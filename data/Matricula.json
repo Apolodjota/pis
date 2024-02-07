@@ -1,0 +1,1 @@
+{"controlador.TDALista.LinkedList":{"head":{"data":{"@class":"modelo.Matricula","id":1,"id_estudiante":1,"id_periodoAcademico":4,"codigo":"CODM-00001","gratuidad":false},"next":{"data":{"@class":"modelo.Matricula","id":2,"id_estudiante":4,"id_periodoAcademico":4,"codigo":"CODM-00002","gratuidad":true}}},"last":{"@reference":"..\/head\/next"},"size":2}}

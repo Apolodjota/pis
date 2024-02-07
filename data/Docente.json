@@ -1,0 +1,53 @@
+{
+    "controlador.TDALista.LinkedList": {
+        "head": {
+            "data": {
+                "@class": "modelo.Docente",
+                "id": 1,
+                "nombres": "richard",
+                "apellidos": "Campoverde",
+                "nacionalidad": "ecuatoriano",
+                "fecha_nac": "2024-01-05 23:57:20.533 UTC",
+                "cedula": 1123097991,
+                "telefono": "0988230513",
+                "anios_exp_docente": 6,
+                "titulo_tercerNivel": "Ingeniero en Sotfware",
+                "titulo_cuartoNivel": "Master en analisis Datos"
+            },
+            "next": {
+                "data": {
+                    "@class": "modelo.Docente",
+                    "id": 2,
+                    "nombres": "israel",
+                    "apellidos": "campoverde",
+                    "nacionalidad": "alemana",
+                    "fecha_nac": "2003-06-05 16:13:31.390 UTC",
+                    "cedula": 1124020392,
+                    "telefono": "09882379212",
+                    "anios_exp_docente": 2,
+                    "titulo_tercerNivel": "Ingniero en SIstema",
+                    "titulo_cuartoNivel": "magister elctronico"
+                },
+                "next": {
+                    "data": {
+                        "@class": "modelo.Docente",
+                        "id": 3,
+                        "nombres": "michelle",
+                        "apellidos": "carapaz",
+                        "nacionalidad": "perruana",
+                        "fecha_nac": "2007-12-26 16:17:34.238 UTC",
+                        "cedula": 1120389231,
+                        "telefono": "098828312",
+                        "anios_exp_docente": 6,
+                        "titulo_tercerNivel": "licenciado",
+                        "titulo_cuartoNivel": "magister"
+                    }
+                }
+            }
+        },
+        "last": {
+            "@reference": "..\/head\/next\/next"
+        },
+        "size": 3
+    }
+}

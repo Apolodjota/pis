@@ -1,0 +1,29 @@
+{
+    "controlador.TDALista.LinkedList": {
+        "head": {
+            "data": {
+                "@class": "modelo.Rol",
+                "id": 1,
+                "nombre": "Admin"
+            },
+            "next": {
+                "data": {
+                    "@class": "modelo.Rol",
+                    "id": 2,
+                    "nombre": "Docente"
+                },
+                "next": {
+                    "data": {
+                        "@class": "modelo.Rol",
+                        "id": 3,
+                        "nombre": "Estudiante"
+                    }
+                }
+            }
+        },
+        "last": {
+            "@reference": "..\/head\/next\/next"
+        },
+        "size": 3
+    }
+}
