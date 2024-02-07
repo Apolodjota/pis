@@ -1,0 +1,1 @@
+{"controlador.TDALista.LinkedList":{"head":{"data":{"@class":"modelo.Materia","id":1,"id_curso":1,"nombre":"Estructura de Datos"},"next":{"data":{"@class":"modelo.Materia","id":2,"id_curso":2,"nombre":"Base de Datos"}}},"last":{"@reference":"..\/head\/next"},"size":2}}
