@@ -2,7 +2,7 @@ package controladores;
 
 import controlador.TDALista.LinkedList;
 import controlador.listas.DAO.DataAccesObject;
-import controlador.util.Utilidades;
+import controlador.Utilidades.Utilidades;
 import java.lang.reflect.Field;
 import modelo.Cuenta;
 
