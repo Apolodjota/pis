@@ -81,6 +81,7 @@ public class FrmMateria extends javax.swing.JFrame {
         mcl.setMateria(null);
         mcl.setIndex(-1);
         try {
+            //System.out.println("CHURONA y BARCELONA");
             UtilVista.cargarCurso(cbxCurso);
             UtilVista.cargarCurso(cbxCursoB);
             txtBusqueda.setVisible(true);    
