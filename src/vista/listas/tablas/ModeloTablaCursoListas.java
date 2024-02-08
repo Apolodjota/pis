@@ -1,7 +1,7 @@
 
 package vista.listas.tablas;
 
-import controlador.MallaControllerListas;
+import controladores.MallaControllerListas;
 import controlador.TDALista.LinkedList;
 import javax.swing.table.AbstractTableModel;
 import modelo.Curso;

@@ -1,6 +1,6 @@
 package vista;
 
-import controlador.MallaControllerListas;
+import controladores.MallaControllerListas;
 import controlador.TDALista.LinkedList;
 import java.awt.event.ItemEvent;
 import java.text.SimpleDateFormat;

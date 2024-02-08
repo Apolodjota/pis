@@ -1,10 +1,10 @@
 
 package vista.listas.util;
 
-import controlador.AdministradorControlador;
-import controlador.CursoControllerListas;
-import controlador.MallaControllerListas;
-import controlador.RolControllerListas;
+import controladores.AdministradorControlador;
+import controladores.CursoControllerListas;
+import controladores.MallaControllerListas;
+import controladores.RolControllerListas;
 import controlador.TDALista.exceptions.VacioException;
 import controladores.DocenteControlador;
 import controladores.EstudianteControlador;

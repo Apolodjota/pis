@@ -1,7 +1,7 @@
 package vista;
 
-import controlador.AdministradorControlador;
-import controlador.RolControllerListas;
+import controladores.AdministradorControlador;
+import controladores.RolControllerListas;
 import controladores.CuentaControllerListas;
 import java.awt.Color;
 import java.awt.Graphics;
