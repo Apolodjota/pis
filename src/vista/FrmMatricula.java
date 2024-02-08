@@ -34,7 +34,7 @@ public class FrmMatricula extends javax.swing.JFrame {
     }
 
     private void cargarCombo() {
-
+        //System.out.println("Comentario a borrar");
     }
 
     private void limpiar() {
