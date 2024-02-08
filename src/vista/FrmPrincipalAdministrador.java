@@ -21,7 +21,7 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         cargarImagenes();
-//        jblNombre.setText(nombre);
+//        jblNombre.setText(nombre);CAMBIAMOS EL PAQUETE
     }
 
     private void cargarImagenes() {
