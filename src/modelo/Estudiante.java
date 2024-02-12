@@ -8,15 +8,15 @@ import java.util.Date;
  */
 public class Estudiante extends Persona{
     private String titulo_bachiller;
-    private String ciudad_Procedencia;
+    private String trabaja; //F o T
 
     public Estudiante() {
     }
 
-    public Estudiante(String titulo_bachiller, String ciudad_Procedencia, Integer id, String nombres, String apellidos, String nacionalidad, Date fecha_nac, String cedula, String telefono) {
-        super(id, nombres, apellidos, nacionalidad, fecha_nac, cedula, telefono);
+    public Estudiante(String titulo_bachiller, String trabaja, Integer id, String nombres, String apellidos, Date fecha_nac, String cedula, String telefonoCasa, String telefonoCelular, String genero, String direccionResidencia, Integer id_rol) {
+        super(id, nombres, apellidos, fecha_nac, cedula, telefonoCasa, telefonoCelular, genero, direccionResidencia, id_rol);
         this.titulo_bachiller = titulo_bachiller;
-        this.ciudad_Procedencia = ciudad_Procedencia;
+        this.trabaja = trabaja;
     }
 
     public String getTitulo_bachiller() {
@@ -26,13 +26,13 @@ public class Estudiante extends Persona{
     public void setTitulo_bachiller(String titulo_bachiller) {
         this.titulo_bachiller = titulo_bachiller;
     }
-
-    public String getCiudad_Procedencia() {
-        return ciudad_Procedencia;
+    
+    public String getTrabaja() {
+        return trabaja;
     }
 
-    public void setCiudad_Procedencia(String ciudad_Procedencia) {
-        this.ciudad_Procedencia = ciudad_Procedencia;
+    public void setTrabaja(String trabaja) {
+        this.trabaja = trabaja;
     }
     
     public Boolean comparar(Estudiante e, Integer type, String field, Integer aux){
@@ -56,12 +56,14 @@ public class Estudiante extends Persona{
                     return getCedula().compareToIgnoreCase(e.getCedula()) > 0;
                 else if (field.equalsIgnoreCase("fecha_nac"))
                     return getFecha_nac().compareTo(e.getFecha_nac()) > 0;
-                else if (field.equalsIgnoreCase("nacionalidad"))
-                    return getNacionalidad().compareToIgnoreCase(e.getNacionalidad()) > 0;
+                else if (field.equalsIgnoreCase("direccionResidencia"))
+                    return getDireccionResidencia().compareToIgnoreCase(e.getDireccionResidencia()) > 0;
                 else if (field.equalsIgnoreCase("tituloBachiller"))
                     return getTitulo_bachiller().compareToIgnoreCase(e.getTitulo_bachiller()) > 0;
-                else if (field.equalsIgnoreCase("ciudadProcedencia"))
-                    return getCiudad_Procedencia().compareToIgnoreCase(e.getCiudad_Procedencia()) > 0;
+                else if (field.equalsIgnoreCase("genero"))
+                    return getGenero().compareToIgnoreCase(e.getGenero()) > 0;
+                else if (field.equalsIgnoreCase("trabaja"))
+                    return getTrabaja().compareToIgnoreCase(e.getTrabaja()) > 0;
             case 0:
                 if (field.equalsIgnoreCase("id"))
                     return getId().intValue() < e.getId().intValue();
@@ -73,15 +75,17 @@ public class Estudiante extends Persona{
                     return getCedula().compareToIgnoreCase(e.getCedula()) < 0;
                 else if (field.equalsIgnoreCase("fecha_nac"))
                     return getFecha_nac().compareTo(e.getFecha_nac()) < 0;
-                else if (field.equalsIgnoreCase("nacionalidad"))
-                    return getNacionalidad().compareToIgnoreCase(e.getNacionalidad()) < 0;
+                else if (field.equalsIgnoreCase("direccionResidencia"))
+                    return getDireccionResidencia().compareToIgnoreCase(e.getDireccionResidencia()) < 0;
                 else if (field.equalsIgnoreCase("tituloBachiller"))
-                    return getTitulo_bachiller().compareToIgnoreCase(e.getTitulo_bachiller()) > 0;
-                else if (field.equalsIgnoreCase("ciudadProcedencia"))
-                    return getCiudad_Procedencia().compareToIgnoreCase(e.getCiudad_Procedencia()) > 0;
+                    return getTitulo_bachiller().compareToIgnoreCase(e.getTitulo_bachiller()) < 0;
+                else if (field.equalsIgnoreCase("genero"))
+                    return getGenero().compareToIgnoreCase(e.getGenero()) < 0;
+                else if (field.equalsIgnoreCase("trabaja"))
+                    return getTrabaja().compareToIgnoreCase(e.getTrabaja()) < 0;
             default:
                 return false;
         }
     }
-    
+
 }
