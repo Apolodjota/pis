@@ -4,3 +4,7 @@ nbproject/
 build.xml
 manifest.mf
 /dist/
+private.xml
+private.properties
+build.properties
+nbproject/private/private.xml
