@@ -51,6 +51,7 @@ public class ModeloTablaCursa extends AbstractTableModel{
             System.out.println(e.getMessage());
         }
         return null;
+        //cambio jejejejjeje
     }
 
     @Override
