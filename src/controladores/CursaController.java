@@ -31,18 +31,6 @@ public class CursaController extends DataAccesObject<Cursa>{
         return update(cursa, fila);
     }
 
-//    public String generatedCode() {
-//        StringBuilder code = new StringBuilder();
-//        Integer length = listall().getSize() + 1;
-//        Integer pos = length.toString().length();
-//        for (int i = 0; i < (10 - pos); i++) {
-//            code.append("0");
-//        }
-//        code.append(length.toString());
-//        return code.toString();
-//    }
-
-
     public LinkedList<Cursa> mergeSort(LinkedList<Cursa> lista, Integer type, String field) {
         Cursa[] m = lista.toArray();
         mergeSort(m, 0, m.length - 1, field, type);
@@ -138,10 +126,6 @@ public class CursaController extends DataAccesObject<Cursa>{
         return result;
     }
     
-    public LinkedList<Cursa> buscarBinario(){
-        return null;
-    }
-    
     /**
      * @return the cursa
      */
@@ -170,33 +154,5 @@ public class CursaController extends DataAccesObject<Cursa>{
      */
     public void setCursas(LinkedList<Cursa> cursas) {
         this.cursas = cursas;
-    }
-    public static void main(String[] args) {
-        CursaController cc = new CursaController();
-//        cc.getCursa().setId(cc.generated_id());
-//        cc.getCursa().setId_docente(2000);
-//        cc.getCursa().setId_materia(5000);
-//        cc.getCursa().setId_matricula(3000);
-//        cc.guardar();
-//        System.out.println(cc.listall().print());
-//        cc.setCursa(null);
-//        CursaController cc = new CursaController();
-//        cc.getCursa().setId(cc.generated_id());
-//        cc.getCursa().setId_docente(2001);
-//        cc.getCursa().setId_materia(5001);
-//        cc.getCursa().setId_matricula(3001);
-//        cc.guardar();
-//        System.out.println(cc.listall().print());
-//        cc.setCursa(null);
-//        cc.getCursa().setId(cc.generated_id());
-//        cc.getCursa().setId_docente(2002);
-//        cc.getCursa().setId_materia(5002);
-//        cc.getCursa().setId_matricula(3002);
-//        cc.guardar();
-//        System.out.println(cc.listall().print());
-//        cc.setCursa(null);
-
-
-        System.out.println(cc.quickSort(cc.getCursas(), 0, "id").print());
     }
 }

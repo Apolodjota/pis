@@ -8,28 +8,21 @@ import java.util.Date;
  */
 public class Revision {
     private Integer id;
-    private Integer id_materia;
-    private Integer id_tarea;  
-    private String titulo;
-    private String descripcion;
-    private Byte archivo;
-    private Date fechaAsignacion;
-    private Date fechaEntrega;
+    private Integer id_asignacion;
+    private Integer id_matricula;  
+    private String estado;
+    private String comentario;
     private Double calificacion;
 
     public Revision() {
     }
-    
 
-    public Revision(Integer id, Integer id_materia, Integer id_tarea, String titulo, String descripcion, Byte archivo, Date fechaAsignacion, Date fechaDate, Double calificacion) {
+    public Revision(Integer id, Integer id_asignacion, Integer id_matricula, String estado, String comentario, Double calificacion) {
         this.id = id;
-        this.id_materia = id_materia;
-        this.id_tarea = id_tarea;
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.archivo = archivo;
-        this.fechaAsignacion = fechaAsignacion;
-        this.fechaEntrega = fechaDate;
+        this.id_asignacion = id_asignacion;
+        this.id_matricula = id_matricula;
+        this.estado = estado;
+        this.comentario = comentario;
         this.calificacion = calificacion;
     }
 
@@ -41,60 +34,36 @@ public class Revision {
         this.id = id;
     }
 
-    public Integer getId_materia() {
-        return id_materia;
+    public Integer getId_asignacion() {
+        return id_asignacion;
     }
 
-    public void setId_materia(Integer id_materia) {
-        this.id_materia = id_materia;
+    public void setId_asignacion(Integer id_asignacion) {
+        this.id_asignacion = id_asignacion;
     }
 
-    public Integer getId_tarea() {
-        return id_tarea;
+    public Integer getId_matricula() {
+        return id_matricula;
     }
 
-    public void setId_tarea(Integer id_tarea) {
-        this.id_tarea = id_tarea;
+    public void setId_matricula(Integer id_matricula) {
+        this.id_matricula = id_matricula;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getComentario() {
+        return comentario;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Byte getArchivo() {
-        return archivo;
-    }
-
-    public void setArchivo(Byte archivo) {
-        this.archivo = archivo;
-    }
-
-    public Date getFechaAsignacion() {
-        return fechaAsignacion;
-    }
-
-    public void setFechaAsignacion(Date fechaAsignacion) {
-        this.fechaAsignacion = fechaAsignacion;
-    }
-
-    public Date getFechaEntrega() {
-        return fechaEntrega;
-    }
-
-    public void setFechaEntrega(Date fechaEntrega) {
-        this.fechaEntrega = fechaEntrega;
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
     }
 
     public Double getCalificacion() {
@@ -104,68 +73,35 @@ public class Revision {
     public void setCalificacion(Double calificacion) {
         this.calificacion = calificacion;
     }
-    
-    public Boolean comparar(Revision r, String field, Integer type) {
+    public Boolean comparar(Revision r, Integer type, String field){
         switch (type) {
             case 1:
-                if (field.equalsIgnoreCase("id")) {
+                if (field.equalsIgnoreCase("id"))
                     return getId().intValue() > r.getId().intValue();
-                    
-                } else if (field.equalsIgnoreCase("id_materia")) {
-                    return getId_materia() > r.getId_materia();
-                    
-                } else if (field.equalsIgnoreCase("id_tarea")) {
-                    return getId_tarea() > r.getId_tarea();
-                    
-                } else if (field.equalsIgnoreCase("titulo")) {
-                    return getTitulo().compareTo(r.getTitulo()) > 0;
-                    
-                } else if (field.equalsIgnoreCase("descripcion")) {
-                    return getDescripcion().compareTo(r.getDescripcion()) > 0;
-                    
-                } else if (field.equalsIgnoreCase("archivo")) {
-                    return getArchivo() > r.getArchivo();
-                    
-                } else if (field.equalsIgnoreCase("fechaasignacion")) {
-                    return getFechaAsignacion().after(r.getFechaAsignacion());
-                    
-                } else if (field.equalsIgnoreCase("fechanntrega")) {
-                    return getFechaEntrega().after(r.getFechaEntrega());
-                    
-                } else if (field.equalsIgnoreCase("calificacion")) {
-                    return getCalificacion() > r.getCalificacion();
-                }
+                else if (field.equalsIgnoreCase("id_asignacion"))
+                    return getId_asignacion() > r.getId_asignacion();
+                else if (field.equalsIgnoreCase("id_matricula"))
+                    return getId_matricula()> r.getId_matricula();
+                else if (field.equalsIgnoreCase("calificacion"))
+                    return getCalificacion()> r.getCalificacion();
             case 0:
-                if (field.equalsIgnoreCase("id")) {
+                if (field.equalsIgnoreCase("id"))
                     return getId().intValue() < r.getId().intValue();
-                    
-                } else if (field.equalsIgnoreCase("id_materia")) {
-                    return getId_materia() < r.getId_materia();
-                    
-                } else if (field.equalsIgnoreCase("id_tarea")) {
-                    return getId_tarea() < r.getId_tarea();
-                    
-                } else if (field.equalsIgnoreCase("titulo")) {
-                    return getTitulo().compareTo(r.getTitulo()) < 0;
-                    
-                } else if (field.equalsIgnoreCase("descripcion")) {
-                    return getDescripcion().compareTo(r.getDescripcion()) < 0;
-                    
-                } else if (field.equalsIgnoreCase("archivo")) {
-                    return getArchivo() < r.getArchivo();
-                    
-                } else if (field.equalsIgnoreCase("fechaasignacion")) {
-                    return getFechaAsignacion().before(r.getFechaAsignacion());
-                    
-                } else if (field.equalsIgnoreCase("fechanntrega")) {
-                    return getFechaEntrega().before(r.getFechaEntrega());
-                    
-                } else if (field.equalsIgnoreCase("calificacion")) {
-                    return getCalificacion() < r.getCalificacion();
-                }
+                else if (field.equalsIgnoreCase("id_asignacion"))
+                    return getId_asignacion() < r.getId_asignacion();
+                else if (field.equalsIgnoreCase("id_matricula"))
+                    return getId_matricula()< r.getId_matricula();
+                else if (field.equalsIgnoreCase("calificacion"))
+                    return getCalificacion()< r.getCalificacion();
+                
             default:
-                return null;
+                return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Revision" + id +"  de la asignacion "+id_asignacion;
     }
     
     
