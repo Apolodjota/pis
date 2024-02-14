@@ -189,7 +189,9 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
         String clave = String.valueOf(txtClave.getPassword());
         try {
             Integer idCuentaCorreo = rc.obtenerIdPorCorreo(rc.getCuentas(), correo);
+            System.out.println("ID cuenta correo: "+idCuentaCorreo);
             Integer idCuentaClave = rc.obtenerIdPorClave(rc.getCuentas(), clave);
+            System.out.println("ID cuenta clave: "+idCuentaClave);
             if (idCuentaCorreo == idCuentaClave && idCuentaCorreo != -1) {
                 Integer idRol = rc.obtenerIdPorRol(rc.getCuentas(), idCuentaCorreo);
                 if (idRol == 1) {
@@ -199,7 +201,10 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
                     new FrmPrincipalDocente().setVisible(true);
                     this.setVisible(false);
                 } else if (idRol == 3) {
-                    new FrmPrincipalEstudiante().setVisible(true);
+                    //new FrmPrincipalEstudiante().setVisible(true);
+                    FrmPrincipalEstudiante fr = new FrmPrincipalEstudiante();
+                    fr.setearEst(correo, idCuentaClave);
+                    fr.setVisible(true);
                     this.setVisible(false);
                 }
             } else {

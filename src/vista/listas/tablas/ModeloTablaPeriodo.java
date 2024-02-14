@@ -25,14 +25,14 @@ public class ModeloTablaPeriodo extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         try {
             PeriodoAcademico periodo = getPeriodos().get(rowIndex);
-            String estado = (periodo.getEstado() == true) ? "En Vigencia" : "Finalizado";
+            String estado = (periodo.getEstado().equalsIgnoreCase("T")) ? "En Vigencia" : "Finalizado";
             switch (columnIndex) {
                 case 0:
                     return (periodo != null) ? periodo.getId() : "";
                 case 1:
                     return (periodo != null) ? periodo.getNombre() : "";   
                 case 2:
-                    return (periodo != null) ? new SimpleDateFormat().format(periodo.getFechaDesde()): "";   
+                    return (periodo != null) ? new SimpleDateFormat("dd-mm-yyyy").format(periodo.getFechaDesde()): "";   
                 case 3:
                     return (periodo != null) ? new SimpleDateFormat().format(periodo.getFechaHasta()): ""; 
                 case 4:

@@ -13,12 +13,12 @@ public class PeriodoAcademico {
     private String nombre;
     private Date fechaDesde;
     private Date fechaHasta;
-    private Boolean estado;
+    private String estado;
 
     public PeriodoAcademico() {
     }
 
-    public PeriodoAcademico(Integer id, String nombre, Date fechaDesde, Date fechaHasta, Boolean estado) {
+    public PeriodoAcademico(Integer id, String nombre, Date fechaDesde, Date fechaHasta, String estado) {
         this.id = id;
         this.nombre = nombre;
         this.fechaDesde = fechaDesde;
@@ -98,13 +98,13 @@ public class PeriodoAcademico {
         this.fechaHasta = fechaHasta;
     }
 
-    public Boolean getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Boolean estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
-
+    
     
 }
