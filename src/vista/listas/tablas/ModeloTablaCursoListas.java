@@ -22,7 +22,7 @@ public class ModeloTablaCursoListas extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 3;
     }
 
     @Override
@@ -37,8 +37,6 @@ public class ModeloTablaCursoListas extends AbstractTableModel{
                 case 1:
                     return (curso != null) ? curso.getCiclo() : "";    
                 case 2:
-                    return (curso != null) ? curso.getParalelo() : "";
-                case 3:
                     return (curso != null) ? malla.toString() + " - " + malla.getModalidad() : "";
                 default:
                     return null;
@@ -57,8 +55,6 @@ public class ModeloTablaCursoListas extends AbstractTableModel{
             case 1:
                 return "Ciclo";   
             case 2:
-                return "Paralelo";
-            case 3:
                 return "Malla";
             default:
                 return null;

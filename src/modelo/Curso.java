@@ -8,7 +8,6 @@ public class Curso {
     private Integer id;
     private Integer id_malla;
     private Integer ciclo;
-    private String paralelo;
 
     public Curso() {
     }
@@ -17,7 +16,6 @@ public class Curso {
         this.id = id;
         this.id_malla = id_malla;
         this.ciclo = ciclo;
-        this.paralelo = paralelo;
     }
     
     public Boolean comparar(Curso c, String field, Integer type) {
@@ -32,9 +30,6 @@ public class Curso {
                 else if (field.equalsIgnoreCase("ciclo")) {
                     return getCiclo().intValue() > c.getCiclo().intValue();
                 }
-                else if (field.equalsIgnoreCase("paralelo")) {
-                    return getParalelo().compareTo(c.getParalelo()) > 0;
-                }
                 
             case 0:
                 if (field.equalsIgnoreCase("id")) {
@@ -46,9 +41,6 @@ public class Curso {
                 else if (field.equalsIgnoreCase("ciclo")) {
                     return getCiclo().intValue() < c.getCiclo().intValue();
                 }
-                else if (field.equalsIgnoreCase("paralelo")) {
-                    return getParalelo().compareTo(c.getParalelo()) < 0;
-                }            
             default:
                 return null;
         }
@@ -83,13 +75,4 @@ public class Curso {
         this.ciclo = ciclo;
     }
 
-    public String getParalelo() {
-        return paralelo;
-    }
-
-    public void setParalelo(String paralelo) {
-        this.paralelo = paralelo;
-    }
-    
-    
 }

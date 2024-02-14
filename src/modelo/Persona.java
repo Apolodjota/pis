@@ -7,11 +7,11 @@ import java.util.Date;
  */
 public class Persona {
     private Integer id;
+    private String cedula;
     private String nombres;
     private String apellidos;
     private String nacionalidad;
     private Date fecha_nac;
-    private String cedula;
     private String telefono;
     
 
