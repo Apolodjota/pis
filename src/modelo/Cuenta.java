@@ -9,7 +9,6 @@ public class Cuenta {
     private String correo;
     private String clave;
     private Boolean estado;
-    private Integer id_rol;
     private Integer id_persona;
 
     public Cuenta() {
