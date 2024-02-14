@@ -51,7 +51,7 @@ private LinkedList <Docente> lista = new LinkedList <Docente>();
                 case 4: 
                     return (d != null) ? new SimpleDateFormat("dd-MM-yyyy").format(d.getFecha_nac()) : " ";
                 case 5:
-                    return (d != null) ? d.getAnios_exp_docente() : " ";
+                    return (d != null) ? new SimpleDateFormat("dd-MM-yyyy").format(d.getFecha_inicio_docencia()) : " ";
                 case 6:
                     return (d != null) ? d.getTitulo_tercerNivel() : " ";
                 default:
