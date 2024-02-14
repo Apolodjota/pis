@@ -3,24 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/black/Documents/REPOSITORIOTE/pis/src/vista/FrmCurso.java</file>
-            <file>file:/C:/Users/black/Documents/REPOSITORIOTE/pis/src/vista/FrmIniciarSesion.java</file>
-            <file>file:/C:/Users/black/Documents/REPOSITORIOTE/pis/src/vista/FrmMalla.java</file>
-            <file>file:/C:/Users/black/Documents/REPOSITORIOTE/pis/src/vista/FrmMateria.java</file>
-            <file>file:/C:/Users/black/Documents/REPOSITORIOTE/pis/src/Controlador/Utilidades/Utilidades.java</file>
-            <file>file:/C:/Users/black/Documents/REPOSITORIOTE/pis/src/vista/FrmMatricula.java</file>
-            <file>file:/C:/Users/black/Documents/REPOSITORIOTE/pis/src/controladores/RolControllerListas.java</file>
-            <file>file:/C:/Users/black/Documents/REPOSITORIOTE/pis/src/vista/listas/tablas/ModeloTablaCursoListas.java</file>
-            <file>file:/C:/Users/black/Documents/REPOSITORIOTE/pis/src/vista/FrmCursa.java</file>
-            <file>file:/C:/Users/black/Documents/REPOSITORIOTE/pis/src/vista/listas/tablas/ModeloTablaMateriaListas.java</file>
-            <file>file:/C:/Users/black/Documents/REPOSITORIOTE/pis/src/Controlador/listas/DAO/Connection.java</file>
-            <file>file:/C:/Users/black/Documents/REPOSITORIOTE/pis/src/vista/FrmPrincipalDocente.java</file>
-            <file>file:/C:/Users/black/Documents/REPOSITORIOTE/pis/src/controladores/MateriaControllerListas.java</file>
-            <file>file:/C:/Users/black/Documents/REPOSITORIOTE/pis/src/controladores/CuentaControllerListas.java</file>
-            <file>file:/C:/Users/black/Documents/REPOSITORIOTE/pis/src/vista/listas/util/UtilVista.java</file>
-            <file>file:/C:/Users/black/Documents/REPOSITORIOTE/pis/data/Rol.json</file>
-            <file>file:/C:/Users/black/Documents/REPOSITORIOTE/pis/data/Cuenta.json</file>
-            <file>file:/C:/Users/black/Documents/REPOSITORIOTE/pis/src/vista/FrmPrincipalAdministrador.java</file>
+            <file>file:/C:/Users/Asus/Desktop/PIS3roDefinitivo/pis/src/controladores/PeriodoController.java</file>
+            <file>file:/C:/Users/Asus/Desktop/PIS3roDefinitivo/pis/src/vista/listas/tablas/ModeloTablaPeriodo.java</file>
+            <file>file:/C:/Users/Asus/Desktop/PIS3roDefinitivo/pis/src/controlador/BDD/DAO/AdaptadorDao.java</file>
+            <file>file:/C:/Users/Asus/Desktop/PIS3roDefinitivo/pis/src/modelo/PeriodoAcademico.java</file>
+            <file>file:/C:/Users/Asus/Desktop/PIS3roDefinitivo/pis/src/controlador/BDD/DAO/Conexion.java</file>
+            <file>file:/C:/Users/Asus/Desktop/PIS3roDefinitivo/pis/src/vista/FrmPeriodoAcademico.java</file>
         </group>
     </open-files>
 </project-private>

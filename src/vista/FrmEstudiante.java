@@ -2,9 +2,12 @@ package vista;
 import controladores.EstudianteControlador;
 import controlador.TDALista.LinkedList;
 import controlador.TDALista.exceptions.VacioException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import modelo.Estudiante;
+import modelo.Persona;
 import vista.Util.Util;
 import vista.tablas.EstudianteModeloTabla;
 
@@ -136,6 +139,7 @@ public class FrmEstudiante extends javax.swing.JFrame {
                 obtenerEstudiante();
                     if (ec.getEstudiante().getId() == null){
                         System.out.println("entra42");
+                        ec.guardar();
                         if (ec.guardar()){
                             
                             limpiar();
@@ -539,7 +543,16 @@ public class FrmEstudiante extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btmSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmSeleccionarActionPerformed
-        cargarVista();
+        //cargarVista();
+        Persona e = new Estudiante();
+        Estudiante et = new Estudiante();
+        for (Field f : Persona.class.getDeclaredFields()) {
+                System.out.println("Persona: "+f.getName());
+            }
+        for (Field f : e.getClass().getDeclaredFields()) {
+                System.out.println("Estudiante: "+f.getName());
+            }
+        
     }//GEN-LAST:event_btmSeleccionarActionPerformed
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
