@@ -7,25 +7,31 @@ import java.util.Date;
  */
 public class Persona {
     private Integer id;
-    private String cedula;
+    private Integer id_rol;
     private String nombres;
     private String apellidos;
-    private String nacionalidad;
     private Date fecha_nac;
-    private String telefono;
+    private String cedula;
+    private String telefonoCasa;
+    private String telefonoCelular;
+    private String genero;
+    private String direccionResidencia;
     
 
     public Persona() {
     }
 
-    public Persona(Integer id, String nombres, String apellidos, String nacionalidad, Date fecha_nac, String cedula, String telefono) {
+    public Persona(Integer id, String nombres, String apellidos, Date fecha_nac, String cedula, String telefonoCasa, String telefonoCelular, String genero, String direccionResidencia, Integer id_rol) {
         this.id = id;
+        this.id_rol = id_rol;
         this.nombres = nombres;
         this.apellidos = apellidos;
-        this.nacionalidad = nacionalidad;
         this.fecha_nac = fecha_nac;
         this.cedula = cedula;
-        this.telefono = telefono;
+        this.telefonoCasa = telefonoCasa;
+        this.telefonoCelular = telefonoCelular;
+        this.genero = genero;
+        this.direccionResidencia = direccionResidencia;
     }
 
     public Integer getId() {
@@ -60,14 +66,6 @@ public class Persona {
         this.cedula = cedula;
     }
 
-    public String getNacionalidad() {
-        return nacionalidad;
-    }
-
-    public void setNacionalidad(String nacionalidad) {
-        this.nacionalidad = nacionalidad;
-    }
-
     public Date getFecha_nac() {
         return fecha_nac;
     }
@@ -76,20 +74,49 @@ public class Persona {
         this.fecha_nac = fecha_nac;
     }
 
+    public String getTelefonoCasa() {
+        return telefonoCasa;
+    }
+
+    public void setTelefonoCasa(String telefonoCasa) {
+        this.telefonoCasa = telefonoCasa;
+    }
+
+    public String getTelefonoCelular() {
+        return telefonoCelular;
+    }
+
+    public void setTelefonoCelular(String telefonoCelular) {
+        this.telefonoCelular = telefonoCelular;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public String getDireccionResidencia() {
+        return direccionResidencia;
+    }
+
+    public void setDireccionResidencia(String direccionResidencia) {
+        this.direccionResidencia = direccionResidencia;
+    }
     
-
-    public String getTelefono() {
-        return telefono;
+    public Integer getId_rol() {
+        return id_rol;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setId_rol(Integer id_rol) {
+        this.id_rol = id_rol;
     }
-
+  
     @Override
     public String toString() {
-        return apellidos + " "+nombres;
+        return apellidos + " "+ nombres;
     }
-    
-    
+
 }
