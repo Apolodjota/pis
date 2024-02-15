@@ -26,7 +26,7 @@ public class UtilVista {
         MallaControllerListas ac = new MallaControllerListas();
         cbxMalla.removeAllItems();
         for (int i = 0; i < ac.getMallas().getSize(); i++) {
-            cbxMalla.addItem(ac.getMallas().get(i));
+                cbxMalla.addItem(ac.getMallas().get(i));
         }
     }  
     

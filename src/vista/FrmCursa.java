@@ -1,12 +1,12 @@
 package vista;
 
-import controladores.MatriculaController;
 import controladores.PeriodoController;
 import controlador.TDALista.LinkedList;
-import vista.listas.util.UtilVistaLista;
+import controladores.CursaController;
+import controladores.RevisionController;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import vista.listas.tablas.ModeloTablaMatricula;
+import vista.listas.tablas.ModeloTablaCursa;
 
 /**
  *
@@ -17,9 +17,10 @@ public class FrmCursa extends javax.swing.JFrame {
     /**
      * @return the panelPrincipal
      */
+    CursaController cC = new CursaController();
     PeriodoController pcl = new PeriodoController();
-    MatriculaController matriC = new MatriculaController();
-    ModeloTablaMatricula mtmatriC = new ModeloTablaMatricula();
+    RevisionController revC = new RevisionController();
+    ModeloTablaCursa mtcc = new ModeloTablaCursa();
 
     /**
      * Creates new form FrmVendedor
@@ -39,113 +40,112 @@ public class FrmCursa extends javax.swing.JFrame {
 
     private void limpiar() {
         try {
-            txtperiodo.setText(pcl.getPeriodos().getLast().getNombre());
-            UtilVistaLista.cargarMarcaEst(cbxestudiante);
+            txtParalelo.setText("");
+            //UtilVistaLista.cargarMarcaEst(cbxMateria);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        txtcodigo.setText("CODM-" + matriC.generatedCode());
-        cbxestudiante.setSelectedIndex(0);
-        checkGratuidad.setSelected(true);
-        checkGratuidad.setEnabled(false);
+        txtParalelo.setText("");
+        cbxMateria.setSelectedIndex(0);
+        cbxDocente.setSelectedIndex(0);
+        cbxPeriodo.setSelectedIndex(0);
+        tbltabla.clearSelection();
+        cC.setCursa(null);
+        cC.setCursas(new LinkedList<>());
         cargarTabla();
-        tbldatos.clearSelection();
-        matriC.setIndex(-1);
-        matriC.setMatricula(null);
-        matriC.setMatriculas(new LinkedList<>());
     }
 
     private void cargarTabla() {
-        mtmatriC.setMatriculas(matriC.getMatriculas());
-        tbldatos.setModel(mtmatriC);
-        tbldatos.updateUI();
+//        mtmatriC.setMatriculas(matriC.getMatriculas());
+//        tbltabla.setModel(mtmatriC);
+//        tbltabla.updateUI();
     }
 
     private void obtenerMatricula() {
-        matriC.getMatricula().setCodigo(txtcodigo.getText());
-        if (matriC.getMatricula().getId() == null) {
-            matriC.getMatricula().setGratuidad(true);
-        } else {
-            matriC.getMatricula().setGratuidad(checkGratuidad.isSelected());
-        }
-        matriC.getMatricula().setId_estudiante(cbxestudiante.getSelectedIndex() + 1);
-        try {
-            matriC.getMatricula().setId_periodoAcademico(pcl.getPeriodos().getLast().getId());
-        } catch (Exception e) {
-            System.out.println("Error al obtener datos de matricula: " + e.getMessage());
-        }
+//        matriC.getMatricula().setCodigo(txtParalelo.getText());
+//        if (matriC.getMatricula().getId() == null) {
+//            matriC.getMatricula().setGratuidad(true);
+//        } else {
+//            matriC.getMatricula().setGratuidad(checkGratuidad.isSelected());
+//        }
+//        matriC.getMatricula().setId_estudiante(cbxMateria.getSelectedIndex() + 1);
+//        try {
+//            matriC.getMatricula().setId_periodoAcademico(pcl.getPeriodos().getLast().getId());
+//        } catch (Exception e) {
+//            System.out.println("Error al obtener datos de matricula: " + e.getMessage());
+//        }
     }
 
-    private boolean validar() {
-        return !(cbxestudiante.getSelectedIndex() == -1);
-    }
+    //private boolean validar() {
+        //return !(cbxMateria.getSelectedIndex() == -1);
+    //}
 
     private void cargarVista() {
-        checkGratuidad.setEnabled(true);
-        matriC.setIndex(tbldatos.getSelectedRow());
-        if (matriC.getIndex() < 0) {
-            JOptionPane.showMessageDialog(null,
-                    "Seleccione una fila",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
-        } else {
-            try {
-                matriC.setMatricula(mtmatriC.getMatriculas().get(matriC.getIndex()));
-                txtperiodo.setText(pcl.getPeriodos().get(matriC.getMatricula().getId_periodoAcademico() - 1).getNombre());
-                txtcodigo.setText(matriC.getMatricula().getCodigo());
-                cbxestudiante.setSelectedIndex(matriC.getMatricula().getId_estudiante() - 1);
-                checkGratuidad.setSelected(matriC.getMatricula().getGratuidad());
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null,
-                        e.getMessage(),
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-        }
+//        checkGratuidad.setEnabled(true);
+//        matriC.setIndex(tbltabla.getSelectedRow());
+//        if (matriC.getIndex() < 0) {
+//            JOptionPane.showMessageDialog(null,
+//                    "Seleccione una fila",
+//                    "Error",
+//                    JOptionPane.ERROR_MESSAGE);
+//        } else {
+//            try {
+//                matriC.setMatricula(mtmatriC.getMatriculas().get(matriC.getIndex()));
+//                txtperiodo.setText(pcl.getPeriodos().get(matriC.getMatricula().getId_periodoAcademico() - 1).getNombre());
+//                txtParalelo.setText(matriC.getMatricula().getCodigo());
+//                cbxMateria.setSelectedIndex(matriC.getMatricula().getId_estudiante() - 1);
+//                checkGratuidad.setSelected(matriC.getMatricula().getGratuidad());
+//            } catch (Exception e) {
+//                JOptionPane.showMessageDialog(null,
+//                        e.getMessage(),
+//                        "Error",
+//                        JOptionPane.ERROR_MESSAGE);
+//            }
+//        }
     }
 
     private void guardar() {
-        if (validar()) {
-            try {
-                obtenerMatricula();
-                if (matriC.getMatricula().getId() == null) {
-                    if (matriC.save()) {
-                        limpiar();
-                        JOptionPane.showMessageDialog(null,
-                                "Se ha registrado correctamente la matrícula", "Operación exitosa",
-                                JOptionPane.INFORMATION_MESSAGE);
-                        matriC.setMatricula(null);
-                    } else {
-                        JOptionPane.showMessageDialog(null,
-                                "No se ha podido guardar",
-                                "Error",
-                                JOptionPane.ERROR_MESSAGE);
-                    }
-                } else {
-                    if (matriC.update(matriC.getIndex())) {
-                        limpiar();
-                        JOptionPane.showMessageDialog(null,
-                                "Se ha editado correctamente", "Operación exitosa",
-                                JOptionPane.INFORMATION_MESSAGE);
-                        matriC.setMatricula(null);
-                    } else {
-                        JOptionPane.showMessageDialog(null,
-                                "No se ha podido editar",
-                                "Error",
-                                JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null,
-                        e.getMessage(),
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null,
-                    "¡Llene todos los campos!",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
+//        if (validar()) {
+//            try {
+//                obtenerMatricula();
+//                if (matriC.getMatricula().getId() == null) {
+//                    if (matriC.save()) {
+//                        limpiar();
+//                        JOptionPane.showMessageDialog(null,
+//                                "Se ha registrado correctamente la matrícula", "Operación exitosa",
+//                                JOptionPane.INFORMATION_MESSAGE);
+//                        matriC.setMatricula(null);
+//                    } else {
+//                        JOptionPane.showMessageDialog(null,
+//                                "No se ha podido guardar",
+//                                "Error",
+//                                JOptionPane.ERROR_MESSAGE);
+//                    }
+//                } else {
+//                    if (matriC.update(matriC.getIndex())) {
+//                        limpiar();
+//                        JOptionPane.showMessageDialog(null,
+//                                "Se ha editado correctamente", "Operación exitosa",
+//                                JOptionPane.INFORMATION_MESSAGE);
+//                        matriC.setMatricula(null);
+//                    } else {
+//                        JOptionPane.showMessageDialog(null,
+//                                "No se ha podido editar",
+//                                "Error",
+//                                JOptionPane.ERROR_MESSAGE);
+//                    }
+//                }
+//            } catch (Exception e) {
+//                JOptionPane.showMessageDialog(null,
+//                        e.getMessage(),
+//                        "Error",
+//                        JOptionPane.ERROR_MESSAGE);
+//            }
+//        } else {
+//            JOptionPane.showMessageDialog(null,
+//                    "¡Llene todos los campos!",
+//                    "Error", JOptionPane.ERROR_MESSAGE);
+//        }
 
     }
 
@@ -165,18 +165,18 @@ public class FrmCursa extends javax.swing.JFrame {
         panelPrincipal = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
-        txtcodigo = new javax.swing.JTextField();
+        txtParalelo = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
-        btnguardar = new javax.swing.JButton();
-        btncancelar = new javax.swing.JButton();
-        cbxestudiante = new javax.swing.JComboBox<>();
-        jLabel34 = new javax.swing.JLabel();
-        txtperiodo = new javax.swing.JTextField();
-        jLabel35 = new javax.swing.JLabel();
-        checkGratuidad = new javax.swing.JCheckBox();
+        btnGuardar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        cbxMateria = new javax.swing.JComboBox<>();
+        cbxDocente = new javax.swing.JComboBox<>();
+        jLabel36 = new javax.swing.JLabel();
+        lblPeriodo = new javax.swing.JLabel();
+        cbxPeriodo = new javax.swing.JComboBox<>();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbldatos = new javax.swing.JTable();
+        tbltabla = new javax.swing.JTable();
         btncancelar1 = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
@@ -194,44 +194,50 @@ public class FrmCursa extends javax.swing.JFrame {
 
         jLabel31.setBackground(new java.awt.Color(204, 204, 255));
         jLabel31.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel31.setText("Código:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 42;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel6.add(jLabel31, gridBagConstraints);
-
-        txtcodigo.setEditable(false);
-        txtcodigo.setText("CODM-");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 61;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel6.add(txtcodigo, gridBagConstraints);
-
-        jLabel33.setBackground(new java.awt.Color(204, 204, 255));
-        jLabel33.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel33.setText("Estudiante:");
+        jLabel31.setText("Paralelo:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.ipadx = 21;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 39;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        gridBagConstraints.insets = new java.awt.Insets(18, 370, 0, 0);
+        jPanel6.add(jLabel31, gridBagConstraints);
+
+        txtParalelo.setEditable(false);
+        txtParalelo.setText("CODM-");
+        txtParalelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtParaleloActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 61;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 20, 0, 375);
+        jPanel6.add(txtParalelo, gridBagConstraints);
+
+        jLabel33.setBackground(new java.awt.Color(204, 204, 255));
+        jLabel33.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel33.setText("Materia:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 37;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 370, 0, 0);
         jPanel6.add(jLabel33, gridBagConstraints);
 
-        btnguardar.setBackground(new java.awt.Color(204, 204, 255));
-        btnguardar.setFont(new java.awt.Font("SimSun-ExtB", 1, 18)); // NOI18N
-        btnguardar.setText("Guardar");
-        btnguardar.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setBackground(new java.awt.Color(204, 204, 255));
+        btnGuardar.setFont(new java.awt.Font("SimSun-ExtB", 1, 18)); // NOI18N
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnguardarActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -242,85 +248,94 @@ public class FrmCursa extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 13;
         gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel6.add(btnguardar, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(28, 360, 0, 0);
+        jPanel6.add(btnGuardar, gridBagConstraints);
 
-        btncancelar.setBackground(new java.awt.Color(204, 204, 255));
-        btncancelar.setFont(new java.awt.Font("SimSun-ExtB", 1, 18)); // NOI18N
-        btncancelar.setText("Cancelar");
-        btncancelar.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setBackground(new java.awt.Color(204, 204, 255));
+        btnCancelar.setFont(new java.awt.Font("SimSun-ExtB", 1, 18)); // NOI18N
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncancelarActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.ipadx = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel6.add(btncancelar, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(28, 30, 0, 0);
+        jPanel6.add(btnCancelar, gridBagConstraints);
 
-        cbxestudiante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxMateria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 53;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel6.add(cbxestudiante, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(18, 20, 0, 375);
+        jPanel6.add(cbxMateria, gridBagConstraints);
 
-        jLabel34.setBackground(new java.awt.Color(204, 204, 255));
-        jLabel34.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel34.setText("Periodo Vigente:");
+        cbxDocente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxDocente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxDocenteActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 53;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 20, 0, 375);
+        jPanel6.add(cbxDocente, gridBagConstraints);
+
+        jLabel36.setBackground(new java.awt.Color(204, 204, 255));
+        jLabel36.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel36.setText("Docente");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.ipadx = 40;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 370, 0, 0);
+        jPanel6.add(jLabel36, gridBagConstraints);
+
+        lblPeriodo.setBackground(new java.awt.Color(204, 204, 255));
+        lblPeriodo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblPeriodo.setText("Periodo académico:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipadx = 11;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(40, 350, 0, 0);
+        jPanel6.add(lblPeriodo, gridBagConstraints);
+
+        cbxPeriodo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxPeriodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxPeriodoActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel6.add(jLabel34, gridBagConstraints);
-
-        txtperiodo.setEditable(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 206;
+        gridBagConstraints.ipadx = 53;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel6.add(txtperiodo, gridBagConstraints);
-
-        jLabel35.setBackground(new java.awt.Color(204, 204, 255));
-        jLabel35.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel35.setText("Gratuidad:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.ipadx = 22;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel6.add(jLabel35, gridBagConstraints);
-
-        checkGratuidad.setSelected(true);
-        checkGratuidad.setText("Mantiene");
-        checkGratuidad.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 12;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel6.add(checkGratuidad, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(40, 20, 0, 375);
+        jPanel6.add(cbxPeriodo, gridBagConstraints);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registros Existentes:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tw Cen MT", 1, 14))); // NOI18N
 
-        tbldatos.setModel(new javax.swing.table.DefaultTableModel(
+        tbltabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -331,7 +346,7 @@ public class FrmCursa extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tbldatos);
+        jScrollPane1.setViewportView(tbltabla);
 
         btncancelar1.setBackground(new java.awt.Color(204, 204, 255));
         btncancelar1.setFont(new java.awt.Font("SimSun-ExtB", 1, 18)); // NOI18N
@@ -347,23 +362,22 @@ public class FrmCursa extends javax.swing.JFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73)
+                .addGap(18, 18, 18)
                 .addComponent(btncancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(103, Short.MAX_VALUE)
+                .addComponent(btncancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66))
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(btncancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
@@ -372,10 +386,10 @@ public class FrmCursa extends javax.swing.JFrame {
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -383,19 +397,19 @@ public class FrmCursa extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 1012, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
         );
 
         pack();
@@ -405,13 +419,25 @@ public class FrmCursa extends javax.swing.JFrame {
         cargarVista();
     }//GEN-LAST:event_btncancelar1ActionPerformed
 
-    private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         limpiar();
-    }//GEN-LAST:event_btncancelarActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         guardar();
-    }//GEN-LAST:event_btnguardarActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void txtParaleloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtParaleloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtParaleloActionPerformed
+
+    private void cbxDocenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxDocenteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxDocenteActionPerformed
+
+    private void cbxPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxPeriodoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxPeriodoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -480,24 +506,24 @@ public class FrmCursa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btncancelar;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btncancelar1;
-    private javax.swing.JButton btnguardar;
-    private javax.swing.JComboBox<String> cbxestudiante;
-    private javax.swing.JCheckBox checkGratuidad;
+    private javax.swing.JComboBox<String> cbxDocente;
+    private javax.swing.JComboBox<String> cbxMateria;
+    private javax.swing.JComboBox<String> cbxPeriodo;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lblPeriodo;
     private javax.swing.JPanel panelPrincipal;
-    private javax.swing.JTable tbldatos;
-    private javax.swing.JTextField txtcodigo;
-    private javax.swing.JTextField txtperiodo;
+    private javax.swing.JTable tbltabla;
+    private javax.swing.JTextField txtParalelo;
     // End of variables declaration//GEN-END:variables
 }

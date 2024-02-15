@@ -7,36 +7,36 @@ package controladores;
 import controlador.TDALista.LinkedList;
 import controlador.TDALista.exceptions.VacioException;
 import controlador.listas.DAO.DataAccesObject;
-import modelo.Revision;
+import modelo.Tarea;
 
 /**
  *
  * @author apolo
  */
-public class RevisionController extends DataAccesObject<Revision>{
-    private Revision revision = new Revision();
-    private LinkedList<Revision> revisiones = new LinkedList<>();
+public class TareaController extends DataAccesObject<Tarea>{
+    private Tarea tarea = new Tarea();
+    private LinkedList<Tarea> tareas = new LinkedList<>();
     
-    public RevisionController() {
-        super(Revision.class);
+    public TareaController() {
+        super(Tarea.class);
     }
 
     public Boolean guardar() {
-        getRevision().setId(generated_id());
-        return save(getRevision());
+        getTarea().setId(generated_id());
+        return save(getTarea());
     }
 
     public Boolean update(int fila) {
-        return update(getRevision(), fila);
+        return update(getTarea(), fila);
     }
 
-    public LinkedList<Revision> mergeSort(LinkedList<Revision> lista, Integer type, String field) {
-        Revision[] m = lista.toArray();
+    public LinkedList<Tarea> mergeSort(LinkedList<Tarea> lista, Integer type, String field) {
+        Tarea[] m = lista.toArray();
         mergeSort(m, 0, m.length - 1, field, type);
         return lista = lista.toList(m);
     }
 
-    private void mergeSort(Revision[] m, Integer ini, Integer fin, String field, Integer type) {
+    private void mergeSort(Tarea[] m, Integer ini, Integer fin, String field, Integer type) {
         if (ini < fin) {
             int medio = (ini + fin) / 2;
             mergeSort(m, ini, medio, field, type);
@@ -45,12 +45,12 @@ public class RevisionController extends DataAccesObject<Revision>{
         }
     }
 
-    private void merge(Revision[] m, Integer ini, Integer medio, Integer fin, String field, Integer type) {
+    private void merge(Tarea[] m, Integer ini, Integer medio, Integer fin, String field, Integer type) {
         Integer izq = ini;
         Integer der = medio + 1;
         Integer k = 0;
         Integer n = fin - ini + 1;
-        Revision[] result = new Revision[n];
+        Tarea[] result = new Tarea[n];
         while (izq <= medio && der <= fin) {
             if (m[izq].comparar(m[der], type, field)) {
                 result[k] = m[izq];
@@ -76,19 +76,19 @@ public class RevisionController extends DataAccesObject<Revision>{
         }
     }
 
-    public LinkedList<Revision> quickSort(LinkedList<Revision> lista, Integer type, String field) {
-        Revision[] m = lista.toArray();
+    public LinkedList<Tarea> quickSort(LinkedList<Tarea> lista, Integer type, String field) {
+        Tarea[] m = lista.toArray();
         Integer fin = m.length - 1;
         quickSort(m, type, field, 0, fin);
         //setVentas(lista.toList(m));
         return lista = lista.toList(m);
     }
 
-    private void quickSort(Revision[] m, Integer type, String field, Integer inicio, Integer fin) {
+    private void quickSort(Tarea[] m, Integer type, String field, Integer inicio, Integer fin) {
         
         if (inicio >= fin) return;
         
-        Revision pivote = m[inicio];
+        Tarea pivote = m[inicio];
         Integer elemIzq = inicio + 1;
         Integer elemDer = fin;
         while (elemIzq <= elemDer) {
@@ -99,13 +99,13 @@ public class RevisionController extends DataAccesObject<Revision>{
                 elemDer--;
             }
             if (elemIzq < elemDer) {
-                Revision temp = m[elemIzq];
+                Tarea temp = m[elemIzq];
                 m[elemIzq] = m[elemDer];
                 m[elemDer] = temp;
             }
         }
         if (elemDer > inicio) {
-            Revision temp = m[inicio];
+            Tarea temp = m[inicio];
             m[inicio] = m[elemDer];
             m[elemDer] = temp;
         }
@@ -113,10 +113,10 @@ public class RevisionController extends DataAccesObject<Revision>{
         quickSort(m, type, field, elemDer + 1, fin);
     }
 
-    public LinkedList<Revision> buscar(LinkedList<Revision> lista, String text) throws VacioException, Exception {
-        LinkedList<Revision> lo = this.quickSort(lista, 0, "id");
-        Revision[] m = lo.toArray();
-        LinkedList<Revision> result = new LinkedList<>();
+    public LinkedList<Tarea> buscar(LinkedList<Tarea> lista, String text) throws VacioException, Exception {
+        LinkedList<Tarea> lo = this.quickSort(lista, 0, "id");
+        Tarea[] m = lo.toArray();
+        LinkedList<Tarea> result = new LinkedList<>();
         for (int i = 0; i < lo.getSize(); i++) {
             if (m[i].getId().toString().toLowerCase().contains(text.toLowerCase())) {
                 result.add(m[i]);
@@ -126,30 +126,30 @@ public class RevisionController extends DataAccesObject<Revision>{
     }
  
     /**
-     * @return the revision
+     * @return the tarea
      */
-    public Revision getRevision() {
-        return revision;
+    public Tarea getTarea() {
+        return tarea;
     }
 
     /**
-     * @param revision the revision to set
+     * @param tarea the tarea to set
      */
-    public void setRevision(Revision revision) {
-        this.revision = revision;
+    public void setTarea(Tarea tarea) {
+        this.tarea = tarea;
     }
 
     /**
-     * @return the revisiones
+     * @return the tareas
      */
-    public LinkedList<Revision> getRevisiones() {
-        return revisiones;
+    public LinkedList<Tarea> getTareas() {
+        return tareas;
     }
 
     /**
-     * @param revisiones the revisiones to set
+     * @param tareas the tareas to set
      */
-    public void setRevisiones(LinkedList<Revision> revisiones) {
-        this.revisiones = revisiones;
+    public void setTareas(LinkedList<Tarea> tareas) {
+        this.tareas = tareas;
     }     
 }

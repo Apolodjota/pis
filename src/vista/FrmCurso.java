@@ -52,9 +52,6 @@ public class FrmCurso extends javax.swing.JFrame {
             if (criterio.equalsIgnoreCase("ciclo")) {
                 Integer ciclo = Integer.parseInt(txtBusqueda.getText());
                 mtcl.setCursos(ccl.buscarCiclo(ccl.getCursos(), criterio, ciclo));
-            } else if (criterio.equalsIgnoreCase("paralelo")) {
-                String paralelo = txtBusqueda.getText().toUpperCase();
-                mtcl.setCursos(ccl.buscarParalelo(ccl.getCursos(), criterio, paralelo));
             } else if (criterio.equalsIgnoreCase("malla")) {
                 mtcl.setCursos(ccl.buscarMalla(ccl.getCursos(), "id_malla", UtilVista.getComboMallas(cbxMallaB)));
             }
@@ -97,7 +94,6 @@ public class FrmCurso extends javax.swing.JFrame {
         try {
             ccl.getCurso().setId_malla(UtilVista.getComboMallas(cbxMalla).getId());
             ccl.getCurso().setCiclo(cbxCiclo.getSelectedIndex() + 1);
-            ccl.getCurso().setParalelo(cbxParalelo.getSelectedItem().toString());
 
             if (ccl.getCurso().getId() == null) {
                 if (ccl.save()) {
@@ -146,7 +142,6 @@ public class FrmCurso extends javax.swing.JFrame {
                 ccl.setCurso(mtcl.getCursos().get(ccl.getIndex()));
                 cbxMalla.setSelectedIndex(ccl.getCurso().getId_malla() - 1);
                 cbxCiclo.setSelectedIndex(ccl.getCurso().getCiclo());
-                cbxParalelo.setSelectedItem(ccl.getCurso().getId() - 1);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null,
                         e.getMessage(),
@@ -173,9 +168,7 @@ public class FrmCurso extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         cbxCiclo = new javax.swing.JComboBox<>();
-        jLabel10 = new javax.swing.JLabel();
         cbxMalla = new javax.swing.JComboBox<>();
-        cbxParalelo = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         txtModalidad = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
@@ -251,15 +244,6 @@ public class FrmCurso extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel3.add(cbxCiclo, gridBagConstraints);
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel10.setText("Paralelo:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel3.add(jLabel10, gridBagConstraints);
-
         cbxMalla.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbxMalla.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -274,15 +258,6 @@ public class FrmCurso extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel3.add(cbxMalla, gridBagConstraints);
-
-        cbxParalelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B" }));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 50;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel3.add(cbxParalelo, gridBagConstraints);
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel11.setText("Modalidad:");
@@ -366,7 +341,7 @@ public class FrmCurso extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel5.add(jLabel9, gridBagConstraints);
 
-        cbxCriterio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CICLO", "PARALELO", "MALLA" }));
+        cbxCriterio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CICLO", "MALLA" }));
         cbxCriterio.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbxCriterioItemStateChanged(evt);
@@ -426,11 +401,11 @@ public class FrmCurso extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1140, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1140, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
         );
 
         pack();
@@ -453,9 +428,6 @@ public class FrmCurso extends javax.swing.JFrame {
             cbxMallaB.setVisible(true);
             txtBusqueda.setVisible(false);
         } else if (evt.getItem().toString().equalsIgnoreCase("CICLO")) {
-            cbxMallaB.setVisible(false);
-            txtBusqueda.setVisible(true);
-        } else if (evt.getItem().toString().equalsIgnoreCase("PARALELO")) {
             cbxMallaB.setVisible(false);
             txtBusqueda.setVisible(true);
         }
@@ -535,8 +507,6 @@ public class FrmCurso extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxCriterio;
     private javax.swing.JComboBox<String> cbxMalla;
     private javax.swing.JComboBox<String> cbxMallaB;
-    private javax.swing.JComboBox<String> cbxParalelo;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
