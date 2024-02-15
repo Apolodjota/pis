@@ -36,7 +36,7 @@ public class FrmEstudiante extends javax.swing.JFrame {
     }    
     
     private void Ordenar(Integer type, String atribute) throws VacioException{
-            et.setAutos(ec.ordenarQuickSort(ec.getEstudiantes(), type, atribute));
+            et.setEstudiantes(ec.ordenarQuickSort(ec.getEstudiantes(), type, atribute));
             table.setModel(et);
             table.updateUI();
     }
@@ -56,7 +56,7 @@ public class FrmEstudiante extends javax.swing.JFrame {
     }
     
     private void cargarTabla(){
-        et.setAutos(ec.getEstudiantes());
+        et.setEstudiantes(ec.getEstudiantes());
         table.setModel(et);
         table.updateUI();
         System.out.println(ec.getEstudiantes().print());
@@ -66,21 +66,21 @@ public class FrmEstudiante extends javax.swing.JFrame {
         if (metodo.equalsIgnoreCase("id") || metodo.equalsIgnoreCase("cedula")){
             if (metodo.equalsIgnoreCase("id")){
                 Integer id = Integer.parseInt(txtBusqueda.getText().toString());
-                et.setAutos(Util.retornar(ec.BusquedaID(ec.getEstudiantes(), id, metodo)));
+                et.setEstudiantes(Util.retornar(ec.BusquedaID(ec.getEstudiantes(), id, metodo)));
             } else if (metodo.equalsIgnoreCase("cedula")) { 
                 String cedula = txtBusqueda.getText().toString();
-                et.setAutos(Util.retornar(ec.BusquedaCedula(ec.getEstudiantes(), cedula, metodo)));
+                et.setEstudiantes(Util.retornar(ec.BusquedaCedula(ec.getEstudiantes(), cedula, metodo)));
             }        
         } else {
             if (metodo.equalsIgnoreCase("nombres")) {
                 String nombres = txtBusqueda.getText().toString();
-                et.setAutos(ec.buscarNombres(ec.getEstudiantes(), metodo, nombres));
+                et.setEstudiantes(ec.buscarNombres(ec.getEstudiantes(), metodo, nombres));
             } else if (metodo.equalsIgnoreCase("apellidos")) { 
                 String apellidos = txtBusqueda.getText().toString();
-                et.setAutos(ec.buscarApellidos(ec.getEstudiantes(), metodo, apellidos));
+                et.setEstudiantes(ec.buscarApellidos(ec.getEstudiantes(), metodo, apellidos));
             } else {
                 String titulo = cbxBusqueda.getSelectedItem().toString();
-                et.setAutos(ec.buscarTituloBachiller(ec.getEstudiantes(), metodo, titulo));
+                et.setEstudiantes(ec.buscarTituloBachiller(ec.getEstudiantes(), metodo, titulo));
             }
         }
         table.setModel(et);
@@ -104,7 +104,7 @@ public class FrmEstudiante extends javax.swing.JFrame {
             , JOptionPane.ERROR_MESSAGE);
         } else {
             try {
-                ec.setEstudiante(et.getAutos().get(fila));
+                ec.setEstudiante(et.getEstudiantes().get(fila));
                 txtApellido.setText(ec.getEstudiante().getApellidos());
                 txtnombres.setText(ec.getEstudiante().getNombres());
                 Calendar.setDate(ec.getEstudiante().getFechaNacimiento());

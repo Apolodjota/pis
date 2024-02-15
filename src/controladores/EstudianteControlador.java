@@ -64,6 +64,33 @@ public class EstudianteControlador extends AdaptadorDao<Estudiante>{
         return a;
     }
     
+    public Estudiante buscarEstudiante(Integer id){
+        Estudiante e = new Estudiante();
+        try {
+            Statement stmt = new Conexion().getConnection().createStatement();
+            String query = "SELECT * FROM estudiante JOIN persona on (estudiante.id = "+id+" and persona.id = "+id+")";
+            System.out.println(query);
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                e.setId(rs.getInt(1));
+                e.setTitulo_bachiller(rs.getString(2));
+                e.setTrabaja(rs.getString(3));
+                e.setId_rol(rs.getInt(5));
+                e.setCedula(rs.getString(6));
+                e.setNombres(rs.getString(7));
+                e.setApellidos(rs.getString(8));
+                e.setGenero(rs.getString(9));
+                e.setFechaNacimiento(rs.getDate(10));
+                e.setTelefonoCasa(rs.getString(11));
+                e.setTelefonoCelular(rs.getString(12));
+                e.setDireccionResidencia(rs.getString(13));
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        return e;
+    }
+    
     public LinkedList <Estudiante> listarEyD (){
         LinkedList <Estudiante> lista = new LinkedList<>();
         try {

@@ -64,6 +64,7 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
     
     public Integer guardar(T object){
         String query = queryInsert(object);
+        System.out.println("Sentencia: "+query);
         Integer idG = -1;
         try {
             PreparedStatement stament = conexion.getConnection().prepareStatement(query);
@@ -133,6 +134,7 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
         try {
             Statement stmt = conexion.getConnection().createStatement();
             String query = "select * from " + clazz.getSimpleName().toLowerCase() + " where id = " + id;
+            System.out.println("Sentencia: "+query);
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 data = llenarObjeto(rs);

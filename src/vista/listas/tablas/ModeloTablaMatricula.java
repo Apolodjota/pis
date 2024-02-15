@@ -31,7 +31,9 @@ public class ModeloTablaMatricula extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         try {
             Matricula matricula = getMatriculas().get(rowIndex);
-            Estudiante estudiante = ec.getEstudiantes().get(matricula.getId_estudiante() - 1);
+            //Estudiante estudiante = ec.getEstudiantes().get(matricula.getId_estudiante() - 1);
+            System.out.println("ID estudiante: "+matricula.getId_estudiante());
+            Estudiante estudiante = ec.buscarEstudiante(matricula.getId_estudiante());
             PeriodoAcademico periodo = pc.getPeriodos().getLast();
             //String estado = (matricula.getGratuidad()== true) ? "Conservada" : "Retirada";
             switch (columnIndex) {
