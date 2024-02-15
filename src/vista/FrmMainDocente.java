@@ -23,6 +23,10 @@ public class FrmMainDocente extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         cargarImagenes();
+        JLabel labl = new JLabel();
+        jPanel3.add(new JLabel());
+        labl.setVisible(true);
+        labl.setText("XDDDDDDDD");
     }
 
     private void cargarImagenes() {

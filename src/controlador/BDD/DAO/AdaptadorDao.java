@@ -12,7 +12,6 @@ import java.util.Map;
 import controlador.TDALista.LinkedList;
 import controlador.Utilidades.Utilidades;
 import java.sql.SQLException;
-import modelo.Estudiante;
 import modelo.Persona;
 
 /**
@@ -104,8 +103,6 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
      * Metodo que permite sacar los datos de la base de datos
      * @return Un Objeto de la ListaEnlazada con los datos llenos
      */
-    
-    
     @Override
     public LinkedList<T> listar() {
         LinkedList<T> lista = new LinkedList<>();
