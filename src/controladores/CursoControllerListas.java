@@ -145,17 +145,17 @@ public class CursoControllerListas extends DataAccesObject<Curso>{
         return result;
     }
 
-    public LinkedList<Curso> buscarParalelo(LinkedList<Curso> lista, String text, String paralelo) throws Exception {
-        LinkedList<Curso> lo = this.quickSort(0, text, lista);
-        Curso[] c = lo.toArray();
-        LinkedList<Curso> result = new LinkedList<>();
-        for (int i = 0; i < lo.getSize(); i++) {
-            if (c[i].getParalelo().equals(paralelo)) {
-                result.add(c[i]);
-            }
-        }
-        return result;
-    }
+//    public LinkedList<Curso> buscarParalelo(LinkedList<Curso> lista, String text, String paralelo) throws Exception {
+//        LinkedList<Curso> lo = this.quickSort(0, text, lista);
+//        Curso[] c = lo.toArray();
+//        LinkedList<Curso> result = new LinkedList<>();
+//        for (int i = 0; i < lo.getSize(); i++) {
+//            if (c[i].getParalelo().equals(paralelo)) {
+//                result.add(c[i]);
+//            }
+//        }
+//        return result;
+//    }
     
     public LinkedList<Curso> buscarMalla(LinkedList<Curso> lista, String text, Malla malla) throws Exception {
         LinkedList<Curso> lo = this.quickSort(0, text, lista);

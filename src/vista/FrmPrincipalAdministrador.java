@@ -48,6 +48,7 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jplSalir = new javax.swing.JPanel();
         panelImage11 = new org.edisoncor.gui.panel.PanelImage();
@@ -85,7 +86,10 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         panelImage1 = new org.edisoncor.gui.panel.PanelImage();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
+
+        jPanel2.setBackground(new java.awt.Color(204, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
@@ -141,7 +145,7 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(196, Short.MAX_VALUE)
                 .addComponent(panelImage10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jplSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -539,6 +543,7 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setPreferredSize(new java.awt.Dimension(1140, 520));
+        jPanel5.setLayout(new java.awt.GridBagLayout());
 
         javax.swing.GroupLayout panelImage1Layout = new javax.swing.GroupLayout(panelImage1);
         panelImage1.setLayout(panelImage1Layout);
@@ -551,42 +556,58 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
             .addGap(0, 315, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(330, 330, 330)
-                .addComponent(panelImage1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(509, Short.MAX_VALUE))
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 301;
+        gridBagConstraints.ipady = 315;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(100, 100, 100, 100);
+        jPanel5.add(panelImage1, gridBagConstraints);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1358, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap()))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(99, 99, 99)
-                .addComponent(panelImage1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(106, Short.MAX_VALUE))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 672, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addContainerGap()))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -603,16 +624,16 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
             panel.setBackground(new Color(0, 153, 153));
         }
 
-        jplDocentes.setBackground(Color.LIGHT_GRAY);
+        jplDocentes.setBackground(Color.WHITE);
         jLabel2.setForeground(Color.black);
         jLabel3.setForeground(Color.black);
-        
+
         FrmDocente frmDocente = new FrmDocente();
         JPanel panelDocente = frmDocente.getJPanel1();
         jPanel5.removeAll();
         jPanel5.add(panelDocente);
         jPanel5.revalidate();
-        jPanel5.repaint();        
+        jPanel5.repaint();
     }//GEN-LAST:event_jplDocentesMouseClicked
 
     private void jplEstudiantesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplEstudiantesMouseClicked
@@ -626,16 +647,16 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
             panel.setBackground(new Color(0, 153, 153));
         }
 
-        jplEstudiantes.setBackground(Color.LIGHT_GRAY);
+        jplEstudiantes.setBackground(Color.WHITE);
         jLabel6.setForeground(Color.black);
         jLabel7.setForeground(Color.black);
-        
+
         FrmEstudiante frmEstudiante = new FrmEstudiante();
         JPanel panelDocente = frmEstudiante.getJPanel1();
         jPanel5.removeAll();
         jPanel5.add(panelDocente);
         jPanel5.revalidate();
-        jPanel5.repaint();          
+        jPanel5.repaint();
     }//GEN-LAST:event_jplEstudiantesMouseClicked
 
     private void jplMateriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMateriasMouseClicked
@@ -649,7 +670,7 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
             panel.setBackground(new Color(0, 153, 153));
         }
 
-        jplMaterias.setBackground(Color.LIGHT_GRAY);
+        jplMaterias.setBackground(Color.WHITE);
         jLabel8.setForeground(Color.black);
         jLabel9.setForeground(Color.black);
 
@@ -672,7 +693,7 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
             panel.setBackground(new Color(0, 153, 153));
         }
 
-        jplCurso.setBackground(Color.LIGHT_GRAY);
+        jplCurso.setBackground(Color.WHITE);
         jLabel11.setForeground(Color.black);
 
         FrmCurso frmCurso = new FrmCurso();
@@ -694,7 +715,7 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
             panel.setBackground(new Color(0, 153, 153));
         }
 
-        jplMalla.setBackground(Color.LIGHT_GRAY);
+        jplMalla.setBackground(Color.WHITE);
         jLabel12.setForeground(Color.black);
 
         FrmMalla frmMalla = new FrmMalla();
@@ -716,15 +737,15 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
             panel.setBackground(new Color(0, 153, 153));
         }
 
-        jplMatricula.setBackground(Color.LIGHT_GRAY);
+        jplMatricula.setBackground(Color.WHITE);
         jLabel13.setForeground(Color.black);
-        
+
         FrmMatricula frmMatricula = new FrmMatricula();
         JPanel panelDocente = frmMatricula.getJPanel1();
         jPanel5.removeAll();
         jPanel5.add(panelDocente);
         jPanel5.revalidate();
-        jPanel5.repaint();          
+        jPanel5.repaint();
     }//GEN-LAST:event_jplMatriculaMouseClicked
 
     private void jplPeriodoAcademicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplPeriodoAcademicoMouseClicked
@@ -738,16 +759,16 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
             panel.setBackground(new Color(0, 153, 153));
         }
 
-        jplPeriodoAcademico.setBackground(Color.LIGHT_GRAY);
+        jplPeriodoAcademico.setBackground(Color.WHITE);
         jLabel4.setForeground(Color.black);
         jLabel5.setForeground(Color.black);
-        
+
         FrmPeriodoAcademico frmPeriodo = new FrmPeriodoAcademico(null, true);
         JPanel panelDocente = frmPeriodo.getJPanel1();
         jPanel5.removeAll();
         jPanel5.add(panelDocente);
         jPanel5.revalidate();
-        jPanel5.repaint();             
+        jPanel5.repaint();
     }//GEN-LAST:event_jplPeriodoAcademicoMouseClicked
 
     private void jplSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplSalirMouseClicked
@@ -808,6 +829,7 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel jblNombre;
