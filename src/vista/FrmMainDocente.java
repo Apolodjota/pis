@@ -26,8 +26,8 @@ public class FrmMainDocente extends javax.swing.JFrame {
     }
 
     private void cargarImagenes() {
-        panelImageAsignacion.setIcon(new ImageIcon("src/icono/docentes.png"));
-        panelImageRevision.setIcon(new ImageIcon("src/icono/estudiantes.png"));
+        panelImageAsignacion.setIcon(new ImageIcon("src/icono/asignaronline.png"));
+        panelImageRevision.setIcon(new ImageIcon("src/icono/revisar.png"));
         panelImageLogo.setIcon(new ImageIcon("src/icono/usuario_prin.png"));
         panelImage11.setIcon(new ImageIcon("src/icono/cerrar-sesion.png"));
         panelImageCentral.setIcon(new ImageIcon("src/icono/logoEva_1.png"));
@@ -52,12 +52,12 @@ public class FrmMainDocente extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jplAsignacion = new javax.swing.JPanel();
         panelImageAsignacion = new org.edisoncor.gui.panel.PanelImage();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblAsignacion = new javax.swing.JLabel();
+        lblAsignacion2 = new javax.swing.JLabel();
         jplRevision = new javax.swing.JPanel();
         panelImageRevision = new org.edisoncor.gui.panel.PanelImage();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lblRevision = new javax.swing.JLabel();
+        lblRevision2 = new javax.swing.JLabel();
         panelImageLogo = new org.edisoncor.gui.panel.PanelImage();
         jblNombre = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -162,18 +162,18 @@ public class FrmMainDocente extends javax.swing.JFrame {
         panelImageAsignacion.setLayout(panelImageAsignacionLayout);
         panelImageAsignacionLayout.setHorizontalGroup(
             panelImageAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
+            .addGap(0, 48, Short.MAX_VALUE)
         );
         panelImageAsignacionLayout.setVerticalGroup(
             panelImageAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 35, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("Asignación");
+        lblAsignacion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblAsignacion.setText("Asignación");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setText("de tareas");
+        lblAsignacion2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblAsignacion2.setText("de tareas");
 
         javax.swing.GroupLayout jplAsignacionLayout = new javax.swing.GroupLayout(jplAsignacion);
         jplAsignacion.setLayout(jplAsignacionLayout);
@@ -182,22 +182,23 @@ public class FrmMainDocente extends javax.swing.JFrame {
             .addGroup(jplAsignacionLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(panelImageAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addGroup(jplAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblAsignacion2)
+                    .addComponent(lblAsignacion))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         jplAsignacionLayout.setVerticalGroup(
             jplAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jplAsignacionLayout.createSequentialGroup()
                 .addGap(8, 8, 8)
-                .addGroup(jplAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelImageAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jplAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelImageAsignacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jplAsignacionLayout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jLabel3))
-                    .addComponent(jLabel2)))
+                        .addComponent(lblAsignacion2))
+                    .addComponent(lblAsignacion))
+                .addGap(0, 0, 0))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -227,18 +228,18 @@ public class FrmMainDocente extends javax.swing.JFrame {
         panelImageRevision.setLayout(panelImageRevisionLayout);
         panelImageRevisionLayout.setHorizontalGroup(
             panelImageRevisionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
+            .addGap(0, 41, Short.MAX_VALUE)
         );
         panelImageRevisionLayout.setVerticalGroup(
             panelImageRevisionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 35, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setText("Revisión de");
+        lblRevision.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblRevision.setText("Revisión de");
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setText("Asignaciones");
+        lblRevision2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblRevision2.setText("Asignaciones");
 
         javax.swing.GroupLayout jplRevisionLayout = new javax.swing.GroupLayout(jplRevision);
         jplRevision.setLayout(jplRevisionLayout);
@@ -247,21 +248,22 @@ public class FrmMainDocente extends javax.swing.JFrame {
             .addGroup(jplRevisionLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(panelImageRevision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(26, 26, 26)
                 .addGroup(jplRevisionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6)))
+                    .addComponent(lblRevision2)
+                    .addComponent(lblRevision)))
         );
         jplRevisionLayout.setVerticalGroup(
             jplRevisionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jplRevisionLayout.createSequentialGroup()
                 .addGap(8, 8, 8)
-                .addGroup(jplRevisionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelImageRevision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jplRevisionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelImageRevision, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jplRevisionLayout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jLabel7))
-                    .addComponent(jLabel6)))
+                        .addComponent(lblRevision2))
+                    .addComponent(lblRevision))
+                .addGap(0, 0, 0))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -335,11 +337,11 @@ public class FrmMainDocente extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 1192, Short.MAX_VALUE))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 1182, Short.MAX_VALUE))
                     .addGap(10, 10, 10)))
         );
         jPanel2Layout.setVerticalGroup(
@@ -378,7 +380,7 @@ public class FrmMainDocente extends javax.swing.JFrame {
     private void jplAsignacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplAsignacionMouseClicked
         isAsignasionesClicked = true;
 
-        JLabel[] labelsBlancos = {jLabel6, jLabel7};
+        JLabel[] labelsBlancos = {lblRevision, lblRevision2};
         for (JLabel label : labelsBlancos) {
             label.setForeground(Color.white);
         }
@@ -389,8 +391,8 @@ public class FrmMainDocente extends javax.swing.JFrame {
         }
 
         jplAsignacion.setBackground(Color.WHITE);
-        jLabel2.setForeground(Color.blue);
-        jLabel3.setForeground(Color.blue);
+        lblAsignacion.setForeground(Color.blue);
+        lblAsignacion2.setForeground(Color.blue);
 
         FrmDocente frmDocente = new FrmDocente();
         JPanel panelDocente = frmDocente.getJPanel1();
@@ -403,7 +405,7 @@ public class FrmMainDocente extends javax.swing.JFrame {
     private void jplRevisionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplRevisionMouseClicked
         isRevisionesClicked = true;
 
-        JLabel[] labelsBlancos = {jLabel2, jLabel3};
+        JLabel[] labelsBlancos = {lblAsignacion, lblAsignacion2};
         for (JLabel label : labelsBlancos) {
             label.setForeground(Color.white);
         }
@@ -414,8 +416,8 @@ public class FrmMainDocente extends javax.swing.JFrame {
         }
 
         jplRevision.setBackground(Color.WHITE);
-        jLabel6.setForeground(Color.blue);
-        jLabel7.setForeground(Color.blue);
+        lblRevision.setForeground(Color.blue);
+        lblRevision2.setForeground(Color.blue);
 
         FrmEstudiante frmEstudiante = new FrmEstudiante();
         JPanel panelDocente = frmEstudiante.getJPanel1();
@@ -431,40 +433,37 @@ public class FrmMainDocente extends javax.swing.JFrame {
     }//GEN-LAST:event_jplSalirMouseClicked
 
     private void jplAsignacionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplAsignacionMouseEntered
-        if (!isRevisionesClicked) {
+        if (!isAsignasionesClicked) {
             jplAsignacion.setBackground(Color.WHITE);
-            jLabel2.setForeground(Color.blue);
-            jLabel3.setForeground(Color.blue);
+            lblAsignacion.setForeground(Color.blue);
+            lblAsignacion2.setForeground(Color.blue);
         }
     }//GEN-LAST:event_jplAsignacionMouseEntered
 
     private void jplAsignacionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplAsignacionMouseExited
-        if (!isRevisionesClicked) {
+        if (!isAsignasionesClicked) {
             jplAsignacion.setBackground(new Color(0, 204, 204));
-            jLabel2.setForeground(Color.black);
-            jLabel3.setForeground(Color.black);
+            lblAsignacion.setForeground(Color.black);
+            lblAsignacion2.setForeground(Color.black);
         }
     }//GEN-LAST:event_jplAsignacionMouseExited
 
     private void jplRevisionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplRevisionMouseEntered
-        if (!isAsignasionesClicked) {
+        if (!isRevisionesClicked) {
             jplRevision.setBackground(Color.WHITE);
-            jLabel6.setForeground(Color.blue);
-            jLabel7.setForeground(Color.blue);
+            lblRevision.setForeground(Color.blue);
+            lblRevision2.setForeground(Color.blue);
         }
     }//GEN-LAST:event_jplRevisionMouseEntered
 
     private void jplRevisionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplRevisionMouseExited
-        if (!isAsignasionesClicked) {
+        if (!isRevisionesClicked) {
             jplRevision.setBackground(new Color(0, 204, 204));
-            jLabel6.setForeground(Color.black);
-            jLabel7.setForeground(Color.black);
+            lblRevision.setForeground(Color.black);
+            lblRevision2.setForeground(Color.black);
         }
     }//GEN-LAST:event_jplRevisionMouseExited
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -506,10 +505,6 @@ public class FrmMainDocente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -518,6 +513,10 @@ public class FrmMainDocente extends javax.swing.JFrame {
     private javax.swing.JPanel jplAsignacion;
     private javax.swing.JPanel jplRevision;
     private javax.swing.JPanel jplSalir;
+    private javax.swing.JLabel lblAsignacion;
+    private javax.swing.JLabel lblAsignacion2;
+    private javax.swing.JLabel lblRevision;
+    private javax.swing.JLabel lblRevision2;
     private org.edisoncor.gui.panel.PanelImage panelImage10;
     private org.edisoncor.gui.panel.PanelImage panelImage11;
     private org.edisoncor.gui.panel.PanelImage panelImageAsignacion;
