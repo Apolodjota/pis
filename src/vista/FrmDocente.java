@@ -106,7 +106,7 @@ public class FrmDocente extends javax.swing.JFrame {
                 dc.setDocente(dt.getDocentes().get(fila));
                 txtapellidos.setText(dc.getDocente().getApellidos());
                 txtNombres.setText(dc.getDocente().getNombres());
-                dateNacimiento.setDate(dc.getDocente().getFecha_nac());
+                dateNacimiento.setDate(dc.getDocente().getFechaNacimiento());
                 dateDocencia.setDate(dc.getDocente().getFecha_inicio_docencia());
                 txtDireccion.setText(dc.getDocente().getDireccionResidencia());
                 txtdni.setText(dc.getDocente().getCedula());
@@ -128,7 +128,7 @@ public class FrmDocente extends javax.swing.JFrame {
         dc.getDocente().setApellidos(txtapellidos.getText().toString());
         dc.getDocente().setCedula(txtdni.getText().toString());
         dc.getDocente().setTelefonoCelular(txtCelular.getText().toString());
-        dc.getDocente().setFecha_nac(dateNacimiento.getDate());
+        dc.getDocente().setFechaNacimiento(dateNacimiento.getDate());
         dc.getDocente().setTelefonoCasa(txtTelefono.getText().toString());
         dc.getDocente().setDireccionResidencia(txtDireccion.getText().toString()); 
         dc.getDocente().setTitulo_cuartoNivel(txtTituloCuarto.getText().toString());

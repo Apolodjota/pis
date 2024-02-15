@@ -29,10 +29,10 @@ public class Conexion {
     //public String url = "jdbc:mysql://" + hostname + ":" + port + "/" + database + "?useSSL=false";//"jdbc:oracle:thin:@"+hostname+":"+port+":"+database;
 
     // Nombre de usuario
-    public String username = "PIS";
+    public String username = "pis";
 
     // Clave de usuario
-    public String password = "pis";
+    public String password = "gerardo";
 
     private Connection conectar() {
         Connection conn = null;
