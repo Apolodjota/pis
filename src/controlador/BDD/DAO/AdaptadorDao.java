@@ -12,7 +12,6 @@ import java.util.Map;
 import controlador.TDALista.LinkedList;
 import controlador.Utilidades.Utilidades;
 import java.sql.SQLException;
-import modelo.Estudiante;
 import modelo.Persona;
 
 /**
@@ -64,6 +63,7 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
     
     public Integer guardar(T object){
         String query = queryInsert(object);
+        System.out.println("Sentencia: "+query);
         Integer idG = -1;
         try {
             PreparedStatement stament = conexion.getConnection().prepareStatement(query);
@@ -103,8 +103,6 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
      * Metodo que permite sacar los datos de la base de datos
      * @return Un Objeto de la ListaEnlazada con los datos llenos
      */
-    
-    
     @Override
     public LinkedList<T> listar() {
         LinkedList<T> lista = new LinkedList<>();
@@ -133,6 +131,7 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
         try {
             Statement stmt = conexion.getConnection().createStatement();
             String query = "select * from " + clazz.getSimpleName().toLowerCase() + " where id = " + id;
+            System.out.println("Sentencia: "+query);
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 data = llenarObjeto(rs);

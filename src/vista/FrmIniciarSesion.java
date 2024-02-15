@@ -215,7 +215,7 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
                     new FrmPrincipalAdministrador().setVisible(true);
                     this.setVisible(false);
                 } else if (idRol == 2) {
-                    new FrmPrincipalDocente().setVisible(true);
+                    new FrmMainDocente().setVisible(true);
                     this.setVisible(false);
                 } else if (idRol == 3) {
                     new FrmPrincipalEstudiante().setVisible(true);

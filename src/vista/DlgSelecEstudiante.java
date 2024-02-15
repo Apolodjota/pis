@@ -18,16 +18,18 @@ import vista.tablas.EstudianteModeloTabla;
 public class DlgSelecEstudiante extends javax.swing.JDialog {
 
     EstudianteControlador ec = new EstudianteControlador();
-    EstudianteModeloTabla modelo = new EstudianteModeloTabla(ec.getEstudiantes());
+    EstudianteModeloTabla modelo = null;
     /**
      * Creates new form DlgSelecEstudiante
      */
     public DlgSelecEstudiante(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        cargarTabla();
     }
 
     private void cargarTabla(){
+        modelo = new EstudianteModeloTabla(ec.getEstudiantes());
         tblDatos.setModel(modelo);
         tblDatos.updateUI();
     }
@@ -138,11 +140,12 @@ public class DlgSelecEstudiante extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             int fila = tblDatos.getSelectedRow();
-            Estudiante e= modelo.getAutos().get(fila);
-            //FrmMatricula.setearEstudiante(e);
+            Estudiante e= modelo.getEstudiantes().get(fila);
+            FrmMatricula.setearEstudiante(e);
         } catch (VacioException ex) {
-            Logger.getLogger(DlgSelecEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error: "+ex);;
         }
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

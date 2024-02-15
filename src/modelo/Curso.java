@@ -12,7 +12,7 @@ public class Curso {
     public Curso() {
     }
 
-    public Curso(Integer id, Integer id_malla, Integer ciclo, String paralelo) {
+    public Curso(Integer id, Integer id_malla, Integer ciclo) {
         this.id = id;
         this.id_malla = id_malla;
         this.ciclo = ciclo;

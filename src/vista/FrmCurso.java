@@ -16,6 +16,7 @@ import vista.listas.util.UtilVista;
 public class FrmCurso extends javax.swing.JFrame {
 
     private CursoControllerListas ccl = new CursoControllerListas();
+    private MallaControllerListas mcl = new MallaControllerListas();
     private ModeloTablaCursoListas mtcl = new ModeloTablaCursoListas();
 
     public JPanel getJPanel1() {
@@ -28,6 +29,9 @@ public class FrmCurso extends javax.swing.JFrame {
     public FrmCurso() {
         initComponents();
         this.setLocationRelativeTo(null);
+        for (int i = 1; i <= UtilVista.getComboMallas(cbxMalla).getId(); i++) {
+          cbxCiclo.addItem(" " + i);  
+        }
         limpiar();
     }
 
@@ -92,32 +96,36 @@ public class FrmCurso extends javax.swing.JFrame {
 
     private void guardar() {
         try {
-            ccl.getCurso().setId_malla(UtilVista.getComboMallas(cbxMalla).getId());
-            ccl.getCurso().setCiclo(cbxCiclo.getSelectedIndex() + 1);
-
+            for (int i = 1; i <= UtilVista.getComboMallas(cbxMalla).getId(); i++) {
+                ccl.getCurso().setId_malla(UtilVista.getComboMallas(cbxMalla).getId());
+                ccl.getCurso().setCiclo(i);
+            }
+            
             if (ccl.getCurso().getId() == null) {
-                if (ccl.save()) {
+                try {
+                    Integer id = ccl.save();
+                    System.out.println("ID: " + id);
                     limpiar();
                     JOptionPane.showMessageDialog(null,
                             "Se ha guardado correctamente", "Ok",
                             JOptionPane.INFORMATION_MESSAGE);
-                    ccl.setCurso(null);
-                } else {
+                } catch (Exception e) {
                     JOptionPane.showMessageDialog(null,
-                            "No se ha podido guardar correctamente",
+                            "No se pudo guardar: " + e,
                             "Error",
                             JOptionPane.ERROR_MESSAGE);
+                    e.printStackTrace();
                 }
             } else {
-                if (ccl.update(ccl.getIndex())) {
+                try {
+                    ccl.update(ccl.getCurso());
                     limpiar();
                     JOptionPane.showMessageDialog(null,
-                            "Se ha editado correctamente", "Ok",
+                            "Se ha actualizado correctamente", "Ok",
                             JOptionPane.INFORMATION_MESSAGE);
-                    ccl.setCurso(null);
-                } else {
+                } catch (Exception e) {
                     JOptionPane.showMessageDialog(null,
-                            "No se ha podido editar correctamente",
+                            "No se pudo actualizar: " + e,
                             "Error",
                             JOptionPane.ERROR_MESSAGE);
                 }
