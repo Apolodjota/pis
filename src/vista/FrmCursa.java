@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import vista.listas.tablas.ModeloTablaCursa;
 import vista.listas.util.UtilVista;
-import vista.listas.util.UtilVistaLista;
 
 /**
  *
@@ -39,7 +38,7 @@ public class FrmCursa extends javax.swing.JFrame {
     }
 
     private void cargarParalelo() {
-
+        
     }
 
     private void limpiar() {
@@ -54,7 +53,8 @@ public class FrmCursa extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
         }
         //cargarParalelo();
-        txtParalelo.setText("");
+        txtParalelo.setText("REPE");
+        txtParalelo.setEnabled(false);
         cbxMateria.setSelectedIndex(0);
         cbxDocente.setSelectedIndex(0);
         cbxPeriodo.setSelectedIndex(0);
@@ -83,7 +83,7 @@ public class FrmCursa extends javax.swing.JFrame {
                 txtParalelo.setText(cC.getCursa().getParalelo());
                 cbxDocente.setSelectedIndex(cC.getCursa().getId_docente()- 1);
                 cbxMateria.setSelectedIndex(cC.getCursa().getId_materia()- 1);
-                cbxPeriodo.setSelectedIndex(cC.getCursa().getId_periodo()- 1);
+                //cbxPeriodo.setSelectedIndex(cC.getCursa().getId_periodo()- 1);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null,
                         e.getMessage(), "Error",
@@ -103,7 +103,7 @@ public class FrmCursa extends javax.swing.JFrame {
             try {
                 cC.getCursa().setId_docente(UtilVista.getComboDocentes(cbxDocente).getId());
                 cC.getCursa().setId_materia(UtilVista.getComboMateria(cbxMateria).getId());
-                cC.getCursa().setId_periodo(UtilVista.getComboPeriodoAcademico(cbxPeriodo).getId());
+                //cC.getCursa().setId_periodo(UtilVista.getComboPeriodoAcademico(cbxPeriodo).getId());
                 cC.getCursa().setParalelo(txtParalelo.getText());
                 cC.guardar();
                 cargarTabla();
@@ -127,7 +127,6 @@ public class FrmCursa extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -160,19 +159,12 @@ public class FrmCursa extends javax.swing.JFrame {
         panelPrincipal.setPreferredSize(new java.awt.Dimension(1140, 520));
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Completar los campos:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tw Cen MT", 1, 14))); // NOI18N
-        jPanel6.setLayout(new java.awt.GridBagLayout());
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel31.setBackground(new java.awt.Color(204, 204, 255));
         jLabel31.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel31.setText("Paralelo:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 39;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 370, 0, 0);
-        jPanel6.add(jLabel31, gridBagConstraints);
+        jPanel6.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, 94, -1));
 
         txtParalelo.setEditable(false);
         txtParalelo.addActionListener(new java.awt.event.ActionListener() {
@@ -180,26 +172,12 @@ public class FrmCursa extends javax.swing.JFrame {
                 txtParaleloActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 61;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 20, 0, 375);
-        jPanel6.add(txtParalelo, gridBagConstraints);
+        jPanel6.add(txtParalelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, 125, -1));
 
         jLabel33.setBackground(new java.awt.Color(204, 204, 255));
         jLabel33.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel33.setText("Materia:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 37;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 370, 0, 0);
-        jPanel6.add(jLabel33, gridBagConstraints);
+        jPanel6.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, 89, -1));
 
         btnGuardar.setBackground(new java.awt.Color(204, 204, 255));
         btnGuardar.setFont(new java.awt.Font("SimSun-ExtB", 1, 18)); // NOI18N
@@ -209,16 +187,7 @@ public class FrmCursa extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 13;
-        gridBagConstraints.ipady = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(28, 360, 0, 0);
-        jPanel6.add(btnGuardar, gridBagConstraints);
+        jPanel6.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 231, 112, 31));
 
         btnCancelar.setBackground(new java.awt.Color(204, 204, 255));
         btnCancelar.setFont(new java.awt.Font("SimSun-ExtB", 1, 18)); // NOI18N
@@ -228,13 +197,7 @@ public class FrmCursa extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.ipadx = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(28, 30, 0, 0);
-        jPanel6.add(btnCancelar, gridBagConstraints);
+        jPanel6.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(507, 231, 112, -1));
 
         cbxMateria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbxMateria.addItemListener(new java.awt.event.ItemListener() {
@@ -242,15 +205,7 @@ public class FrmCursa extends javax.swing.JFrame {
                 cbxMateriaItemStateChanged(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 53;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 20, 0, 375);
-        jPanel6.add(cbxMateria, gridBagConstraints);
+        jPanel6.add(cbxMateria, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 125, -1));
 
         cbxDocente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbxDocente.addActionListener(new java.awt.event.ActionListener() {
@@ -258,38 +213,17 @@ public class FrmCursa extends javax.swing.JFrame {
                 cbxDocenteActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 53;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 20, 0, 375);
-        jPanel6.add(cbxDocente, gridBagConstraints);
+        jPanel6.add(cbxDocente, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, 125, -1));
 
         jLabel36.setBackground(new java.awt.Color(204, 204, 255));
         jLabel36.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel36.setText("Docente");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.ipadx = 40;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 370, 0, 0);
-        jPanel6.add(jLabel36, gridBagConstraints);
+        jPanel6.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 89, -1));
 
         lblPeriodo.setBackground(new java.awt.Color(204, 204, 255));
         lblPeriodo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblPeriodo.setText("Periodo académico:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 11;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(40, 350, 0, 0);
-        jPanel6.add(lblPeriodo, gridBagConstraints);
+        lblPeriodo.setText("Matrícula:");
+        jPanel6.add(lblPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, -1, -1));
 
         cbxPeriodo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbxPeriodo.addActionListener(new java.awt.event.ActionListener() {
@@ -297,15 +231,7 @@ public class FrmCursa extends javax.swing.JFrame {
                 cbxPeriodoActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 53;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(40, 20, 0, 375);
-        jPanel6.add(cbxPeriodo, gridBagConstraints);
+        jPanel6.add(cbxPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 125, -1));
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registros Existentes:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tw Cen MT", 1, 14))); // NOI18N
 
@@ -345,7 +271,7 @@ public class FrmCursa extends javax.swing.JFrame {
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(103, Short.MAX_VALUE)
+                .addContainerGap(108, Short.MAX_VALUE)
                 .addComponent(btncancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66))
             .addGroup(jPanel7Layout.createSequentialGroup()
@@ -363,7 +289,7 @@ public class FrmCursa extends javax.swing.JFrame {
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -9,19 +9,22 @@ public class Cursa {
     private Integer id_materia;
     private String paralelo;
     private Integer id_docente;
-    private Integer id_periodo;
+    //private Integer id_periodo;
+    private Integer id_matricula;
     
 
     public Cursa() {
     }
 
-    public Cursa(Integer id, Integer id_materia, String paralelo, Integer id_docente, Integer id_periodo) {
+    public Cursa(Integer id, Integer id_materia, String paralelo, Integer id_docente, Integer id_matricula) {
         this.id = id;
         this.id_materia = id_materia;
         this.paralelo = paralelo;
         this.id_docente = id_docente;
-        this.id_periodo = id_periodo;
+        this.id_matricula = id_matricula;
     }
+
+    
 
     public Integer getId() {
         return id;
@@ -55,13 +58,22 @@ public class Cursa {
         this.id_docente = id_docente;
     }
 
-    public Integer getId_periodo() {
-        return id_periodo;
+    public Integer getId_matricula() {
+        return id_matricula;
     }
 
-    public void setId_periodo(Integer id_periodo) {
-        this.id_periodo = id_periodo;
+    public void setId_matricula(Integer id_matricula) {
+        this.id_matricula = id_matricula;
     }
+
+    
+//    public Integer getId_periodo() {
+//        return id_periodo;
+//    }
+//
+//    public void setId_periodo(Integer id_periodo) {
+//        this.id_periodo = id_periodo;
+//    }
 
    public Boolean comparar(Cursa c, String field, Integer type) {
         switch (type) {
@@ -74,8 +86,8 @@ public class Cursa {
                     return getParalelo().compareToIgnoreCase(c.getParalelo()) > 0;
                 else if (field.equalsIgnoreCase("id_docente")) 
                     return getId_docente() > c.getId_docente();
-                else if (field.equalsIgnoreCase("id_periodo"))
-                    return getId_periodo() > c.getId_periodo();
+                else if (field.equalsIgnoreCase("id_matricula"))
+                    return getId_matricula()> c.getId_matricula();
             case 0:
                 if (field.equalsIgnoreCase("id"))
                     return getId().intValue() < c.getId().intValue();
@@ -85,8 +97,8 @@ public class Cursa {
                     return getParalelo().compareToIgnoreCase(c.getParalelo()) < 0;
                 else if (field.equalsIgnoreCase("id_docente")) 
                     return getId_docente() < c.getId_docente();
-                else if (field.equalsIgnoreCase("id_periodo"))
-                    return getId_periodo() < c.getId_periodo();
+                else if (field.equalsIgnoreCase("id_matricula"))
+                    return getId_matricula()< c.getId_matricula();
             default:
                 return null;
         }
