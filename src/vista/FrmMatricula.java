@@ -82,7 +82,7 @@ public class FrmMatricula extends javax.swing.JFrame {
 
     private boolean validar() {
         //return !(cbxestudiante.getSelectedIndex() == -1);
-        return false;
+        return e != null;
     }
 
     private void cargarVista() {
@@ -148,7 +148,7 @@ public class FrmMatricula extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(null,
-                    "¡Llene todos los campos!",
+                    "¡No ha seleccionado un estudiante!",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
 
@@ -156,6 +156,7 @@ public class FrmMatricula extends javax.swing.JFrame {
     
     public static void setearEstudiante(Estudiante nuevoE){
         e = nuevoE;
+        txtestudiante.setText(e.toString());
     }
     
     /**
@@ -251,6 +252,11 @@ public class FrmMatricula extends javax.swing.JFrame {
         txtestudiante.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         txtestudiante.setText("Seleccione...");
         txtestudiante.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtestudiante.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtestudianteMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -433,6 +439,10 @@ public class FrmMatricula extends javax.swing.JFrame {
         guardar();
     }//GEN-LAST:event_btnguardarActionPerformed
 
+    private void txtestudianteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtestudianteMouseClicked
+        new DlgSelecEstudiante(this, true).setVisible(true);
+    }//GEN-LAST:event_txtestudianteMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -503,7 +513,7 @@ public class FrmMatricula extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JTable tbldatos;
-    private javax.swing.JTextField txtestudiante;
+    public static javax.swing.JTextField txtestudiante;
     private javax.swing.JTextField txtperiodo;
     private javax.swing.JTextField txtvalor;
     // End of variables declaration//GEN-END:variables
