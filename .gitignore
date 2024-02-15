@@ -1,4 +1,4 @@
-libs/
+lib/
 build/
 nbproject/
 build.xml
@@ -9,3 +9,4 @@ private.properties
 build.properties
 nbproject/private/private.xml
 build/built-jar.properties
+nbproject/
