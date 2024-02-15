@@ -42,7 +42,7 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
      * @return La llave primaria generada por el motor de base de datos (se sugiere construir la tabla de base de datos con la generacion de id auto incementable) 
      * @throws Exception Cuando no se puede guardar en la base de datos
      */
-    @Override
+    
     public void guardarEyD(T obj) throws Exception {
         //INSERT INTO <TABLA> (..) value (...)
         String query = queryInsertHerencia(obj);
