@@ -23,7 +23,7 @@ public class PersonaController extends AdaptadorDao<Persona>{
     }
     
     public Integer save() throws Exception{
-        return guardar(getPersona());
+        return guardar(persona);
     }
 
     public Persona getPersona() {
