@@ -65,7 +65,7 @@ public class Docente extends Persona{
                 else if (field.equalsIgnoreCase("cedula"))
                     return getCedula().compareToIgnoreCase(e.getCedula()) > 0;
                 else if (field.equalsIgnoreCase("fecha_nac"))
-                    return getFecha_nac().compareTo(e.getFecha_nac()) > 0;
+                    return getFechaNacimiento().compareTo(e.getFechaNacimiento()) > 0;
                 else if (field.equalsIgnoreCase("direccionResidencia"))
                     return getDireccionResidencia().compareToIgnoreCase(e.getDireccionResidencia()) > 0;
                 else if (field.equalsIgnoreCase("genero"))
@@ -84,7 +84,7 @@ public class Docente extends Persona{
                 else if (field.equalsIgnoreCase("cedula"))
                     return getCedula().compareToIgnoreCase(e.getCedula()) < 0;
                 else if (field.equalsIgnoreCase("fecha_nac"))
-                    return getFecha_nac().compareTo(e.getFecha_nac()) < 0;
+                    return getFechaNacimiento().compareTo(e.getFechaNacimiento()) < 0;
                 else if (field.equalsIgnoreCase("direccionResidencia"))
                     return getDireccionResidencia().compareToIgnoreCase(e.getDireccionResidencia()) < 0;
                 else if (field.equalsIgnoreCase("genero"))
