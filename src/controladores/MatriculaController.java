@@ -5,6 +5,7 @@ import controlador.TDALista.exceptions.VacioException;
 import controlador.listas.DAO.DataAccesObject;
 import controlador.listas.DAO.TransferObject;
 import java.lang.reflect.Field;
+import modelo.Estudiante;
 import modelo.Matricula;
 import modelo.PeriodoAcademico;
 
@@ -51,6 +52,17 @@ public class MatriculaController extends AdaptadorDao<Matricula>{
 
     public Integer save() throws Exception{
         return guardar(matricula);
+    }
+    
+    public void matricularVarios(LinkedList<Estudiante> estudiantes, Integer idPeriodoActual)throws Exception{
+        Estudiante[] lista = estudiantes.toArray();
+        //Integer idperiodoActual = new PeriodoController().getPeriodos().getLast().getId();
+        for (Estudiante estudiante : lista) {
+            Matricula m = new Matricula();
+            m.setId_estudiante(estudiante.getId());
+            m.setId_periodoAcademico(idPeriodoActual);
+            guardar(m);
+        }
     }
     
     public void update(Matricula mat) throws Exception{
