@@ -173,7 +173,6 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
             }
             if (f.getType().getSimpleName().equalsIgnoreCase("Integer")) {
                 m = clazz.getMethod("set" + atributo, Integer.class);
-                System.out.println("data "+ data + "atributo" + atributo);
                 m.invoke(data, rs.getInt(atributo));
             }
             if (f.getType().getSimpleName().equalsIgnoreCase("Double")) {
@@ -186,12 +185,9 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
             }
             if (f.getType().getSimpleName().equalsIgnoreCase("Date")) {
                 m = clazz.getMethod("set" + atributo, Date.class);
-                System.out.println("metood fate" + m.getName());
-                System.out.println("data "+ data + "atributo" + atributo);
                 m.invoke(data, rs.getDate(atributo)); 
             }
             if (f.getType().isEnum()) {
-
                 m = clazz.getMethod("set" + atributo, (Class<Enum>) f.getType());
                 m.invoke(data, Enum.valueOf((Class<Enum>) f.getType(), rs.getString(atributo)));
             }
@@ -231,30 +227,32 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
     
     private String queryInsertHerencia (T obj) {
         String query = "INSERT INTO ";
-        HashMap<String, Object> mapa = obtenerObjeto(obj);
-        if (clazz.getSimpleName().equalsIgnoreCase("estudiante")){
-            query += ""+clazz.getSimpleName().toLowerCase() + "(id,";
-            Field [] fields = clazz.getDeclaredFields();
-            for(Field f : fields){
-                query += f.getName() + ",";
+        query += "" + clazz.getSimpleName().toLowerCase() + "(id,";
+        Field[] fields = clazz.getDeclaredFields();
+        for (Field f : fields) {
+            query += f.getName() + ",";
+        }
+        query = query.substring(0, query.length() - 1);
+        query += ") VALUES (";
+        try {
+            Field campo = obj.getClass().getSuperclass().getDeclaredField("id");
+            campo.setAccessible(true);
+            query += campo.get(obj) + ",";
+            Field[] fiels = clazz.getDeclaredFields();
+            for (Field fi : fiels) {
+                fi.setAccessible(true);
+                if(fi.get(obj).getClass().getSimpleName().equalsIgnoreCase("Date")){   
+                    SimpleDateFormat formato = new SimpleDateFormat("dd-MM-YY");
+                //query += '"' + formato.format(entry.getValue()) + '"' + ", ";
+                query += "'" + formato.format(fi.get(obj)) + "'" + ", ";
+                } else { 
+                    query += "'" + fi.get(obj) + "'" + ",";
+                }
             }
             query = query.substring(0, query.length() - 1);
-            query += ") VALUES ("; 
-            try {
-                Field campo = obj.getClass().getSuperclass().getDeclaredField("id");
-                campo.setAccessible(true);
-                query += campo.get(obj) + ",";
-                Field [] fiels = clazz.getDeclaredFields();
-                for (Field fi : fiels) {
-                    fi.setAccessible(true);
-                    query += "'" + fi.get(obj) + "'" + ",";
-
-                }
-                query = query.substring(0, query.length() - 1);
-                query += ")"; 
-            } catch (Exception ed) {
-                System.out.println("ex" + ed.getMessage());
-            } 
+            query += ")";
+        } catch (Exception ed) {
+            System.out.println("ex" + ed.getMessage());
         }
         System.out.println("--> " + query);
         return query;

@@ -4,9 +4,13 @@
  */
 package controladores;
 
+import controlador.BDD.DAO.AdaptadorDao;
+import controlador.BDD.DAO.Conexion;
 import controlador.TDALista.LinkedList;
 import controlador.TDALista.exceptions.VacioException;
 import controlador.listas.DAO.DataAccesObject;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import modelo.Docente;
 import modelo.Estudiante;
 
@@ -14,7 +18,7 @@ import modelo.Estudiante;
  *
  * @author sakotaz
  */
-public class DocenteControlador extends DataAccesObject<Docente>{
+public class DocenteControlador extends AdaptadorDao<Docente>{
     private LinkedList <Docente> docentes = new LinkedList <Docente>();
     private Docente docente = new Docente();
     
@@ -24,7 +28,7 @@ public class DocenteControlador extends DataAccesObject<Docente>{
 
     public LinkedList <Docente> getDocentes() {
         if (docentes.isEmpty())
-            docentes = listall();
+            docentes = listarD();
         return docentes;
     }
 
@@ -42,13 +46,41 @@ public class DocenteControlador extends DataAccesObject<Docente>{
         this.docente = docente;
     }
     
-    public Boolean guardar(){
-        docente.setId(generated_id());
-        return save(docente);
+    public void guardar() throws Exception{
+        guardarEyD(docente);
     }
     
-    public Boolean modificar(Integer index){
-        return update(docente, index);
+    public void update() throws Exception{
+        modificar(docente);
+    }
+    
+    public LinkedList <Docente> listarD (){
+        LinkedList <Docente> lista = new LinkedList<>();
+        try {
+            Statement stmt = new Conexion().getConnection().createStatement();
+            String query = "SELECT * FROM docente JOIN persona using (id)";
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()) {
+                Docente d = new Docente();
+                d.setId(rs.getInt(1));
+                d.setFecha_inicio_docencia(rs.getDate(2));
+                d.setTitulo_tercerNivel(rs.getString(3));
+                d.setTitulo_cuartoNivel(rs.getString(4));
+                d.setId_rol(rs.getInt(5));
+                d.setCedula(rs.getString(6));
+                d.setNombres(rs.getString(7));
+                d.setApellidos(rs.getString(8));
+                d.setGenero(rs.getString(9));
+                d.setFechaNacimiento(rs.getDate(10));
+                d.setTelefonoCasa(rs.getString(11));
+                d.setTelefonoCelular(rs.getString(12));
+                d.setDireccionResidencia(rs.getString(13));
+                lista.add(d);
+            }
+        } catch (Exception e) {
+            System.out.println("error" + e.getMessage());
+        }
+        return lista;
     }
     
     private void intercambio(Docente d[], int i, int j){

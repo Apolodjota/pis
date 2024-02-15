@@ -22,10 +22,18 @@ public class PIS {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        EstudianteControlador ec = new EstudianteControlador();
-        ec.getEstudiantes();
-        System.out.println("estudaintes-->" + ec.getEstudiantes().getSize());
-        System.out.println("1er " + ec.getEstudiantes().get(1).getTrabaja());
+        String fechaString = "12-03-2015";
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            Date fechaDate = formato.parse(fechaString);
+            System.out.println(fechaDate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        EstudianteControlador ec = new EstudianteControlador();
+//        ec.getEstudiantes();
+//        System.out.println("estudaintes-->" + ec.getEstudiantes().getSize());
+//        System.out.println("1er " + ec.getEstudiantes().get(1).getTrabaja());
 //        JDateChooser data = new JDateChooser();
 //        
 //        // Establecer la fecha en el JDateChooser

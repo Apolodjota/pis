@@ -2,6 +2,9 @@ package vista;
 import controlador.TDALista.LinkedList;
 import controlador.TDALista.exceptions.VacioException;
 import controladores.DocenteControlador;
+import controladores.PersonaController;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import modelo.Docente;
@@ -15,6 +18,7 @@ import vista.tablas.DocenteModeloTabla;
  */
 
 public class FrmDocente extends javax.swing.JFrame {
+    private PersonaController pc = new PersonaController();
     private DocenteControlador dc = new DocenteControlador();
     private DocenteModeloTabla dt = new DocenteModeloTabla(dc.getDocentes());
     private Integer fila = -1;
@@ -74,7 +78,6 @@ public class FrmDocente extends javax.swing.JFrame {
         txtDireccion.setText("");
         dc.setDocente(null);
         dc.setDocentes(new LinkedList<Docente>());
-        cargarTabla();
         table.clearSelection();
     }
     
@@ -123,7 +126,19 @@ public class FrmDocente extends javax.swing.JFrame {
             
     }
     
-    private void obtenerDocente(){
+    private void obtenerPersona(){
+        pc.getPersona().setNombres(txtNombres.getText().toString());
+        pc.getPersona().setApellidos(txtapellidos.getText().toString());
+        pc.getPersona().setCedula(txtdni.getText().toString());
+        pc.getPersona().setFechaNacimiento(dateNacimiento.getDate());
+        pc.getPersona().setTelefonoCelular(txtCelular.getText().toString());
+        pc.getPersona().setId_rol(2);
+        pc.getPersona().setTelefonoCasa(txtTelefono.getText().toString());
+        pc.getPersona().setGenero(cbxGenero.getSelectedItem().toString());
+        pc.getPersona().setDireccionResidencia(txtDireccion.getText().toString());
+    }
+    
+    private void obtenerDocente() throws Exception{
         dc.getDocente().setNombres(txtNombres.getText().toString());
         dc.getDocente().setApellidos(txtapellidos.getText().toString());
         dc.getDocente().setCedula(txtdni.getText().toString());
@@ -140,26 +155,32 @@ public class FrmDocente extends javax.swing.JFrame {
     private void save(){
         if (validar()) {
             try {
+                obtenerPersona();
                 obtenerDocente();
                     if (dc.getDocente().getId() == null){
-                        if (dc.guardar()){
+                        try {
+                            Integer idD = pc.save();
+                            dc.getDocente().setId(idD);
+                            dc.guardar();
                             limpiar();
+                            dc.setDocente(null); 
+                            pc.setPersona(null);
                             JOptionPane.showMessageDialog(null, "Se ha guardado Correctamente");
-                            dc.setDocente(null);
-                        } else {
+                        } catch (Exception e) {                              
                             JOptionPane.showMessageDialog(null, "No se ha podido Guardar");
-                        }
-                            
+                        }                            
                     } else {
-                        if (dc.modificar(fila)){
+                        try {
+                            dc.update();
                             limpiar();
                             JOptionPane.showMessageDialog(null, "Se ha modificado correctamente");
                             dc.setDocente(null);
-                        } else {
+                            pc.setPersona(null);
+                        } catch (Exception e) {
                             JOptionPane.showMessageDialog(null, "Error no se pudo mofidicar",
                                     "ERROR",
-                                    JOptionPane.ERROR_MESSAGE);
-                        }            
+                                    JOptionPane.ERROR_MESSAGE);          
+                        }    
                     }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "error " + e.getMessage());
@@ -295,7 +316,7 @@ public class FrmDocente extends javax.swing.JFrame {
         jLabel43.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel43.setText("direccion Residencia");
 
-        cbxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Femenino", "Masculino", "Otro" }));
+        cbxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "M" }));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -569,7 +590,7 @@ public class FrmDocente extends javax.swing.JFrame {
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 1111, Short.MAX_VALUE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 1111, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
@@ -579,7 +600,7 @@ public class FrmDocente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE))
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 228, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
