@@ -15,6 +15,7 @@ public class FrmAsignacion extends javax.swing.JFrame {
      */
     public FrmAsignacion() {
         initComponents();
+       
     }
 
     /**
@@ -28,26 +29,29 @@ public class FrmAsignacion extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
         jplAsignacion = new javax.swing.JPanel();
-        panelImageAsignacion = new org.edisoncor.gui.panel.PanelImage();
         lblAsignacion = new javax.swing.JLabel();
         lblAsignacion2 = new javax.swing.JLabel();
+        jplAsignacion1 = new javax.swing.JPanel();
+        lblAsignacion1 = new javax.swing.JLabel();
+        lblAsignacion3 = new javax.swing.JLabel();
+        jplAsignacion2 = new javax.swing.JPanel();
+        lblAsignacion4 = new javax.swing.JLabel();
+        lblAsignacion5 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 131, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        jPanel1.setBackground(new java.awt.Color(64, 145, 108));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jplAsignacion.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel2.setBackground(new java.awt.Color(149, 213, 178));
+        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jplAsignacion.setBackground(new java.awt.Color(216, 243, 220));
         jplAsignacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jplAsignacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -61,97 +65,144 @@ public class FrmAsignacion extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout panelImageAsignacionLayout = new javax.swing.GroupLayout(panelImageAsignacion);
-        panelImageAsignacion.setLayout(panelImageAsignacionLayout);
-        panelImageAsignacionLayout.setHorizontalGroup(
-            panelImageAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 48, Short.MAX_VALUE)
-        );
-        panelImageAsignacionLayout.setVerticalGroup(
-            panelImageAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
         lblAsignacion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblAsignacion.setText("Asignación");
+        lblAsignacion.setText("UNIDAD");
 
         lblAsignacion2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblAsignacion2.setText("de tareas");
+        lblAsignacion2.setText("|");
 
         javax.swing.GroupLayout jplAsignacionLayout = new javax.swing.GroupLayout(jplAsignacion);
         jplAsignacion.setLayout(jplAsignacionLayout);
         jplAsignacionLayout.setHorizontalGroup(
             jplAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jplAsignacionLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblAsignacion2)
+                .addGap(66, 66, 66))
             .addGroup(jplAsignacionLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(panelImageAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jplAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAsignacion2)
-                    .addComponent(lblAsignacion))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(lblAsignacion)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jplAsignacionLayout.setVerticalGroup(
             jplAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jplAsignacionLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addGroup(jplAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelImageAsignacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jplAsignacionLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(lblAsignacion2))
-                    .addComponent(lblAsignacion))
-                .addGap(0, 0, 0))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jplAsignacionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblAsignacion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblAsignacion2)
+                .addContainerGap())
         );
+
+        jPanel2.add(jplAsignacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 100, -1));
+
+        jplAsignacion1.setBackground(new java.awt.Color(216, 243, 220));
+        jplAsignacion1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jplAsignacion1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jplAsignacion1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jplAsignacion1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jplAsignacion1MouseExited(evt);
+            }
+        });
+
+        lblAsignacion1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblAsignacion1.setText("UNIDAD");
+
+        lblAsignacion3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblAsignacion3.setText("||");
+
+        javax.swing.GroupLayout jplAsignacion1Layout = new javax.swing.GroupLayout(jplAsignacion1);
+        jplAsignacion1.setLayout(jplAsignacion1Layout);
+        jplAsignacion1Layout.setHorizontalGroup(
+            jplAsignacion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jplAsignacion1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblAsignacion3)
+                .addGap(62, 62, 62))
+            .addGroup(jplAsignacion1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(lblAsignacion1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jplAsignacion1Layout.setVerticalGroup(
+            jplAsignacion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jplAsignacion1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblAsignacion1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblAsignacion3)
+                .addContainerGap())
+        );
+
+        jPanel2.add(jplAsignacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 100, -1));
+
+        jplAsignacion2.setBackground(new java.awt.Color(216, 243, 220));
+        jplAsignacion2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jplAsignacion2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jplAsignacion2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jplAsignacion2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jplAsignacion2MouseExited(evt);
+            }
+        });
+
+        lblAsignacion4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblAsignacion4.setText("UNIDAD");
+
+        lblAsignacion5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblAsignacion5.setText("|||");
+
+        javax.swing.GroupLayout jplAsignacion2Layout = new javax.swing.GroupLayout(jplAsignacion2);
+        jplAsignacion2.setLayout(jplAsignacion2Layout);
+        jplAsignacion2Layout.setHorizontalGroup(
+            jplAsignacion2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jplAsignacion2Layout.createSequentialGroup()
+                .addGroup(jplAsignacion2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jplAsignacion2Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(lblAsignacion4))
+                    .addGroup(jplAsignacion2Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(lblAsignacion5)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jplAsignacion2Layout.setVerticalGroup(
+            jplAsignacion2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jplAsignacion2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblAsignacion4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblAsignacion5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel2.add(jplAsignacion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 100, -1));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, 540));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(159, 159, 159)
-                .addComponent(jplAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(649, Short.MAX_VALUE))
+            .addGap(0, 930, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(276, Short.MAX_VALUE)
-                .addComponent(jplAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(241, 241, 241))
+            .addGap(0, 540, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 6, 930, 540));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 550));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -197,6 +248,30 @@ public class FrmAsignacion extends javax.swing.JFrame {
 //        }
     }//GEN-LAST:event_jplAsignacionMouseExited
 
+    private void jplAsignacion1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplAsignacion1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jplAsignacion1MouseClicked
+
+    private void jplAsignacion1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplAsignacion1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jplAsignacion1MouseEntered
+
+    private void jplAsignacion1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplAsignacion1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jplAsignacion1MouseExited
+
+    private void jplAsignacion2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplAsignacion2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jplAsignacion2MouseClicked
+
+    private void jplAsignacion2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplAsignacion2MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jplAsignacion2MouseEntered
+
+    private void jplAsignacion2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplAsignacion2MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jplAsignacion2MouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -237,8 +312,13 @@ public class FrmAsignacion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jplAsignacion;
+    private javax.swing.JPanel jplAsignacion1;
+    private javax.swing.JPanel jplAsignacion2;
     private javax.swing.JLabel lblAsignacion;
+    private javax.swing.JLabel lblAsignacion1;
     private javax.swing.JLabel lblAsignacion2;
-    private org.edisoncor.gui.panel.PanelImage panelImageAsignacion;
+    private javax.swing.JLabel lblAsignacion3;
+    private javax.swing.JLabel lblAsignacion4;
+    private javax.swing.JLabel lblAsignacion5;
     // End of variables declaration//GEN-END:variables
 }
