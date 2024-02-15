@@ -159,7 +159,8 @@ public class FrmEstudiante extends javax.swing.JFrame {
                         try {
                             Integer idE = pc.save();
                             ec.getEstudiante().setId(idE);
-                            ec.guardar();
+                            System.out.println("-->" + ec.guardar());
+                            
                             limpiar();
                             JOptionPane.showMessageDialog(null, "Se ha guardado Correctamente");
                             ec.setEstudiante(null); 
