@@ -1,10 +1,15 @@
 package controladores;
 import controlador.BDD.DAO.AdaptadorDao;
+import controlador.BDD.DAO.Conexion;
 import controlador.TDALista.LinkedList;
 import controlador.TDALista.exceptions.VacioException;
 import controlador.listas.DAO.DataAccesObject;
 import controlador.listas.DAO.TransferObject;
 import java.lang.reflect.Field;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.PeriodoAcademico;
 
 /**
@@ -50,9 +55,27 @@ public class PeriodoController extends AdaptadorDao<PeriodoAcademico>{
         this.index = index;
     }
 
-
+    private void actualizarAnterior(){
+        Integer id = 0;
+        PeriodoAcademico p = new PeriodoAcademico();
+        p.setEstado("F");
+        try { 
+            ResultSet generatedKey = new Conexion().getConnection().createStatement().executeQuery(
+                    "SELECT MAX(id) FROM PERIODOACADEMICO");
+            if (generatedKey.next())
+                id = generatedKey.getInt(1);
+            System.out.println("ID ANT: "+id);
+            p.setId(id);
+            this.update(p);
+        }catch (SQLException ex){
+            System.out.println("Al obtener id anterior: "+ex);
+        } catch (Exception ex) {
+            System.out.println("Al obtener id anterior: "+ex);
+        } 
+    }
     
     public Integer save() throws Exception{
+        actualizarAnterior();
         /*Integer id = generated_id();
         if(id != 1){
             try {
