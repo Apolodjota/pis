@@ -43,32 +43,25 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
      * @throws Exception Cuando no se puede guardar en la base de datos
      */
     @Override
-    public Integer guardar(T obj) throws Exception {
+    public void guardarEyD(T obj) throws Exception {
         //INSERT INTO <TABLA> (..) value (...)
-        String query = "";
-        if (obj.getClass().getSimpleName().equalsIgnoreCase("estudiante") || obj.getClass().getSimpleName().equalsIgnoreCase("profesor")) {
-            query = queryInsertHerencia(obj);
-        } else {
-           query = queryInsert(obj); 
-        } 
-        System.out.println("En insert: "+query);
-        //Integer idGenerado = -1;
+        String query = queryInsertHerencia(obj);
+        System.out.println("Select: "+query);
         Integer idGenerado = -1;
         PreparedStatement statement
                 = conexion.getConnection().prepareStatement(query,
                         Statement.RETURN_GENERATED_KEYS);
         statement.executeUpdate();
-        ResultSet generatedKeys = statement.getGeneratedKeys();
+        /*ResultSet generatedKeys = statement.getGeneratedKeys();
         if (generatedKeys.next()) {
             idGenerado = generatedKeys.getInt(1);
-        }
-
+        }*/
         conexion.getConnection().close();
         conexion.setConnection(null);
-        return idGenerado;
+        //return idGenerado;
     }
     
-    public Integer guardarP(T object){
+    public Integer guardar(T object){
         String query = queryInsert(object);
         Integer idG = -1;
         try {
@@ -99,6 +92,7 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
     @Override
     public void modificar(T obj) throws Exception {
         String query = queryUpdate(obj);
+        System.out.println("Sentencia: "+query);
         Statement st = conexion.getConnection().createStatement();
         st.executeUpdate(query);
         conexion.getConnection().close();
@@ -110,7 +104,6 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
      */
     @Override
     public LinkedList<T> listar() {
-
         LinkedList<T> lista = new LinkedList<>();
         try {
             Statement stmt = conexion.getConnection().createStatement();
@@ -312,11 +305,12 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
                     query += entry.getValue() + ", ";
                 }
                 if (entry.getValue().getClass().getSimpleName().equalsIgnoreCase("Date")) {
-                    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                    query += '"' + formato.format(entry.getValue()) + '"' + ", ";
+                    SimpleDateFormat formato = new SimpleDateFormat("dd-MM-YY");
+                    //SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                    query += "'" + formato.format(entry.getValue()) + "'" + ", ";
                 }
                 if (entry.getValue().getClass().isEnum() || entry.getValue().getClass().getSimpleName().equalsIgnoreCase("String")) {
-                    query += '"' + entry.getValue().toString() + '"' + ", ";
+                    query += "'" + entry.getValue().toString() + "'" + ", ";
                 }
             }
 

@@ -41,8 +41,8 @@ public class EstudianteControlador extends AdaptadorDao<Estudiante>{
         this.estudiante = estudiante;
     }
     
-    public Integer guardar() throws Exception{
-        return guardar(estudiante);
+    public void guardar() throws Exception{
+        guardarEyD(estudiante);
     }
     
     public void update() throws Exception{
