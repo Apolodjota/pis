@@ -3,6 +3,7 @@ package vista;
 import controladores.MatriculaController;
 import controladores.PeriodoController;
 import controlador.TDALista.LinkedList;
+import controladores.EstudianteControlador;
 import vista.listas.util.UtilVistaLista;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -71,6 +72,7 @@ public class FrmMatricula extends javax.swing.JFrame {
 
     private void obtenerMatricula() {
         //matriC.getMatricula().setId_estudiante(cbxestudiante.getSelectedIndex() + 1);
+        matriC.getMatricula().setId_estudiante(e.getId());
         try {
             matriC.getMatricula().setId_periodoAcademico(pActual.getId());
         } catch (Exception e) {
@@ -177,7 +179,7 @@ public class FrmMatricula extends javax.swing.JFrame {
         txtperiodo = new javax.swing.JTextField();
         jLabel35 = new javax.swing.JLabel();
         checkGratuidad = new javax.swing.JCheckBox();
-        btnguardar1 = new javax.swing.JButton();
+        btnguardar = new javax.swing.JButton();
         txtestudiante = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -236,12 +238,12 @@ public class FrmMatricula extends javax.swing.JFrame {
         checkGratuidad.setText("Mantiene");
         checkGratuidad.setEnabled(false);
 
-        btnguardar1.setBackground(new java.awt.Color(204, 204, 255));
-        btnguardar1.setFont(new java.awt.Font("SimSun-ExtB", 1, 18)); // NOI18N
-        btnguardar1.setText("Guardar");
-        btnguardar1.addActionListener(new java.awt.event.ActionListener() {
+        btnguardar.setBackground(new java.awt.Color(204, 204, 255));
+        btnguardar.setFont(new java.awt.Font("SimSun-ExtB", 1, 18)); // NOI18N
+        btnguardar.setText("Guardar");
+        btnguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnguardar1ActionPerformed(evt);
+                btnguardarActionPerformed(evt);
             }
         });
 
@@ -262,7 +264,7 @@ public class FrmMatricula extends javax.swing.JFrame {
                         .addGap(44, 44, 44)
                         .addComponent(checkGratuidad, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(btnguardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
                         .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
@@ -295,7 +297,7 @@ public class FrmMatricula extends javax.swing.JFrame {
                     .addComponent(checkGratuidad))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnguardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
@@ -413,12 +415,23 @@ public class FrmMatricula extends javax.swing.JFrame {
     }//GEN-LAST:event_btncancelarActionPerformed
 
     private void btnmattodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmattodosActionPerformed
-        guardar();
+        try {
+            matriC.matricularVarios(new EstudianteControlador().getEstudiantes(),pActual.getId());
+            JOptionPane.showMessageDialog(null,
+                        "Estudiantes matriculados correctamente",
+                        "OK",
+                        JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,
+                        "No se logró matrícular a varios estudiantes: "+e.getMessage(),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnmattodosActionPerformed
 
-    private void btnguardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnguardar1ActionPerformed
+    private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
+        guardar();
+    }//GEN-LAST:event_btnguardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -473,7 +486,7 @@ public class FrmMatricula extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btncancelar;
     private javax.swing.JButton btncancelar1;
-    private javax.swing.JButton btnguardar1;
+    private javax.swing.JButton btnguardar;
     private javax.swing.JButton btnmattodos;
     private javax.swing.JComboBox<String> cbxcriterio;
     private javax.swing.JCheckBox checkGratuidad;

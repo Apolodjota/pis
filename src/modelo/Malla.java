@@ -12,12 +12,12 @@ public class Malla {
     private String cod_resolucion;
     private String modalidad;
     private Date fecha_Creacion;
-    private Boolean estado;
+    private String estado;
 
     public Malla() {
     }
 
-    public Malla(Integer id, String nombre, String cod_resolucion, String modalidad, Date fecha_Creacion, Boolean estado) {
+    public Malla(Integer id, String nombre, String cod_resolucion, String modalidad, Date fecha_Creacion, String estado) {
         this.id = id;
         this.nombre = nombre;
         this.cod_resolucion = cod_resolucion;
@@ -25,6 +25,7 @@ public class Malla {
         this.fecha_Creacion = fecha_Creacion;
         this.estado = estado;
     }
+    
     
     public Boolean comparar(Malla c, String field, Integer type) {
         switch (type) {
@@ -71,7 +72,7 @@ public class Malla {
                 return null;
         }
     }    
-
+    
     @Override
     public String toString() {
         return nombre;
@@ -109,11 +110,11 @@ public class Malla {
         this.fecha_Creacion = fecha_Creacion;
     }
 
-    public Boolean getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Boolean estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

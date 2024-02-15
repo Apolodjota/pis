@@ -29,6 +29,7 @@ public class ModeloTablaMallaListas extends AbstractTableModel {
         Malla malla = null;
         try {
             malla = getMallas().get(rowIndex);
+            String estado = (malla.getEstado().equalsIgnoreCase("T")) ? "En Vigencia" : "Finalizado";
             switch (columnIndex) {
                 case 0:
                     return (malla != null) ? malla.getId() : "";
@@ -41,7 +42,7 @@ public class ModeloTablaMallaListas extends AbstractTableModel {
                 case 4:
                     return (malla != null) ? new SimpleDateFormat("dd / MM / yy").format(malla.getFecha_Creacion()) : "";
                 case 5:
-                    return (malla != null) ? (malla.getEstado() ? "Vigente" : "Deshabilitado") : "";           
+                    return (malla != null) ? estado : "";       
                 default:
                     return null;
             }
