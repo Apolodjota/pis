@@ -7,13 +7,19 @@ import java.util.Date;
  */
 public class Tarea {
     private Integer id;
+    private Integer id_revision;
+    private Integer id_matricula;
     private Byte archivo;
     private Date fechaEntrega;
     private String comentario;
-    private Unidad unidad;
 
-    public Tarea(Integer id, Byte archivo, Date fechaEntrega, String comentario) {
+    public Tarea() {
+    }
+
+    public Tarea(Integer id, Integer id_revision, Integer id_matricula, Byte archivo, Date fechaEntrega, String comentario) {
         this.id = id;
+        this.id_revision = id_revision;
+        this.id_matricula = id_matricula;
         this.archivo = archivo;
         this.fechaEntrega = fechaEntrega;
         this.comentario = comentario;
@@ -27,6 +33,22 @@ public class Tarea {
         this.id = id;
     }
 
+    public Integer getId_revision() {
+        return id_revision;
+    }
+
+    public void setId_revision(Integer id_revision) {
+        this.id_revision = id_revision;
+    }
+
+    public Integer getId_matricula() {
+        return id_matricula;
+    }
+
+    public void setId_matricula(Integer id_matricula) {
+        this.id_matricula = id_matricula;
+    }
+
     public Byte getArchivo() {
         return archivo;
     }
@@ -37,7 +59,7 @@ public class Tarea {
 
     public Date getFechaEntrega() {
         return fechaEntrega;
-    } 
+    }
 
     public void setFechaEntrega(Date fechaEntrega) {
         this.fechaEntrega = fechaEntrega;
@@ -50,14 +72,30 @@ public class Tarea {
     public void setComentario(String comentario) {
         this.comentario = comentario;
     }
-
-    public Unidad getUnidad() {
-        return unidad;
-    }
-
-    public void setUnidad(Unidad unidad) {
-        this.unidad = unidad;
-    }
-          
     
+    public Boolean comparar(Tarea t, Integer type, String field){
+        switch (type) {
+            case 1:
+                if (field.equalsIgnoreCase("id"))
+                    return getId().intValue() > t.getId().intValue();
+                else if (field.equalsIgnoreCase("id_revision"))
+                    return getId_revision()> t.getId_revision();
+                else if (field.equalsIgnoreCase("id_matricula"))
+                    return getId_matricula()> t.getId_matricula();
+                else if (field.equalsIgnoreCase("fechaEntrega"))
+                    return getFechaEntrega().after(t.getFechaEntrega());
+            case 0:
+                if (field.equalsIgnoreCase("id"))
+                    return getId().intValue() < t.getId().intValue();
+                else if (field.equalsIgnoreCase("id_revision"))
+                    return getId_revision() <  t.getId_revision();
+                else if (field.equalsIgnoreCase("id_matricula"))
+                    return getId_matricula() < t.getId_matricula();
+                else if (field.equalsIgnoreCase("fechaEntrega"))
+                    return getFechaEntrega().after(t.getFechaEntrega());
+                
+            default:
+                return false;
+        }
+    }
 }
