@@ -1,5 +1,4 @@
 package vista;
-
 import controladores.MallaControllerListas;
 import controlador.TDALista.LinkedList;
 import java.awt.event.ItemEvent;

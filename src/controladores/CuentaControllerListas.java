@@ -5,6 +5,8 @@ import controlador.listas.DAO.DataAccesObject;
 import controlador.Utilidades.Utilidades;
 import java.lang.reflect.Field;
 import modelo.Cuenta;
+import modelo.Estudiante;
+import modelo.Persona;
 
 /**
  *
@@ -204,6 +206,10 @@ public class CuentaControllerListas extends DataAccesObject<Cuenta> {
 //        }
 //        return -1; // Devuelve -1 si no se encuentra ninguna cuenta con la credencial ingresada
 //    }
+    
+    private Persona retornarInfoCuenta(){
+        return new Estudiante();
+    }
     public static void main(String[] args) {
         CuentaControllerListas cc = new CuentaControllerListas();
 
