@@ -37,7 +37,7 @@ public class ModeloTablaMateriaListas extends AbstractTableModel{
                 case 1:
                     return (materia != null) ? materia.getNombre() : "";   
                 case 2:
-                    return (materia != null) ? "Ciclo: " + curso.getCiclo() + " - Paralelo: " + curso.getParalelo() : "";
+                    return (materia != null) ? curso.getCiclo(): "";
                 default:
                     return null;
             }

@@ -8,12 +8,16 @@ import controladores.RolControllerListas;
 import controlador.TDALista.exceptions.VacioException;
 import controladores.DocenteControlador;
 import controladores.EstudianteControlador;
+import controladores.MateriaControllerListas;
+import controladores.PeriodoController;
 import javax.swing.JComboBox;
 import modelo.Administrador;
 import modelo.Curso;
 import modelo.Docente;
 import modelo.Estudiante;
 import modelo.Malla;
+import modelo.Materia;
+import modelo.PeriodoAcademico;
 import modelo.Rol;
 
 /**
@@ -26,7 +30,7 @@ public class UtilVista {
         MallaControllerListas ac = new MallaControllerListas();
         cbxMalla.removeAllItems();
         for (int i = 0; i < ac.getMallas().getSize(); i++) {
-            cbxMalla.addItem(ac.getMallas().get(i));
+                cbxMalla.addItem(ac.getMallas().get(i));
         }
     }  
     
@@ -93,5 +97,28 @@ public class UtilVista {
     public static Administrador getAdministradores(JComboBox cbx) {
         return (Administrador)cbx.getSelectedItem();
     }    
+    public static void cargarPeriodoAcademico (JComboBox cbxPeriodoAcademico) throws VacioException {
+        PeriodoController pc = new PeriodoController();
+        cbxPeriodoAcademico.removeAllItems();
+        for (int i = 0; i < pc.getPeriodos().getSize(); i++) {
+            cbxPeriodoAcademico.addItem(pc.getPeriodos().get(i));
+        }
+    }  
+    
+    public static PeriodoAcademico getComboPeriodoAcademico(JComboBox cbx) {
+        return (PeriodoAcademico)cbx.getSelectedItem();
+    } 
+    
+    public static void cargarMateria (JComboBox cbxMateria) throws VacioException {
+        MateriaControllerListas pc = new MateriaControllerListas();
+        cbxMateria.removeAllItems();
+        for (int i = 0; i < pc.getMaterias().getSize(); i++) {
+            cbxMateria.addItem(pc.getMaterias().get(i));
+        }
+    }  
+    
+    public static Materia getComboMateria(JComboBox cbx) {
+        return (Materia)cbx.getSelectedItem();
+    } 
     
 }
