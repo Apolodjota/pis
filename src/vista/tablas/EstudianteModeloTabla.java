@@ -48,7 +48,7 @@ public class EstudianteModeloTabla extends AbstractTableModel{
                 case 3:
                     return (e != null) ? e.getCedula() : " ";
                 case 4: 
-                    return (e != null) ? new SimpleDateFormat("dd-MM-yyyy").format(e.getFecha_nac()) : " ";
+                    return (e != null) ? new SimpleDateFormat("dd-MM-yyyy").format(e.getFechaNacimiento()) : " ";
                 case 5:
                     return (e != null) ? e.getDireccionResidencia() : " ";
                 default:

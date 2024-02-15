@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import controlador.TDALista.LinkedList;
+import java.sql.SQLException;
 import modelo.Persona;
 
 /**
@@ -59,6 +60,32 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
         conexion.getConnection().close();
         conexion.setConnection(null);
         return idGenerado;
+    }
+    
+    public Integer guardarP(T object){
+        String query = queryInsert(object);
+        Integer idG = -1;
+        try {
+            PreparedStatement stament = conexion.getConnection().prepareStatement(query);
+            stament.executeUpdate();
+            System.out.println("god-->");
+            try {
+                Statement seqStament = conexion.getConnection().createStatement();
+                ResultSet result = stament.executeQuery("SELECT "+ object.getClass().getSimpleName().toUpperCase()+"_SEQ.CURRVAL FROM dual");
+                if (result.next()){
+                    idG = result.getInt(1);
+                }
+                System.out.println("cerrar finallyu");
+                conexion.getConnection().close();
+                conexion.setConnection(null);
+                System.out.println("fickui j");
+            } catch (SQLException ex){
+                System.out.println("ERROR GUARDARP" + ex.getMessage());
+            }
+        } catch (SQLException e){
+            System.out.println("ERROO GUARDAR P2" + e.getMessage().toString());
+        }
+        return idG;
     }
     
     /**

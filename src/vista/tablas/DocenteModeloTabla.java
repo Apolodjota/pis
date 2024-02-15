@@ -49,7 +49,7 @@ private LinkedList <Docente> lista = new LinkedList <Docente>();
                 case 3:
                     return (d != null) ? d.getCedula() : " ";
                 case 4: 
-                    return (d != null) ? new SimpleDateFormat("dd-MM-yyyy").format(d.getFecha_nac()) : " ";
+                    return (d != null) ? new SimpleDateFormat("dd-MM-yyyy").format(d.getFechaNacimiento()) : " ";
                 case 5:
                     return (d != null) ? new SimpleDateFormat("dd-MM-yyyy").format(d.getFecha_inicio_docencia()) : " ";
                 case 6:
