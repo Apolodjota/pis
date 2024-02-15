@@ -1,9 +1,11 @@
 package vista.listas.tablas;
 import controlador.TDALista.LinkedList;
+import controladores.CursoControllerListas;
 import controladores.DocenteControlador;
 import controladores.MateriaControllerListas;
 import javax.swing.table.AbstractTableModel;
 import modelo.Cursa;
+import modelo.Curso;
 import modelo.Docente;
 import modelo.Materia;
 
@@ -15,6 +17,7 @@ public class ModeloTablaCursa extends AbstractTableModel{
     private LinkedList<Cursa> cursas = new LinkedList<>();
     MateriaControllerListas mC = new MateriaControllerListas();
     DocenteControlador dC = new DocenteControlador();
+    CursoControllerListas cC = new CursoControllerListas();
     @Override
     public int getRowCount() {
         return getCursas().getSize();
@@ -29,8 +32,9 @@ public class ModeloTablaCursa extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         try {
             Cursa cursa = getCursas().get(rowIndex);
-            Materia materia = mC.getMaterias().get(cursa.getId_materia()- 1);
+            Materia materia = mC.getMaterias().get(cursa.getId_materia() - 1);
             Docente docente = dC.getDocentes().get(cursa.getId_docente() - 1);
+            Curso curso = cC.getCursos().get(materia.getId_curso() - 1 );
             switch (columnIndex) {
                 case 0:
                     return (cursa != null) ? cursa.getId(): "";
@@ -41,7 +45,7 @@ public class ModeloTablaCursa extends AbstractTableModel{
                 case 3:
                     return (cursa != null) ? docente.getId()+". "+ docente.getCedula(): ""; 
                 case 4:
-                    return (cursa != null) ? "Aun no": ""; 
+                    return (cursa != null) ? curso.toString(): ""; 
                 case 5:
                     return (cursa != null) ? cursa.getParalelo(): ""; 
                 default:
@@ -51,8 +55,6 @@ public class ModeloTablaCursa extends AbstractTableModel{
             System.out.println(e.getMessage());
         }
         return null;
-        
-        //ojala
     }
 
     @Override

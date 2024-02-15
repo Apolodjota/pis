@@ -3,10 +3,13 @@ package vista;
 import controladores.PeriodoController;
 import controlador.TDALista.LinkedList;
 import controladores.CursaController;
+import controladores.CursoControllerListas;
 import controladores.RevisionController;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import vista.listas.tablas.ModeloTablaCursa;
+import vista.listas.util.UtilVista;
+import vista.listas.util.UtilVistaLista;
 
 /**
  *
@@ -18,6 +21,7 @@ public class FrmCursa extends javax.swing.JFrame {
      * @return the panelPrincipal
      */
     CursaController cC = new CursaController();
+    CursoControllerListas csoC = new CursoControllerListas();
     PeriodoController pcl = new PeriodoController();
     RevisionController revC = new RevisionController();
     ModeloTablaCursa mtcc = new ModeloTablaCursa();
@@ -34,17 +38,22 @@ public class FrmCursa extends javax.swing.JFrame {
         return panelPrincipal;
     }
 
-    private void cargarCombo() {
+    private void cargarParalelo() {
 
     }
 
     private void limpiar() {
         try {
-            txtParalelo.setText("");
-            //UtilVistaLista.cargarMarcaEst(cbxMateria);
+            UtilVista.cargarPeriodoAcademico(cbxPeriodo);
+            UtilVista.cargarMateria(cbxMateria);
+            UtilVista.cargarDocente(cbxDocente);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null,
+                    "Problemas con los combos de seleccion: " + e.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
+        //cargarParalelo();
         txtParalelo.setText("");
         cbxMateria.setSelectedIndex(0);
         cbxDocente.setSelectedIndex(0);
@@ -56,97 +65,58 @@ public class FrmCursa extends javax.swing.JFrame {
     }
 
     private void cargarTabla() {
-//        mtmatriC.setMatriculas(matriC.getMatriculas());
-//        tbltabla.setModel(mtmatriC);
-//        tbltabla.updateUI();
+        mtcc.setCursas(mtcc.getCursas());
+        tbltabla.setModel(mtcc);
+        tbltabla.updateUI();
     }
-
-    private void obtenerMatricula() {
-//        matriC.getMatricula().setCodigo(txtParalelo.getText());
-//        if (matriC.getMatricula().getId() == null) {
-//            matriC.getMatricula().setGratuidad(true);
-//        } else {
-//            matriC.getMatricula().setGratuidad(checkGratuidad.isSelected());
-//        }
-//        matriC.getMatricula().setId_estudiante(cbxMateria.getSelectedIndex() + 1);
-//        try {
-//            matriC.getMatricula().setId_periodoAcademico(pcl.getPeriodos().getLast().getId());
-//        } catch (Exception e) {
-//            System.out.println("Error al obtener datos de matricula: " + e.getMessage());
-//        }
-    }
-
-    //private boolean validar() {
-        //return !(cbxMateria.getSelectedIndex() == -1);
-    //}
-
-    private void cargarVista() {
-//        checkGratuidad.setEnabled(true);
-//        matriC.setIndex(tbltabla.getSelectedRow());
-//        if (matriC.getIndex() < 0) {
-//            JOptionPane.showMessageDialog(null,
-//                    "Seleccione una fila",
-//                    "Error",
-//                    JOptionPane.ERROR_MESSAGE);
-//        } else {
-//            try {
-//                matriC.setMatricula(mtmatriC.getMatriculas().get(matriC.getIndex()));
-//                txtperiodo.setText(pcl.getPeriodos().get(matriC.getMatricula().getId_periodoAcademico() - 1).getNombre());
-//                txtParalelo.setText(matriC.getMatricula().getCodigo());
-//                cbxMateria.setSelectedIndex(matriC.getMatricula().getId_estudiante() - 1);
-//                checkGratuidad.setSelected(matriC.getMatricula().getGratuidad());
-//            } catch (Exception e) {
-//                JOptionPane.showMessageDialog(null,
-//                        e.getMessage(),
-//                        "Error",
-//                        JOptionPane.ERROR_MESSAGE);
-//            }
-//        }
+    
+    private void cargarVista(){ 
+        Integer fila = tbltabla.getSelectedRow();
+        cC.setIndex(fila);
+        if (cC.getIndex().intValue() < 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Selecccione la fila", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                cC.setCursa(mtcc.getCursas().get(cC.getIndex()));
+                txtParalelo.setText(cC.getCursa().getParalelo());
+                cbxDocente.setSelectedIndex(cC.getCursa().getId_docente()- 1);
+                cbxMateria.setSelectedIndex(cC.getCursa().getId_materia()- 1);
+                cbxPeriodo.setSelectedIndex(cC.getCursa().getId_periodo()- 1);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,
+                        e.getMessage(), "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 
     private void guardar() {
-//        if (validar()) {
-//            try {
-//                obtenerMatricula();
-//                if (matriC.getMatricula().getId() == null) {
-//                    if (matriC.save()) {
-//                        limpiar();
-//                        JOptionPane.showMessageDialog(null,
-//                                "Se ha registrado correctamente la matrícula", "Operación exitosa",
-//                                JOptionPane.INFORMATION_MESSAGE);
-//                        matriC.setMatricula(null);
-//                    } else {
-//                        JOptionPane.showMessageDialog(null,
-//                                "No se ha podido guardar",
-//                                "Error",
-//                                JOptionPane.ERROR_MESSAGE);
-//                    }
-//                } else {
-//                    if (matriC.update(matriC.getIndex())) {
-//                        limpiar();
-//                        JOptionPane.showMessageDialog(null,
-//                                "Se ha editado correctamente", "Operación exitosa",
-//                                JOptionPane.INFORMATION_MESSAGE);
-//                        matriC.setMatricula(null);
-//                    } else {
-//                        JOptionPane.showMessageDialog(null,
-//                                "No se ha podido editar",
-//                                "Error",
-//                                JOptionPane.ERROR_MESSAGE);
-//                    }
-//                }
-//            } catch (Exception e) {
-//                JOptionPane.showMessageDialog(null,
-//                        e.getMessage(),
-//                        "Error",
-//                        JOptionPane.ERROR_MESSAGE);
-//            }
-//        } else {
-//            JOptionPane.showMessageDialog(null,
-//                    "¡Llene todos los campos!",
-//                    "Error", JOptionPane.ERROR_MESSAGE);
-//        }
+        Integer respuesta = JOptionPane.showConfirmDialog(null, 
+                "Realmente desea guardar este nuevo paralelo?", 
+                "Confirmar guaardado", 
+                JOptionPane. YES_NO_OPTION, 
+                JOptionPane.QUESTION_MESSAGE);
 
+       if (respuesta == JOptionPane.YES_OPTION) {
+            try {
+                cC.getCursa().setId_docente(UtilVista.getComboDocentes(cbxDocente).getId());
+                cC.getCursa().setId_materia(UtilVista.getComboMateria(cbxMateria).getId());
+                cC.getCursa().setId_periodo(UtilVista.getComboPeriodoAcademico(cbxPeriodo).getId());
+                cC.getCursa().setParalelo(txtParalelo.getText());
+                cC.guardar();
+                cargarTabla();
+           } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,
+                            e.getMessage(), "ERROR",
+                            JOptionPane.ERROR_MESSAGE);
+           }
+            
+        } else
+            JOptionPane.showMessageDialog(null,
+                            "Perfecto ", "OK",
+                            JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**
@@ -205,7 +175,6 @@ public class FrmCursa extends javax.swing.JFrame {
         jPanel6.add(jLabel31, gridBagConstraints);
 
         txtParalelo.setEditable(false);
-        txtParalelo.setText("CODM-");
         txtParalelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtParaleloActionPerformed(evt);
@@ -268,6 +237,11 @@ public class FrmCursa extends javax.swing.JFrame {
         jPanel6.add(btnCancelar, gridBagConstraints);
 
         cbxMateria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxMateria.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxMateriaItemStateChanged(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 2;
@@ -438,6 +412,10 @@ public class FrmCursa extends javax.swing.JFrame {
     private void cbxPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxPeriodoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxPeriodoActionPerformed
+
+    private void cbxMateriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxMateriaItemStateChanged
+        //nadita de nada
+    }//GEN-LAST:event_cbxMateriaItemStateChanged
 
     /**
      * @param args the command line arguments
