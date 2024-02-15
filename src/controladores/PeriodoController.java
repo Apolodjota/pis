@@ -1,4 +1,5 @@
 package controladores;
+import controlador.BDD.DAO.AdaptadorDao;
 import controlador.TDALista.LinkedList;
 import controlador.TDALista.exceptions.VacioException;
 import controlador.listas.DAO.DataAccesObject;
@@ -10,7 +11,7 @@ import modelo.PeriodoAcademico;
  *
  * @author asus
  */
-public class PeriodoController extends DataAccesObject<PeriodoAcademico>{
+public class PeriodoController extends AdaptadorDao<PeriodoAcademico>{
     private LinkedList<PeriodoAcademico> periodos = new LinkedList<>();
     private PeriodoAcademico periodo = new PeriodoAcademico();
     private Integer index = -1;
@@ -21,9 +22,10 @@ public class PeriodoController extends DataAccesObject<PeriodoAcademico>{
 
     
     public LinkedList<PeriodoAcademico> getPeriodos() {
-        if(periodos.isEmpty())
-            periodos = listall();
-        return periodos;
+        if(periodos.isEmpty()){
+            periodos = listar();
+            //periodos = listall();
+        }return periodos;
     }
 
     public void setPeriodos(LinkedList<PeriodoAcademico> periodos) {
@@ -48,8 +50,10 @@ public class PeriodoController extends DataAccesObject<PeriodoAcademico>{
         this.index = index;
     }
 
-    public Boolean save() {
-        Integer id = generated_id();
+
+    
+    public Integer save() throws Exception{
+        /*Integer id = generated_id();
         if(id != 1){
             try {
                 PeriodoAcademico periodoant = getPeriodos().get(id - 2);
@@ -60,16 +64,18 @@ public class PeriodoController extends DataAccesObject<PeriodoAcademico>{
             }
         }
         this.periodo.setId(id);
-        return save(periodo);
+        return save(periodo);*/
+        return guardar(periodo);
     }
     
-    public Boolean update(Integer index) {
-        return update(periodo, index);
+    public void update(PeriodoAcademico perio) throws Exception{
+        //return update(periodo, index);
+        modificar(perio);
     }
     
     public String generatedCode() {
         StringBuilder code = new StringBuilder();
-        Integer lenght = listall().getSize() + 1;
+        Integer lenght = listar().getSize() + 1;
         Integer pos = lenght.toString().length();
         for (int i = 0; i < (10 - pos); i++) {
             code.append("0");

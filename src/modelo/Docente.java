@@ -7,26 +7,26 @@ import java.util.Date;
  * @author Asus
  */
 public class Docente extends Persona{
-    private Integer anios_exp_docente;   
+    private Date fecha_inicio_docencia;   
     private String titulo_tercerNivel;
     private String titulo_cuartoNivel;
     
     public Docente() {
     }
 
-    public Docente(Integer anios_exp_docente, String titulo_tercerNivel, String titulo_cuartoNivel, Integer id, String nombres, String apellidos, String nacionalidad, Date fecha_nac, String cedula, String telefono) {
-        super(id, nombres, apellidos, nacionalidad, fecha_nac, cedula, telefono);
-        this.anios_exp_docente = anios_exp_docente;
+    public Docente(Date fecha_inicio_docencia, String titulo_tercerNivel, String titulo_cuartoNivel, Integer id, String nombres, String apellidos, Date fecha_nac, String cedula, String telefonoCasa, String telefonoCelular, String genero, String direccionResidencia, Integer id_rol) {
+        super(id, nombres, apellidos, fecha_nac, cedula, telefonoCasa, telefonoCelular, genero, direccionResidencia, id_rol);
+        this.fecha_inicio_docencia = fecha_inicio_docencia;
         this.titulo_tercerNivel = titulo_tercerNivel;
         this.titulo_cuartoNivel = titulo_cuartoNivel;
     }
 
-    public Integer getAnios_exp_docente() {
-        return anios_exp_docente;
+    public void setFecha_inicio_docencia(Date fecha_inicio_docencia) {
+        this.fecha_inicio_docencia = fecha_inicio_docencia;
     }
 
-    public void setAnios_exp_docente(Integer anios_exp_docente) {
-        this.anios_exp_docente = anios_exp_docente;
+    public Date getFecha_inicio_docencia() {
+        return fecha_inicio_docencia;
     }
 
     public String getTitulo_tercerNivel() {
@@ -66,10 +66,12 @@ public class Docente extends Persona{
                     return getCedula().compareToIgnoreCase(e.getCedula()) > 0;
                 else if (field.equalsIgnoreCase("fecha_nac"))
                     return getFecha_nac().compareTo(e.getFecha_nac()) > 0;
-                else if (field.equalsIgnoreCase("nacionalidad"))
-                    return getNacionalidad().compareToIgnoreCase(e.getNacionalidad()) > 0;
-                else if (field.equalsIgnoreCase("anios_exp_docente"))
-                    return getAnios_exp_docente().intValue() > e.getAnios_exp_docente();
+                else if (field.equalsIgnoreCase("direccionResidencia"))
+                    return getDireccionResidencia().compareToIgnoreCase(e.getDireccionResidencia()) > 0;
+                else if (field.equalsIgnoreCase("genero"))
+                    return getGenero().compareToIgnoreCase(e.getGenero()) > 0;
+                else if (field.equalsIgnoreCase("fecha_inicio_docencia"))
+                    return getFecha_inicio_docencia().compareTo(e.getFecha_inicio_docencia()) > 0;
                 else if (field.equalsIgnoreCase("titulo_tercerNivel"))
                     return getTitulo_tercerNivel().compareToIgnoreCase(e.getTitulo_tercerNivel()) > 0;
             case 0:
@@ -83,17 +85,17 @@ public class Docente extends Persona{
                     return getCedula().compareToIgnoreCase(e.getCedula()) < 0;
                 else if (field.equalsIgnoreCase("fecha_nac"))
                     return getFecha_nac().compareTo(e.getFecha_nac()) < 0;
-                else if (field.equalsIgnoreCase("nacionalidad"))
-                    return getNacionalidad().compareToIgnoreCase(e.getNacionalidad()) < 0;
-                else if (field.equalsIgnoreCase("anios_exp_docente"))
-                    return getAnios_exp_docente().intValue() < e.getAnios_exp_docente();
+                else if (field.equalsIgnoreCase("direccionResidencia"))
+                    return getDireccionResidencia().compareToIgnoreCase(e.getDireccionResidencia()) < 0;
+                else if (field.equalsIgnoreCase("genero"))
+                    return getGenero().compareToIgnoreCase(e.getGenero()) < 0;
+                else if (field.equalsIgnoreCase("fecha_inicio_docencia"))
+                    return getFecha_inicio_docencia().compareTo(e.getFecha_inicio_docencia()) < 0;
                 else if (field.equalsIgnoreCase("titulo_tercerNivel"))
                     return getTitulo_tercerNivel().compareToIgnoreCase(e.getTitulo_tercerNivel()) < 0;
             default:
                 return false;
         }
     }
-
-    
 
 }

@@ -50,7 +50,7 @@ public class EstudianteModeloTabla extends AbstractTableModel{
                 case 4: 
                     return (e != null) ? new SimpleDateFormat("dd-MM-yyyy").format(e.getFecha_nac()) : " ";
                 case 5:
-                    return (e != null) ? e.getCiudad_Procedencia() : " ";
+                    return (e != null) ? e.getDireccionResidencia() : " ";
                 default:
                     return null;
         } 

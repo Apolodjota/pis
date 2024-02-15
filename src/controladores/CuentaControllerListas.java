@@ -5,6 +5,8 @@ import controlador.listas.DAO.DataAccesObject;
 import controlador.Utilidades.Utilidades;
 import java.lang.reflect.Field;
 import modelo.Cuenta;
+import modelo.Estudiante;
+import modelo.Persona;
 
 /**
  *
@@ -177,16 +179,16 @@ public class CuentaControllerListas extends DataAccesObject<Cuenta> {
         return -1; // Devuelve -1 si no se encuentra ninguna cuenta con la clave ingresada
     }
 
-    public Integer obtenerIdPorRol(LinkedList<Cuenta> lista, Integer id) throws Exception {
-        LinkedList<Cuenta> lo = this.quickSort(0, "id_rol", lista);
-        Cuenta[] c = lo.toArray();
-        for (int i = 0; i < lo.getSize(); i++) {
-            if (c[i].getId_rol().equals(id)) {
-                return c[i].getId();
-            }
-        }
-        return -1; // Devuelve -1 si no se encuentra ninguna cuenta con la clave ingresada
-    }
+//    public Integer obtenerIdPorRol(LinkedList<Cuenta> lista, Integer id) throws Exception {
+//        LinkedList<Cuenta> lo = this.quickSort(0, "id_rol", lista);
+//        Cuenta[] c = lo.toArray();
+//        for (int i = 0; i < lo.getSize(); i++) {
+//            if (c[i].getId_rol().equals(id)) {
+//                return c[i].getId();
+//            }
+//        }
+//        return -1; // Devuelve -1 si no se encuentra ninguna cuenta con la clave ingresada
+//    }
 
 //    public Integer obtenerIdPorCredencial(LinkedList<Cuenta> lista, String credencial, String tipo) throws Exception {
 //        LinkedList<Cuenta> lo = this.quickSort(0, tipo, lista);
@@ -204,6 +206,10 @@ public class CuentaControllerListas extends DataAccesObject<Cuenta> {
 //        }
 //        return -1; // Devuelve -1 si no se encuentra ninguna cuenta con la credencial ingresada
 //    }
+    
+    private Persona retornarInfoCuenta(){
+        return new Estudiante();
+    }
     public static void main(String[] args) {
         CuentaControllerListas cc = new CuentaControllerListas();
 
@@ -212,7 +218,7 @@ public class CuentaControllerListas extends DataAccesObject<Cuenta> {
         cc.getCuenta().setClave("123");
         cc.getCuenta().setEstado(true);
         cc.getCuenta().setId_persona(1);
-        cc.getCuenta().setId_rol(2);
+//        cc.getCuenta().setId_rol(2);
         cc.save();
         
         cc.getCuenta().setId(2);
@@ -220,7 +226,7 @@ public class CuentaControllerListas extends DataAccesObject<Cuenta> {
         cc.getCuenta().setClave("2004");
         cc.getCuenta().setEstado(true);
         cc.getCuenta().setId_persona(2);
-        cc.getCuenta().setId_rol(1);
+//        cc.getCuenta().setId_rol(1);
         cc.save();        
         
         cc.getCuenta().setId(3);
@@ -228,7 +234,7 @@ public class CuentaControllerListas extends DataAccesObject<Cuenta> {
         cc.getCuenta().setClave("456");
         cc.getCuenta().setEstado(true);
         cc.getCuenta().setId_persona(3);
-        cc.getCuenta().setId_rol(3);
+//        cc.getCuenta().setId_rol(3);
         cc.save();         
     }
 }
