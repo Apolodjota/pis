@@ -10,7 +10,7 @@ import javax.swing.JPanel;
  *
  * @author alexg
  */
-public class FrmPrincipalAdministrador extends javax.swing.JFrame {
+public class FrmPrincipalAdministrador1 extends javax.swing.JFrame {
 
     private CuentaControllerListas cc = new CuentaControllerListas();
     private boolean isDocentesClicked = false;
@@ -24,7 +24,7 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
     /**
      * Creates new form FrmPrincipalAdministrador
      */
-    public FrmPrincipalAdministrador() {
+    public FrmPrincipalAdministrador1() {
         initComponents();
         this.setLocationRelativeTo(null);
         cargarImagenes();
@@ -169,7 +169,7 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(255, 255, 255)));
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
@@ -183,7 +183,7 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(30, 30, 30, 30);
         jPanel3.add(jblNombre, gridBagConstraints);
 
-        jplDocentes.setBackground(new java.awt.Color(0, 204, 204));
+        jplDocentes.setBackground(new java.awt.Color(255, 255, 255));
         jplDocentes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jplDocentes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -245,7 +245,7 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         gridBagConstraints.ipady = 7;
         jPanel3.add(jplDocentes, gridBagConstraints);
 
-        jplEstudiantes.setBackground(new java.awt.Color(0, 204, 204));
+        jplEstudiantes.setBackground(new java.awt.Color(255, 255, 255));
         jplEstudiantes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jplEstudiantes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -307,7 +307,7 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         gridBagConstraints.ipady = 7;
         jPanel3.add(jplEstudiantes, gridBagConstraints);
 
-        jplMaterias.setBackground(new java.awt.Color(0, 204, 204));
+        jplMaterias.setBackground(new java.awt.Color(255, 255, 255));
         jplMaterias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jplMaterias.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -369,7 +369,7 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         gridBagConstraints.ipady = 7;
         jPanel3.add(jplMaterias, gridBagConstraints);
 
-        jplCurso.setBackground(new java.awt.Color(0, 204, 204));
+        jplCurso.setBackground(new java.awt.Color(255, 255, 255));
         jplCurso.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jplCurso.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -427,7 +427,7 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 66;
         jPanel3.add(jplCurso, gridBagConstraints);
 
-        jplMalla.setBackground(new java.awt.Color(0, 204, 204));
+        jplMalla.setBackground(new java.awt.Color(255, 255, 255));
         jplMalla.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jplMalla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -486,7 +486,7 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         gridBagConstraints.ipady = -6;
         jPanel3.add(jplMalla, gridBagConstraints);
 
-        jplMatricula.setBackground(new java.awt.Color(0, 204, 204));
+        jplMatricula.setBackground(new java.awt.Color(255, 255, 255));
         jplMatricula.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jplMatricula.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -543,7 +543,7 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 40;
         jPanel3.add(jplMatricula, gridBagConstraints);
 
-        jplPeriodoAcademico.setBackground(new java.awt.Color(0, 204, 204));
+        jplPeriodoAcademico.setBackground(new java.awt.Color(255, 255, 255));
         jplPeriodoAcademico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jplPeriodoAcademico.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -642,7 +642,13 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
             .addGap(0, 592, Short.MAX_VALUE)
         );
 
-        jPanel5.add(panelImage1, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 595;
+        gridBagConstraints.ipady = 592;
+        gridBagConstraints.insets = new java.awt.Insets(50, 50, 50, 50);
+        jPanel5.add(panelImage1, gridBagConstraints);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -669,7 +675,7 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE))
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 642, Short.MAX_VALUE))
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addContainerGap()))
         );
@@ -992,14 +998,17 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipalAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipalAdministrador1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipalAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipalAdministrador1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipalAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipalAdministrador1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipalAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipalAdministrador1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -1009,7 +1018,7 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
             public void run() {
                 String nombre = null;
                 String apellidos = null;
-                new FrmPrincipalAdministrador().setVisible(true);
+                new FrmPrincipalAdministrador1().setVisible(true);
             }
         });
     }
