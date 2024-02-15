@@ -2,7 +2,7 @@ package vista;
 
 import controladores.MallaControllerListas;
 import controlador.TDALista.LinkedList;
-import java.awt.event.ItemEvent;
+import controladores.CursoControllerListas;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -16,6 +16,7 @@ import vista.listas.tablas.ModeloTablaMallaListas;
 public class FrmMalla extends javax.swing.JFrame {
 
     private MallaControllerListas mcl = new MallaControllerListas();
+    private CursoControllerListas ccl = new CursoControllerListas();
     private ModeloTablaMallaListas mtml = new ModeloTablaMallaListas();
 
     public JPanel getJPanel1() {
@@ -81,6 +82,7 @@ public class FrmMalla extends javax.swing.JFrame {
         cbxCriterio.setSelectedItem("NOMBRE");
         checkBoxVigente.setSelected(true);
         checkBoxVigente.setEnabled(false);
+        txtCiclos.setText("");
         mcl.setMalla(null);
         mcl.setMallas(new LinkedList<>());
         cargarTabla();
@@ -97,6 +99,7 @@ public class FrmMalla extends javax.swing.JFrame {
         mtml.setMallas(mcl.getMallas());
         tblTabla.setModel(mtml);
         tblTabla.updateUI();
+        mtml.fireTableDataChanged();
     }
 
     private Boolean validar() {
@@ -110,15 +113,18 @@ public class FrmMalla extends javax.swing.JFrame {
                 mcl.getMalla().setCod_resolucion(txtCodResolucion.getText());
                 mcl.getMalla().setModalidad(cbxModalidad.getSelectedItem().toString());
                 mcl.getMalla().setFecha_Creacion(new SimpleDateFormat("dd / MM / yy").parse(txtFechaCreacion.getText()));
-                /*if (checkBoxVigente.isSelected()) {
-                    mcl.getMalla().setEstado(true);
-                } else {
-                    mcl.getMalla().setEstado(false);
-                }*/
                 mcl.getMalla().setEstado("T");
+
                 if (mcl.getMalla().getId() == null) {
+                    Integer id = mcl.save();
+                    System.out.println("Numero de ciclos; " + Integer.valueOf(txtCiclos.getText()));
                     try {
-                        Integer id = mcl.save();
+                        for (int i = 1; i <= Integer.valueOf(txtCiclos.getText()); i++) {
+                            ccl.save();
+                            ccl.getCurso().setId_malla(id);
+                            ccl.getCurso().setCiclo(i);
+                        }
+
                         System.out.println("ID: " + id);
                         limpiar();
                         JOptionPane.showMessageDialog(null,
@@ -133,6 +139,11 @@ public class FrmMalla extends javax.swing.JFrame {
                     }
                 } else {
                     try {
+                        for (int i = 1; i <= Integer.valueOf(txtCiclos.getText()); i++) {
+                            ccl.getCurso().setId_malla(mcl.getMalla().getId());
+                            ccl.getCurso().setCiclo(i);
+                            ccl.update(ccl.getCurso());
+                        }
                         mcl.update(mcl.getMalla());
                         limpiar();
                         JOptionPane.showMessageDialog(null,
@@ -203,6 +214,8 @@ public class FrmMalla extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         cbxModalidad = new javax.swing.JComboBox<>();
         checkBoxVigente = new javax.swing.JCheckBox();
+        jLabel13 = new javax.swing.JLabel();
+        txtCiclos = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblTabla = new javax.swing.JTable();
@@ -232,7 +245,7 @@ public class FrmMalla extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel3.add(btnGuardar, gridBagConstraints);
@@ -245,7 +258,7 @@ public class FrmMalla extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.ipadx = 1;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
@@ -302,9 +315,8 @@ public class FrmMalla extends javax.swing.JFrame {
 
         txtFechaCreacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         jPanel3.add(txtFechaCreacion, gridBagConstraints);
 
@@ -332,6 +344,23 @@ public class FrmMalla extends javax.swing.JFrame {
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 4;
         jPanel3.add(checkBoxVigente, gridBagConstraints);
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel13.setText("Numero de Ciclos:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel3.add(jLabel13, gridBagConstraints);
+
+        txtCiclos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel3.add(txtCiclos, gridBagConstraints);
 
         jPanel1.add(jPanel3, java.awt.BorderLayout.PAGE_START);
 
@@ -567,6 +596,7 @@ public class FrmMalla extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -578,6 +608,7 @@ public class FrmMalla extends javax.swing.JFrame {
     private javax.swing.JTable tblTabla;
     private javax.swing.JTextField txtBusqueda;
     private javax.swing.JTextField txtBusquedaFecha;
+    private javax.swing.JTextField txtCiclos;
     private javax.swing.JTextField txtCodResolucion;
     private javax.swing.JTextField txtFechaCreacion;
     private javax.swing.JTextField txtNombre;

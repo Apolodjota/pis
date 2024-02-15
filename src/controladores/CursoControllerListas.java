@@ -1,6 +1,7 @@
 
 package controladores;
 
+import controlador.BDD.DAO.AdaptadorDao;
 import controlador.TDALista.LinkedList;
 import controlador.listas.DAO.DataAccesObject;
 import controlador.Utilidades.Utilidades;
@@ -12,7 +13,7 @@ import modelo.Malla;
  *
  * @author alexg
  */
-public class CursoControllerListas extends DataAccesObject<Curso>{
+public class CursoControllerListas extends AdaptadorDao<Curso>{
     
     private LinkedList<Curso> cursos = new LinkedList<>();
     private Curso curso = new Curso();
@@ -27,7 +28,7 @@ public class CursoControllerListas extends DataAccesObject<Curso>{
      */
     public LinkedList<Curso> getCursos() {
         if (cursos.isEmpty()) 
-            cursos = listall();
+            cursos = listar();
             return cursos;
     }
 
@@ -69,18 +70,17 @@ public class CursoControllerListas extends DataAccesObject<Curso>{
         this.index = index;
     }
 
-    public Boolean save() {
-        this.curso.setId(generated_id());
-        return save(curso);
+    public Integer save() {
+        return guardar(curso);
     }
     
-    public Boolean update(Integer index) {
-        return update(curso, index);
+    public void update(Curso curso) throws Exception {
+        modificar(curso);
     }
     
     public String generatedCode() {
         StringBuilder code = new StringBuilder();
-        Integer lenght = listall().getSize() + 1;
+        Integer lenght = listar().getSize() + 1;
         Integer pos = lenght.toString().length();
         for (int i = 0; i < (10 - pos); i++) {
             code.append("0");
