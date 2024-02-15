@@ -43,7 +43,7 @@ public class FrmCursa extends javax.swing.JFrame {
 
     private void limpiar() {
         try {
-            UtilVista.cargarPeriodoAcademico(cbxPeriodo);
+            //UtilVista.cargarPeriodoAcademico(cbxPeriodo);
             UtilVista.cargarMateria(cbxMateria);
             UtilVista.cargarDocente(cbxDocente);
         } catch (Exception e) {
@@ -57,7 +57,7 @@ public class FrmCursa extends javax.swing.JFrame {
         txtParalelo.setEnabled(false);
         cbxMateria.setSelectedIndex(0);
         cbxDocente.setSelectedIndex(0);
-        cbxPeriodo.setSelectedIndex(0);
+        //cbxPeriodo.setSelectedIndex(0);
         tbltabla.clearSelection();
         cC.setCursa(null);
         cC.setCursas(new LinkedList<>());
@@ -142,7 +142,7 @@ public class FrmCursa extends javax.swing.JFrame {
         cbxDocente = new javax.swing.JComboBox<>();
         jLabel36 = new javax.swing.JLabel();
         lblPeriodo = new javax.swing.JLabel();
-        cbxPeriodo = new javax.swing.JComboBox<>();
+        txtParalelo1 = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbltabla = new javax.swing.JTable();
@@ -172,7 +172,7 @@ public class FrmCursa extends javax.swing.JFrame {
                 txtParaleloActionPerformed(evt);
             }
         });
-        jPanel6.add(txtParalelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, 125, -1));
+        jPanel6.add(txtParalelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 125, -1));
 
         jLabel33.setBackground(new java.awt.Color(204, 204, 255));
         jLabel33.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -187,7 +187,7 @@ public class FrmCursa extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        jPanel6.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 231, 112, 31));
+        jPanel6.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, 112, 31));
 
         btnCancelar.setBackground(new java.awt.Color(204, 204, 255));
         btnCancelar.setFont(new java.awt.Font("SimSun-ExtB", 1, 18)); // NOI18N
@@ -197,7 +197,7 @@ public class FrmCursa extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        jPanel6.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(507, 231, 112, -1));
+        jPanel6.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, 112, -1));
 
         cbxMateria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbxMateria.addItemListener(new java.awt.event.ItemListener() {
@@ -225,13 +225,13 @@ public class FrmCursa extends javax.swing.JFrame {
         lblPeriodo.setText("Matrícula:");
         jPanel6.add(lblPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, -1, -1));
 
-        cbxPeriodo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbxPeriodo.addActionListener(new java.awt.event.ActionListener() {
+        txtParalelo1.setEditable(false);
+        txtParalelo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxPeriodoActionPerformed(evt);
+                txtParalelo1ActionPerformed(evt);
             }
         });
-        jPanel6.add(cbxPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 125, -1));
+        jPanel6.add(txtParalelo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, 125, -1));
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registros Existentes:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tw Cen MT", 1, 14))); // NOI18N
 
@@ -271,7 +271,7 @@ public class FrmCursa extends javax.swing.JFrame {
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(108, Short.MAX_VALUE)
+                .addContainerGap(119, Short.MAX_VALUE)
                 .addComponent(btncancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66))
             .addGroup(jPanel7Layout.createSequentialGroup()
@@ -286,9 +286,9 @@ public class FrmCursa extends javax.swing.JFrame {
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 989, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         panelPrincipalLayout.setVerticalGroup(
@@ -335,13 +335,13 @@ public class FrmCursa extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxDocenteActionPerformed
 
-    private void cbxPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxPeriodoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxPeriodoActionPerformed
-
     private void cbxMateriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxMateriaItemStateChanged
         //nadita de nada
     }//GEN-LAST:event_cbxMateriaItemStateChanged
+
+    private void txtParalelo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtParalelo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtParalelo1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -415,7 +415,6 @@ public class FrmCursa extends javax.swing.JFrame {
     private javax.swing.JButton btncancelar1;
     private javax.swing.JComboBox<String> cbxDocente;
     private javax.swing.JComboBox<String> cbxMateria;
-    private javax.swing.JComboBox<String> cbxPeriodo;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel36;
@@ -429,5 +428,6 @@ public class FrmCursa extends javax.swing.JFrame {
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JTable tbltabla;
     private javax.swing.JTextField txtParalelo;
+    private javax.swing.JTextField txtParalelo1;
     // End of variables declaration//GEN-END:variables
 }
