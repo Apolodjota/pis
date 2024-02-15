@@ -14,6 +14,7 @@ import modelo.Cursa;
 import modelo.Curso;
 import modelo.Docente;
 import modelo.Materia;
+import modelo.Matricula;
 import modelo.PeriodoAcademico;
 
 /**
@@ -168,17 +169,29 @@ public class CursaController extends  AdaptadorDao<Cursa>{
         return result;
     }
     
-    public LinkedList<Cursa> buscarPeriodo(LinkedList<Cursa> lista, String text, PeriodoAcademico periodo  ) throws VacioException, Exception {
+    public LinkedList<Cursa> buscarDocente(LinkedList<Cursa> lista, String text, Matricula matricula  ) throws VacioException, Exception {
         LinkedList<Cursa> lo = this.quickSort(lista, 1 , text);
         Cursa[] m = lo.toArray();
         LinkedList<Cursa> result = new LinkedList<>();
         for (int i = 0; i < lo.getSize(); i++) {
-            if (m[i].getId_periodo().intValue() == periodo.getId().intValue()) {
+            if (m[i].getId_matricula().intValue() == matricula.getId().intValue()) {
                 result.add(m[i]);
             }
         }
         return result;
     }
+    
+//    public LinkedList<Cursa> buscarPeriodo(LinkedList<Cursa> lista, String text, PeriodoAcademico periodo  ) throws VacioException, Exception {
+//        LinkedList<Cursa> lo = this.quickSort(lista, 1 , text);
+//        Cursa[] m = lo.toArray();
+//        LinkedList<Cursa> result = new LinkedList<>();
+//        for (int i = 0; i < lo.getSize(); i++) {
+//            if (m[i].getId_periodo().intValue() == periodo.getId().intValue()) {
+//                result.add(m[i]);
+//            }
+//        }
+//        return result;
+//    }
     
     /**
      * @return the cursa
