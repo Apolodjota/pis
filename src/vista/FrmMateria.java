@@ -17,6 +17,7 @@ import vista.listas.util.UtilVista;
 public class FrmMateria extends javax.swing.JFrame {
 
     private MateriaControllerListas mcl = new MateriaControllerListas();
+    private CursoControllerListas ccl = new CursoControllerListas();
     private ModeloTablaMateriaListas mtml = new ModeloTablaMateriaListas();
 
     public JPanel getJPanel1() {
@@ -74,11 +75,10 @@ public class FrmMateria extends javax.swing.JFrame {
         txtBusqueda.setText("");
         mcl.setMateria(null);
         mcl.setMaterias(new LinkedList<>());
-        cargarTabla();
+        //cargarTabla();
         mcl.setMateria(null);
         mcl.setIndex(-1);
         try {
-            //System.out.println("CHURONA y BARCELONA");
             UtilVista.cargarCurso(cbxCurso);
             UtilVista.cargarCurso(cbxCursoB);
             txtBusqueda.setVisible(true);
@@ -90,11 +90,11 @@ public class FrmMateria extends javax.swing.JFrame {
         }
     }
 
-    private void cargarTabla() {
+    /*private void cargarTabla() {
         mtml.setMaterias(mcl.getMaterias());
         tblTabla.setModel(mtml);
         tblTabla.updateUI();
-    }
+    }*/
 
     private Boolean validar() {
         return !txtNombre.getText().trim().isEmpty();
