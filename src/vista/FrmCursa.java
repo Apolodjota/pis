@@ -167,6 +167,11 @@ public class FrmCursa extends javax.swing.JFrame {
         jPanel6.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, 94, -1));
 
         txtParalelo.setEditable(false);
+        txtParalelo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtParaleloMouseClicked(evt);
+            }
+        });
         txtParalelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtParaleloActionPerformed(evt);
@@ -250,7 +255,7 @@ public class FrmCursa extends javax.swing.JFrame {
 
         btncancelar1.setBackground(new java.awt.Color(204, 204, 255));
         btncancelar1.setFont(new java.awt.Font("SimSun-ExtB", 1, 18)); // NOI18N
-        btncancelar1.setText("Selecc.");
+        btncancelar1.setText("Seleccionar.");
         btncancelar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncancelar1ActionPerformed(evt);
@@ -262,22 +267,22 @@ public class FrmCursa extends javax.swing.JFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btncancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btncancelar1, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(119, Short.MAX_VALUE)
-                .addComponent(btncancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66))
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(270, Short.MAX_VALUE)
+                .addComponent(btncancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
@@ -295,9 +300,9 @@ public class FrmCursa extends javax.swing.JFrame {
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -309,7 +314,7 @@ public class FrmCursa extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
+            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
         );
 
         pack();
@@ -342,6 +347,10 @@ public class FrmCursa extends javax.swing.JFrame {
     private void txtParalelo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtParalelo1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtParalelo1ActionPerformed
+
+    private void txtParaleloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtParaleloMouseClicked
+        new DialogSelecMatricula(this, false);
+    }//GEN-LAST:event_txtParaleloMouseClicked
 
     /**
      * @param args the command line arguments
