@@ -112,7 +112,7 @@
                               <Component id="checkGratuidad" min="-2" pref="85" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="btnguardar1" min="-2" pref="114" max="-2" attributes="0"/>
+                              <Component id="btnguardar" min="-2" pref="114" max="-2" attributes="0"/>
                               <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
                               <Component id="btncancelar" min="-2" pref="124" max="-2" attributes="0"/>
                           </Group>
@@ -155,7 +155,7 @@
                       </Group>
                       <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnguardar1" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="btnguardar" min="-2" pref="31" max="-2" attributes="0"/>
                           <Component id="btncancelar" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -236,7 +236,7 @@
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnguardar1">
+            <Component class="javax.swing.JButton" name="btnguardar">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="cc" red="cc" type="rgb"/>
@@ -247,7 +247,7 @@
                 <Property name="text" type="java.lang.String" value="Guardar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnguardar1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnguardarActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtestudiante">

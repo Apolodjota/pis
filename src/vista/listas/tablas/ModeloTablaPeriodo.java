@@ -32,9 +32,9 @@ public class ModeloTablaPeriodo extends AbstractTableModel{
                 case 1:
                     return (periodo != null) ? periodo.getNombre() : "";   
                 case 2:
-                    return (periodo != null) ? new SimpleDateFormat("dd-mm-yyyy").format(periodo.getFechaDesde()): "";   
+                    return (periodo != null) ? new SimpleDateFormat("dd-MM-yyyy").format(periodo.getFechaDesde()): "";   
                 case 3:
-                    return (periodo != null) ? new SimpleDateFormat().format(periodo.getFechaHasta()): ""; 
+                    return (periodo != null) ? new SimpleDateFormat("dd-MM-yyyy").format(periodo.getFechaHasta()): ""; 
                 case 4:
                     return (periodo != null) ? estado : "";
                 default:
