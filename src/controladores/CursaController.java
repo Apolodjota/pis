@@ -5,17 +5,18 @@
 package controladores;
 
 import controlador.BDD.DAO.AdaptadorDao;
+import controlador.BDD.DAO.Conexion;
 import controlador.TDALista.LinkedList;
 import controlador.TDALista.exceptions.VacioException;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.Cursa;
-import modelo.Curso;
 import modelo.Docente;
 import modelo.Materia;
 import modelo.Matricula;
-import modelo.PeriodoAcademico;
 
 /**
  *
@@ -181,17 +182,24 @@ public class CursaController extends  AdaptadorDao<Cursa>{
         return result;
     }
     
-//    public LinkedList<Cursa> buscarPeriodo(LinkedList<Cursa> lista, String text, PeriodoAcademico periodo  ) throws VacioException, Exception {
-//        LinkedList<Cursa> lo = this.quickSort(lista, 1 , text);
-//        Cursa[] m = lo.toArray();
-//        LinkedList<Cursa> result = new LinkedList<>();
-//        for (int i = 0; i < lo.getSize(); i++) {
-//            if (m[i].getId_periodo().intValue() == periodo.getId().intValue()) {
-//                result.add(m[i]);
-//            }
-//        }
-//        return result;
-//    }
+    public LinkedList <Cursa> listarCursosDocente (){
+        LinkedList <Cursa> lista = new LinkedList<>();
+        try {
+            Statement stmt = new Conexion().getConnection().createStatement();
+            String query = "SELECT DISTINCT id_materia, paralelo FROM Cursa";
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()) {
+                Cursa cc = new Cursa();
+                cc.setId(rs.getInt(1));
+                cc.setId_materia(rs.getInt(2));
+                cc.setParalelo(rs.getString(3));
+                lista.add(cc);
+            }
+        } catch (Exception e) {
+            System.out.println("error" + e.getMessage());
+        }
+        return lista;
+    }
     
     /**
      * @return the cursa
