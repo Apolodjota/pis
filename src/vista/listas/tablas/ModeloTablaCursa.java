@@ -39,7 +39,7 @@ public class ModeloTablaCursa extends AbstractTableModel{
                 case 0:
                     return (cursa != null) ? cursa.getId(): "";
                 case 1:
-                    return (cursa != null) ? cursa.getId_periodo(): "";   
+                    return (cursa != null) ? "Repe": "";   //cursa.getId_periodo(): "";   
                 case 2:
                     return (cursa != null) ? materia.getId() + materia.getNombre(): "";   
                 case 3:
