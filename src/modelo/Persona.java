@@ -10,7 +10,7 @@ public class Persona {
     private Integer id_rol;
     private String nombres;
     private String apellidos;
-    private Date fecha_nac;
+    private Date fechaNacimiento;
     private String cedula;
     private String telefonoCasa;
     private String telefonoCelular;
@@ -21,12 +21,12 @@ public class Persona {
     public Persona() {
     }
 
-    public Persona(Integer id, String nombres, String apellidos, Date fecha_nac, String cedula, String telefonoCasa, String telefonoCelular, String genero, String direccionResidencia, Integer id_rol) {
+    public Persona(Integer id, Integer id_rol, String nombres, String apellidos, Date fechaNacimiento, String cedula, String telefonoCasa, String telefonoCelular, String genero, String direccionResidencia) {
         this.id = id;
         this.id_rol = id_rol;
         this.nombres = nombres;
         this.apellidos = apellidos;
-        this.fecha_nac = fecha_nac;
+        this.fechaNacimiento = fechaNacimiento;
         this.cedula = cedula;
         this.telefonoCasa = telefonoCasa;
         this.telefonoCelular = telefonoCelular;
@@ -64,14 +64,6 @@ public class Persona {
 
     public void setCedula(String cedula) {
         this.cedula = cedula;
-    }
-
-    public Date getFecha_nac() {
-        return fecha_nac;
-    }
-
-    public void setFecha_nac(Date fecha_nac) {
-        this.fecha_nac = fecha_nac;
     }
 
     public String getTelefonoCasa() {
@@ -117,6 +109,20 @@ public class Persona {
     @Override
     public String toString() {
         return apellidos + " "+ nombres;
+    }
+
+    /**
+     * @return the fechaNacimiento
+     */
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    /**
+     * @param fechaNacimiento the fechaNacimiento to set
+     */
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
 }

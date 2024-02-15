@@ -103,7 +103,7 @@ public class FrmEstudiante extends javax.swing.JFrame {
                 ec.setEstudiante(et.getAutos().get(fila));
                 txtapellidos.setText(ec.getEstudiante().getApellidos());
                 txtnombres.setText(ec.getEstudiante().getNombres());
-                Calendar.setDate(ec.getEstudiante().getFecha_nac());
+                Calendar.setDate(ec.getEstudiante().getFechaNacimiento());
                 //txtEdad.setText(String.valueOf(ec.getEstudiante().getEdad()));
                 txtCelular.setText(ec.getEstudiante().getTelefonoCelular());
                 txtdni.setText(ec.getEstudiante().getCedula());
@@ -124,7 +124,7 @@ public class FrmEstudiante extends javax.swing.JFrame {
         ec.getEstudiante().setNombres(txtnombres.getText().toString());
         ec.getEstudiante().setApellidos(txtapellidos.getText().toString());
         ec.getEstudiante().setCedula(txtdni.getText().toString());
-        ec.getEstudiante().setFecha_nac(Calendar.getDate());
+        ec.getEstudiante().setFechaNacimiento(Calendar.getDate());
         ec.getEstudiante().setTelefonoCelular(txtCelular.getText().toString());
         //ec.getEstudiante().setEdad(Integer.parseInt(txtEdad.getText().toString()));
         ec.getEstudiante().setTelefonoCasa(txtTelefono.getText().toString());

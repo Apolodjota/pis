@@ -207,17 +207,18 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
             Integer idCuentaCorreo = rc.obtenerIdPorCorreo(rc.getCuentas(), correo);
             Integer idCuentaClave = rc.obtenerIdPorClave(rc.getCuentas(), clave);
             if (idCuentaCorreo == idCuentaClave && idCuentaCorreo != -1) {
-//                Integer idRol = rc.obtenerIdPorRol(rc.getCuentas(), idCuentaCorreo);
-//                if (idRol == 1) {
-//                    new FrmPrincipalAdministrador().setVisible(true);
-//                    this.setVisible(false);
-//                } else if (idRol == 2) {
-//                    new FrmPrincipalDocente().setVisible(true);
-//                    this.setVisible(false);
-//                } else if (idRol == 3) {
-//                    new FrmPrincipalEstudiante().setVisible(true);
-//                    this.setVisible(false);
-//                }
+                Integer idPersona = rc.getCuentas().get(idCuentaCorreo).getId_persona();
+                Integer idRol = persona.getId_rol();
+                if (idRol == 1) {
+                    new FrmPrincipalAdministrador().setVisible(true);
+                    this.setVisible(false);
+                } else if (idRol == 2) {
+                    new FrmPrincipalDocente().setVisible(true);
+                    this.setVisible(false);
+                } else if (idRol == 3) {
+                    new FrmPrincipalEstudiante().setVisible(true);
+                    this.setVisible(false);
+                }
             } else {
                 JOptionPane.showMessageDialog(null,
                         "Credenciales invalidas",

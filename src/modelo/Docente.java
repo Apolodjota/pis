@@ -14,13 +14,13 @@ public class Docente extends Persona{
     public Docente() {
     }
 
-    public Docente(Date fecha_inicio_docencia, String titulo_tercerNivel, String titulo_cuartoNivel, Integer id, String nombres, String apellidos, Date fecha_nac, String cedula, String telefonoCasa, String telefonoCelular, String genero, String direccionResidencia, Integer id_rol) {
-        super(id, nombres, apellidos, fecha_nac, cedula, telefonoCasa, telefonoCelular, genero, direccionResidencia, id_rol);
+    public Docente(Date fecha_inicio_docencia, String titulo_tercerNivel, String titulo_cuartoNivel, Integer id, Integer id_rol, String nombres, String apellidos, Date fechaNacimiento, String cedula, String telefonoCasa, String telefonoCelular, String genero, String direccionResidencia) {
+        super(id, id_rol, nombres, apellidos, fechaNacimiento, cedula, telefonoCasa, telefonoCelular, genero, direccionResidencia);
         this.fecha_inicio_docencia = fecha_inicio_docencia;
         this.titulo_tercerNivel = titulo_tercerNivel;
         this.titulo_cuartoNivel = titulo_cuartoNivel;
     }
-
+    
     public void setFecha_inicio_docencia(Date fecha_inicio_docencia) {
         this.fecha_inicio_docencia = fecha_inicio_docencia;
     }
@@ -64,8 +64,8 @@ public class Docente extends Persona{
                     return getApellidos().compareToIgnoreCase(e.getApellidos()) > 0;
                 else if (field.equalsIgnoreCase("cedula"))
                     return getCedula().compareToIgnoreCase(e.getCedula()) > 0;
-                else if (field.equalsIgnoreCase("fecha_nac"))
-                    return getFecha_nac().compareTo(e.getFecha_nac()) > 0;
+                else if (field.equalsIgnoreCase(" fechaNacimiento"))
+                    return getFechaNacimiento().compareTo(e.getFechaNacimiento()) > 0;
                 else if (field.equalsIgnoreCase("direccionResidencia"))
                     return getDireccionResidencia().compareToIgnoreCase(e.getDireccionResidencia()) > 0;
                 else if (field.equalsIgnoreCase("genero"))
@@ -83,8 +83,8 @@ public class Docente extends Persona{
                     return getApellidos().compareToIgnoreCase(e.getApellidos()) < 0;
                 else if (field.equalsIgnoreCase("cedula"))
                     return getCedula().compareToIgnoreCase(e.getCedula()) < 0;
-                else if (field.equalsIgnoreCase("fecha_nac"))
-                    return getFecha_nac().compareTo(e.getFecha_nac()) < 0;
+                else if (field.equalsIgnoreCase(" fechaNacimiento"))
+                    return getFechaNacimiento().compareTo(e.getFechaNacimiento()) < 0;
                 else if (field.equalsIgnoreCase("direccionResidencia"))
                     return getDireccionResidencia().compareToIgnoreCase(e.getDireccionResidencia()) < 0;
                 else if (field.equalsIgnoreCase("genero"))
