@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import controlador.TDALista.LinkedList;
+import controlador.Utilidades.Utilidades;
 import java.sql.SQLException;
 import modelo.Persona;
 
@@ -42,43 +43,38 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
      * @throws Exception Cuando no se puede guardar en la base de datos
      */
     @Override
-    public Integer guardar(T obj) throws Exception {
+    public void guardarEyD(T obj) throws Exception {
         //INSERT INTO <TABLA> (..) value (...)
-        String query = queryInsert(obj);
-        System.out.println("En insert: "+query);
-        //Integer idGenerado = -1;
+        String query = queryInsertHerencia(obj);
+        System.out.println("Select: "+query);
         Integer idGenerado = -1;
         PreparedStatement statement
                 = conexion.getConnection().prepareStatement(query,
                         Statement.RETURN_GENERATED_KEYS);
         statement.executeUpdate();
-        ResultSet generatedKeys = statement.getGeneratedKeys();
+        /*ResultSet generatedKeys = statement.getGeneratedKeys();
         if (generatedKeys.next()) {
             idGenerado = generatedKeys.getInt(1);
-        }
-
+        }*/
         conexion.getConnection().close();
         conexion.setConnection(null);
-        return idGenerado;
+        //return idGenerado;
     }
     
-    public Integer guardarP(T object){
+    public Integer guardar(T object){
         String query = queryInsert(object);
         Integer idG = -1;
         try {
             PreparedStatement stament = conexion.getConnection().prepareStatement(query);
             stament.executeUpdate();
-            System.out.println("god-->");
             try {
                 Statement seqStament = conexion.getConnection().createStatement();
                 ResultSet result = stament.executeQuery("SELECT "+ object.getClass().getSimpleName().toUpperCase()+"_SEQ.CURRVAL FROM dual");
                 if (result.next()){
                     idG = result.getInt(1);
                 }
-                System.out.println("cerrar finallyu");
                 conexion.getConnection().close();
                 conexion.setConnection(null);
-                System.out.println("fickui j");
             } catch (SQLException ex){
                 System.out.println("ERROR GUARDARP" + ex.getMessage());
             }
@@ -96,6 +92,7 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
     @Override
     public void modificar(T obj) throws Exception {
         String query = queryUpdate(obj);
+        System.out.println("Sentencia: "+query);
         Statement st = conexion.getConnection().createStatement();
         st.executeUpdate(query);
         conexion.getConnection().close();
@@ -107,7 +104,6 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
      */
     @Override
     public LinkedList<T> listar() {
-
         LinkedList<T> lista = new LinkedList<>();
         try {
             Statement stmt = conexion.getConnection().createStatement();
@@ -172,27 +168,25 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
                 m = clazz.getMethod("set" + atributo, String.class);
                 m.invoke(data, rs.getString(atributo));
             }
-
             if (f.getType().getSimpleName().equalsIgnoreCase("Integer")) {
                 m = clazz.getMethod("set" + atributo, Integer.class);
+                System.out.println("data "+ data + "atributo" + atributo);
                 m.invoke(data, rs.getInt(atributo));
             }
-
             if (f.getType().getSimpleName().equalsIgnoreCase("Double")) {
                 m = clazz.getMethod("set" + atributo, Double.class);
                 m.invoke(data, rs.getDouble(atributo));
             }
-
             if (f.getType().getSimpleName().equalsIgnoreCase("Boolean")) {
                 m = clazz.getMethod("set" + atributo, Boolean.class);
                 m.invoke(data, rs.getBoolean(atributo));
             }
-
             if (f.getType().getSimpleName().equalsIgnoreCase("Date")) {
                 m = clazz.getMethod("set" + atributo, Date.class);
-                m.invoke(data, rs.getDate(atributo));
+                System.out.println("metood fate" + m.getName());
+                System.out.println("data "+ data + "atributo" + atributo);
+                m.invoke(data, rs.getDate(atributo)); 
             }
-
             if (f.getType().isEnum()) {
 
                 m = clazz.getMethod("set" + atributo, (Class<Enum>) f.getType());
@@ -231,7 +225,42 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
         }
         return mapa;
     }
+    
+    private String queryInsertHerencia (T obj) {
+        String query = "INSERT INTO ";
+        HashMap<String, Object> mapa = obtenerObjeto(obj);
+        if (clazz.getSimpleName().equalsIgnoreCase("estudiante")){
+            query += ""+clazz.getSimpleName().toLowerCase() + "(id,";
+            Field [] fields = clazz.getDeclaredFields();
+            for(Field f : fields){
+                query += f.getName() + ",";
+            }
+            query = query.substring(0, query.length() - 1);
+            query += ") VALUES ("; 
+            try {
+                Field campo = obj.getClass().getSuperclass().getDeclaredField("id");
+                campo.setAccessible(true);
+                query += campo.get(obj) + ",";
+                Field [] fiels = clazz.getDeclaredFields();
+                for (Field fi : fiels) {
+                    fi.setAccessible(true);
+                    query += "'" + fi.get(obj) + "'" + ",";
 
+                }
+                query = query.substring(0, query.length() - 1);
+                query += ")"; 
+            } catch (Exception ed) {
+                System.out.println("ex" + ed.getMessage());
+            } 
+        }
+        System.out.println("--> " + query);
+        return query;
+        
+    }
+            
+        
+    
+    
     private String queryInsert(T obj) {
         HashMap<String, Object> mapa = obtenerObjeto(obj);
         String query = "INSERT INTO " + clazz.getSimpleName().toLowerCase() + " (";
@@ -276,11 +305,12 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
                     query += entry.getValue() + ", ";
                 }
                 if (entry.getValue().getClass().getSimpleName().equalsIgnoreCase("Date")) {
-                    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                    query += '"' + formato.format(entry.getValue()) + '"' + ", ";
+                    SimpleDateFormat formato = new SimpleDateFormat("dd-MM-YY");
+                    //SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                    query += "'" + formato.format(entry.getValue()) + "'" + ", ";
                 }
                 if (entry.getValue().getClass().isEnum() || entry.getValue().getClass().getSimpleName().equalsIgnoreCase("String")) {
-                    query += '"' + entry.getValue().toString() + '"' + ", ";
+                    query += "'" + entry.getValue().toString() + "'" + ", ";
                 }
             }
 

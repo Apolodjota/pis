@@ -27,7 +27,7 @@ public class EstudianteModeloTabla extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 3;
     }
 
     @Override
@@ -42,15 +42,19 @@ public class EstudianteModeloTabla extends AbstractTableModel{
                 case 0:
                     return (e != null) ? e.getId() : " ";
                 case 1:
-                    return (e != null) ? e.getNombres() : " ";
+                    return (e != null) ? e.getTitulo_bachiller() : " ";
                 case 2:
-                    return (e != null) ? e.getApellidos(): " ";
-                case 3:
-                    return (e != null) ? e.getCedula() : " ";
-                case 4: 
-                    return (e != null) ? new SimpleDateFormat("dd-MM-yyyy").format(e.getFechaNacimiento()) : " ";
-                case 5:
-                    return (e != null) ? e.getDireccionResidencia() : " ";
+                    return (e != null) ? e.getTrabaja() : " ";
+//                case 1:
+//                    return (e != null) ? e.getNombres() : " ";
+//                case 2:
+//                    return (e != null) ? e.getApellidos(): " ";
+//                case 3:
+//                    return (e != null) ? e.getCedula() : " ";
+//                case 4: 
+//                    //return (e != null) ? new SimpleDateFormat("dd-MM-yyyy").format(e.getFechaNacimiento()) : "";
+//                case 5:
+//                    return (e != null) ? e.getDireccionResidencia() : " ";
                 default:
                     return null;
         } 
@@ -65,12 +69,12 @@ public class EstudianteModeloTabla extends AbstractTableModel{
                 return "Nombres";
             case 2: 
                 return "Apellidos";
-            case 3:
-                return "Cedula";
-            case 4:
-                return "Fecha Nacimiento";
-            case 5:
-                return "Ciudad Procedencia";
+//            case 3:
+//                return "Cedula";
+//            case 4:
+//                return "FechaNacimiento";
+//            case 5:
+//                return "CiudadProcedencia";
             default:
                 return " ";
         }

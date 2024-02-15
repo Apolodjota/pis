@@ -1,4 +1,5 @@
 package controladores;
+import controlador.BDD.DAO.AdaptadorDao;
 import controlador.TDALista.LinkedList;
 import controlador.TDALista.exceptions.VacioException;
 import controlador.listas.DAO.DataAccesObject;
@@ -11,7 +12,7 @@ import modelo.PeriodoAcademico;
  *
  * @author asus
  */
-public class MatriculaController extends DataAccesObject<Matricula>{
+public class MatriculaController extends AdaptadorDao<Matricula>{
     private LinkedList<Matricula> matriculas = new LinkedList<>();
     private Matricula matricula = new Matricula();
     private Integer index = -1;
@@ -22,7 +23,7 @@ public class MatriculaController extends DataAccesObject<Matricula>{
 
     public LinkedList<Matricula> getMatriculas() {
         if(matriculas.isEmpty())
-            matriculas = listall();
+            matriculas = listar();
         return matriculas;
     }
 
@@ -48,17 +49,15 @@ public class MatriculaController extends DataAccesObject<Matricula>{
         this.index = index;
     }
 
-    public Boolean save() {
-        Integer id = generated_id();
-        this.matricula.setId(id);
-        return save(matricula);
+    public Integer save() throws Exception{
+        return guardar(matricula);
     }
     
-    public Boolean update(Integer index) {
-        return update(matricula, index);
+    public void update(Matricula mat) throws Exception{
+        modificar(mat);
     }
     
-    public String generatedCode() {
+    /*public String generatedCode() {
         StringBuilder code = new StringBuilder();
         Integer lenght = listall().getSize() + 1;
         Integer pos = lenght.toString().length();
@@ -108,6 +107,6 @@ public class MatriculaController extends DataAccesObject<Matricula>{
                 result.add(arrayOrdenado[i]);
         }
         return result;
-    }
+    }*/
 
 }

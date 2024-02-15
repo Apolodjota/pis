@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controladores;
+import controlador.BDD.DAO.AdaptadorDao;
 import controlador.TDALista.LinkedList;
 import controlador.TDALista.exceptions.VacioException;
 import controlador.listas.DAO.DataAccesObject;
@@ -12,7 +13,7 @@ import modelo.Estudiante;
  *
  * @author sakotaz
  */
-public class EstudianteControlador extends DataAccesObject <Estudiante>{
+public class EstudianteControlador extends AdaptadorDao<Estudiante>{
     private LinkedList <Estudiante> estudiantes = new LinkedList <Estudiante>();
     private Estudiante estudiante = new Estudiante();
 
@@ -22,7 +23,7 @@ public class EstudianteControlador extends DataAccesObject <Estudiante>{
 
     public LinkedList <Estudiante> getEstudiantes() {
         if (estudiantes.isEmpty())
-            estudiantes = listall();
+            estudiantes = listar();
         return estudiantes;
     }
 
@@ -40,13 +41,12 @@ public class EstudianteControlador extends DataAccesObject <Estudiante>{
         this.estudiante = estudiante;
     }
     
-    public Boolean guardar(){
-        estudiante.setId(generated_id());
-        return save(estudiante);
+    public Integer guardar() throws Exception{
+        return guardar(estudiante);
     }
     
-    public Boolean modificar(Integer index){
-        return update(estudiante, index);
+    public void update() throws Exception{
+        modificar(estudiante);
     }
     
     private void intercambio(Estudiante e[], int i, int j){

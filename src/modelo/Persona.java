@@ -21,12 +21,12 @@ public class Persona {
     public Persona() {
     }
 
-    public Persona(Integer id, String nombres, String apellidos, Date fecha_nac, String cedula, String telefonoCasa, String telefonoCelular, String genero, String direccionResidencia, Integer id_rol) {
+    public Persona(Integer id, String nombres, String apellidos, Date fechaNacimiento, String cedula, String telefonoCasa, String telefonoCelular, String genero, String direccionResidencia, Integer id_rol) {
         this.id = id;
         this.id_rol = id_rol;
         this.nombres = nombres;
         this.apellidos = apellidos;
-        this.fechaNacimiento = fecha_nac;
+        this.fechaNacimiento = fechaNacimiento;
         this.cedula = cedula;
         this.telefonoCasa = telefonoCasa;
         this.telefonoCelular = telefonoCelular;
