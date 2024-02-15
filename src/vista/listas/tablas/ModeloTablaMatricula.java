@@ -71,6 +71,7 @@ public class ModeloTablaMatricula extends AbstractTableModel{
     }
 
     public LinkedList<Matricula> getMatriculas() {
+        System.out.println("Ejemplo");
         return matriculas;
     }
 
