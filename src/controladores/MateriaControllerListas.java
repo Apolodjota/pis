@@ -1,8 +1,9 @@
 
 package controladores;
 
+import controlador.BDD.DAO.AdaptadorDao;
 import controlador.TDALista.LinkedList;
-import controlador.listas.DAO.DataAccesObject;
+//import controlador.listas.DAO.DataAccesObject;
 import controlador.Utilidades.Utilidades;
 import java.lang.reflect.Field;
 import modelo.Curso;
@@ -12,7 +13,7 @@ import modelo.Materia;
  *
  * @author alexg
  */
-public class MateriaControllerListas extends DataAccesObject<Materia>{
+public class MateriaControllerListas extends AdaptadorDao<Materia>{
     
     private LinkedList<Materia> materias = new LinkedList<>();
     private Materia materia = new Materia();
@@ -27,7 +28,7 @@ public class MateriaControllerListas extends DataAccesObject<Materia>{
      */
     public LinkedList<Materia> getMaterias() {
         if (materias.isEmpty()) 
-            materias = listall();
+            materias = listar();
             return materias;
     }
 
@@ -69,18 +70,17 @@ public class MateriaControllerListas extends DataAccesObject<Materia>{
         this.index = index;
     }
 
-    public Boolean save() {
-        this.materia.setId(generated_id());
-        return save(materia);
-    }
+    public Integer save() {
+        return guardar(materia);
+    } 
     
-    public Boolean update(Integer index) {
-        return update(materia, index);
+    public void update(Materia materia) throws Exception {
+        modificar(materia);
     }
     
     public String generatedCode() {
         StringBuilder code = new StringBuilder();
-        Integer lenght = listall().getSize() + 1;
+        Integer lenght = listar().getSize() + 1;
         Integer pos = lenght.toString().length();
         for (int i = 0; i < (10 - pos); i++) {
             code.append("0");

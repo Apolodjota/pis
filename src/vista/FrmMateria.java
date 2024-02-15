@@ -1,4 +1,3 @@
-
 package vista;
 
 import controladores.CursoControllerListas;
@@ -19,11 +18,11 @@ public class FrmMateria extends javax.swing.JFrame {
 
     private MateriaControllerListas mcl = new MateriaControllerListas();
     private ModeloTablaMateriaListas mtml = new ModeloTablaMateriaListas();
-    
+
     public JPanel getJPanel1() {
         return jPanel1;
     }
-    
+
     /**
      * Creates new form FrmAutos
      */
@@ -31,10 +30,10 @@ public class FrmMateria extends javax.swing.JFrame {
         initComponents();
         limpiar();
     }
-    
+
     private void ordenar() {
         String criterio = cbxCriterio.getSelectedItem().toString().toLowerCase();
-        Integer ascdesc  = cbxAscDesc.getSelectedIndex();
+        Integer ascdesc = cbxAscDesc.getSelectedIndex();
         try {
             if (criterio.equalsIgnoreCase("nombre")) {
                 mtml.setMaterias(mcl.quickSort(ascdesc, criterio, mtml.getMaterias()));
@@ -49,18 +48,17 @@ public class FrmMateria extends javax.swing.JFrame {
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
-    }      
+    }
 
     private void buscar() {
         String criterio = cbxCriterio.getSelectedItem().toString().toLowerCase();
         try {
             if (criterio.equalsIgnoreCase("nombre")) {
                 mtml.setMaterias(mcl.buscarNombre(mcl.getMaterias(), criterio, txtBusqueda.getText()));
-            }
-            else if (criterio.equalsIgnoreCase("curso")) {
+            } else if (criterio.equalsIgnoreCase("curso")) {
                 mtml.setMaterias(mcl.buscarCurso(mcl.getMaterias(), "id_curso", UtilVista.getComboCursos(cbxCursoB)));
             }
- 
+
             tblTabla.setModel(mtml);
             tblTabla.updateUI();
         } catch (Exception e) {
@@ -69,8 +67,8 @@ public class FrmMateria extends javax.swing.JFrame {
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
-    }      
-    
+    }
+
     private void limpiar() {
         txtNombre.setText("");
         txtBusqueda.setText("");
@@ -83,7 +81,7 @@ public class FrmMateria extends javax.swing.JFrame {
             //System.out.println("CHURONA y BARCELONA");
             UtilVista.cargarCurso(cbxCurso);
             UtilVista.cargarCurso(cbxCursoB);
-            txtBusqueda.setVisible(true);    
+            txtBusqueda.setVisible(true);
             cbxCursoB.setVisible(false);
             jblTexto.setVisible(true);
             jblCiclo.setVisible(false);
@@ -91,84 +89,89 @@ public class FrmMateria extends javax.swing.JFrame {
             System.out.println("ERROR: " + e.getMessage());
         }
     }
-    
+
     private void cargarTabla() {
         mtml.setMaterias(mcl.getMaterias());
         tblTabla.setModel(mtml);
         tblTabla.updateUI();
     }
-    
+
     private Boolean validar() {
         return !txtNombre.getText().trim().isEmpty();
     }
-    
+
     private void guardar() {
         if (validar()) {
             try {
                 mcl.getMateria().setNombre(txtNombre.getText());
                 mcl.getMateria().setId_curso(UtilVista.getComboCursos(cbxCurso).getId());
-                
-                if (mcl.getMateria().getId() == null) {
-                    if (mcl.save()) {
-                        limpiar();
-                        JOptionPane.showMessageDialog(null, 
-                                "Se ha guardado correctamente", "Ok", 
-                                JOptionPane.INFORMATION_MESSAGE);   
-                        mcl.setMateria(null); 
-                    } else {
-                    JOptionPane.showMessageDialog(null, 
-                            "No se ha podido guardar correctamente", 
-                            "Error", 
-                            JOptionPane.ERROR_MESSAGE);
-                } 
-            } else {
-                    if (mcl.update(mcl.getIndex())) {
-                        limpiar();
-                        JOptionPane.showMessageDialog(null, 
-                                "Se ha editado correctamente", "Ok", 
-                                JOptionPane.INFORMATION_MESSAGE);   
-                        mcl.setMateria(null); 
-                    } else {
-                    JOptionPane.showMessageDialog(null, 
-                            "No se ha podido editar correctamente", 
-                            "Error", 
-                            JOptionPane.ERROR_MESSAGE);
-                }  
-               }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, 
-                        e.getMessage(), 
-                        "Error", 
-                        JOptionPane.ERROR_MESSAGE);                   
-            } 
-        }else {
-                JOptionPane.showMessageDialog(null, 
-                        "Llene todos los campos", 
-                        "Error", JOptionPane.ERROR_MESSAGE);
-        }
 
+                if (mcl.getMateria().getId() == null) {
+                    try {
+                        Integer id = mcl.save();
+                        System.out.println("ID: " + id);
+                        limpiar();
+                        JOptionPane.showMessageDialog(null,
+                                "Se ha guardado correctamente", "Ok",
+                                JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null,
+                                "No se pudo guardar: " + e,
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        mcl.update(mcl.getMateria());
+                        limpiar();
+                        JOptionPane.showMessageDialog(null,
+                                "Se ha actualizado correctamente", "Ok",
+                                JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null,
+                                "No se pudo actualizar: " + e,
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+        }catch (Exception e) {
+                JOptionPane.showMessageDialog(null,
+                        e.getMessage(),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
     }
+
     
-    private void cargarVista() {
+        else {
+            JOptionPane.showMessageDialog(null,
+                "Llene todos los campos",
+                "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+}
+
+private void cargarVista() {
         mcl.setIndex(tblTabla.getSelectedRow());
         if (mcl.getIndex() < 0) {
             JOptionPane.showMessageDialog(null,
-                    "Seleccione una fila", 
-                    "Error", 
+                    "Seleccione una fila",
+                    "Error",
                     JOptionPane.ERROR_MESSAGE);
         } else {
             try {
                 mcl.setMateria(mtml.getMaterias().get(mcl.getIndex()));
                 txtNombre.setText(mcl.getMateria().getNombre());
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, 
-                        e.getMessage(), 
-                        "Error", 
+                JOptionPane.showMessageDialog(null,
+                        e.getMessage(),
+                        "Error",
                         JOptionPane.ERROR_MESSAGE);
             }
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -451,7 +454,7 @@ public class FrmMateria extends javax.swing.JFrame {
             txtBusqueda.setVisible(false);
             cbxCursoB.setVisible(true);
             jblTexto.setVisible(false);
-            jblCiclo.setVisible(true);            
+            jblCiclo.setVisible(true);
         }
     }//GEN-LAST:event_cbxCriterioItemStateChanged
 
@@ -481,16 +484,28 @@ public class FrmMateria extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmMateria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmMateria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmMateria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmMateria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMateria.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(FrmMateria.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(FrmMateria.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FrmMateria.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>

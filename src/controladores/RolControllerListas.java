@@ -1,8 +1,8 @@
 
 package controladores;
 
+import controlador.BDD.DAO.AdaptadorDao;
 import controlador.TDALista.LinkedList;
-import controlador.listas.DAO.DataAccesObject;
 import controlador.Utilidades.Utilidades;
 import java.lang.reflect.Field;
 import modelo.Rol;
@@ -11,7 +11,7 @@ import modelo.Rol;
  *
  * @author alexg
  */
-public class RolControllerListas extends DataAccesObject<Rol>{
+public class RolControllerListas extends AdaptadorDao<Rol>{
     
     private LinkedList<Rol> roles = new LinkedList<>();
     private Rol rol = new Rol();
@@ -26,7 +26,7 @@ public class RolControllerListas extends DataAccesObject<Rol>{
      */
     public LinkedList<Rol> getRoles() {
         if (roles.isEmpty()) 
-            roles = listall();
+            roles = listar();
             return roles;
     }
 
@@ -68,18 +68,18 @@ public class RolControllerListas extends DataAccesObject<Rol>{
         this.index = index;
     }
 
-    public Boolean save() {
-        this.rol.setId(generated_id());
-        return save(rol);
+    public Integer save() {
+        return guardar(rol);
+        
     }
     
-    public Boolean update(Integer index) {
-        return update(rol, index);
+    public void update(Rol rol) throws Exception {
+        modificar(rol);
     }
     
     public String generatedCode() {
         StringBuilder code = new StringBuilder();
-        Integer lenght = listall().getSize() + 1;
+        Integer lenght = listar().getSize() + 1;
         Integer pos = lenght.toString().length();
         for (int i = 0; i < (10 - pos); i++) {
             code.append("0");

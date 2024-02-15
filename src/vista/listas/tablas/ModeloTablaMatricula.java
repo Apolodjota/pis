@@ -24,7 +24,7 @@ public class ModeloTablaMatricula extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 3;
     }
 
     @Override
@@ -38,9 +38,9 @@ public class ModeloTablaMatricula extends AbstractTableModel{
                 case 0:
                     return (matricula != null) ? matricula.getId() : "";
                 case 1:
-                    return (matricula != null) ? periodo.getNombre() : "";   
+                    return (matricula != null) ? estudiante.toString(): "";  
                 case 2:
-                    return (matricula != null) ? estudiante.toString(): "";   
+                    return (matricula != null) ? periodo.getNombre() : ""; 
                 case 3:
                     //return (matricula != null) ? estado: ""; 
                 default:
@@ -56,11 +56,11 @@ public class ModeloTablaMatricula extends AbstractTableModel{
     public String getColumnName(int column) {
         switch (column) {
             case 0:
-                return "Num. Matricula";
+                return "Matricula";
             case 1:
-                return "Periodo";  
-            case 2:
                 return "Estudiante";  
+            case 2:
+                return "Periodo";  
             /*case 3:
                 return "Estado";*/
             default:

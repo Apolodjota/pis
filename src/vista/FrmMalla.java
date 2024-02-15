@@ -1,4 +1,5 @@
 package vista;
+
 import controladores.MallaControllerListas;
 import controlador.TDALista.LinkedList;
 import java.awt.event.ItemEvent;
@@ -109,35 +110,37 @@ public class FrmMalla extends javax.swing.JFrame {
                 mcl.getMalla().setCod_resolucion(txtCodResolucion.getText());
                 mcl.getMalla().setModalidad(cbxModalidad.getSelectedItem().toString());
                 mcl.getMalla().setFecha_Creacion(new SimpleDateFormat("dd / MM / yy").parse(txtFechaCreacion.getText()));
-                if (checkBoxVigente.isSelected()) {
+                /*if (checkBoxVigente.isSelected()) {
                     mcl.getMalla().setEstado(true);
                 } else {
                     mcl.getMalla().setEstado(false);
-                }
-
+                }*/
+                mcl.getMalla().setEstado("T");
                 if (mcl.getMalla().getId() == null) {
-                    if (mcl.save()) {
+                    try {
+                        Integer id = mcl.save();
+                        System.out.println("ID: " + id);
                         limpiar();
                         JOptionPane.showMessageDialog(null,
                                 "Se ha guardado correctamente", "Ok",
                                 JOptionPane.INFORMATION_MESSAGE);
-                        mcl.setMalla(null);
-                    } else {
+                    } catch (Exception e) {
                         JOptionPane.showMessageDialog(null,
-                                "No se ha podido guardar correctamente",
+                                "No se pudo guardar: " + e,
                                 "Error",
                                 JOptionPane.ERROR_MESSAGE);
+                        e.printStackTrace();
                     }
                 } else {
-                    if (mcl.update(mcl.getIndex())) {
+                    try {
+                        mcl.update(mcl.getMalla());
                         limpiar();
                         JOptionPane.showMessageDialog(null,
-                                "Se ha editado correctamente", "Ok",
+                                "Se ha actualizado correctamente", "Ok",
                                 JOptionPane.INFORMATION_MESSAGE);
-                        mcl.setMalla(null);
-                    } else {
+                    } catch (Exception e) {
                         JOptionPane.showMessageDialog(null,
-                                "No se ha podido editar correctamente",
+                                "No se pudo actualizar: " + e,
                                 "Error",
                                 JOptionPane.ERROR_MESSAGE);
                     }
