@@ -13,12 +13,12 @@ public class Estudiante extends Persona{
     public Estudiante() {
     }
 
-    public Estudiante(String titulo_bachiller, String trabaja, Integer id, String nombres, String apellidos, Date fechaNacimiento, String cedula, String telefonoCasa, String telefonoCelular, String genero, String direccionResidencia, Integer id_rol) {
-        super(id, nombres, apellidos, fechaNacimiento, cedula, telefonoCasa, telefonoCelular, genero, direccionResidencia, id_rol);
+    public Estudiante(String titulo_bachiller, String trabaja, Integer id, Integer id_rol, String nombres, String apellidos, Date fechaNacimiento, String cedula, String telefonoCasa, String telefonoCelular, String genero, String direccionResidencia) {
+        super(id, id_rol, nombres, apellidos, fechaNacimiento, cedula, telefonoCasa, telefonoCelular, genero, direccionResidencia);
         this.titulo_bachiller = titulo_bachiller;
         this.trabaja = trabaja;
     }
-
+    
     public String getTitulo_bachiller() {
         return titulo_bachiller;
     }

@@ -13,8 +13,8 @@ public class Administrador extends Persona{
     public Administrador() {
     }
 
-    public Administrador(Integer id, String nombres, String apellidos, Date fecha_nac, String cedula, String telefonoCasa, String telefonoCelular, String genero, String direccionResidencia, Integer id_rol) {
-        super(id, nombres, apellidos, fecha_nac, cedula, telefonoCasa, telefonoCelular, genero, direccionResidencia, id_rol);
+    public Administrador(Integer id, Integer id_rol, String nombres, String apellidos, Date fechaNacimiento, String cedula, String telefonoCasa, String telefonoCelular, String genero, String direccionResidencia) {
+        super(id, id_rol, nombres, apellidos, fechaNacimiento, cedula, telefonoCasa, telefonoCelular, genero, direccionResidencia);
         this.id = id;
     }
 
@@ -35,12 +35,6 @@ public class Administrador extends Persona{
      */
     public void setId(Integer id) {
         this.id = id;
-    }
-    
-    public static void main(String[] args) {
-        Administrador administrador = new Administrador(1, "Bayron A", "Jimenez C", new Date(), "1150", "099", "5152", "M", "Loja", 3);
-        AdministradorControlador ac = new AdministradorControlador();
-        ac.save(administrador);
     }
     
 }
