@@ -333,7 +333,7 @@ public class FrmCursa extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtParaleloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtParaleloActionPerformed
-        // TODO add your handling code here:
+        //LLLamadi a dialoj
     }//GEN-LAST:event_txtParaleloActionPerformed
 
     private void cbxDocenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxDocenteActionPerformed
