@@ -21,7 +21,8 @@ public class Persona {
     public Persona() {
     }
 
-    public Persona(Integer id, String nombres, String apellidos, Date fechaNacimiento, String cedula, String telefonoCasa, String telefonoCelular, String genero, String direccionResidencia, Integer id_rol) {
+
+    public Persona(Integer id, Integer id_rol, String nombres, String apellidos, Date fechaNacimiento, String cedula, String telefonoCasa, String telefonoCelular, String genero, String direccionResidencia) {
         this.id = id;
         this.id_rol = id_rol;
         this.nombres = nombres;
@@ -65,7 +66,6 @@ public class Persona {
     public void setCedula(String cedula) {
         this.cedula = cedula;
     }
-
 
     public String getTelefonoCasa() {
         return telefonoCasa;
@@ -113,10 +113,17 @@ public class Persona {
         return apellidos + " "+ nombres;
     }
 
+
+    /**
+     * @return the fechaNacimiento
+     */
     public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
+    /**
+     * @param fechaNacimiento the fechaNacimiento to set
+     */
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }

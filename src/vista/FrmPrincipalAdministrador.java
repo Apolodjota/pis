@@ -13,6 +13,13 @@ import javax.swing.JPanel;
 public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
     private CuentaControllerListas cc = new CuentaControllerListas();
+    private boolean isDocentesClicked = false;
+    private boolean isEstudiantesClicked = false;
+    private boolean isMateriasClicked = false;
+    private boolean isCursoClicked = false;
+    private boolean isMallaClicked = false;
+    private boolean isMatriculaClicked = false;
+    private boolean isPeriodoAcademicoClicked = false;
 
     /**
      * Creates new form FrmPrincipalAdministrador
@@ -34,7 +41,7 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         panelImage3.setIcon(new ImageIcon("src/icono/periodoAcademico.png"));
         panelImage9.setIcon(new ImageIcon("src/icono/usuario_prin.png"));
         panelImage11.setIcon(new ImageIcon("src/icono/cerrar-sesion.png"));
-        panelImage1.setIcon(new ImageIcon("src/icono/logoEva.png"));
+        panelImage1.setIcon(new ImageIcon("src/icono/logoEva_1.png"));
 //        panelImage10.setIcon(new ImageIcon("src/icono/fondo_blue.png"));
     }
 
@@ -89,10 +96,10 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
 
-        jPanel2.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(0, 51, 153));
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
-        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(255, 255, 255)));
 
         jplSalir.setBackground(new java.awt.Color(255, 255, 204));
         jplSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -145,7 +152,7 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(196, Short.MAX_VALUE)
+                .addContainerGap(192, Short.MAX_VALUE)
                 .addComponent(panelImage10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jplSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -162,19 +169,31 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(0, 153, 153));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel3.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel3.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(255, 255, 255)));
+        jPanel3.setLayout(new java.awt.GridBagLayout());
 
         jblNombre.setFont(new java.awt.Font("Harlow Solid Italic", 1, 18)); // NOI18N
         jblNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jblNombre.setText("Administrador");
-        jPanel3.add(jblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 128, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 11;
+        gridBagConstraints.insets = new java.awt.Insets(30, 30, 30, 30);
+        jPanel3.add(jblNombre, gridBagConstraints);
 
-        jplDocentes.setBackground(new java.awt.Color(0, 153, 153));
+        jplDocentes.setBackground(new java.awt.Color(0, 204, 204));
         jplDocentes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jplDocentes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jplDocentesMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jplDocentesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jplDocentesMouseExited(evt);
             }
         });
 
@@ -190,11 +209,9 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         );
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Administrar");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Docentes");
 
         javax.swing.GroupLayout jplDocentesLayout = new javax.swing.GroupLayout(jplDocentes);
@@ -221,13 +238,24 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
                     .addComponent(jLabel2)))
         );
 
-        jPanel3.add(jplDocentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 209, 200, 50));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 31;
+        gridBagConstraints.ipady = 7;
+        jPanel3.add(jplDocentes, gridBagConstraints);
 
-        jplEstudiantes.setBackground(new java.awt.Color(0, 153, 153));
+        jplEstudiantes.setBackground(new java.awt.Color(0, 204, 204));
         jplEstudiantes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jplEstudiantes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jplEstudiantesMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jplEstudiantesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jplEstudiantesMouseExited(evt);
             }
         });
 
@@ -243,11 +271,9 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         );
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Administrar");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Estudiantes");
 
         javax.swing.GroupLayout jplEstudiantesLayout = new javax.swing.GroupLayout(jplEstudiantes);
@@ -274,13 +300,24 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
                     .addComponent(jLabel6)))
         );
 
-        jPanel3.add(jplEstudiantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 200, 50));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipadx = 31;
+        gridBagConstraints.ipady = 7;
+        jPanel3.add(jplEstudiantes, gridBagConstraints);
 
-        jplMaterias.setBackground(new java.awt.Color(0, 153, 153));
+        jplMaterias.setBackground(new java.awt.Color(0, 204, 204));
         jplMaterias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jplMaterias.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jplMateriasMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jplMateriasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jplMateriasMouseExited(evt);
             }
         });
 
@@ -296,11 +333,9 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         );
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Administrar");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Materias");
 
         javax.swing.GroupLayout jplMateriasLayout = new javax.swing.GroupLayout(jplMaterias);
@@ -327,13 +362,24 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
                         .addComponent(jLabel9))))
         );
 
-        jPanel3.add(jplMaterias, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 200, 50));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.ipadx = 31;
+        gridBagConstraints.ipady = 7;
+        jPanel3.add(jplMaterias, gridBagConstraints);
 
-        jplCurso.setBackground(new java.awt.Color(0, 153, 153));
+        jplCurso.setBackground(new java.awt.Color(0, 204, 204));
         jplCurso.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jplCurso.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jplCursoMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jplCursoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jplCursoMouseExited(evt);
             }
         });
 
@@ -349,7 +395,6 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         );
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Curso");
         jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
@@ -376,13 +421,23 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel3.add(jplCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 200, 50));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.ipadx = 66;
+        jPanel3.add(jplCurso, gridBagConstraints);
 
-        jplMalla.setBackground(new java.awt.Color(0, 153, 153));
+        jplMalla.setBackground(new java.awt.Color(0, 204, 204));
         jplMalla.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jplMalla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jplMallaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jplMallaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jplMallaMouseExited(evt);
             }
         });
 
@@ -398,7 +453,6 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         );
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Malla");
 
         javax.swing.GroupLayout jplMallaLayout = new javax.swing.GroupLayout(jplMalla);
@@ -425,13 +479,24 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
                 .addGap(15, 15, 15))
         );
 
-        jPanel3.add(jplMalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 200, 50));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.ipadx = 60;
+        gridBagConstraints.ipady = -6;
+        jPanel3.add(jplMalla, gridBagConstraints);
 
-        jplMatricula.setBackground(new java.awt.Color(0, 153, 153));
+        jplMatricula.setBackground(new java.awt.Color(0, 204, 204));
         jplMatricula.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jplMatricula.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jplMatriculaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jplMatriculaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jplMatriculaMouseExited(evt);
             }
         });
 
@@ -447,7 +512,6 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         );
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Matricula");
 
         javax.swing.GroupLayout jplMatriculaLayout = new javax.swing.GroupLayout(jplMatricula);
@@ -473,13 +537,23 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel3.add(jplMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 200, 50));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.ipadx = 40;
+        jPanel3.add(jplMatricula, gridBagConstraints);
 
-        jplPeriodoAcademico.setBackground(new java.awt.Color(0, 153, 153));
+        jplPeriodoAcademico.setBackground(new java.awt.Color(0, 204, 204));
         jplPeriodoAcademico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jplPeriodoAcademico.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jplPeriodoAcademicoMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jplPeriodoAcademicoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jplPeriodoAcademicoMouseExited(evt);
             }
         });
 
@@ -495,11 +569,9 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         );
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Periodo");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Academico");
 
         javax.swing.GroupLayout jplPeriodoAcademicoLayout = new javax.swing.GroupLayout(jplPeriodoAcademico);
@@ -526,63 +598,76 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
                     .addComponent(jLabel4)))
         );
 
-        jPanel3.add(jplPeriodoAcademico, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, 200, 50));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.ipadx = 34;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 100, 0);
+        jPanel3.add(jplPeriodoAcademico, gridBagConstraints);
 
         javax.swing.GroupLayout panelImage9Layout = new javax.swing.GroupLayout(panelImage9);
         panelImage9.setLayout(panelImage9Layout);
         panelImage9Layout.setHorizontalGroup(
             panelImage9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
+            .addGap(0, 30, Short.MAX_VALUE)
         );
         panelImage9Layout.setVerticalGroup(
             panelImage9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
+            .addGap(0, 29, Short.MAX_VALUE)
         );
 
-        jPanel3.add(panelImage9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 70, 70));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.ipady = 29;
+        gridBagConstraints.insets = new java.awt.Insets(30, 30, 30, 30);
+        jPanel3.add(panelImage9, gridBagConstraints);
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel5.setPreferredSize(new java.awt.Dimension(1140, 520));
+        jPanel5.setPreferredSize(new java.awt.Dimension(1140, 572));
+        jPanel5.setRequestFocusEnabled(false);
         jPanel5.setLayout(new java.awt.GridBagLayout());
 
         javax.swing.GroupLayout panelImage1Layout = new javax.swing.GroupLayout(panelImage1);
         panelImage1.setLayout(panelImage1Layout);
         panelImage1Layout.setHorizontalGroup(
             panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 301, Short.MAX_VALUE)
+            .addGap(0, 595, Short.MAX_VALUE)
         );
         panelImage1Layout.setVerticalGroup(
             panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 315, Short.MAX_VALUE)
+            .addGap(0, 592, Short.MAX_VALUE)
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 301;
-        gridBagConstraints.ipady = 315;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(100, 100, 100, 100);
+        gridBagConstraints.ipadx = 595;
+        gridBagConstraints.ipady = 592;
+        gridBagConstraints.insets = new java.awt.Insets(50, 50, 50, 50);
         jPanel5.add(panelImage1, gridBagConstraints);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1358, Short.MAX_VALUE)
+            .addGap(0, 1372, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap()))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGap(10, 10, 10)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 672, Short.MAX_VALUE)
+            .addGap(0, 768, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
@@ -590,7 +675,7 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE))
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 642, Short.MAX_VALUE))
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addContainerGap()))
         );
@@ -614,6 +699,8 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jplDocentesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplDocentesMouseClicked
+        isDocentesClicked = true;
+
         JLabel[] labelsBlancos = {jLabel6, jLabel7, jLabel8, jLabel9, jLabel11, jLabel12, jLabel13, jLabel4, jLabel5};
         for (JLabel label : labelsBlancos) {
             label.setForeground(Color.white);
@@ -621,12 +708,12 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
         JPanel[] panelsCianOscuro = {jplEstudiantes, jplMaterias, jplMalla, jplCurso, jplMatricula, jplPeriodoAcademico};
         for (JPanel panel : panelsCianOscuro) {
-            panel.setBackground(new Color(0, 153, 153));
+            panel.setBackground(new Color(0, 204, 204));
         }
 
         jplDocentes.setBackground(Color.WHITE);
-        jLabel2.setForeground(Color.black);
-        jLabel3.setForeground(Color.black);
+        jLabel2.setForeground(Color.blue);
+        jLabel3.setForeground(Color.blue);
 
         FrmDocente frmDocente = new FrmDocente();
         JPanel panelDocente = frmDocente.getJPanel1();
@@ -637,6 +724,8 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jplDocentesMouseClicked
 
     private void jplEstudiantesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplEstudiantesMouseClicked
+        isEstudiantesClicked = true;
+
         JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel8, jLabel9, jLabel11, jLabel12, jLabel13, jLabel4, jLabel5};
         for (JLabel label : labelsBlancos) {
             label.setForeground(Color.white);
@@ -644,12 +733,12 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
         JPanel[] panelsCianOscuro = {jplDocentes, jplMaterias, jplMalla, jplCurso, jplMatricula, jplPeriodoAcademico};
         for (JPanel panel : panelsCianOscuro) {
-            panel.setBackground(new Color(0, 153, 153));
+            panel.setBackground(new Color(0, 204, 204));
         }
 
         jplEstudiantes.setBackground(Color.WHITE);
-        jLabel6.setForeground(Color.black);
-        jLabel7.setForeground(Color.black);
+        jLabel6.setForeground(Color.blue);
+        jLabel7.setForeground(Color.blue);
 
         FrmEstudiante frmEstudiante = new FrmEstudiante();
         JPanel panelDocente = frmEstudiante.getJPanel1();
@@ -660,6 +749,8 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jplEstudiantesMouseClicked
 
     private void jplMateriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMateriasMouseClicked
+        isMateriasClicked = true;
+
         JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7, jLabel11, jLabel12, jLabel13, jLabel4, jLabel5};
         for (JLabel label : labelsBlancos) {
             label.setForeground(Color.white);
@@ -667,12 +758,12 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
         JPanel[] panelsCianOscuro = {jplDocentes, jplEstudiantes, jplMalla, jplCurso, jplMatricula, jplPeriodoAcademico};
         for (JPanel panel : panelsCianOscuro) {
-            panel.setBackground(new Color(0, 153, 153));
+            panel.setBackground(new Color(0, 204, 204));
         }
 
         jplMaterias.setBackground(Color.WHITE);
-        jLabel8.setForeground(Color.black);
-        jLabel9.setForeground(Color.black);
+        jLabel8.setForeground(Color.blue);
+        jLabel9.setForeground(Color.blue);
 
         FrmMateria frmMateria = new FrmMateria();
         JPanel panelMateria = frmMateria.getJPanel1();
@@ -683,6 +774,8 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jplMateriasMouseClicked
 
     private void jplCursoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplCursoMouseClicked
+        isCursoClicked = true;
+
         JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7, jLabel8, jLabel9, jLabel12, jLabel13, jLabel4, jLabel5};
         for (JLabel label : labelsBlancos) {
             label.setForeground(Color.white);
@@ -690,11 +783,11 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
         JPanel[] panelsCianOscuro = {jplDocentes, jplEstudiantes, jplMaterias, jplMalla, jplMatricula, jplPeriodoAcademico};
         for (JPanel panel : panelsCianOscuro) {
-            panel.setBackground(new Color(0, 153, 153));
+            panel.setBackground(new Color(0, 204, 204));
         }
 
         jplCurso.setBackground(Color.WHITE);
-        jLabel11.setForeground(Color.black);
+        jLabel11.setForeground(Color.blue);
 
         FrmCurso frmCurso = new FrmCurso();
         JPanel panelCurso = frmCurso.getJPanel1();
@@ -705,6 +798,8 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jplCursoMouseClicked
 
     private void jplMallaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMallaMouseClicked
+        isMallaClicked = true;
+
         JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7, jLabel8, jLabel9, jLabel11, jLabel13, jLabel4, jLabel5};
         for (JLabel label : labelsBlancos) {
             label.setForeground(Color.white);
@@ -712,11 +807,11 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
         JPanel[] panelsCianOscuro = {jplDocentes, jplEstudiantes, jplMaterias, jplCurso, jplMatricula, jplPeriodoAcademico};
         for (JPanel panel : panelsCianOscuro) {
-            panel.setBackground(new Color(0, 153, 153));
+            panel.setBackground(new Color(0, 204, 204));
         }
 
         jplMalla.setBackground(Color.WHITE);
-        jLabel12.setForeground(Color.black);
+        jLabel12.setForeground(Color.blue);
 
         FrmMalla frmMalla = new FrmMalla();
         JPanel panelMalla = frmMalla.getJPanel1();
@@ -727,6 +822,8 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jplMallaMouseClicked
 
     private void jplMatriculaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMatriculaMouseClicked
+        isMatriculaClicked = true;
+
         JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7, jLabel8, jLabel9, jLabel11, jLabel12, jLabel4, jLabel5};
         for (JLabel label : labelsBlancos) {
             label.setForeground(Color.white);
@@ -734,11 +831,11 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
         JPanel[] panelsCianOscuro = {jplDocentes, jplEstudiantes, jplMaterias, jplCurso, jplMalla, jplPeriodoAcademico};
         for (JPanel panel : panelsCianOscuro) {
-            panel.setBackground(new Color(0, 153, 153));
+            panel.setBackground(new Color(0, 204, 204));
         }
 
         jplMatricula.setBackground(Color.WHITE);
-        jLabel13.setForeground(Color.black);
+        jLabel13.setForeground(Color.blue);
 
         FrmMatricula frmMatricula = new FrmMatricula();
         JPanel panelDocente = frmMatricula.getJPanel1();
@@ -749,6 +846,8 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jplMatriculaMouseClicked
 
     private void jplPeriodoAcademicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplPeriodoAcademicoMouseClicked
+        isPeriodoAcademicoClicked = true;
+
         JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7, jLabel8, jLabel9, jLabel11, jLabel12, jLabel13};
         for (JLabel label : labelsBlancos) {
             label.setForeground(Color.white);
@@ -756,12 +855,12 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
         JPanel[] panelsCianOscuro = {jplDocentes, jplEstudiantes, jplMaterias, jplCurso, jplMalla, jplMatricula};
         for (JPanel panel : panelsCianOscuro) {
-            panel.setBackground(new Color(0, 153, 153));
+            panel.setBackground(new Color(0, 204, 204));
         }
 
         jplPeriodoAcademico.setBackground(Color.WHITE);
-        jLabel4.setForeground(Color.black);
-        jLabel5.setForeground(Color.black);
+        jLabel4.setForeground(Color.blue);
+        jLabel5.setForeground(Color.blue);
 
         FrmPeriodoAcademico frmPeriodo = new FrmPeriodoAcademico(null, true);
         JPanel panelDocente = frmPeriodo.getJPanel1();
@@ -775,6 +874,112 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         new FrmIniciarSesion().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jplSalirMouseClicked
+
+    private void jplDocentesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplDocentesMouseEntered
+        if (!isDocentesClicked) {
+            jplDocentes.setBackground(Color.WHITE);
+            jLabel2.setForeground(Color.blue);
+            jLabel3.setForeground(Color.blue);
+        }
+    }//GEN-LAST:event_jplDocentesMouseEntered
+
+    private void jplDocentesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplDocentesMouseExited
+        if (!isDocentesClicked) {
+            jplDocentes.setBackground(new Color(0, 204, 204));
+            jLabel2.setForeground(Color.black);
+            jLabel3.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_jplDocentesMouseExited
+
+    private void jplEstudiantesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplEstudiantesMouseEntered
+        if (!isEstudiantesClicked) {
+            jplEstudiantes.setBackground(Color.WHITE);
+            jLabel6.setForeground(Color.blue);
+            jLabel7.setForeground(Color.blue);
+        }
+    }//GEN-LAST:event_jplEstudiantesMouseEntered
+
+    private void jplEstudiantesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplEstudiantesMouseExited
+        if (!isEstudiantesClicked) {
+            jplEstudiantes.setBackground(new Color(0, 204, 204));
+            jLabel6.setForeground(Color.black);
+            jLabel7.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_jplEstudiantesMouseExited
+
+    private void jplMateriasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMateriasMouseEntered
+        if (!isMateriasClicked) {
+            jplMaterias.setBackground(Color.WHITE);
+            jLabel8.setForeground(Color.blue);
+            jLabel9.setForeground(Color.blue);
+        }
+    }//GEN-LAST:event_jplMateriasMouseEntered
+
+    private void jplMateriasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMateriasMouseExited
+        if (!isMateriasClicked) {
+            jplMaterias.setBackground(new Color(0, 204, 204));
+            jLabel8.setForeground(Color.black);
+            jLabel9.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_jplMateriasMouseExited
+
+    private void jplCursoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplCursoMouseEntered
+        if (!isCursoClicked) {
+            jplCurso.setBackground(Color.WHITE);
+            jLabel11.setForeground(Color.blue);
+        }
+    }//GEN-LAST:event_jplCursoMouseEntered
+
+    private void jplCursoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplCursoMouseExited
+        if (!isCursoClicked) {
+            jplCurso.setBackground(new Color(0, 204, 204));
+            jLabel11.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_jplCursoMouseExited
+
+    private void jplMallaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMallaMouseEntered
+        if (!isMallaClicked) {
+            jplMalla.setBackground(Color.WHITE);
+            jLabel12.setForeground(Color.blue);
+        }
+    }//GEN-LAST:event_jplMallaMouseEntered
+
+    private void jplMallaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMallaMouseExited
+        if (!isMallaClicked) {
+            jplMalla.setBackground(new Color(0, 204, 204));
+            jLabel12.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_jplMallaMouseExited
+
+    private void jplMatriculaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMatriculaMouseEntered
+        if (!isMatriculaClicked) {
+            jplMatricula.setBackground(Color.WHITE);
+            jLabel13.setForeground(Color.blue);
+        }
+    }//GEN-LAST:event_jplMatriculaMouseEntered
+
+    private void jplMatriculaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMatriculaMouseExited
+        if (!isMatriculaClicked) {
+            jplMatricula.setBackground(new Color(0, 204, 204));
+            jLabel13.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_jplMatriculaMouseExited
+
+    private void jplPeriodoAcademicoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplPeriodoAcademicoMouseEntered
+        if (!isPeriodoAcademicoClicked) {
+            jplPeriodoAcademico.setBackground(Color.WHITE);
+            jLabel4.setForeground(Color.blue);
+            jLabel5.setForeground(Color.blue);
+        }
+    }//GEN-LAST:event_jplPeriodoAcademicoMouseEntered
+
+    private void jplPeriodoAcademicoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplPeriodoAcademicoMouseExited
+        if (!isPeriodoAcademicoClicked) {
+            jplPeriodoAcademico.setBackground(new Color(0, 204, 204));
+            jLabel4.setForeground(Color.black);
+            jLabel5.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_jplPeriodoAcademicoMouseExited
 
     /**
      * @param args the command line arguments
