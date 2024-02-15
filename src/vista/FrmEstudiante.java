@@ -52,7 +52,6 @@ public class FrmEstudiante extends javax.swing.JFrame {
         cbxBusqueda.setVisible(false);
         ec.setEstudiante(null);
         ec.setEstudiantes(new LinkedList<Estudiante>());
-        cargarTabla();
         table.clearSelection();
     }
     
@@ -60,6 +59,7 @@ public class FrmEstudiante extends javax.swing.JFrame {
         et.setAutos(ec.getEstudiantes());
         table.setModel(et);
         table.updateUI();
+        System.out.println(ec.getEstudiantes().print());
     }
     
     private void busqueda(String metodo) throws Exception {    
@@ -159,8 +159,7 @@ public class FrmEstudiante extends javax.swing.JFrame {
                         try {
                             Integer idE = pc.save();
                             ec.getEstudiante().setId(idE);
-                            System.out.println("-->" + ec.guardar());
-                            
+                            ec.guardar();
                             limpiar();
                             JOptionPane.showMessageDialog(null, "Se ha guardado Correctamente");
                             ec.setEstudiante(null); 
