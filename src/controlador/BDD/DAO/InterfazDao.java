@@ -12,7 +12,7 @@ public interface InterfazDao<T> {
      * @param obj Objeto del modelo
      * @return El id generado producto del guardado
      */
-    public Integer guardar(T obj) throws Exception;
+    public void guardarEyD(T obj) throws Exception;
     /**
      * Permite modificar los datos en un repositorio de datos
      * @param obj Objeto a modificar     

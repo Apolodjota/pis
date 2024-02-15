@@ -4,9 +4,12 @@
  */
 package controladores;
 import controlador.BDD.DAO.AdaptadorDao;
+import controlador.BDD.DAO.Conexion;
 import controlador.TDALista.LinkedList;
 import controlador.TDALista.exceptions.VacioException;
 import controlador.listas.DAO.DataAccesObject;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import modelo.Estudiante;
 
 /**
@@ -23,7 +26,7 @@ public class EstudianteControlador extends AdaptadorDao<Estudiante>{
 
     public LinkedList <Estudiante> getEstudiantes() {
         if (estudiantes.isEmpty())
-            estudiantes = listar();
+            estudiantes = listarEyD();
         return estudiantes;
     }
 
@@ -41,8 +44,8 @@ public class EstudianteControlador extends AdaptadorDao<Estudiante>{
         this.estudiante = estudiante;
     }
     
-    public Integer guardar() throws Exception{
-        return guardar(estudiante);
+    public void guardar() throws Exception{
+        guardarEyD(estudiante);
     }
     
     public void update() throws Exception{
@@ -59,6 +62,34 @@ public class EstudianteControlador extends AdaptadorDao<Estudiante>{
         Estudiante estudent[] = lista.toArray();
         LinkedList <Estudiante> a = ordenarQuickSort(estudent, type, atribute, 0, lista.getSize()-1);
         return a;
+    }
+    
+    public LinkedList <Estudiante> listarEyD (){
+        LinkedList <Estudiante> lista = new LinkedList<>();
+        try {
+            Statement stmt = new Conexion().getConnection().createStatement();
+            String query = "SELECT * FROM estudiante JOIN persona using (id)";
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()) {
+                Estudiante e = new Estudiante();
+                e.setId(rs.getInt(1));
+                e.setTitulo_bachiller(rs.getString(2));
+                e.setTrabaja(rs.getString(3));
+                e.setId_rol(rs.getInt(4));
+                e.setCedula(rs.getString(5));
+                e.setNombres(rs.getString(6));
+                e.setApellidos(rs.getString(7));
+                e.setGenero(rs.getString(8));
+                e.setFechaNacimiento(rs.getDate(9));
+                e.setTelefonoCasa(rs.getString(10));
+                e.setTelefonoCelular(rs.getString(11));
+                e.setDireccionResidencia(rs.getString(12));
+                lista.add(e);
+            }
+        } catch (Exception e) {
+            System.out.println("error" + e.getMessage());
+        }
+        return lista;
     }
     
     
