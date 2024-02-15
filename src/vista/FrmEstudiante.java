@@ -2,9 +2,13 @@ package vista;
 import controladores.EstudianteControlador;
 import controlador.TDALista.LinkedList;
 import controlador.TDALista.exceptions.VacioException;
+import controladores.PersonaController;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import modelo.Estudiante;
+import modelo.Persona;
 import vista.Util.Util;
 import vista.tablas.EstudianteModeloTabla;
 
@@ -13,7 +17,7 @@ import vista.tablas.EstudianteModeloTabla;
  * @author Asus
  */
 public class FrmEstudiante extends javax.swing.JFrame {
-
+    private PersonaController pc = new PersonaController();
     private EstudianteControlador ec = new EstudianteControlador();
     private EstudianteModeloTabla et = new EstudianteModeloTabla(ec.getEstudiantes());
     private Integer fila = -1;
@@ -39,7 +43,7 @@ public class FrmEstudiante extends javax.swing.JFrame {
     
     private void limpiar(){
         cargarTabla();
-        txtapellidos.setText("");
+        txtApellido.setText("");
         txtDireccionResidencia.setText("");
         txtCelular.setText("");
         txtdni.setText("");
@@ -84,7 +88,7 @@ public class FrmEstudiante extends javax.swing.JFrame {
     }
 
     private Boolean validar (){
-        return !txtapellidos.getText().trim().isEmpty() &&
+        return !txtApellido.getText().trim().isEmpty() &&
                 !txtDireccionResidencia.getText().trim().isEmpty() &&
                 !txtdni.getText().trim().isEmpty() &&
                 !txtnombres.getText().trim().isEmpty() &&
@@ -101,7 +105,7 @@ public class FrmEstudiante extends javax.swing.JFrame {
         } else {
             try {
                 ec.setEstudiante(et.getAutos().get(fila));
-                txtapellidos.setText(ec.getEstudiante().getApellidos());
+                txtApellido.setText(ec.getEstudiante().getApellidos());
                 txtnombres.setText(ec.getEstudiante().getNombres());
                 Calendar.setDate(ec.getEstudiante().getFechaNacimiento());
                 //txtEdad.setText(String.valueOf(ec.getEstudiante().getEdad()));
@@ -120,9 +124,21 @@ public class FrmEstudiante extends javax.swing.JFrame {
             
     }
     
+    private void obtenerPersona(){
+        pc.getPersona().setNombres(txtnombres.getText().toString());
+        pc.getPersona().setApellidos(txtApellido.getText().toString());
+        pc.getPersona().setCedula(txtdni.getText().toString());
+        pc.getPersona().setFechaNacimiento(Calendar.getDate());
+        pc.getPersona().setTelefonoCelular(txtCelular.getText().toString());
+        pc.getPersona().setId_rol(3);
+        pc.getPersona().setTelefonoCasa(txtTelefono.getText().toString());
+        pc.getPersona().setGenero(cbxGenero.getSelectedItem().toString());
+        pc.getPersona().setDireccionResidencia(txtDireccionResidencia.getText().toString());
+    }
+    
     private void obtenerEstudiante(){
         ec.getEstudiante().setNombres(txtnombres.getText().toString());
-        ec.getEstudiante().setApellidos(txtapellidos.getText().toString());
+        ec.getEstudiante().setApellidos(txtApellido.getText().toString());
         ec.getEstudiante().setCedula(txtdni.getText().toString());
         ec.getEstudiante().setFechaNacimiento(Calendar.getDate());
         ec.getEstudiante().setTelefonoCelular(txtCelular.getText().toString());
@@ -137,29 +153,33 @@ public class FrmEstudiante extends javax.swing.JFrame {
     private void save(){
         if (validar()) {
             try {
+                obtenerPersona();
                 obtenerEstudiante();
                     if (ec.getEstudiante().getId() == null){
-                        System.out.println("entra42");
-                        if (ec.guardar()){
-                            
+                        try {
+                            Integer idE = pc.save();
+                            ec.getEstudiante().setId(idE);
+                            ec.guardar();
                             limpiar();
                             JOptionPane.showMessageDialog(null, "Se ha guardado Correctamente");
-                            ec.setEstudiante(null);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "No se ha podido Guardar");
-                        }
-                            
+                            ec.setEstudiante(null); 
+                            pc.setPersona(null);
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, e.getMessage() + "No se ha podido Guardar");
+                        }         
                     } else {
-                        if (ec.modificar(fila)){
+                        try {
+                            ec.update();
                             limpiar();
                             JOptionPane.showMessageDialog(null, "Se ha modificado correctamente");
                             ec.setEstudiante(null);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Error no se pudo mofidicar",
+                            pc.setPersona(null);
+                        } catch (Exception e) {
+                             JOptionPane.showMessageDialog(null, "Error no se pudo mofidicar",
                                     "ERROR",
                                     JOptionPane.ERROR_MESSAGE);
-                        }            
-                    }
+                        }
+                    }                         
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "error " + e.getMessage());
             }
@@ -284,12 +304,12 @@ public class FrmEstudiante extends javax.swing.JFrame {
         jLabel39.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel39.setText("TeléfonoCasa:");
 
-        cbxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Femenino", "Masculino", "Otro" }));
+        cbxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "M" }));
 
         jLabel6.setFont(new java.awt.Font("Nimbus Sans", 1, 15)); // NOI18N
         jLabel6.setText("TituloBachiller");
 
-        cbxTrabaja.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
+        cbxTrabaja.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "T" }));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -520,7 +540,7 @@ public class FrmEstudiante extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btmSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -537,7 +557,7 @@ public class FrmEstudiante extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btmSeleccionar))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
@@ -558,7 +578,7 @@ public class FrmEstudiante extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -576,7 +596,16 @@ public class FrmEstudiante extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btmSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmSeleccionarActionPerformed
-        cargarVista();
+        //cargarVista();
+        Persona e = new Estudiante();
+        Estudiante et = new Estudiante();
+        for (Field f : Persona.class.getDeclaredFields()) {
+                System.out.println("Persona: "+f.getName());
+            }
+        for (Field f : e.getClass().getDeclaredFields()) {
+                System.out.println("Estudiante: "+f.getName());
+            }
+        
     }//GEN-LAST:event_btmSeleccionarActionPerformed
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed

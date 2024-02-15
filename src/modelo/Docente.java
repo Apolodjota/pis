@@ -36,7 +36,7 @@ public class Docente extends Persona{
     public void setTitulo_tercerNivel(String titulo_tercerNivel) {
         this.titulo_tercerNivel = titulo_tercerNivel;
     }
-
+ 
     public String getTitulo_cuartoNivel() {
         return titulo_cuartoNivel;
     }

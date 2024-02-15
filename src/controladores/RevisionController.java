@@ -20,10 +20,7 @@ public class RevisionController extends DataAccesObject<Revision>{
     public RevisionController() {
         super(Revision.class);
     }
-    
-    
-    
-    
+
     public Boolean guardar() {
         getRevision().setId(generated_id());
         return save(getRevision());
@@ -32,18 +29,6 @@ public class RevisionController extends DataAccesObject<Revision>{
     public Boolean update(int fila) {
         return update(getRevision(), fila);
     }
-
-//    public String generatedCode() {
-//        StringBuilder code = new StringBuilder();
-//        Integer length = listall().getSize() + 1;
-//        Integer pos = length.toString().length();
-//        for (int i = 0; i < (10 - pos); i++) {
-//            code.append("0");
-//        }
-//        code.append(length.toString());
-//        return code.toString();
-//    }
-
 
     public LinkedList<Revision> mergeSort(LinkedList<Revision> lista, Integer type, String field) {
         Revision[] m = lista.toArray();
@@ -67,7 +52,7 @@ public class RevisionController extends DataAccesObject<Revision>{
         Integer n = fin - ini + 1;
         Revision[] result = new Revision[n];
         while (izq <= medio && der <= fin) {
-            if (m[izq].comparar(m[der], field, type)) {
+            if (m[izq].comparar(m[der], type, field)) {
                 result[k] = m[izq];
                 izq++;
             } else {
@@ -107,10 +92,10 @@ public class RevisionController extends DataAccesObject<Revision>{
         Integer elemIzq = inicio + 1;
         Integer elemDer = fin;
         while (elemIzq <= elemDer) {
-            while (elemIzq <= fin && m[elemIzq].comparar(pivote, field, type)) {
+            while (elemIzq <= fin && m[elemIzq].comparar(pivote, type, field)) {
                 elemIzq++;
             }
-            while (elemDer > inicio && !m[elemDer].comparar(pivote, field, type)) {
+            while (elemDer > inicio && !m[elemDer].comparar(pivote, type, field)) {
                 elemDer--;
             }
             if (elemIzq < elemDer) {
@@ -166,8 +151,5 @@ public class RevisionController extends DataAccesObject<Revision>{
      */
     public void setRevisiones(LinkedList<Revision> revisiones) {
         this.revisiones = revisiones;
-    }
-    
-    
-    
+    }     
 }

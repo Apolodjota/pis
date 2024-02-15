@@ -1,6 +1,12 @@
-libs/
+lib/
 build/
 nbproject/
 build.xml
 manifest.mf
 /dist/
+private.xml
+private.properties
+build.properties
+nbproject/private/private.xml
+build/built-jar.properties
+nbproject/

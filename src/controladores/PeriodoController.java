@@ -1,16 +1,22 @@
 package controladores;
+import controlador.BDD.DAO.AdaptadorDao;
+import controlador.BDD.DAO.Conexion;
 import controlador.TDALista.LinkedList;
 import controlador.TDALista.exceptions.VacioException;
 import controlador.listas.DAO.DataAccesObject;
 import controlador.listas.DAO.TransferObject;
 import java.lang.reflect.Field;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.PeriodoAcademico;
 
 /**
  *
  * @author asus
  */
-public class PeriodoController extends DataAccesObject<PeriodoAcademico>{
+public class PeriodoController extends AdaptadorDao<PeriodoAcademico>{
     private LinkedList<PeriodoAcademico> periodos = new LinkedList<>();
     private PeriodoAcademico periodo = new PeriodoAcademico();
     private Integer index = -1;
@@ -21,9 +27,10 @@ public class PeriodoController extends DataAccesObject<PeriodoAcademico>{
 
     
     public LinkedList<PeriodoAcademico> getPeriodos() {
-        if(periodos.isEmpty())
-            periodos = listall();
-        return periodos;
+        if(periodos.isEmpty()){
+            periodos = listar();
+            //periodos = listall();
+        }return periodos;
     }
 
     public void setPeriodos(LinkedList<PeriodoAcademico> periodos) {
@@ -48,8 +55,28 @@ public class PeriodoController extends DataAccesObject<PeriodoAcademico>{
         this.index = index;
     }
 
-    public Boolean save() {
-        Integer id = generated_id();
+    private void actualizarAnterior(){
+        Integer id = 0;
+        PeriodoAcademico p = new PeriodoAcademico();
+        p.setEstado("F");
+        try { 
+            ResultSet generatedKey = new Conexion().getConnection().createStatement().executeQuery(
+                    "SELECT MAX(id) FROM PERIODOACADEMICO");
+            if (generatedKey.next())
+                id = generatedKey.getInt(1);
+            System.out.println("ID ANT: "+id);
+            p.setId(id);
+            this.update(p);
+        }catch (SQLException ex){
+            System.out.println("Al obtener id anterior: "+ex);
+        } catch (Exception ex) {
+            System.out.println("Al obtener id anterior: "+ex);
+        } 
+    }
+    
+    public Integer save() throws Exception{
+        actualizarAnterior();
+        /*Integer id = generated_id();
         if(id != 1){
             try {
                 PeriodoAcademico periodoant = getPeriodos().get(id - 2);
@@ -60,16 +87,18 @@ public class PeriodoController extends DataAccesObject<PeriodoAcademico>{
             }
         }
         this.periodo.setId(id);
-        return save(periodo);
+        return save(periodo);*/
+        return guardar(periodo);
     }
     
-    public Boolean update(Integer index) {
-        return update(periodo, index);
+    public void update(PeriodoAcademico perio) throws Exception{
+        //return update(periodo, index);
+        modificar(perio);
     }
     
     public String generatedCode() {
         StringBuilder code = new StringBuilder();
-        Integer lenght = listall().getSize() + 1;
+        Integer lenght = listar().getSize() + 1;
         Integer pos = lenght.toString().length();
         for (int i = 0; i < (10 - pos); i++) {
             code.append("0");

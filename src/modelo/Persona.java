@@ -21,6 +21,7 @@ public class Persona {
     public Persona() {
     }
 
+
     public Persona(Integer id, Integer id_rol, String nombres, String apellidos, Date fechaNacimiento, String cedula, String telefonoCasa, String telefonoCelular, String genero, String direccionResidencia) {
         this.id = id;
         this.id_rol = id_rol;
@@ -81,7 +82,8 @@ public class Persona {
     public void setTelefonoCelular(String telefonoCelular) {
         this.telefonoCelular = telefonoCelular;
     }
-
+    
+    
     public String getGenero() {
         return genero;
     }
@@ -110,6 +112,7 @@ public class Persona {
     public String toString() {
         return apellidos + " "+ nombres;
     }
+
 
     /**
      * @return the fechaNacimiento

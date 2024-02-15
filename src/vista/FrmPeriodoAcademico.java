@@ -2,8 +2,10 @@ package vista;
 
 import controladores.PeriodoController;
 import controlador.TDALista.LinkedList;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -93,38 +95,59 @@ public class FrmPeriodoAcademico extends javax.swing.JDialog {
         txtnombre.setText("Periodo Academico"+" "+fechaIni+"-"+fechaFin);
     }
     
+    private Date setearHorasCero(Date fecha){
+        fecha.setHours(00);
+        fecha.setMinutes(00);
+        fecha.setSeconds(00);
+        return fecha;
+    }
+    
     private void guardar() {
         if (validar()) {
             try {
                 verNombre();
                 pcl.getPeriodo().setNombre(txtnombre.getText());
+                /*SimpleDateFormat format = new SimpleDateFormat("dd-MM-YY 00:00:00");
+                String fecha = format.format(dtcInicio.getDate());
+                Date fec = setearHorasCero(dtcInicio.getDate());*/
                 pcl.getPeriodo().setFechaDesde(dtcInicio.getDate());
                 pcl.getPeriodo().setFechaHasta(dtcFin.getDate());
-                pcl.getPeriodo().setEstado(true);
+                pcl.getPeriodo().setEstado("T");
+                //pcl.getPeriodo().setEstado(true);
                 if (pcl.getPeriodo().getId() == null) {
-                    if (pcl.save()) {
+                    try {
+                        Integer id = pcl.save();
+                        System.out.println("ID: "+id);
                         limpiar();
                         JOptionPane.showMessageDialog(null, 
                                 "Se ha guardado correctamente", "Ok", 
                                 JOptionPane.INFORMATION_MESSAGE);   
-                    } else {
-                    JOptionPane.showMessageDialog(null, 
-                            "No se ha podido guardar correctamente", 
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, 
+                            "No se pudo guardar: "+e, 
                             "Error", 
                             JOptionPane.ERROR_MESSAGE);
-                } 
+                        e.printStackTrace();
+                    }
+                    /*if (pcl.save()) {   
+                    } else {
+                    }*/ 
             } else {
-                    if (pcl.update(pcl.getIndex())) {
+                    try {
+                        pcl.update(pcl.getPeriodo());
                         limpiar();
                         JOptionPane.showMessageDialog(null, 
-                                "Se ha editado correctamente", "Ok", 
+                                "Se ha actualizado correctamente", "Ok", 
                                 JOptionPane.INFORMATION_MESSAGE);   
-                    } else {
-                    JOptionPane.showMessageDialog(null, 
-                            "No se ha podido editar correctamente", 
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, 
+                            "No se pudo actualizar: "+e, 
                             "Error", 
                             JOptionPane.ERROR_MESSAGE);
-                }  
+                    }
+                    /*if (pcl.update(pcl.getIndex())) {
+                    } else {
+                    }*/  
                }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, 
@@ -222,7 +245,7 @@ public class FrmPeriodoAcademico extends javax.swing.JDialog {
             }
         });
         jPanel3.add(btnCancelar);
-        btnCancelar.setBounds(370, 150, 75, 23);
+        btnCancelar.setBounds(370, 150, 76, 23);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Recuerde que al generarse un nuevo periodo, el existente quedará en desuso.");
@@ -292,7 +315,7 @@ public class FrmPeriodoAcademico extends javax.swing.JDialog {
             }
         });
         jPanel5.add(btnSeleccionar);
-        btnSeleccionar.setBounds(1000, 160, 90, 23);
+        btnSeleccionar.setBounds(1000, 160, 91, 23);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("Valor:");

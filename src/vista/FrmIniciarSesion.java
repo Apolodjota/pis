@@ -205,7 +205,9 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
         String clave = String.valueOf(txtClave.getPassword());
         try {
             Integer idCuentaCorreo = rc.obtenerIdPorCorreo(rc.getCuentas(), correo);
+            System.out.println("ID cuenta correo: "+idCuentaCorreo);
             Integer idCuentaClave = rc.obtenerIdPorClave(rc.getCuentas(), clave);
+            System.out.println("ID cuenta clave: "+idCuentaClave);
             if (idCuentaCorreo == idCuentaClave && idCuentaCorreo != -1) {
                 Integer idPersona = rc.getCuentas().get(idCuentaCorreo).getId_persona();
                 Integer idRol = persona.getId_rol();
