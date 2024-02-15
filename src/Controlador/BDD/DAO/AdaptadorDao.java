@@ -45,18 +45,18 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
     public Integer guardar(T obj) throws Exception {
         //INSERT INTO <TABLA> (..) value (...)
         String query = queryInsert(obj);
-        System.out.println("En insert: "+query);
-        //Integer idGenerado = -1;
+        System.out.println("Sentencia: "+query);
         Integer idGenerado = -1;
         PreparedStatement statement
                 = conexion.getConnection().prepareStatement(query,
                         Statement.RETURN_GENERATED_KEYS);
         statement.executeUpdate();
-        ResultSet generatedKeys = statement.getGeneratedKeys();
-        if (generatedKeys.next()) {
-            idGenerado = generatedKeys.getInt(1);
+        //ResultSet generatedKeys = statement.getGeneratedKeys();
+        ResultSet generatedKey = conexion.getConnection().createStatement().executeQuery(
+                "SELECT "+ obj.getClass().getSimpleName().toUpperCase()+"_SEQ.CURRVAL FROM dual");
+        if (generatedKey.next()) {
+            idGenerado = generatedKey.getInt(1);
         }
-
         conexion.getConnection().close();
         conexion.setConnection(null);
         return idGenerado;
@@ -96,6 +96,7 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
     @Override
     public void modificar(T obj) throws Exception {
         String query = queryUpdate(obj);
+        System.out.println("Sentencia: "+query);
         Statement st = conexion.getConnection().createStatement();
         st.executeUpdate(query);
         conexion.getConnection().close();
@@ -107,7 +108,6 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
      */
     @Override
     public LinkedList<T> listar() {
-
         LinkedList<T> lista = new LinkedList<>();
         try {
             Statement stmt = conexion.getConnection().createStatement();
@@ -276,11 +276,12 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
                     query += entry.getValue() + ", ";
                 }
                 if (entry.getValue().getClass().getSimpleName().equalsIgnoreCase("Date")) {
-                    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                    query += '"' + formato.format(entry.getValue()) + '"' + ", ";
+                    SimpleDateFormat formato = new SimpleDateFormat("dd-MM-YY");
+                    //SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                    query += "'" + formato.format(entry.getValue()) + "'" + ", ";
                 }
                 if (entry.getValue().getClass().isEnum() || entry.getValue().getClass().getSimpleName().equalsIgnoreCase("String")) {
-                    query += '"' + entry.getValue().toString() + '"' + ", ";
+                    query += "'" + entry.getValue().toString() + "'" + ", ";
                 }
             }
 

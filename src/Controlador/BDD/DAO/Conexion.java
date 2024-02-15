@@ -19,8 +19,8 @@ public class Conexion {
     public String database = "XE";
 
     // Host
-    public String hostname = "localhost";
-
+    public String hostname = "localhost";//"192.168.56.1"
+    
     // Puerto
     public String port = "1521";//1521...3306
 
@@ -29,14 +29,15 @@ public class Conexion {
     //public String url = "jdbc:mysql://" + hostname + ":" + port + "/" + database + "?useSSL=false";//"jdbc:oracle:thin:@"+hostname+":"+port+":"+database;
 
     // Nombre de usuario
-    public String username = "pis";
+    public String username = "PIS";
+    //public String username = "BASEPIS";
 
     // Clave de usuario
-    public String password = "gerardo";
+    public String password = "pis";
+    //public String password = "basepis";
 
     private Connection conectar() {
         Connection conn = null;
-
         try {
             Class.forName(driver);
             conn = DriverManager.getConnection(url, username, password);

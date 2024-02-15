@@ -33,16 +33,16 @@ public class ModeloTablaMatricula extends AbstractTableModel{
             Matricula matricula = getMatriculas().get(rowIndex);
             Estudiante estudiante = ec.getEstudiantes().get(matricula.getId_estudiante() - 1);
             PeriodoAcademico periodo = pc.getPeriodos().getLast();
-            String estado = (matricula.getGratuidad()== true) ? "Conservada" : "Retirada";
+            //String estado = (matricula.getGratuidad()== true) ? "Conservada" : "Retirada";
             switch (columnIndex) {
                 case 0:
-                    return (matricula != null) ? matricula.getCodigo() : "";
+                    return (matricula != null) ? matricula.getId() : "";
                 case 1:
                     return (matricula != null) ? periodo.getNombre() : "";   
                 case 2:
                     return (matricula != null) ? estudiante.toString(): "";   
                 case 3:
-                    return (matricula != null) ? estado: ""; 
+                    //return (matricula != null) ? estado: ""; 
                 default:
                     return null;
             }
@@ -56,13 +56,13 @@ public class ModeloTablaMatricula extends AbstractTableModel{
     public String getColumnName(int column) {
         switch (column) {
             case 0:
-                return "Código";
+                return "Num. Matricula";
             case 1:
                 return "Periodo";  
             case 2:
                 return "Estudiante";  
-            case 3:
-                return "Estado";
+            /*case 3:
+                return "Estado";*/
             default:
                 return null;
         }

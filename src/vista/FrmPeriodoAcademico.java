@@ -116,7 +116,8 @@ public class FrmPeriodoAcademico extends javax.swing.JDialog {
                 //pcl.getPeriodo().setEstado(true);
                 if (pcl.getPeriodo().getId() == null) {
                     try {
-                        pcl.save();
+                        Integer id = pcl.save();
+                        System.out.println("ID: "+id);
                         limpiar();
                         JOptionPane.showMessageDialog(null, 
                                 "Se ha guardado correctamente", "Ok", 
