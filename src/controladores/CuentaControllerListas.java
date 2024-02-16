@@ -1,5 +1,6 @@
 package controladores;
 
+import controlador.BDD.DAO.AdaptadorDao;
 import controlador.TDALista.LinkedList;
 import controlador.listas.DAO.DataAccesObject;
 import controlador.Utilidades.Utilidades;
@@ -12,7 +13,7 @@ import modelo.Persona;
  *
  * @author alexg
  */
-public class CuentaControllerListas extends DataAccesObject<Cuenta> {
+public class CuentaControllerListas extends AdaptadorDao<Cuenta> {
 
     private LinkedList<Cuenta> cuentas = new LinkedList<>();
     private Cuenta cuenta = new Cuenta();
@@ -27,7 +28,7 @@ public class CuentaControllerListas extends DataAccesObject<Cuenta> {
      */
     public LinkedList<Cuenta> getCuentas() {
         if (cuentas.isEmpty()) {
-            cuentas = listall();
+            cuentas = listar();
         }
         return cuentas;
     }
@@ -70,18 +71,17 @@ public class CuentaControllerListas extends DataAccesObject<Cuenta> {
         this.index = index;
     }
 
-    public Boolean save() {
-        this.cuenta.setId(generated_id());
-        return save(cuenta);
+    public void save() {
+        guardar(cuenta);
     }
 
-    public Boolean update(Integer index) {
-        return update(cuenta, index);
+    public void update(Integer index) throws Exception{
+        modificar(cuenta);
     }
 
     public String generatedCode() {
         StringBuilder code = new StringBuilder();
-        Integer lenght = listall().getSize() + 1;
+        Integer lenght = listar().getSize() + 1;
         Integer pos = lenght.toString().length();
         for (int i = 0; i < (10 - pos); i++) {
             code.append("0");
@@ -216,7 +216,6 @@ public class CuentaControllerListas extends DataAccesObject<Cuenta> {
         cc.getCuenta().setId(1);
         cc.getCuenta().setCorreo("apolo");
         cc.getCuenta().setClave("123");
-        cc.getCuenta().setEstado(true);
         cc.getCuenta().setId_persona(1);
 //        cc.getCuenta().setId_rol(2);
         cc.save();
@@ -224,7 +223,6 @@ public class CuentaControllerListas extends DataAccesObject<Cuenta> {
         cc.getCuenta().setId(2);
         cc.getCuenta().setCorreo("admin@gmail.com");
         cc.getCuenta().setClave("2004");
-        cc.getCuenta().setEstado(true);
         cc.getCuenta().setId_persona(2);
 //        cc.getCuenta().setId_rol(1);
         cc.save();        
@@ -232,7 +230,6 @@ public class CuentaControllerListas extends DataAccesObject<Cuenta> {
         cc.getCuenta().setId(3);
         cc.getCuenta().setCorreo("ger");
         cc.getCuenta().setClave("456");
-        cc.getCuenta().setEstado(true);
         cc.getCuenta().setId_persona(3);
 //        cc.getCuenta().setId_rol(3);
         cc.save();         

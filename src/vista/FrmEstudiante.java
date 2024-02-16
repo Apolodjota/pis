@@ -2,6 +2,7 @@ package vista;
 import controladores.EstudianteControlador;
 import controlador.TDALista.LinkedList;
 import controlador.TDALista.exceptions.VacioException;
+import controladores.CuentaControllerListas;
 import controladores.PersonaController;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -18,6 +19,7 @@ import vista.tablas.EstudianteModeloTabla;
  * @author Asus
  */
 public class FrmEstudiante extends javax.swing.JFrame {
+    private CuentaControllerListas cc = new CuentaControllerListas();
     private PersonaController pc = new PersonaController();
     private EstudianteControlador ec = new EstudianteControlador();
     private EstudianteModeloTabla et = new EstudianteModeloTabla(ec.getEstudiantes());
@@ -125,6 +127,13 @@ public class FrmEstudiante extends javax.swing.JFrame {
             
     }
     
+    private void registrarCuenta(Integer id){
+        cc.getCuenta().setId_persona(id);
+        cc.getCuenta().setEstado("T");
+        cc.getCuenta().setCorreo(""+ec.getEstudiante().getNombres().trim()+ec.getEstudiante().getApellidos().trim()+"@unl.com.ec");
+        cc.getCuenta().setClave(ec.getEstudiante().getCedula().trim());
+    }
+    
     private void obtenerPersona()throws Exception{
         pc.getPersona().setNombres(txtnombres.getText().toString());
         pc.getPersona().setApellidos(txtApellido.getText().toString());
@@ -160,7 +169,9 @@ public class FrmEstudiante extends javax.swing.JFrame {
                         try {
                             Integer idE = pc.save();
                             ec.getEstudiante().setId(idE);
-                            ec.guardar();
+                            registrarCuenta(idE);
+                            ec.guardar();                            
+                            cc.save();
                             limpiar();
                             JOptionPane.showMessageDialog(null, "Se ha guardado Correctamente");
                             ec.setEstudiante(null); 
@@ -171,6 +182,8 @@ public class FrmEstudiante extends javax.swing.JFrame {
                     } else {
                         try {
                             ec.update();
+                            pc.getPersona().setId(ec.getEstudiante().getId());
+                            pc.update();
                             limpiar();
                             JOptionPane.showMessageDialog(null, "Se ha modificado correctamente");
                             ec.setEstudiante(null);
@@ -393,11 +406,12 @@ public class FrmEstudiante extends javax.swing.JFrame {
                             .addComponent(jLabel38)
                             .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbxNachiller, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel39)
-                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel39)
+                                .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -594,15 +608,15 @@ public class FrmEstudiante extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btmSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmSeleccionarActionPerformed
-        //cargarVista();
-        Persona e = new Estudiante();
-        Estudiante et = new Estudiante();
-        for (Field f : Persona.class.getDeclaredFields()) {
-                System.out.println("Persona: "+f.getName());
-            }
-        for (Field f : e.getClass().getDeclaredFields()) {
-                System.out.println("Estudiante: "+f.getName());
-            }
+        cargarVista();
+//        Persona e = new Estudiante();
+//        Estudiante et = new Estudiante();
+//        for (Field f : Persona.class.getDeclaredFields()) {
+//                System.out.println("Persona: "+f.getName());
+//            }
+//        for (Field f : e.getClass().getDeclaredFields()) {
+//                System.out.println("Estudiante: "+f.getName());
+//            }
         
     }//GEN-LAST:event_btmSeleccionarActionPerformed
 

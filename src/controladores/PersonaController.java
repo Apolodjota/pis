@@ -25,6 +25,10 @@ public class PersonaController extends AdaptadorDao<Persona>{
     public Integer save() throws Exception{
         return guardar(persona);
     }
+    
+    public void update() throws Exception {
+        modificar(persona);
+    }
 
     public Persona getPersona() {
         if (persona == null)
