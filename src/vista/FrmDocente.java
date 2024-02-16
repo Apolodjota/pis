@@ -1,6 +1,7 @@
 package vista;
 import controlador.TDALista.LinkedList;
 import controlador.TDALista.exceptions.VacioException;
+import controladores.CuentaControllerListas;
 import controladores.DocenteControlador;
 import controladores.PersonaController;
 import java.text.SimpleDateFormat;
@@ -18,6 +19,7 @@ import vista.tablas.DocenteModeloTabla;
  */
 
 public class FrmDocente extends javax.swing.JFrame {
+    private CuentaControllerListas cc = new CuentaControllerListas();
     private PersonaController pc = new PersonaController();
     private DocenteControlador dc = new DocenteControlador();
     private DocenteModeloTabla dt = new DocenteModeloTabla(dc.getDocentes());
@@ -121,9 +123,15 @@ public class FrmDocente extends javax.swing.JFrame {
             } catch (Exception e) {
                 System.out.println("EEORR" + e.getMessage());
             }
-            
         }
             
+    }
+    
+    private void registrarCuenta(Integer id){
+        cc.getCuenta().setId_persona(id);
+        cc.getCuenta().setEstado("T");
+        cc.getCuenta().setCorreo(""+dc.getDocente().getNombres().trim()+dc.getDocente().getApellidos().trim()+"@unl.com.ec");
+        cc.getCuenta().setClave(dc.getDocente().getCedula().trim());
     }
     
     private void obtenerPersona(){
@@ -162,6 +170,8 @@ public class FrmDocente extends javax.swing.JFrame {
                             Integer idD = pc.save();
                             dc.getDocente().setId(idD);
                             dc.guardar();
+                            registrarCuenta(idD);
+                            cc.save();
                             limpiar();
                             dc.setDocente(null); 
                             pc.setPersona(null);
