@@ -8,8 +8,10 @@ import controlador.listas.DAO.TransferObject;
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modelo.Estudiante;
 import modelo.PeriodoAcademico;
 
 /**
@@ -20,6 +22,7 @@ public class PeriodoController extends AdaptadorDao<PeriodoAcademico>{
     private LinkedList<PeriodoAcademico> periodos = new LinkedList<>();
     private PeriodoAcademico periodo = new PeriodoAcademico();
     private Integer index = -1;
+    private Conexion conexion =new Conexion();
     
     public PeriodoController() {
         super(PeriodoAcademico.class);
@@ -54,17 +57,36 @@ public class PeriodoController extends AdaptadorDao<PeriodoAcademico>{
     public void setIndex(Integer index) {
         this.index = index;
     }
-
+    
+    public PeriodoAcademico getPerioVigente(){
+        PeriodoAcademico p = new PeriodoAcademico();
+        try {
+            Statement stmt = conexion.getConnection().createStatement();
+            String query = "SELECT * FROM periodoacademico WHERE estado = 'T'";
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                p.setId(rs.getInt(1));
+                p.setNombre(rs.getString(2));
+                p.setFechaDesde(rs.getDate(3));
+                p.setFechaHasta(rs.getDate(4));
+                p.setEstado(rs.getString(5));
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        return p;
+    }
+    
     private void actualizarAnterior(){
         Integer id = 0;
         PeriodoAcademico p = new PeriodoAcademico();
         p.setEstado("F");
         try { 
-            ResultSet generatedKey = new Conexion().getConnection().createStatement().executeQuery(
+            ResultSet generatedKey = conexion.getConnection().createStatement().executeQuery(
                     "SELECT MAX(id) FROM PERIODOACADEMICO");
             if (generatedKey.next())
                 id = generatedKey.getInt(1);
-            System.out.println("ID ANT: "+id);
+            //System.out.println("ID ANT: "+id);
             p.setId(id);
             this.update(p);
         }catch (SQLException ex){
