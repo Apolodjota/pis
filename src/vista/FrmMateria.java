@@ -3,9 +3,11 @@ package vista;
 import controladores.CursoControllerListas;
 import controladores.MateriaControllerListas;
 import controlador.TDALista.LinkedList;
+import controladores.MallaControllerListas;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import modelo.Curso;
+import modelo.Malla;
 import modelo.Materia;
 import vista.listas.tablas.ModeloTablaMateriaListas;
 import vista.listas.util.UtilVista;
@@ -75,12 +77,11 @@ public class FrmMateria extends javax.swing.JFrame {
         txtBusqueda.setText("");
         mcl.setMateria(null);
         mcl.setMaterias(new LinkedList<>());
-        //cargarTabla();
+        cargarTabla();
         mcl.setMateria(null);
         mcl.setIndex(-1);
         try {
-            UtilVista.cargarCurso(cbxCurso);
-            UtilVista.cargarCurso(cbxCursoB);
+            UtilVista.cargarMalla(cbxMalla);
             txtBusqueda.setVisible(true);
             cbxCursoB.setVisible(false);
             jblTexto.setVisible(true);
@@ -90,11 +91,11 @@ public class FrmMateria extends javax.swing.JFrame {
         }
     }
 
-    /*private void cargarTabla() {
+    private void cargarTabla() {
         mtml.setMaterias(mcl.getMaterias());
         tblTabla.setModel(mtml);
         tblTabla.updateUI();
-    }*/
+    }
 
     private Boolean validar() {
         return !txtNombre.getText().trim().isEmpty();
@@ -135,24 +136,21 @@ public class FrmMateria extends javax.swing.JFrame {
                                 JOptionPane.ERROR_MESSAGE);
                     }
                 }
-        }catch (Exception e) {
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(null,
                         e.getMessage(),
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
             }
-    }
-
-    
-        else {
+        } else {
             JOptionPane.showMessageDialog(null,
-                "Llene todos los campos",
-                "Error", JOptionPane.ERROR_MESSAGE);
+                    "Llene todos los campos",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 
-}
-
-private void cargarVista() {
+    private void cargarVista() {
         mcl.setIndex(tblTabla.getSelectedRow());
         if (mcl.getIndex() < 0) {
             JOptionPane.showMessageDialog(null,
@@ -163,6 +161,8 @@ private void cargarVista() {
             try {
                 mcl.setMateria(mtml.getMaterias().get(mcl.getIndex()));
                 txtNombre.setText(mcl.getMateria().getNombre());
+                cbxMalla.setSelectedItem(UtilVista.getComboMallas(cbxMalla).getId().equals(mcl.getMateria().getId_curso()));
+                cbxCurso.setSelectedItem(mcl.getMateria().getId_curso());
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null,
                         e.getMessage(),
@@ -191,6 +191,8 @@ private void cargarVista() {
         jLabel7 = new javax.swing.JLabel();
         cbxCurso = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        cbxMalla = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblTabla = new javax.swing.JTable();
@@ -236,13 +238,12 @@ private void cargarVista() {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel3.add(btnCancelar, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 200;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
@@ -265,7 +266,36 @@ private void cargarVista() {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel3.add(jLabel7, gridBagConstraints);
 
-        cbxCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel3.add(cbxCurso, gridBagConstraints);
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel11.setText("Ciclo");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        jPanel3.add(jLabel11, gridBagConstraints);
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel12.setText("Malla:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        jPanel3.add(jLabel12, gridBagConstraints);
+
+        cbxMalla.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxMalla.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxMallaItemStateChanged(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
@@ -273,15 +303,7 @@ private void cargarVista() {
         gridBagConstraints.ipadx = 20;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel3.add(cbxCurso, gridBagConstraints);
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel11.setText("Ciclo");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        jPanel3.add(jLabel11, gridBagConstraints);
+        jPanel3.add(cbxMalla, gridBagConstraints);
 
         jPanel1.add(jPanel3, java.awt.BorderLayout.PAGE_START);
 
@@ -470,6 +492,17 @@ private void cargarVista() {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxCursoBActionPerformed
 
+    private void cbxMallaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxMallaItemStateChanged
+        Malla malla = null;
+        try {
+            malla = new MallaControllerListas().getMallas().get(UtilVista.getComboMallas(cbxMalla).getId() - 1);
+            System.out.println("MALLA ID: " + malla.getId());
+            UtilVista.cargarCurso(cbxCurso, malla.getId());
+        } catch (Exception e) {
+
+        }
+    }//GEN-LAST:event_cbxMallaItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -485,27 +518,23 @@ private void cargarVista() {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmMateria.class  
+            java.util.logging.Logger.getLogger(FrmMateria.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(FrmMateria.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmMateria.class  
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(FrmMateria.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmMateria.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmMateria.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FrmMateria.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -589,7 +618,9 @@ private void cargarVista() {
     private javax.swing.JComboBox<String> cbxCriterio;
     private javax.swing.JComboBox<String> cbxCurso;
     private javax.swing.JComboBox<String> cbxCursoB;
+    private javax.swing.JComboBox<String> cbxMalla;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
