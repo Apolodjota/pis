@@ -1,7 +1,10 @@
 package modelo;
 import controlador.TDALista.LinkedList;
 import controlador.TDALista.exceptions.VacioException;
+import controladores.EstudianteControlador;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -11,7 +14,7 @@ public class Matricula {
     private Integer id;
     private Integer id_estudiante;
     private Integer id_periodoAcademico;
-
+    
     public Matricula() {
     }
 
@@ -80,5 +83,18 @@ public class Matricula {
     public void setId_estudiante(Integer id_estudiante) {
         this.id_estudiante = id_estudiante;
     }
+
+    @Override
+    public String toString() {
+        EstudianteControlador ec = new EstudianteControlador();
+        Estudiante m;
+        try {
+            m = ec.getEstudiantes().get(id_estudiante);
+            return id +" "+ m.getCedula();
+        } catch (VacioException ex) {
+            return id+" "+id_estudiante;
+        }
+    }
    
+    
 }

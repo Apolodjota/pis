@@ -182,6 +182,8 @@ public class FrmDocente extends javax.swing.JFrame {
                     } else {
                         try {
                             dc.update();
+                            pc.getPersona().setId(dc.getDocente().getId());
+                            pc.update();
                             limpiar();
                             JOptionPane.showMessageDialog(null, "Se ha modificado correctamente");
                             dc.setDocente(null);

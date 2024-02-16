@@ -255,10 +255,15 @@ public class FrmMatricula extends javax.swing.JFrame {
         txtestudiante.setEditable(false);
         txtestudiante.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         txtestudiante.setText("Seleccione...");
-        txtestudiante.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtestudiante.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtestudiante.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtestudianteMouseClicked(evt);
+            }
+        });
+        txtestudiante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtestudianteActionPerformed(evt);
             }
         });
 
@@ -403,7 +408,7 @@ public class FrmMatricula extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -466,6 +471,10 @@ public class FrmMatricula extends javax.swing.JFrame {
     private void txtestudianteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtestudianteMouseClicked
         new DlgSelecEstudiante(this, true).setVisible(true);
     }//GEN-LAST:event_txtestudianteMouseClicked
+
+    private void txtestudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtestudianteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtestudianteActionPerformed
 
     /**
      * @param args the command line arguments
