@@ -1,5 +1,6 @@
 package controladores;
 import controlador.BDD.DAO.AdaptadorDao;
+import controlador.BDD.DAO.Conexion;
 import controlador.TDALista.LinkedList;
 import controlador.TDALista.exceptions.VacioException;
 import controlador.listas.DAO.DataAccesObject;
@@ -17,6 +18,7 @@ public class MatriculaController extends AdaptadorDao<Matricula>{
     private LinkedList<Matricula> matriculas = new LinkedList<>();
     private Matricula matricula = new Matricula();
     private Integer index = -1;
+    private Conexion conexion;
     
     public MatriculaController() {
         super(Matricula.class);

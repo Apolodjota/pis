@@ -29,7 +29,7 @@ public class DlgSelecEstudiante extends javax.swing.JDialog {
     }
 
     private void cargarTabla(){
-        modelo = new EstudianteModeloTabla(ec.getEstudiantes());
+        modelo = new EstudianteModeloTabla(ec.getEstudiantesNoMatriculados());
         tblDatos.setModel(modelo);
         tblDatos.updateUI();
     }
