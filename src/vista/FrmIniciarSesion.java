@@ -59,6 +59,7 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
         panelImage10 = new org.edisoncor.gui.panel.PanelImage();
         txtClave1 = new javax.swing.JTextField();
         panelImage11 = new org.edisoncor.gui.panel.PanelImage();
+        jlabelContraseñas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Iniciar Sesion");
@@ -183,6 +184,10 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
         );
 
         panelImage1.add(panelImage11, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 409, -1, 28));
+
+        jlabelContraseñas.setFont(new java.awt.Font("Segoe UI Emoji", 2, 14)); // NOI18N
+        jlabelContraseñas.setText("Cambiar Contraseña");
+        panelImage1.add(jlabelContraseñas, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 450, -1, -1));
 
         jPanel1.add(panelImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 700));
 
@@ -335,6 +340,7 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jlabelContraseñas;
     private org.edisoncor.gui.panel.PanelImage panelImage1;
     private org.edisoncor.gui.panel.PanelImage panelImage10;
     private org.edisoncor.gui.panel.PanelImage panelImage11;

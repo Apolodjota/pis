@@ -32,9 +32,10 @@ public class ModeloTablaMatricula extends AbstractTableModel{
         try {
             Matricula matricula = getMatriculas().get(rowIndex);
             //Estudiante estudiante = ec.getEstudiantes().get(matricula.getId_estudiante() - 1);
-            System.out.println("ID estudiante: "+matricula.getId_estudiante());
+            //System.out.println("ID estudiante: "+matricula.getId_estudiante());
             Estudiante estudiante = ec.buscarEstudiante(matricula.getId_estudiante());
-            PeriodoAcademico periodo = pc.getPeriodos().getLast();
+            //PeriodoAcademico periodo = pc.getPeriodos().getLast();
+            PeriodoAcademico periodo = pc.getPerioVigente();
             //String estado = (matricula.getGratuidad()== true) ? "Conservada" : "Retirada";
             switch (columnIndex) {
                 case 0:
@@ -70,8 +71,7 @@ public class ModeloTablaMatricula extends AbstractTableModel{
         }
     }
 
-    public LinkedList<Matricula> getMatriculas() {
-        System.out.println("Ejemplo");
+    public LinkedList<Matricula> getMatriculas() {;
         return matriculas;
     }
 
