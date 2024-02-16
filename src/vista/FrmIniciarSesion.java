@@ -125,7 +125,7 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
                 buttonColoredAction1ActionPerformed(evt);
             }
         });
-        panelImage1.add(buttonColoredAction1, new org.netbeans.lib.awtextra.AbsoluteConstraints(221, 481, 162, -1));
+        panelImage1.add(buttonColoredAction1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 500, 162, -1));
 
         javax.swing.GroupLayout panelImage9Layout = new javax.swing.GroupLayout(panelImage9);
         panelImage9.setLayout(panelImage9Layout);
@@ -185,9 +185,22 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
 
         panelImage1.add(panelImage11, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 409, -1, 28));
 
-        jlabelContraseñas.setFont(new java.awt.Font("Segoe UI Emoji", 2, 14)); // NOI18N
+        jlabelContraseñas.setFont(new java.awt.Font("Harlow Solid Italic", 1, 14)); // NOI18N
+        jlabelContraseñas.setForeground(new java.awt.Color(255, 255, 255));
         jlabelContraseñas.setText("Cambiar Contraseña");
-        panelImage1.add(jlabelContraseñas, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 450, -1, -1));
+        jlabelContraseñas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jlabelContraseñas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlabelContraseñasMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jlabelContraseñasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jlabelContraseñasMouseExited(evt);
+            }
+        });
+        panelImage1.add(jlabelContraseñas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 460, -1, -1));
 
         jPanel1.add(panelImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 700));
 
@@ -296,6 +309,19 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
         panelImage11.setVisible(false);
         panelImage10.setVisible(true);
     }//GEN-LAST:event_panelImage11MouseClicked
+
+    private void jlabelContraseñasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlabelContraseñasMouseClicked
+        new FrmCambiarClave().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jlabelContraseñasMouseClicked
+
+    private void jlabelContraseñasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlabelContraseñasMouseEntered
+        jlabelContraseñas.setForeground(Color.yellow);
+    }//GEN-LAST:event_jlabelContraseñasMouseEntered
+
+    private void jlabelContraseñasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlabelContraseñasMouseExited
+        jlabelContraseñas.setForeground(Color.WHITE);
+    }//GEN-LAST:event_jlabelContraseñasMouseExited
 
     /**
      * @param args the command line arguments
