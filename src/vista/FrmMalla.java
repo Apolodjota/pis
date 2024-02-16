@@ -56,8 +56,8 @@ public class FrmMalla extends javax.swing.JFrame {
             } else if (criterio.equalsIgnoreCase("modalidad")) {
                 mtml.setMallas(mcl.buscarModalidad(mcl.getMallas(), criterio, txtBusqueda.getText()));
             } else if (criterio.equalsIgnoreCase("fecha")) {
-                String strDate = txtBusquedaFecha.getText();
                 SimpleDateFormat formatter = new SimpleDateFormat("dd / MM / yy");
+                String strDate = formatter.format(dtcBusquedaFecha.getDate());
                 Date fecha = formatter.parse(strDate);
                 mtml.setMallas(mcl.buscarFecha(mcl.getMallas(), "fecha_Creacion", fecha));
             }
@@ -77,8 +77,9 @@ public class FrmMalla extends javax.swing.JFrame {
         txtBusqueda.setText("");
         txtCodResolucion.setText("COD_R_" + mcl.generatedCode());
         txtCodResolucion.setEnabled(false);
-        txtFechaCreacion.setText(new SimpleDateFormat("dd / MM / yy").format(new Date()));
-        txtBusquedaFecha.setText("dd / MM / yy");
+        dtcBusquedaFecha.setDate(null);
+        dtcBusquedaFecha.setVisible(false);
+        dtcCreacion.setDate(null);
         cbxCriterio.setSelectedItem("NOMBRE");
         checkBoxVigente.setSelected(true);
         checkBoxVigente.setEnabled(false);
@@ -103,7 +104,8 @@ public class FrmMalla extends javax.swing.JFrame {
     }
 
     private Boolean validar() {
-        return !txtNombre.getText().trim().isEmpty();
+        return !txtNombre.getText().trim().isEmpty()
+                && !(dtcCreacion == null);
     }
 
     private void guardar() {
@@ -112,7 +114,7 @@ public class FrmMalla extends javax.swing.JFrame {
                 mcl.getMalla().setNombre(txtNombre.getText());
                 mcl.getMalla().setCod_resolucion(txtCodResolucion.getText());
                 mcl.getMalla().setModalidad(cbxModalidad.getSelectedItem().toString());
-                mcl.getMalla().setFecha_Creacion(new SimpleDateFormat("dd / MM / yy").parse(txtFechaCreacion.getText()));
+                mcl.getMalla().setFecha_Creacion(dtcCreacion.getDate());
                 mcl.getMalla().setEstado("T");
 
                 if (mcl.getMalla().getId() == null) {
@@ -139,12 +141,13 @@ public class FrmMalla extends javax.swing.JFrame {
                     }
                 } else {
                     try {
+                        mcl.update(mcl.getMalla());
                         for (int i = 1; i <= Integer.valueOf(txtCiclos.getText()); i++) {
                             ccl.getCurso().setId_malla(mcl.getMalla().getId());
                             ccl.getCurso().setCiclo(i);
                             ccl.update(ccl.getCurso());
                         }
-                        mcl.update(mcl.getMalla());
+
                         limpiar();
                         JOptionPane.showMessageDialog(null,
                                 "Se ha actualizado correctamente", "Ok",
@@ -177,10 +180,15 @@ public class FrmMalla extends javax.swing.JFrame {
                 mcl.setMalla(mtml.getMallas().get(mcl.getIndex()));
                 txtNombre.setText(mcl.getMalla().getNombre());
                 txtCodResolucion.setText(mcl.getMalla().getCod_resolucion());
-                txtFechaCreacion.setText(new SimpleDateFormat("dd / MM / yy").format(mcl.getMalla().getFecha_Creacion()));
+                dtcCreacion.setDate(mcl.getMalla().getFecha_Creacion());
                 cbxModalidad.setSelectedItem(mcl.getMalla().getModalidad());
-                checkBoxVigente.setSelected(mcl.getMalla().getEstado().equals(true));
-                checkBoxVigente.setEnabled(true);
+                if (mcl.getMalla().getEstado().equals("T")) {
+                    checkBoxVigente.setSelected(true);
+                    checkBoxVigente.setEnabled(true);
+                } else {
+                    checkBoxVigente.setSelected(false);
+                    checkBoxVigente.setEnabled(true);  
+                }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null,
                         e.getMessage(),
@@ -210,12 +218,12 @@ public class FrmMalla extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         txtCodResolucion = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        txtFechaCreacion = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         cbxModalidad = new javax.swing.JComboBox<>();
         checkBoxVigente = new javax.swing.JCheckBox();
         jLabel13 = new javax.swing.JLabel();
         txtCiclos = new javax.swing.JTextField();
+        dtcCreacion = new com.toedter.calendar.JDateChooser();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblTabla = new javax.swing.JTable();
@@ -226,7 +234,7 @@ public class FrmMalla extends javax.swing.JFrame {
         cbxCriterio = new javax.swing.JComboBox<>();
         cbxAscDesc = new javax.swing.JComboBox<>();
         btnBuscar = new javax.swing.JButton();
-        txtBusquedaFecha = new javax.swing.JTextField();
+        dtcBusquedaFecha = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -313,13 +321,6 @@ public class FrmMalla extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel3.add(jLabel11, gridBagConstraints);
 
-        txtFechaCreacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel3.add(txtFechaCreacion, gridBagConstraints);
-
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel12.setText("Estado:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -361,6 +362,11 @@ public class FrmMalla extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         jPanel3.add(txtCiclos, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel3.add(dtcCreacion, gridBagConstraints);
 
         jPanel1.add(jPanel3, java.awt.BorderLayout.PAGE_START);
 
@@ -473,17 +479,12 @@ public class FrmMalla extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel5.add(btnBuscar, gridBagConstraints);
-
-        txtBusquedaFecha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtBusquedaFecha.setText("dd / MM / yy");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 142;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel5.add(txtBusquedaFecha, gridBagConstraints);
+        gridBagConstraints.ipadx = 150;
+        jPanel5.add(dtcBusquedaFecha, gridBagConstraints);
 
         jPanel1.add(jPanel5, java.awt.BorderLayout.CENTER);
 
@@ -516,13 +517,13 @@ public class FrmMalla extends javax.swing.JFrame {
     private void cbxCriterioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCriterioItemStateChanged
         if (evt.getItem().toString().equalsIgnoreCase("NOMBRE")) {
             txtBusqueda.setVisible(true);
-            txtBusquedaFecha.setVisible(false);
+            dtcBusquedaFecha.setVisible(false);
         } else if (evt.getItem().toString().equalsIgnoreCase("MODALIDAD")) {
             txtBusqueda.setVisible(true);
-            txtBusquedaFecha.setVisible(false);
+            dtcBusquedaFecha.setVisible(false);
         } else if (evt.getItem().toString().equalsIgnoreCase("FECHA")) {
             txtBusqueda.setVisible(false);
-            txtBusquedaFecha.setVisible(true);
+            dtcBusquedaFecha.setVisible(true);
         }
     }//GEN-LAST:event_cbxCriterioItemStateChanged
 
@@ -593,6 +594,8 @@ public class FrmMalla extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxCriterio;
     private javax.swing.JComboBox<String> cbxModalidad;
     private javax.swing.JCheckBox checkBoxVigente;
+    private com.toedter.calendar.JDateChooser dtcBusquedaFecha;
+    private com.toedter.calendar.JDateChooser dtcCreacion;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -607,10 +610,8 @@ public class FrmMalla extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblTabla;
     private javax.swing.JTextField txtBusqueda;
-    private javax.swing.JTextField txtBusquedaFecha;
     private javax.swing.JTextField txtCiclos;
     private javax.swing.JTextField txtCodResolucion;
-    private javax.swing.JTextField txtFechaCreacion;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
