@@ -5,13 +5,9 @@
 package vista;
 
 import controlador.TDALista.exceptions.VacioException;
-import controladores.EstudianteControlador;
 import controladores.MatriculaController;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import modelo.Estudiante;
+import modelo.Matricula;
 import vista.listas.tablas.ModeloTablaMatricula;
-import vista.tablas.EstudianteModeloTabla;
 
 /**
  *
@@ -27,16 +23,23 @@ public class DialogSelecMatricula extends javax.swing.JDialog {
     public DialogSelecMatricula(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
+        cargarTabla();
     }
 
     private void cargarTabla(){
         tblDatos.setModel(modelo);
         tblDatos.updateUI();
     }
-    
-    public static Estudiante seleccionarEstudiante(){
-        
-        return null;
+    public void cargarMatriculas(){
+        try {
+            int fila = tblDatos.getSelectedRow();
+            Matricula mat= modelo.getMatriculas().get(fila);
+            FrmCursa.setearMatricula(mat);
+        } catch (VacioException e) {
+            System.out.println("Error: "+ e.getMessage());;
+        }
+        this.dispose();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -138,13 +141,7 @@ public class DialogSelecMatricula extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        try {
-//            int fila = tblDatos.getSelectedRow();
-//            Estudiante e= modelo.getAutos().get(fila);
-//            //FrmMatricula.setearEstudiante(e);
-//        } catch (VacioException ex) {
-//            Logger.getLogger(DialogSelecMatricula.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        cargarMatriculas();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

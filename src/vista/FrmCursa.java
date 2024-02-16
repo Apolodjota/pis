@@ -7,6 +7,7 @@ import controladores.CursoControllerListas;
 import controladores.RevisionController;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import modelo.Matricula;
 import vista.listas.tablas.ModeloTablaCursa;
 import vista.listas.util.UtilVista;
 
@@ -24,6 +25,7 @@ public class FrmCursa extends javax.swing.JFrame {
     PeriodoController pcl = new PeriodoController();
     RevisionController revC = new RevisionController();
     ModeloTablaCursa mtcc = new ModeloTablaCursa();
+    public static Matricula m;
 
     /**
      * Creates new form FrmVendedor
@@ -43,7 +45,6 @@ public class FrmCursa extends javax.swing.JFrame {
 
     private void limpiar() {
         try {
-            //UtilVista.cargarPeriodoAcademico(cbxPeriodo);
             UtilVista.cargarMateria(cbxMateria);
             UtilVista.cargarDocente(cbxDocente);
         } catch (Exception e) {
@@ -52,12 +53,9 @@ public class FrmCursa extends javax.swing.JFrame {
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
-        //cargarParalelo();
-        txtParalelo.setText("REPE");
-        txtParalelo.setEnabled(false);
+        txtMatricula.setEnabled(false);
         cbxMateria.setSelectedIndex(0);
         cbxDocente.setSelectedIndex(0);
-        //cbxPeriodo.setSelectedIndex(0);
         tbltabla.clearSelection();
         cC.setCursa(null);
         cC.setCursas(new LinkedList<>());
@@ -80,7 +78,7 @@ public class FrmCursa extends javax.swing.JFrame {
         } else {
             try {
                 cC.setCursa(mtcc.getCursas().get(cC.getIndex()));
-                txtParalelo.setText(cC.getCursa().getParalelo());
+                txtMatricula.setText(cC.getCursa().getId_matricula().toString());
                 cbxDocente.setSelectedIndex(cC.getCursa().getId_docente()- 1);
                 cbxMateria.setSelectedIndex(cC.getCursa().getId_materia()- 1);
                 //cbxPeriodo.setSelectedIndex(cC.getCursa().getId_periodo()- 1);
@@ -104,7 +102,7 @@ public class FrmCursa extends javax.swing.JFrame {
                 cC.getCursa().setId_docente(UtilVista.getComboDocentes(cbxDocente).getId());
                 cC.getCursa().setId_materia(UtilVista.getComboMateria(cbxMateria).getId());
                 //cC.getCursa().setId_periodo(UtilVista.getComboPeriodoAcademico(cbxPeriodo).getId());
-                cC.getCursa().setParalelo(txtParalelo.getText());
+                cC.getCursa().setParalelo(txtMatricula.getText());
                 cC.guardar();
                 cargarTabla();
            } catch (Exception e) {
@@ -117,6 +115,10 @@ public class FrmCursa extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,
                             "Perfecto ", "OK",
                             JOptionPane.INFORMATION_MESSAGE);
+    }
+    public static void setearMatricula(Matricula mat) {
+        m = mat;
+        txtMatricula.setText(m.toString());
     }
 
     /**
@@ -134,7 +136,7 @@ public class FrmCursa extends javax.swing.JFrame {
         panelPrincipal = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
-        txtParalelo = new javax.swing.JTextField();
+        txtMatricula = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -142,7 +144,7 @@ public class FrmCursa extends javax.swing.JFrame {
         cbxDocente = new javax.swing.JComboBox<>();
         jLabel36 = new javax.swing.JLabel();
         lblPeriodo = new javax.swing.JLabel();
-        txtParalelo1 = new javax.swing.JTextField();
+        txtParalelo = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbltabla = new javax.swing.JTable();
@@ -166,18 +168,21 @@ public class FrmCursa extends javax.swing.JFrame {
         jLabel31.setText("Paralelo:");
         jPanel6.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, 94, -1));
 
-        txtParalelo.setEditable(false);
-        txtParalelo.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtMatricula.setEditable(false);
+        txtMatricula.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        txtMatricula.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtMatricula.setText("Seleccione");
+        txtMatricula.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtParaleloMouseClicked(evt);
+                txtMatriculaMouseClicked(evt);
             }
         });
-        txtParalelo.addActionListener(new java.awt.event.ActionListener() {
+        txtMatricula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtParaleloActionPerformed(evt);
+                txtMatriculaActionPerformed(evt);
             }
         });
-        jPanel6.add(txtParalelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 125, -1));
+        jPanel6.add(txtMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 125, -1));
 
         jLabel33.setBackground(new java.awt.Color(204, 204, 255));
         jLabel33.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -230,13 +235,13 @@ public class FrmCursa extends javax.swing.JFrame {
         lblPeriodo.setText("Matrícula:");
         jPanel6.add(lblPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, -1, -1));
 
-        txtParalelo1.setEditable(false);
-        txtParalelo1.addActionListener(new java.awt.event.ActionListener() {
+        txtParalelo.setEditable(false);
+        txtParalelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtParalelo1ActionPerformed(evt);
+                txtParaleloActionPerformed(evt);
             }
         });
-        jPanel6.add(txtParalelo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, 125, -1));
+        jPanel6.add(txtParalelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, 125, -1));
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registros Existentes:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tw Cen MT", 1, 14))); // NOI18N
 
@@ -332,9 +337,9 @@ public class FrmCursa extends javax.swing.JFrame {
         guardar();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void txtParaleloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtParaleloActionPerformed
+    private void txtMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatriculaActionPerformed
         //LLLamadi a dialoj
-    }//GEN-LAST:event_txtParaleloActionPerformed
+    }//GEN-LAST:event_txtMatriculaActionPerformed
 
     private void cbxDocenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxDocenteActionPerformed
         // TODO add your handling code here:
@@ -344,13 +349,13 @@ public class FrmCursa extends javax.swing.JFrame {
         //nadita de nada
     }//GEN-LAST:event_cbxMateriaItemStateChanged
 
-    private void txtParalelo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtParalelo1ActionPerformed
+    private void txtParaleloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtParaleloActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtParalelo1ActionPerformed
+    }//GEN-LAST:event_txtParaleloActionPerformed
 
-    private void txtParaleloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtParaleloMouseClicked
-        new DialogSelecMatricula(this, false);
-    }//GEN-LAST:event_txtParaleloMouseClicked
+    private void txtMatriculaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMatriculaMouseClicked
+        new DialogSelecMatricula(this, true).setVisible(true);
+    }//GEN-LAST:event_txtMatriculaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -436,7 +441,7 @@ public class FrmCursa extends javax.swing.JFrame {
     private javax.swing.JLabel lblPeriodo;
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JTable tbltabla;
+    private static javax.swing.JTextField txtMatricula;
     private javax.swing.JTextField txtParalelo;
-    private javax.swing.JTextField txtParalelo1;
     // End of variables declaration//GEN-END:variables
 }
