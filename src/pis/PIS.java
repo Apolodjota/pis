@@ -2,6 +2,7 @@ package pis;
 
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
+import controladores.CuentaControllerListas;
 import controladores.EstudianteControlador;
 import controladores.PersonaController;
 import java.lang.reflect.Field;
@@ -10,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modelo.Cuenta;
 import modelo.Persona;
 
 /**
@@ -22,13 +24,11 @@ public class PIS {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        String fechaString = "12-03-2015";
-        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            Date fechaDate = formato.parse(fechaString);
-            System.out.println(fechaDate);
-        } catch (Exception e) {
-            e.printStackTrace();
+        CuentaControllerListas cc = new CuentaControllerListas();
+        Cuenta cuenta = new Cuenta();
+        Field[] fields = cuenta.getClass().getDeclaredFields();
+        for (Field f : fields) {
+            System.out.println("--" + f.getName());
         }
 //        EstudianteControlador ec = new EstudianteControlador();
 //        ec.getEstudiantes();

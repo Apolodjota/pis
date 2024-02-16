@@ -92,12 +92,31 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
      */
     @Override
     public void modificar(T obj) throws Exception {
-        String query = queryUpdate(obj);
+        String query = "";
+        if (obj.getClass().getSimpleName().equalsIgnoreCase("estudiante") || obj.getClass().getSimpleName().equalsIgnoreCase("docente")){
+            System.out.println("1pasa");
+            query = queryUpdateHerencia(obj);
+        } else {
+            query = queryUpdate(obj);
+        }
         System.out.println("Sentencia: "+query);
-        Statement st = conexion.getConnection().createStatement();
-        st.executeUpdate(query);
-        conexion.getConnection().close();
-        conexion.setConnection(null);
+        try {
+            PreparedStatement stament = conexion.getConnection().prepareStatement(query);
+            stament.executeUpdate();
+            try {
+                Statement seqStament = conexion.getConnection().createStatement();
+                conexion.getConnection().close();
+                conexion.setConnection(null);
+            } catch (Exception e) {
+                System.out.println("PRIMERO");
+            }
+        } catch (Exception e) {
+            System.out.println("SEGUNDO");
+        }
+//        Statement st = conexion.getConnection().createStatement();
+//        st.executeUpdate(query);
+//        conexion.getConnection().close();
+//        conexion.setConnection(null);
     }
     /**
      * Metodo que permite sacar los datos de la base de datos
@@ -266,12 +285,10 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
         String query = "INSERT INTO " + clazz.getSimpleName().toLowerCase() + " (";
         for (Map.Entry<String, Object> entry : mapa.entrySet()) {
             query += entry.getKey() + ",";
-
         }
         query = query.substring(0, query.length() - 1);
         query += ") VALUES (";
         for (Map.Entry<String, Object> entry : mapa.entrySet()) {
-
             if (entry.getValue().getClass().getSuperclass().getSimpleName().equalsIgnoreCase("Number") || entry.getValue().getClass().getSimpleName().equalsIgnoreCase("Boolean")) {
                 query += entry.getValue() + ", ";
             }
@@ -289,6 +306,30 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
         }
         query = query.substring(0, query.length() - 2);
         query += ")";
+        System.out.println("-->" + query);
+        return query;
+    }
+    
+    private String queryUpdateHerencia(T obj) throws Exception{
+        String query = "UPDATE ";
+        try {
+            
+            query += "" + clazz.getSimpleName().toLowerCase() + " SET ";
+            Field[] fields = clazz.getDeclaredFields();
+            for (Field f : fields) {
+                f.setAccessible(true);
+                query += f.getName() + " = " + "'" + f.get(obj) + "'" + ",";
+            }
+            System.out.println("despues");
+            query = query.substring(0, query.length() - 1);
+            Field campo = obj.getClass().getSuperclass().getDeclaredField("id");
+            campo.setAccessible(true);
+            query += " WHERE id = " + campo.get(obj);
+            //System.out.println("---- > bb --> " + query);
+            
+        } catch (Exception e) {
+            System.out.println("ELLORL" + e.getMessage());
+        }
         return query;
     }
 
@@ -297,8 +338,10 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
         String query = "UPDATE " + clazz.getSimpleName().toLowerCase() + " SET ";
         Integer id = 0;
         for (Map.Entry<String, Object> entry : mapa.entrySet()) {
-            if (entry.getKey().toString().equalsIgnoreCase("id")) {
+            if (entry.getKey().equalsIgnoreCase("id")) {
+                System.out.println("amtes");
                 id = (Integer) entry.getValue();
+                System.out.println("despuems");
             } else {
                 query += entry.getKey() + " = ";
                 if (entry.getValue().getClass().getSuperclass().getSimpleName().equalsIgnoreCase("Number") || entry.getValue().getClass().getSimpleName().equalsIgnoreCase("Boolean")) {

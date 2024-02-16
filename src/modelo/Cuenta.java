@@ -5,17 +5,16 @@ package modelo;
  * @author alexg
  */
 public class Cuenta {
-
     private Integer id;
     private Integer id_persona;
-    private Boolean estado;
+    private String estado;
     private String correo;
     private String clave;
 
     public Cuenta() {
     }
 
-    public Cuenta(Integer id, Integer id_persona, Boolean estado, String correo, String clave) {
+    public Cuenta(Integer id, Integer id_persona, String estado, String correo, String clave) {
         this.id = id;
         this.id_persona = id_persona;
         this.estado = estado;
@@ -79,24 +78,18 @@ public class Cuenta {
         this.clave = clave;
     }
 
-    public Boolean getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Boolean estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
-    /**
-     * @return the id_persona
-     */
     public Integer getId_persona() {
         return id_persona;
     }
 
-    /**
-     * @param id_persona the id_persona to set
-     */
     public void setId_persona(Integer id_persona) {
         this.id_persona = id_persona;
     }
