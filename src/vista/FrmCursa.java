@@ -32,7 +32,7 @@ public class FrmCursa extends javax.swing.JFrame {
      */
     public FrmCursa() {
         initComponents();
-        limpiar();
+//        limpiar();
     }
 
     public JPanel getJPanel1() {
@@ -43,24 +43,24 @@ public class FrmCursa extends javax.swing.JFrame {
         
     }
 
-    private void limpiar() {
-        try {
-            UtilVista.cargarMateria(cbxMateria);
-            UtilVista.cargarDocente(cbxDocente);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,
-                    "Problemas con los combos de seleccion: " + e.getMessage(),
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-        txtMatricula.setEnabled(false);
-        cbxMateria.setSelectedIndex(0);
-        cbxDocente.setSelectedIndex(0);
-        tbltabla.clearSelection();
-        cC.setCursa(null);
-        cC.setCursas(new LinkedList<>());
-        cargarTabla();
-    }
+//    private void limpiar() {
+//        try {
+//            UtilVista.cargarMateria(cbxMateria);
+//            UtilVista.cargarDocente(cbxDocente);
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null,
+//                    "Problemas con los combos de seleccion: " + e.getMessage(),
+//                    "Error",
+//                    JOptionPane.ERROR_MESSAGE);
+//        }
+//        txtMatricula.setEnabled(false);
+//        cbxMateria.setSelectedIndex(0);
+//        cbxDocente.setSelectedIndex(0);
+//        tbltabla.clearSelection();
+//        cC.setCursa(null);
+//        cC.setCursas(new LinkedList<>());
+//        cargarTabla();
+//    }
 
     private void cargarTabla() {
         mtcc.setCursas(mtcc.getCursas());
@@ -157,14 +157,15 @@ public class FrmCursa extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestión de Matriculas");
 
-        panelPrincipal.setBackground(new java.awt.Color(153, 153, 153));
-        panelPrincipal.setPreferredSize(new java.awt.Dimension(1140, 520));
+        panelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        panelPrincipal.setPreferredSize(new java.awt.Dimension(1140, 642));
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Completar los campos:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tw Cen MT", 1, 14))); // NOI18N
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Completar los campos:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel31.setBackground(new java.awt.Color(204, 204, 255));
-        jLabel31.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel31.setText("Paralelo:");
         jPanel6.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, 94, -1));
 
@@ -185,12 +186,10 @@ public class FrmCursa extends javax.swing.JFrame {
         jPanel6.add(txtMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 125, -1));
 
         jLabel33.setBackground(new java.awt.Color(204, 204, 255));
-        jLabel33.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel33.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel33.setText("Materia:");
         jPanel6.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, 89, -1));
 
-        btnGuardar.setBackground(new java.awt.Color(204, 204, 255));
-        btnGuardar.setFont(new java.awt.Font("SimSun-ExtB", 1, 18)); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,15 +198,13 @@ public class FrmCursa extends javax.swing.JFrame {
         });
         jPanel6.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, 112, 31));
 
-        btnCancelar.setBackground(new java.awt.Color(204, 204, 255));
-        btnCancelar.setFont(new java.awt.Font("SimSun-ExtB", 1, 18)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
         });
-        jPanel6.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, 112, -1));
+        jPanel6.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, 112, 30));
 
         cbxMateria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbxMateria.addItemListener(new java.awt.event.ItemListener() {
@@ -226,12 +223,12 @@ public class FrmCursa extends javax.swing.JFrame {
         jPanel6.add(cbxDocente, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, 125, -1));
 
         jLabel36.setBackground(new java.awt.Color(204, 204, 255));
-        jLabel36.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel36.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel36.setText("Docente");
         jPanel6.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 89, -1));
 
         lblPeriodo.setBackground(new java.awt.Color(204, 204, 255));
-        lblPeriodo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblPeriodo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblPeriodo.setText("Matrícula:");
         jPanel6.add(lblPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, -1, -1));
 
@@ -243,7 +240,8 @@ public class FrmCursa extends javax.swing.JFrame {
         });
         jPanel6.add(txtParalelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, 125, -1));
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registros Existentes:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tw Cen MT", 1, 14))); // NOI18N
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         tbltabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -258,8 +256,6 @@ public class FrmCursa extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbltabla);
 
-        btncancelar1.setBackground(new java.awt.Color(204, 204, 255));
-        btncancelar1.setFont(new java.awt.Font("SimSun-ExtB", 1, 18)); // NOI18N
         btncancelar1.setText("Seleccionar.");
         btncancelar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -272,11 +268,11 @@ public class FrmCursa extends javax.swing.JFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btncancelar1, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addComponent(btncancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,27 +281,22 @@ public class FrmCursa extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(270, Short.MAX_VALUE)
+                .addContainerGap(149, Short.MAX_VALUE)
                 .addComponent(btncancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addGap(143, 143, 143))
         );
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
         panelPrincipalLayout.setHorizontalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelPrincipalLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 989, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -315,11 +306,13 @@ public class FrmCursa extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 1012, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -330,7 +323,7 @@ public class FrmCursa extends javax.swing.JFrame {
     }//GEN-LAST:event_btncancelar1ActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        limpiar();
+//        limpiar();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed

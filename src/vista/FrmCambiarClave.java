@@ -574,7 +574,7 @@ public class FrmCambiarClave extends javax.swing.JFrame {
                 Integer idPersona = rc.getCuentas().get(idCuentaCorreo).getId_persona();
                 Integer idRol = persona.getId_rol();
                 if (idRol == 1) {
-                    new FrmPrincipalAdministrador().setVisible(true);
+//                    new FrmPrincipalAdministrador().setVisible(true);
                     this.setVisible(false);
                 } else if (idRol == 2) {
                     new FrmMainDocente().setVisible(true);
