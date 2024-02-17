@@ -111,7 +111,7 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
                 System.out.println("PRIMERO");
             }
         } catch (Exception e) {
-            System.out.println("SEGUNDO");
+            System.out.println(e.getMessage() + "SEGUNDO");
         }
 //        Statement st = conexion.getConnection().createStatement();
 //        st.executeUpdate(query);
