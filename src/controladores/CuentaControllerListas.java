@@ -220,16 +220,16 @@ public class CuentaControllerListas extends AdaptadorDao<Cuenta> {
 ////        cc.getCuenta().setId_rol(2);
 //        cc.save();
         
-//        cc.getCuenta().setCorreo("admin@gmail.com");
-//        cc.getCuenta().setClave("2004");
-//        cc.getCuenta().setId_persona(2);
-//        cc.getCuenta().setEstado("T");
-////        cc.getCuenta().setId_rol(1);
-//        cc.save();        
+        cc.getCuenta().setCorreo("admin");
+        cc.getCuenta().setClave("2004");
+        cc.getCuenta().setId_persona(6);
+        cc.getCuenta().setEstado("T");
+//        cc.getCuenta().setId_rol(1);
+        cc.save();        
 //        
         cc.getCuenta().setCorreo("ger");
         cc.getCuenta().setClave("456");
-        cc.getCuenta().setId_persona(3);
+        cc.getCuenta().setId_persona(7);
         cc.getCuenta().setEstado("T");
 //        cc.getCuenta().setId_rol(3);
         cc.save();         

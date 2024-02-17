@@ -16,10 +16,11 @@ import modelo.Persona;
  */
 public class FrmIniciarSesion extends javax.swing.JFrame {
 
+    private PersonaController perc = new PersonaController();
     private CuentaControllerListas rc = new CuentaControllerListas();
     private PersonaController pc = new PersonaController();
     private Persona persona = null;
-    
+
     /**
      * Creates new form FrmPrincipal
      */
@@ -217,7 +218,12 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
 
     private void buttonColoredAction1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonColoredAction1ActionPerformed
         String correo = txtCorreo.getText();
-        String clave = String.valueOf(txtClave.getPassword());
+        String clave = null;
+        if (txtClave.isVisible()) {
+            clave = String.valueOf(txtClave.getPassword());
+        } else if (txtClave1.isVisible()) {
+            clave = txtClave1.getText();
+        }
         try {
             Integer idCuentaCorreo = rc.obtenerIdPorCorreo(rc.getCuentas(), correo);
             System.out.println("ID cuenta correo: " + idCuentaCorreo);
@@ -225,9 +231,7 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
             System.out.println("ID cuenta clave: " + idCuentaClave);
             if (idCuentaCorreo.equals(idCuentaClave) && idCuentaCorreo != -1) {
                 Integer idPersona = rc.getCuentas().get(idCuentaCorreo).getId_persona();
-                System.out.println("Num persona: " + idPersona.toString());
                 Integer idRol = pc.getLista().get(idPersona).getId_rol();
-                System.out.println("Num rol: " + idRol.toString());
                 if (idRol == 1) {
                     String nombres = pc.getLista().get(idCuentaCorreo).getNombres();
                     String apellidos = pc.getLista().get(idCuentaCorreo).getApellidos();
@@ -237,7 +241,7 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
                     new FrmMainDocente().setVisible(true);
                     this.setVisible(false);
                 } else if (idRol == 3) {
-                    new FrmPrincipalEstudiante().setVisible(true);
+                    new FrmPrincipalEstudiante(persona.getId()).setVisible(true);
                     this.setVisible(false);
                 }
             } else {
@@ -312,16 +316,17 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_panelImage11MouseClicked
 
     private void jlabelContraseñasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlabelContraseñasMouseClicked
-        new FrmCambiarClave().setVisible(true);
+        FrmCambiarClave cambio = new FrmCambiarClave();
+        cambio.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jlabelContraseñasMouseClicked
 
     private void jlabelContraseñasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlabelContraseñasMouseEntered
-        jlabelContraseñas.setForeground(Color.yellow);
+        jlabelContraseñas.setForeground(Color.YELLOW);
     }//GEN-LAST:event_jlabelContraseñasMouseEntered
 
     private void jlabelContraseñasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlabelContraseñasMouseExited
-        jlabelContraseñas.setForeground(Color.WHITE);
+        jlabelContraseñas.setForeground(Color.white);
     }//GEN-LAST:event_jlabelContraseñasMouseExited
 
     /**

@@ -66,16 +66,16 @@ public class PersonaController extends AdaptadorDao<Persona>{
 //        pc.getPersona().setTelefonoCelular("1902721234");
 //        pc.save();
 //
-//        pc.getPersona().setNombres("Alexis Gradyn");
-//        pc.getPersona().setApellidos("Ludena Cueva");
-//        pc.getPersona().setCedula("0645892561");
-//        pc.getPersona().setDireccionResidencia("Loja");
-//        pc.getPersona().setFechaNacimiento(new Date());
-//        pc.getPersona().setGenero("M");
-//        pc.getPersona().setId_rol(1);
-//        pc.getPersona().setTelefonoCasa("0273319381");
-//        pc.getPersona().setTelefonoCelular("0101322441");
-//        pc.save();       
+        pc.getPersona().setNombres("Alexis Gradyn");
+        pc.getPersona().setApellidos("Ludena Cueva");
+        pc.getPersona().setCedula("0645892561");
+        pc.getPersona().setDireccionResidencia("Loja");
+        pc.getPersona().setFechaNacimiento(new Date());
+        pc.getPersona().setGenero("M");
+        pc.getPersona().setId_rol(1);
+        pc.getPersona().setTelefonoCasa("0273319381");
+        pc.getPersona().setTelefonoCelular("0101322441");
+        pc.save();       
 
         pc.getPersona().setNombres("Gerardo Insano");
         pc.getPersona().setApellidos("Gavilan Potencia");
@@ -83,7 +83,7 @@ public class PersonaController extends AdaptadorDao<Persona>{
         pc.getPersona().setDireccionResidencia("Loja");
         pc.getPersona().setFechaNacimiento(new Date());
         pc.getPersona().setGenero("M");
-        pc.getPersona().setId_rol(1);
+        pc.getPersona().setId_rol(2);
         pc.getPersona().setTelefonoCasa("1782243555");
         pc.getPersona().setTelefonoCelular("0923666661");
         pc.save();      
