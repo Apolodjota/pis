@@ -3,6 +3,7 @@ package vista;
 import controladores.AdministradorControlador;
 import controladores.RolControllerListas;
 import controladores.CuentaControllerListas;
+import controladores.PersonaController;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -16,7 +17,7 @@ import modelo.Persona;
  * @author alexg
  */
 public class FrmIniciarSesion extends javax.swing.JFrame {
-
+    private PersonaController perc = new PersonaController();
     private CuentaControllerListas rc = new CuentaControllerListas();
     private AdministradorControlador ac = new AdministradorControlador();
     private RolControllerListas rl = new RolControllerListas();
@@ -210,7 +211,8 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
             System.out.println("ID cuenta clave: "+idCuentaClave);
             if (idCuentaCorreo == idCuentaClave && idCuentaCorreo != -1) {
                 Integer idPersona = rc.getCuentas().get(idCuentaCorreo).getId_persona();
-                Integer idRol = persona.getId_rol();
+                persona = perc.buscar(idPersona);
+                Integer idRol = persona.getId_rol(); 
                 if (idRol == 1) {
                     new FrmPrincipalAdministrador().setVisible(true);
                     this.setVisible(false);
@@ -218,7 +220,7 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
                     new FrmMainDocente().setVisible(true);
                     this.setVisible(false);
                 } else if (idRol == 3) {
-                    new FrmPrincipalEstudiante().setVisible(true);
+                    new FrmPrincipalEstudiante(persona.getId()).setVisible(true);
                     this.setVisible(false);
                 }
             } else {
