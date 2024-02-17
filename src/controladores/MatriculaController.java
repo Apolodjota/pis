@@ -6,6 +6,8 @@ import controlador.TDALista.exceptions.VacioException;
 import controlador.listas.DAO.DataAccesObject;
 import controlador.listas.DAO.TransferObject;
 import java.lang.reflect.Field;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import modelo.Estudiante;
 import modelo.Matricula;
 import modelo.PeriodoAcademico;
@@ -18,7 +20,8 @@ public class MatriculaController extends AdaptadorDao<Matricula>{
     private LinkedList<Matricula> matriculas = new LinkedList<>();
     private Matricula matricula = new Matricula();
     private Integer index = -1;
-    private Conexion conexion;
+    private Conexion conexion = new Conexion();
+    private PeriodoController pc = new PeriodoController();
     
     public MatriculaController() {
         super(Matricula.class);
@@ -54,6 +57,25 @@ public class MatriculaController extends AdaptadorDao<Matricula>{
 
     public Integer save() throws Exception{
         return guardar(matricula);
+    }
+    
+    public Matricula obtenerMatriculaActual(Integer id_estudiante) {
+        Matricula m = new Matricula();
+        try {
+            Statement stmt = conexion.getConnection().createStatement();
+            String query = "SELECT * FROM matricula WHERE id_estudiante = "+id_estudiante
+                    +" AND id_periodoacademico = "+pc.getPerioVigente().getId();
+            System.out.println(query);
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                m.setId(rs.getInt(1));
+                m.setId_periodoAcademico(rs.getInt(2));
+                m.setId_estudiante(rs.getInt(3));
+            }
+        } catch (Exception ex) {
+            System.out.println("No obtuvo la matricula del id: "+ex);
+        }
+        return m;
     }
     
     public void matricularVarios(LinkedList<Estudiante> estudiantes, Integer idPeriodoActual)throws Exception{

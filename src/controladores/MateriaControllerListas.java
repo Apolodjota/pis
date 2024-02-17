@@ -78,6 +78,10 @@ public class MateriaControllerListas extends AdaptadorDao<Materia>{
         modificar(materia);
     }
     
+    public Materia buscarMateria(Integer id){
+        return obtener(id);
+    }
+    
     public String generatedCode() {
         StringBuilder code = new StringBuilder();
         Integer lenght = listar().getSize() + 1;

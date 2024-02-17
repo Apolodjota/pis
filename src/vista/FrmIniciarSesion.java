@@ -220,7 +220,8 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
             Integer idCuentaClave = rc.obtenerIdPorClave(rc.getCuentas(), clave);
             System.out.println("ID cuenta clave: " + idCuentaClave);
             if (idCuentaCorreo.equals(idCuentaClave) && idCuentaCorreo != -1) {
-                Integer idPersona = rc.getCuentas().get(idCuentaCorreo).getId_persona();
+                //Integer idPersona = rc.getCuentas().get(idCuentaCorreo).getId_persona();
+                Integer idPersona = rc.obtenerCuenta(idCuentaCorreo).getId_persona();
                 persona = perc.buscar(idPersona);
                 Integer idRol = persona.getId_rol(); 
                 if (idRol == 1) {

@@ -1,4 +1,5 @@
 package modelo;
+import java.io.File;
 import java.util.Date;
 
 /**
@@ -7,22 +8,24 @@ import java.util.Date;
  */
 public class Tarea {
     private Integer id;
-    private Integer id_revision;
-    private Integer id_matricula;
-    private Byte archivo;
+    private Integer unidad;
+    private String titulo;
+    private File archivo;
+    private Date fechaAsignacion;
     private Date fechaEntrega;
-    private String comentario;
+    private String descripcion;
 
     public Tarea() {
     }
 
-    public Tarea(Integer id, Integer id_revision, Integer id_matricula, Byte archivo, Date fechaEntrega, String comentario) {
+    public Tarea(Integer id, Integer unidad, String titulo, File archivo, Date fechaAsignacion, Date fechaEntrega, String descripcion) {
         this.id = id;
-        this.id_revision = id_revision;
-        this.id_matricula = id_matricula;
+        this.unidad = unidad;
+        this.titulo = titulo;
         this.archivo = archivo;
+        this.fechaAsignacion = fechaAsignacion;
         this.fechaEntrega = fechaEntrega;
-        this.comentario = comentario;
+        this.descripcion = descripcion;
     }
 
     public Integer getId() {
@@ -33,28 +36,36 @@ public class Tarea {
         this.id = id;
     }
 
-    public Integer getId_revision() {
-        return id_revision;
+    public Integer getUnidad() {
+        return unidad;
     }
 
-    public void setId_revision(Integer id_revision) {
-        this.id_revision = id_revision;
+    public void setUnidad(Integer unidad) {
+        this.unidad = unidad;
     }
 
-    public Integer getId_matricula() {
-        return id_matricula;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setId_matricula(Integer id_matricula) {
-        this.id_matricula = id_matricula;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
-    public Byte getArchivo() {
+    public File getArchivo() {
         return archivo;
     }
 
-    public void setArchivo(Byte archivo) {
+    public void setArchivo(File archivo) {
         this.archivo = archivo;
+    }
+
+    public Date getFechaAsignacion() {
+        return fechaAsignacion;
+    }
+
+    public void setFechaAsignacion(Date fechaAsignacion) {
+        this.fechaAsignacion = fechaAsignacion;
     }
 
     public Date getFechaEntrega() {
@@ -65,32 +76,29 @@ public class Tarea {
         this.fechaEntrega = fechaEntrega;
     }
 
-    public String getComentario() {
-        return comentario;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
+
     
     public Boolean comparar(Tarea t, Integer type, String field){
         switch (type) {
             case 1:
                 if (field.equalsIgnoreCase("id"))
                     return getId().intValue() > t.getId().intValue();
-                else if (field.equalsIgnoreCase("id_revision"))
-                    return getId_revision()> t.getId_revision();
-                else if (field.equalsIgnoreCase("id_matricula"))
-                    return getId_matricula()> t.getId_matricula();
+                else if(field.equalsIgnoreCase("titulo"))
+                    return getTitulo().compareToIgnoreCase(t.getTitulo()) > 0;
                 else if (field.equalsIgnoreCase("fechaEntrega"))
                     return getFechaEntrega().after(t.getFechaEntrega());
             case 0:
                 if (field.equalsIgnoreCase("id"))
                     return getId().intValue() < t.getId().intValue();
-                else if (field.equalsIgnoreCase("id_revision"))
-                    return getId_revision() <  t.getId_revision();
-                else if (field.equalsIgnoreCase("id_matricula"))
-                    return getId_matricula() < t.getId_matricula();
+                else if(field.equalsIgnoreCase("titulo"))
+                    return getTitulo().compareToIgnoreCase(t.getTitulo()) < 0;
                 else if (field.equalsIgnoreCase("fechaEntrega"))
                     return getFechaEntrega().after(t.getFechaEntrega());
                 
