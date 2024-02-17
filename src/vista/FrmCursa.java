@@ -8,6 +8,7 @@ import controladores.RevisionController;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import modelo.Matricula;
+import modelo.Persona;
 import vista.listas.tablas.ModeloTablaCursa;
 import vista.listas.util.UtilVista;
 
@@ -33,6 +34,10 @@ public class FrmCursa extends javax.swing.JFrame {
         initComponents();
         limpiar();
     }
+    public FrmCursa(Persona p) {
+        initComponents();
+        limpiar();
+    }
 
     public JPanel getJPanel1() {
         return panelPrincipal;
@@ -49,6 +54,7 @@ public class FrmCursa extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
         }
         txtMatricula.setEnabled(false);
+        txtParalelo.setEnabled(true);
         tbltabla.clearSelection();
         cC.setCursa(null);
         cC.setCursas(new LinkedList<>());
@@ -133,14 +139,9 @@ public class FrmCursa extends javax.swing.JFrame {
         }else{
             criterio = "id_docente";
         }
-//        if (cbxOrdenamiento.getSelectedItem().toString().equalsIgnoreCase("QuickSort")) {
-//            vc.quickSort(vc.getVentas(), ascdesc, cbxOrdenarPOR.getSelectedItem().toString());
-//            //limpiarVentas();
-//            cargarTablaVentas();
-//        } else {
-//            vc.mergeSort(vc.getVentas(), ascdesc, cbxOrdenarPOR.getSelectedItem().toString());
-//            cargarTablaVentas();
-//        }
+            cC.quickSort(cC.getCursas(), ascdesc, criterio);
+            limpiar();
+            cargarTabla();
     }
 
     /**
@@ -151,6 +152,7 @@ public class FrmCursa extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -185,8 +187,8 @@ public class FrmCursa extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Gestión de Matriculas");
-        setPreferredSize(new java.awt.Dimension(1140, 572));
+        setTitle("Gestión de Cursas");
+        setResizable(false);
 
         panelPrincipal.setBackground(new java.awt.Color(153, 153, 153));
         panelPrincipal.setMinimumSize(new java.awt.Dimension(622, 251));
@@ -270,8 +272,8 @@ public class FrmCursa extends javax.swing.JFrame {
 
         lblPeriodo.setBackground(new java.awt.Color(204, 204, 255));
         lblPeriodo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblPeriodo.setText("Matrícula:");
-        jPanel6.add(lblPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
+        lblPeriodo.setText("Estudiante matriculado:");
+        jPanel6.add(lblPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
 
         txtParalelo.setEditable(false);
         txtParalelo.addActionListener(new java.awt.event.ActionListener() {
@@ -303,6 +305,7 @@ public class FrmCursa extends javax.swing.JFrame {
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Registros Existentes:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tw Cen MT", 1, 14))); // NOI18N
+        jPanel7.setLayout(new java.awt.GridBagLayout());
 
         tbltabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -317,6 +320,19 @@ public class FrmCursa extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbltabla);
 
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 645;
+        gridBagConstraints.ipady = 385;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(24, 26, 0, 27);
+        jPanel7.add(jScrollPane1, gridBagConstraints);
+
         btncancelar1.setBackground(new java.awt.Color(204, 204, 255));
         btncancelar1.setFont(new java.awt.Font("SimSun-ExtB", 1, 18)); // NOI18N
         btncancelar1.setText("Seleccionar");
@@ -325,9 +341,31 @@ public class FrmCursa extends javax.swing.JFrame {
                 btncancelar1ActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 18;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 75, 23, 0);
+        jPanel7.add(btncancelar1, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 142;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 20, 0, 0);
+        jPanel7.add(txtBusqueda, gridBagConstraints);
 
         jblTexto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jblTexto.setText("Texto:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(9, 74, 0, 0);
+        jPanel7.add(jblTexto, gridBagConstraints);
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -335,6 +373,14 @@ public class FrmCursa extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.ipadx = 18;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 20, 0, 0);
+        jPanel7.add(btnBuscar, gridBagConstraints);
 
         cbxCriterio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NOMBRE", "CURSO" }));
         cbxCriterio.addItemListener(new java.awt.event.ItemListener() {
@@ -342,56 +388,24 @@ public class FrmCursa extends javax.swing.JFrame {
                 cbxCriterioItemStateChanged(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 55;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 40, 0, 0);
+        jPanel7.add(cbxCriterio, gridBagConstraints);
 
         jblTexto1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jblTexto1.setText("Criterio");
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 661, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addComponent(jblTexto)
-                        .addGap(20, 20, 20)
-                        .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(cbxCriterio, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(84, 84, 84))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addComponent(jblTexto1)
-                        .addGap(133, 133, 133))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addComponent(btncancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30))))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addComponent(jblTexto1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jblTexto))
-                    .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnBuscar)
-                        .addComponent(cbxCriterio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btncancelar1)
-                .addGap(17, 17, 17))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(34, 87, 0, 0);
+        jPanel7.add(jblTexto1, gridBagConstraints);
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
@@ -399,24 +413,24 @@ public class FrmCursa extends javax.swing.JFrame {
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -463,18 +477,7 @@ public class FrmCursa extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void cbxCriterioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCriterioItemStateChanged
-        ordenar();
-//        if (evt.getItem().toString().equalsIgnoreCase("NOMBRE")) {
-//            txtBusqueda.setVisible(true);
-//            cbxCursoB.setVisible(false);
-//            jblTexto.setVisible(true);
-//            jblCiclo.setVisible(false);
-//        } else if (evt.getItem().toString().equalsIgnoreCase("CURSO")) {
-//            txtBusqueda.setVisible(false);
-//            cbxCursoB.setVisible(true);
-//            jblTexto.setVisible(false);
-//            jblCiclo.setVisible(true);
-//        }
+        //ordenar();
     }//GEN-LAST:event_cbxCriterioItemStateChanged
 
     private void cbxOrdenamientoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxOrdenamientoItemStateChanged
