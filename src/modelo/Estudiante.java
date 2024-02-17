@@ -54,7 +54,7 @@ public class Estudiante extends Persona{
                     return getApellidos().compareToIgnoreCase(e.getApellidos()) > 0;
                 else if (field.equalsIgnoreCase("cedula"))
                     return getCedula().compareToIgnoreCase(e.getCedula()) > 0;
-                else if (field.equalsIgnoreCase("fecha_nac"))
+                else if (field.equalsIgnoreCase("fechaNacimiento"))
                     return getFechaNacimiento().compareTo(e.getFechaNacimiento()) > 0;
                 else if (field.equalsIgnoreCase("direccionResidencia"))
                     return getDireccionResidencia().compareToIgnoreCase(e.getDireccionResidencia()) > 0;
@@ -67,13 +67,13 @@ public class Estudiante extends Persona{
             case 0:
                 if (field.equalsIgnoreCase("id"))
                     return getId().intValue() < e.getId().intValue();
-                else if (field.equalsIgnoreCase("nombre"))
+                else if (field.equalsIgnoreCase("nombres"))
                     return getNombres().compareToIgnoreCase(e.getNombres()) < 0;
                 else if (field.equalsIgnoreCase("apellidos"))
                     return getApellidos().compareToIgnoreCase(e.getApellidos()) < 0;
                 else if (field.equalsIgnoreCase("cedula"))
                     return getCedula().compareToIgnoreCase(e.getCedula()) < 0;
-                else if (field.equalsIgnoreCase("fecha_nac"))
+                else if (field.equalsIgnoreCase("fechaNacimiento"))
                     return getFechaNacimiento().compareTo(e.getFechaNacimiento()) < 0;
                 else if (field.equalsIgnoreCase("direccionResidencia"))
                     return getDireccionResidencia().compareToIgnoreCase(e.getDireccionResidencia()) < 0;
