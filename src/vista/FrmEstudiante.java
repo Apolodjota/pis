@@ -446,7 +446,7 @@ public class FrmEstudiante extends javax.swing.JFrame {
 
         jLabel2.setText("Ordenar Por:");
 
-        cbxOrdenar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "id", "nombres", "apellidos", "fecha_nac" }));
+        cbxOrdenar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "id", "nombres", "apellidos", "fechaNacimiento" }));
         cbxOrdenar.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbxOrdenarItemStateChanged(evt);
@@ -456,6 +456,11 @@ public class FrmEstudiante extends javax.swing.JFrame {
         jLabel3.setText("tipo");
 
         cbxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ascendente", "descendente" }));
+        cbxTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxTipoActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Buscar Por:");
 
@@ -551,7 +556,7 @@ public class FrmEstudiante extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btmSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -589,7 +594,7 @@ public class FrmEstudiante extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -656,6 +661,19 @@ public class FrmEstudiante extends javax.swing.JFrame {
             System.out.println("Have problems in search" + ex.getMessage()); 
         }
     }//GEN-LAST:event_btmBusquedaActionPerformed
+
+    private void cbxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoActionPerformed
+        try {
+            int aux;
+            if (cbxTipo.getSelectedItem().toString().equalsIgnoreCase("descendente"))
+                aux = 1;
+            else
+                aux = 0;
+            Ordenar(aux, cbxOrdenar.getSelectedItem().toString());
+        } catch (VacioException ex) {
+            System.out.println("Have problems " + ex.getMessage()); 
+        }
+    }//GEN-LAST:event_cbxTipoActionPerformed
 
     /**
      * @param args the command line arguments

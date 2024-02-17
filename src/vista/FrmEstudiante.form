@@ -64,7 +64,7 @@
                   <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel7" min="-2" pref="211" max="-2" attributes="0"/>
-                  <EmptySpace pref="42" max="32767" attributes="0"/>
+                  <EmptySpace pref="47" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -424,7 +424,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" pref="496" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" pref="499" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="btmSeleccionar" min="-2" pref="111" max="-2" attributes="0"/>
@@ -567,7 +567,7 @@
                         <StringItem index="0" value="id"/>
                         <StringItem index="1" value="nombres"/>
                         <StringItem index="2" value="apellidos"/>
-                        <StringItem index="3" value="fecha_nac"/>
+                        <StringItem index="3" value="fechaNacimiento"/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -592,6 +592,9 @@
                       </StringArray>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxTipoActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>

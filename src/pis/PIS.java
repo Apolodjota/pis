@@ -8,9 +8,15 @@ import controladores.PersonaController;
 import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.DESedeKeySpec;
 import modelo.Cuenta;
 import modelo.Persona;
 
@@ -24,12 +30,12 @@ public class PIS {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        CuentaControllerListas cc = new CuentaControllerListas();
-        Cuenta cuenta = new Cuenta();
-        Field[] fields = cuenta.getClass().getDeclaredFields();
-        for (Field f : fields) {
-            System.out.println("--" + f.getName());
-        }
+//        CuentaControllerListas cc = new CuentaControllerListas();
+//        Cuenta cuenta = new Cuenta();
+//        Field[] fields = cuenta.getClass().getDeclaredFields();
+//        for (Field f : fields) {
+//            System.out.println("--" + f.getName());
+//        }
 //        EstudianteControlador ec = new EstudianteControlador();
 //        ec.getEstudiantes();
 //        System.out.println("estudaintes-->" + ec.getEstudiantes().getSize());
