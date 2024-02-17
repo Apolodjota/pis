@@ -233,7 +233,8 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
                     new FrmMainDocente().setVisible(true);
                     this.setVisible(false);
                 } else if (idRol == 3) {
-                    new FrmPrincipalEstudiante(persona.getId()).setVisible(true);
+                    //new FrmPrincipalEstudiante(persona.getId()).setVisible(true);
+                    new FrmPrincipalEstudiante1(persona.getId()).setVisible(true);
                     this.setVisible(false);
                 }
             } else {

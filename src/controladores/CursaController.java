@@ -55,6 +55,10 @@ public class CursaController extends  AdaptadorDao<Cursa>{
         }
     }
     
+    public Cursa obtenerCursaPorID_Cursa(Integer id_cursa){
+        return obtener(id_cursa);
+    }
+    
     public LinkedList<Cursa> mergeSort(LinkedList<Cursa> lista, Integer type, String field) {
         Cursa[] m = lista.toArray();
         mergeSort(m, 0, m.length - 1, field, type);
