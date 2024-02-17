@@ -29,53 +29,6 @@ public class TareaController extends DataAccesObject<Tarea>{
     public Boolean update(int fila) {
         return update(getTarea(), fila);
     }
-
-    public LinkedList<Tarea> mergeSort(LinkedList<Tarea> lista, Integer type, String field) {
-        Tarea[] m = lista.toArray();
-        mergeSort(m, 0, m.length - 1, field, type);
-        return lista = lista.toList(m);
-    }
-
-    private void mergeSort(Tarea[] m, Integer ini, Integer fin, String field, Integer type) {
-        if (ini < fin) {
-            int medio = (ini + fin) / 2;
-            mergeSort(m, ini, medio, field, type);
-            mergeSort(m, medio + 1, fin, field, type);
-            merge(m, ini, medio, fin, field, type);
-        }
-    }
-
-    private void merge(Tarea[] m, Integer ini, Integer medio, Integer fin, String field, Integer type) {
-        Integer izq = ini;
-        Integer der = medio + 1;
-        Integer k = 0;
-        Integer n = fin - ini + 1;
-        Tarea[] result = new Tarea[n];
-        while (izq <= medio && der <= fin) {
-            if (m[izq].comparar(m[der], type, field)) {
-                result[k] = m[izq];
-                izq++;
-            } else {
-                result[k] = m[der];
-                der++;
-            }
-            k++;
-        }
-        while (izq <= medio) {
-            result[k] = m[izq];
-            izq++;
-            k++;
-        }
-        while (der <= fin) {
-            result[k] = m[der];
-            der++;
-            k++;
-        }
-        for (k = 0; k < n; k++) {
-            m[ini + k] = result[k];
-        }
-    }
-
     public LinkedList<Tarea> quickSort(LinkedList<Tarea> lista, Integer type, String field) {
         Tarea[] m = lista.toArray();
         Integer fin = m.length - 1;
