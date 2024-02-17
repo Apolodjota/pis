@@ -15,7 +15,7 @@ import modelo.Persona;
  * @author alexg
  */
 public class FrmIniciarSesion extends javax.swing.JFrame {
-
+    private PersonaController perc = new PersonaController();
     private CuentaControllerListas rc = new CuentaControllerListas();
     private PersonaController pc = new PersonaController();
     private Persona persona = null;
@@ -221,9 +221,8 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
             System.out.println("ID cuenta clave: " + idCuentaClave);
             if (idCuentaCorreo.equals(idCuentaClave) && idCuentaCorreo != -1) {
                 Integer idPersona = rc.getCuentas().get(idCuentaCorreo).getId_persona();
-                System.out.println("Num persona: " + idPersona.toString());
-                Integer idRol = pc.getLista().get(idPersona).getId_rol();
-                System.out.println("Num rol: " + idRol.toString());
+                persona = perc.buscar(idPersona);
+                Integer idRol = persona.getId_rol(); 
                 if (idRol == 1) {
                     String nombres = pc.getLista().get(idCuentaCorreo).getNombres();
                     String apellidos = pc.getLista().get(idCuentaCorreo).getApellidos();
@@ -233,7 +232,7 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
                     new FrmMainDocente().setVisible(true);
                     this.setVisible(false);
                 } else if (idRol == 3) {
-                    new FrmPrincipalEstudiante().setVisible(true);
+                    new FrmPrincipalEstudiante(persona.getId()).setVisible(true);
                     this.setVisible(false);
                 }
             } else {
