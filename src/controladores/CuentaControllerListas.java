@@ -79,6 +79,10 @@ public class CuentaControllerListas extends AdaptadorDao<Cuenta> {
         modificar(cuenta);
     }
 
+    public Cuenta obtenerCuenta(Integer id_cuenta){
+        return obtener(id_cuenta);
+    }
+    
     public String generatedCode() {
         StringBuilder code = new StringBuilder();
         Integer lenght = listar().getSize() + 1;
@@ -179,6 +183,8 @@ public class CuentaControllerListas extends AdaptadorDao<Cuenta> {
         return -1; // Devuelve -1 si no se encuentra ninguna cuenta con la clave ingresada
     }
 
+    
+    
 //    public Integer obtenerIdPorRol(LinkedList<Cuenta> lista, Integer id) throws Exception {
 //        LinkedList<Cuenta> lo = this.quickSort(0, "id_rol", lista);
 //        Cuenta[] c = lo.toArray();

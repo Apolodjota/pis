@@ -1,9 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
-
+import java.io.File;
 import java.util.Date;
 
 /**
@@ -13,25 +9,26 @@ import java.util.Date;
 public class Asignasion {
     private Integer id;
     private Integer id_cursa;
-    private Integer unidad;
-    private String titulo;
-    private String descripcion;
-    private Byte archivo;
-    private Date fechaAsignacion;
+    private Integer id_tarea;
+    private File archivo;
     private Date fechaEntrega;
+    private Double calificacion;
+    private String comentario;
+    private String estado;
+    
 
     public Asignasion() {
     }
 
-    public Asignasion(Integer id, Integer id_cursa, Integer unidad, String titulo, String descripcion, Byte archivo, Date fechaAsignacion, Date fechaEntrega) {
+    public Asignasion(Integer id, Integer id_cursa, Integer id_tarea, File archivo, Date fechaEntrega, Double calificacion, String comentario, String estado) {
         this.id = id;
         this.id_cursa = id_cursa;
-        this.unidad = unidad;
-        this.titulo = titulo;
-        this.descripcion = descripcion;
+        this.id_tarea = id_tarea;
         this.archivo = archivo;
-        this.fechaAsignacion = fechaAsignacion;
         this.fechaEntrega = fechaEntrega;
+        this.calificacion = calificacion;
+        this.comentario = comentario;
+        this.estado = estado;
     }
 
     public Integer getId() {
@@ -50,44 +47,20 @@ public class Asignasion {
         this.id_cursa = id_cursa;
     }
 
-    public Integer getUnidad() {
-        return unidad;
+    public Integer getId_tarea() {
+        return id_tarea;
     }
 
-    public void setUnidad(Integer unidad) {
-        this.unidad = unidad;
+    public void setId_tarea(Integer id_tarea) {
+        this.id_tarea = id_tarea;
     }
 
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Byte getArchivo() {
+    public File getArchivo() {
         return archivo;
     }
 
-    public void setArchivo(Byte archivo) {
+    public void setArchivo(File archivo) {
         this.archivo = archivo;
-    }
-
-    public Date getFechaAsignacion() {
-        return fechaAsignacion;
-    }
-
-    public void setFechaAsignacion(Date fechaAsignacion) {
-        this.fechaAsignacion = fechaAsignacion;
     }
 
     public Date getFechaEntrega() {
@@ -97,7 +70,32 @@ public class Asignasion {
     public void setFechaEntrega(Date fechaEntrega) {
         this.fechaEntrega = fechaEntrega;
     }
-    
+
+    public Double getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(Double calificacion) {
+        this.calificacion = calificacion;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+   /*
     public Boolean comparar(Asignasion a, Integer type, String field){
         switch (type) {
             case 1:
@@ -130,7 +128,7 @@ public class Asignasion {
             default:
                 return false;
         }
-    }
+    }*/
     
     
     
