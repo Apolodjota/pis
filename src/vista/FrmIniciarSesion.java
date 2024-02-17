@@ -187,6 +187,11 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
 
         jlabelContraseñas.setFont(new java.awt.Font("Segoe UI Emoji", 2, 14)); // NOI18N
         jlabelContraseñas.setText("Cambiar Contraseña");
+        jlabelContraseñas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlabelContraseñasMouseClicked(evt);
+            }
+        });
         panelImage1.add(jlabelContraseñas, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 450, -1, -1));
 
         jPanel1.add(panelImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 700));
@@ -296,6 +301,11 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
         panelImage11.setVisible(false);
         panelImage10.setVisible(true);
     }//GEN-LAST:event_panelImage11MouseClicked
+
+    private void jlabelContraseñasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlabelContraseñasMouseClicked
+        FrmCambiarClave cambio =  new FrmCambiarClave();
+        cambio.setVisible(true);
+    }//GEN-LAST:event_jlabelContraseñasMouseClicked
 
     /**
      * @param args the command line arguments

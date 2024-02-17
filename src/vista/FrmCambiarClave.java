@@ -8,6 +8,8 @@ import controladores.AdministradorControlador;
 import controladores.CuentaControllerListas;
 import controladores.RolControllerListas;
 import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelo.Persona;
@@ -17,9 +19,10 @@ import modelo.Persona;
  * @author alexg
  */
 public class FrmCambiarClave extends javax.swing.JFrame {
-
     private CuentaControllerListas rc = new CuentaControllerListas();
     private Persona persona = new Persona();
+    private Integer band = 0;
+    private Integer aux = -1;
 
     /**
      * Creates new form FrmCambiarClave
@@ -38,10 +41,85 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         panelImage16.setIcon(new ImageIcon("src/icono/salir.png"));
         txtClave1.setVisible(false);
         panelImage11.setVisible(false);
-        txtClave3.setVisible(false);
+        txtClave2.setVisible(false);
         panelImage13.setVisible(false);
         txtClave4.setVisible(false);
+        panelImage15.setVisible(false);       
+        cambiarVisibilidadF();
+    }
+    
+    private void cambiarVisibilidadT(){
+        txtClave1.setVisible(true);
+        txtClave2.setVisible(true);
+        txtClave4.setVisible(true);
+        j1.setVisible(true);
+        jLabel8.setVisible(true);
+        jLabel9.setVisible(true);
+        txtClaveActual.setVisible(true);
+        txtClaveNueva.setVisible(true);
+        txtClaveConfrimar.setVisible(true); //false
+        panelImage10.setVisible(true);
+        panelImage11.setVisible(true);
+        panelImage12.setVisible(true);
+        panelImage13.setVisible(true);
+        panelImage14.setVisible(true);
+        panelImage15.setVisible(true);
+    }
+    
+    private void cambiarVisibilidadF(){
+        j1.setVisible(false);
+        jLabel8.setVisible(false);
+        jLabel9.setVisible(false);
+        txtClaveActual.setVisible(false);
+        txtClaveNueva.setVisible(false);
+        txtClaveConfrimar.setVisible(false);
+        panelImage10.setVisible(false);
+        panelImage11.setVisible(false);
+        panelImage12.setVisible(false);
+        panelImage13.setVisible(false);
+        panelImage14.setVisible(false);
         panelImage15.setVisible(false);
+    }
+    
+    private Integer comprobarCorreo() throws Exception{
+        for (int i = 0; i < rc.getCuentas().getSize(); i++){
+           if(txtCorreo.getText().toString().equals(rc.getCuentas().get(i).getCorreo())){
+               cambiarVisibilidadT();
+               band = 1;
+               return i;
+           } 
+        } 
+        return -1;
+    }
+    
+    private void darValores(){
+        char[] password = txtClaveActual.getPassword();
+        String passwordStr = new String(password);
+        txtClave1.setText(passwordStr);
+        password = txtClave2.getPassword();
+        passwordStr = new String(password);
+        txtClaveNueva.setText(passwordStr);
+        password = txtClaveConfrimar.getPassword();
+        passwordStr = new String(password);       
+        txtClave4.setText(passwordStr);
+    }
+    
+    private void cambiarClave(Integer index) throws Exception{
+        darValores();
+        if (txtClave1.getText().toString().equals(rc.getCuentas().get(index).getClave())){
+            if (txtClaveNueva.getText().toString().equals(txtClave4.getText().toString())){
+                rc.getCuentas().get(index).setClave(txtClaveNueva.getText().toString());
+                JOptionPane.showMessageDialog(null, "Cambio exitoso");
+                rc.setCuenta(rc.getCuentas().get(index));
+                rc.update(rc.getCuenta().getId());
+            } else {
+                JOptionPane.showMessageDialog(null, "La confirmacion de contraseñas no es correcta, intentelo nuevamente");               
+            }
+           
+       } else {
+           JOptionPane.showMessageDialog(null, "La contraseña ingresada no coincide con el correo, intentelo nuevamente");
+       }
+           
     }
 
     /**
@@ -59,27 +137,28 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtClave = new javax.swing.JPasswordField();
+        j1 = new javax.swing.JLabel();
+        txtClaveActual = new javax.swing.JPasswordField();
         buttonColoredActionGuardar = new org.edisoncor.gui.button.ButtonColoredAction();
         panelImage9 = new org.edisoncor.gui.panel.PanelImage();
         txtClave1 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtClave3 = new javax.swing.JTextField();
-        panelImage12 = new org.edisoncor.gui.panel.PanelImage();
         txtClave2 = new javax.swing.JPasswordField();
+        panelImage12 = new org.edisoncor.gui.panel.PanelImage();
+        txtClaveNueva = new javax.swing.JTextField();
         panelImage13 = new org.edisoncor.gui.panel.PanelImage();
         panelImage10 = new org.edisoncor.gui.panel.PanelImage();
         panelImage11 = new org.edisoncor.gui.panel.PanelImage();
         jLabel9 = new javax.swing.JLabel();
+        txtClaveConfrimar = new javax.swing.JPasswordField();
+        panelImage14 = new org.edisoncor.gui.panel.PanelImage();
         txtClave4 = new javax.swing.JTextField();
         panelImage15 = new org.edisoncor.gui.panel.PanelImage();
-        panelImage14 = new org.edisoncor.gui.panel.PanelImage();
-        txtClave5 = new javax.swing.JPasswordField();
         jplSalir = new javax.swing.JPanel();
         panelImage16 = new org.edisoncor.gui.panel.PanelImage();
         jLabel14 = new javax.swing.JLabel();
+        buttonColoredActionGuardar1 = new org.edisoncor.gui.button.ButtonColoredAction();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -127,25 +206,29 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         gridBagConstraints.ipady = 17;
         panelImage1.add(txtCorreo, gridBagConstraints);
 
-        jLabel5.setFont(new java.awt.Font("Harlow Solid Italic", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Contraseña actual:");
+        j1.setFont(new java.awt.Font("Harlow Solid Italic", 1, 18)); // NOI18N
+        j1.setForeground(new java.awt.Color(255, 255, 255));
+        j1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        j1.setText("Contraseña actual:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 18;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        panelImage1.add(jLabel5, gridBagConstraints);
+        panelImage1.add(j1, gridBagConstraints);
 
-        txtClave.setForeground(java.awt.Color.lightGray);
-        txtClave.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtClave.setText("**********************");
-        txtClave.setBorder(null);
-        txtClave.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtClaveActual.setForeground(java.awt.Color.lightGray);
+        txtClaveActual.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtClaveActual.setBorder(null);
+        txtClaveActual.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtClaveMousePressed(evt);
+                txtClaveActualMousePressed(evt);
+            }
+        });
+        txtClaveActual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtClaveActualActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -153,10 +236,10 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         gridBagConstraints.gridy = 6;
         gridBagConstraints.ipadx = 258;
         gridBagConstraints.ipady = 12;
-        panelImage1.add(txtClave, gridBagConstraints);
+        panelImage1.add(txtClaveActual, gridBagConstraints);
 
         buttonColoredActionGuardar.setBackground(new java.awt.Color(0, 0, 255));
-        buttonColoredActionGuardar.setText("Guardar cambios");
+        buttonColoredActionGuardar.setText("Aceptar");
         buttonColoredActionGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 buttonColoredActionGuardarMouseEntered(evt);
@@ -201,8 +284,12 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         txtClave1.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         txtClave1.setForeground(java.awt.Color.lightGray);
         txtClave1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtClave1.setText("Ingrese su correo institucional");
         txtClave1.setBorder(null);
+        txtClave1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtClave1ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
@@ -235,16 +322,20 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         panelImage1.add(jLabel8, gridBagConstraints);
 
-        txtClave3.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        txtClave3.setForeground(java.awt.Color.lightGray);
-        txtClave3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtClave3.setBorder(null);
+        txtClave2.setForeground(java.awt.Color.lightGray);
+        txtClave2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtClave2.setBorder(null);
+        txtClave2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtClave2MousePressed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.ipadx = 258;
         gridBagConstraints.ipady = 12;
-        panelImage1.add(txtClave3, gridBagConstraints);
+        panelImage1.add(txtClave2, gridBagConstraints);
 
         panelImage12.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -272,13 +363,13 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(7, 6, 0, 140);
         panelImage1.add(panelImage12, gridBagConstraints);
 
-        txtClave2.setForeground(java.awt.Color.lightGray);
-        txtClave2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtClave2.setText("**********************");
-        txtClave2.setBorder(null);
-        txtClave2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtClave2MousePressed(evt);
+        txtClaveNueva.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        txtClaveNueva.setForeground(java.awt.Color.lightGray);
+        txtClaveNueva.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtClaveNueva.setBorder(null);
+        txtClaveNueva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtClaveNuevaActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -286,7 +377,7 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         gridBagConstraints.gridy = 8;
         gridBagConstraints.ipadx = 258;
         gridBagConstraints.ipady = 12;
-        panelImage1.add(txtClave2, gridBagConstraints);
+        panelImage1.add(txtClaveNueva, gridBagConstraints);
 
         panelImage13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -378,9 +469,51 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         panelImage1.add(jLabel9, gridBagConstraints);
 
+        txtClaveConfrimar.setForeground(java.awt.Color.lightGray);
+        txtClaveConfrimar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtClaveConfrimar.setBorder(null);
+        txtClaveConfrimar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtClaveConfrimarMousePressed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.ipadx = 258;
+        gridBagConstraints.ipady = 12;
+        panelImage1.add(txtClaveConfrimar, gridBagConstraints);
+
+        panelImage14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelImage14MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelImage14Layout = new javax.swing.GroupLayout(panelImage14);
+        panelImage14.setLayout(panelImage14Layout);
+        panelImage14Layout.setHorizontalGroup(
+            panelImage14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 28, Short.MAX_VALUE)
+        );
+        panelImage14Layout.setVerticalGroup(
+            panelImage14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 28, Short.MAX_VALUE)
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.ipadx = 28;
+        gridBagConstraints.ipady = 28;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(7, 6, 0, 140);
+        panelImage1.add(panelImage14, gridBagConstraints);
+
         txtClave4.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         txtClave4.setForeground(java.awt.Color.lightGray);
         txtClave4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtClave4.setText("blabla");
         txtClave4.setBorder(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -414,48 +547,6 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(7, 6, 0, 140);
         panelImage1.add(panelImage15, gridBagConstraints);
-
-        panelImage14.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelImage14MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelImage14Layout = new javax.swing.GroupLayout(panelImage14);
-        panelImage14.setLayout(panelImage14Layout);
-        panelImage14Layout.setHorizontalGroup(
-            panelImage14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 28, Short.MAX_VALUE)
-        );
-        panelImage14Layout.setVerticalGroup(
-            panelImage14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 28, Short.MAX_VALUE)
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.ipadx = 28;
-        gridBagConstraints.ipady = 28;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(7, 6, 0, 140);
-        panelImage1.add(panelImage14, gridBagConstraints);
-
-        txtClave5.setForeground(java.awt.Color.lightGray);
-        txtClave5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtClave5.setText("**********************");
-        txtClave5.setBorder(null);
-        txtClave5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtClave5MousePressed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.ipadx = 258;
-        gridBagConstraints.ipady = 12;
-        panelImage1.add(txtClave5, gridBagConstraints);
 
         jplSalir.setBackground(new java.awt.Color(255, 204, 0));
         jplSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -501,6 +592,29 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelImage1.add(jplSalir, gridBagConstraints);
 
+        buttonColoredActionGuardar1.setBackground(new java.awt.Color(0, 0, 255));
+        buttonColoredActionGuardar1.setText("Guardar cambios");
+        buttonColoredActionGuardar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonColoredActionGuardar1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonColoredActionGuardar1MouseExited(evt);
+            }
+        });
+        buttonColoredActionGuardar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonColoredActionGuardar1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 46;
+        gridBagConstraints.insets = new java.awt.Insets(50, 50, 50, 50);
+        panelImage1.add(buttonColoredActionGuardar1, gridBagConstraints);
+
         jPanel1.add(panelImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 700));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -523,195 +637,112 @@ public class FrmCambiarClave extends javax.swing.JFrame {
             txtCorreo.setForeground(Color.blue);
         }
 
-        if (String.valueOf(txtClave.getPassword()).isEmpty()) {
-            txtClave.setText("**********************");
-            txtClave.setForeground(Color.lightGray);
-        }
-
-        if (String.valueOf(txtClave2.getPassword()).isEmpty()) {
-            txtClave2.setText("**********************");
-            txtClave2.setForeground(Color.lightGray);
-        }
+//        if (String.valueOf(txtClaveActual.getPassword()).isEmpty()) {
+//            txtClaveActual.setText("");
+//            txtClaveActual.setForeground(Color.lightGray);
+//        }
+//
+//        if (String.valueOf(txtClave2.getPassword()).isEmpty()) {
+//            txtClave2.setText("");
+//            txtClave2.setForeground(Color.lightGray);
+//        }
     }//GEN-LAST:event_txtCorreoMousePressed
-
-    private void txtClaveMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtClaveMousePressed
-        if (String.valueOf(txtClave.getPassword()).equals("**********************")) {
-            txtClave.setText("");
-            txtClave.setForeground(Color.blue);
-        }
-
-        if (txtCorreo.getText().isEmpty()) {
-            txtCorreo.setText("Ingrese su correo institucional");
-            txtCorreo.setForeground(Color.lightGray);
-        }
-
-        if (String.valueOf(txtClave2.getPassword()).isEmpty()) {
-            txtClave2.setText("**********************");
-            txtClave2.setForeground(Color.lightGray);
-        }
-
-        if (String.valueOf(txtClave5.getPassword()).isEmpty()) {
-            txtClave5.setText("**********************");
-            txtClave5.setForeground(Color.lightGray);
-        }
-    }//GEN-LAST:event_txtClaveMousePressed
 
     private void buttonColoredActionGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonColoredActionGuardarMouseEntered
         buttonColoredActionGuardar.setForeground(Color.YELLOW);
     }//GEN-LAST:event_buttonColoredActionGuardarMouseEntered
 
     private void buttonColoredActionGuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonColoredActionGuardarMouseExited
-        buttonColoredActionGuardar.setForeground(Color.white);
-        String correo = txtCorreo.getText();
-        String clave = String.valueOf(txtClave.getPassword());
-        try {
-            Integer idCuentaCorreo = rc.obtenerIdPorCorreo(rc.getCuentas(), correo);
-            System.out.println("ID cuenta correo: " + idCuentaCorreo);
-            Integer idCuentaClave = rc.obtenerIdPorClave(rc.getCuentas(), clave);
-            System.out.println("ID cuenta clave: " + idCuentaClave);
-            if (idCuentaCorreo == idCuentaClave && idCuentaCorreo != -1) {
-                Integer idPersona = rc.getCuentas().get(idCuentaCorreo).getId_persona();
-                Integer idRol = persona.getId_rol();
-                if (idRol == 1) {
-                    new FrmPrincipalAdministrador().setVisible(true);
-                    this.setVisible(false);
-                } else if (idRol == 2) {
-                    new FrmMainDocente().setVisible(true);
-                    this.setVisible(false);
-                } else if (idRol == 3) {
-                    new FrmPrincipalEstudiante().setVisible(true);
-                    this.setVisible(false);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null,
-                        "Credenciales invalidas",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,
-                    e.getMessage(),
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
-        }
+
     }//GEN-LAST:event_buttonColoredActionGuardarMouseExited
 
     private void buttonColoredActionGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonColoredActionGuardarActionPerformed
-
+        try {
+            if (band == 0) {
+                aux = comprobarCorreo();
+            } else if (band == 1) {
+                if (aux > -1) {
+                    cambiarClave(aux);
+                } else {
+                    JOptionPane.showMessageDialog(null, "El correo ingresado no existe en el registro de usuarios, verifique que sea correcto");
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println("error" + ex.getMessage());
+        }
     }//GEN-LAST:event_buttonColoredActionGuardarActionPerformed
 
     private void txtClave2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtClave2MousePressed
-        if (String.valueOf(txtClave2.getPassword()).equals("**********************")) {
-            txtClave2.setText("");
-            txtClave2.setForeground(Color.blue);
-        }
-
         if (txtCorreo.getText().isEmpty()) {
             txtCorreo.setText("Ingrese su correo institucional");
             txtCorreo.setForeground(Color.lightGray);
-        }
-
-        if (String.valueOf(txtClave.getPassword()).isEmpty()) {
-            txtClave.setText("**********************");
-            txtClave.setForeground(Color.lightGray);
-        }
-
-        if (String.valueOf(txtClave5.getPassword()).isEmpty()) {
-            txtClave5.setText("**********************");
-            txtClave5.setForeground(Color.lightGray);
         }
     }//GEN-LAST:event_txtClave2MousePressed
 
     private void panelImage11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelImage11MouseClicked
         panelImage10.setVisible(false);
-        txtClave.setText(txtClave1.getText());
-        txtClave.setVisible(true);
+        txtClaveActual.setText(txtClave1.getText());
+        txtClaveActual.setVisible(true);
         panelImage11.setVisible(false);
         panelImage10.setVisible(true);
     }//GEN-LAST:event_panelImage11MouseClicked
 
     private void panelImage10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelImage10MouseClicked
-        char[] password = txtClave.getPassword();
+        char[] password = txtClaveActual.getPassword();
         String passwordStr = new String(password);
-        if (String.valueOf(txtClave.getPassword()).equals("**********************")) {
-            txtClave.setText("**********************");
-            txtClave.setForeground(Color.lightGray);
-        } else {
-            txtClave.setVisible(false);
-            txtClave1.setVisible(true);
-            txtClave1.setText(passwordStr);
-            txtClave1.setForeground(Color.blue);
-            panelImage10.setVisible(false);
-            panelImage11.setVisible(true);
-        }
+        txtClaveActual.setVisible(false);
+        txtClave1.setVisible(true);
+        txtClave1.setText(passwordStr);
+        txtClave1.setForeground(Color.blue);
+        panelImage10.setVisible(false);
+        panelImage11.setVisible(true);
     }//GEN-LAST:event_panelImage10MouseClicked
 
     private void panelImage13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelImage13MouseClicked
         panelImage12.setVisible(false);
-        txtClave2.setText(txtClave3.getText());
+        txtClave2.setText(txtClaveNueva.getText());
         txtClave2.setVisible(true);
         panelImage13.setVisible(false);
-        panelImage12.setVisible(true);
+       panelImage12.setVisible(true);
     }//GEN-LAST:event_panelImage13MouseClicked
 
     private void panelImage12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelImage12MouseClicked
         char[] password = txtClave2.getPassword();
         String passwordStr = new String(password);
-        if (String.valueOf(txtClave2.getPassword()).equals("**********************")) {
-            txtClave2.setText("**********************");
-            txtClave2.setForeground(Color.lightGray);
-        } else {
-            txtClave2.setVisible(false);
-            txtClave3.setVisible(true);
-            txtClave3.setText(passwordStr);
-            txtClave3.setForeground(Color.blue);
-            panelImage12.setVisible(false);
-            panelImage13.setVisible(true);
-        }
+        txtClave2.setVisible(false);
+        txtClaveNueva.setVisible(true);
+        txtClaveNueva.setText(passwordStr);
+        txtClaveNueva.setForeground(Color.blue);
+        panelImage12.setVisible(false);
+        panelImage13.setVisible(true);
+        
     }//GEN-LAST:event_panelImage12MouseClicked
 
-    private void txtClave5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtClave5MousePressed
-        if (String.valueOf(txtClave5.getPassword()).equals("**********************")) {
-            txtClave5.setText("");
-            txtClave5.setForeground(Color.blue);
-        }
+    private void txtClaveConfrimarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtClaveConfrimarMousePressed
 
         if (txtCorreo.getText().isEmpty()) {
             txtCorreo.setText("Ingrese su correo institucional");
             txtCorreo.setForeground(Color.lightGray);
         }
 
-        if (String.valueOf(txtClave.getPassword()).isEmpty()) {
-            txtClave.setText("**********************");
-            txtClave.setForeground(Color.lightGray);
-        }
-
-        if (String.valueOf(txtClave2.getPassword()).isEmpty()) {
-            txtClave2.setText("**********************");
-            txtClave2.setForeground(Color.lightGray);
-        }
-    }//GEN-LAST:event_txtClave5MousePressed
+    }//GEN-LAST:event_txtClaveConfrimarMousePressed
 
     private void panelImage14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelImage14MouseClicked
-        char[] password = txtClave5.getPassword();
+        char[] password = txtClaveConfrimar.getPassword();
         String passwordStr = new String(password);
-        if (String.valueOf(txtClave5.getPassword()).equals("**********************")) {
-            txtClave5.setText("**********************");
-            txtClave5.setForeground(Color.lightGray);
-        } else {
-            txtClave5.setVisible(false);
-            txtClave4.setVisible(true);
-            txtClave4.setText(passwordStr);
-            txtClave4.setForeground(Color.blue);
-            panelImage14.setVisible(false);
-            panelImage15.setVisible(true);
-        }
+        txtClaveConfrimar.setVisible(false);
+        txtClave4.setText(passwordStr);
+        txtClave4.setVisible(true);
+        txtClave4.setForeground(Color.blue);
+        panelImage14.setVisible(false);
+        panelImage15.setVisible(true);
+
     }//GEN-LAST:event_panelImage14MouseClicked
 
     private void panelImage15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelImage15MouseClicked
         panelImage14.setVisible(false);
-        txtClave5.setText(txtClave4.getText());
-        txtClave5.setVisible(true);
+        txtClaveConfrimar.setText(txtClave4.getText());
+        txtClaveConfrimar.setVisible(true);
         panelImage15.setVisible(false);
         panelImage14.setVisible(true);
     }//GEN-LAST:event_panelImage15MouseClicked
@@ -720,6 +751,37 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         new FrmIniciarSesion().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jplSalirMouseClicked
+
+    private void txtClaveActualMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtClaveActualMousePressed
+        if (txtCorreo.getText().isEmpty()) {
+            txtCorreo.setText("Ingrese su correo institucional");
+            txtCorreo.setForeground(Color.lightGray);
+        }
+    }//GEN-LAST:event_txtClaveActualMousePressed
+
+    private void txtClaveActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClaveActualActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtClaveActualActionPerformed
+
+    private void txtClave1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClave1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtClave1ActionPerformed
+
+    private void txtClaveNuevaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClaveNuevaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtClaveNuevaActionPerformed
+
+    private void buttonColoredActionGuardar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonColoredActionGuardar1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonColoredActionGuardar1MouseEntered
+
+    private void buttonColoredActionGuardar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonColoredActionGuardar1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonColoredActionGuardar1MouseExited
+
+    private void buttonColoredActionGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonColoredActionGuardar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonColoredActionGuardar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -758,9 +820,10 @@ public class FrmCambiarClave extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.edisoncor.gui.button.ButtonColoredAction buttonColoredActionGuardar;
+    private org.edisoncor.gui.button.ButtonColoredAction buttonColoredActionGuardar1;
+    private javax.swing.JLabel j1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -776,12 +839,12 @@ public class FrmCambiarClave extends javax.swing.JFrame {
     private org.edisoncor.gui.panel.PanelImage panelImage15;
     private org.edisoncor.gui.panel.PanelImage panelImage16;
     private org.edisoncor.gui.panel.PanelImage panelImage9;
-    private javax.swing.JPasswordField txtClave;
     private javax.swing.JTextField txtClave1;
     private javax.swing.JPasswordField txtClave2;
-    private javax.swing.JTextField txtClave3;
     private javax.swing.JTextField txtClave4;
-    private javax.swing.JPasswordField txtClave5;
+    private javax.swing.JPasswordField txtClaveActual;
+    private javax.swing.JPasswordField txtClaveConfrimar;
+    private javax.swing.JTextField txtClaveNueva;
     private javax.swing.JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables
 }
