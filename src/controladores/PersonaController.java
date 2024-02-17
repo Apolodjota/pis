@@ -31,6 +31,10 @@ public class PersonaController extends AdaptadorDao<Persona>{
         modificar(persona);
     }
 
+    public Persona buscar(Integer id){
+        return obtener(id);
+    }
+    
     public Persona getPersona() {
         if (persona == null)
             persona = new Persona();

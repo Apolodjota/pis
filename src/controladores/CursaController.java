@@ -8,6 +8,7 @@ import controlador.BDD.DAO.AdaptadorDao;
 import controlador.BDD.DAO.Conexion;
 import controlador.TDALista.LinkedList;
 import controlador.TDALista.exceptions.VacioException;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -26,6 +27,8 @@ public class CursaController extends  AdaptadorDao<Cursa>{
     private Cursa cursa = new Cursa();
     private Integer index = - 1;
     private LinkedList<Cursa> cursas = new LinkedList<>();
+    private Conexion conexion = new Conexion();
+    private Connection con = conexion.getConnection();
     
     public CursaController() {
         super(Cursa.class);
@@ -193,6 +196,28 @@ public class CursaController extends  AdaptadorDao<Cursa>{
                 cc.setId(rs.getInt(1));
                 cc.setId_materia(rs.getInt(2));
                 cc.setParalelo(rs.getString(3));
+                lista.add(cc);
+            }
+        } catch (Exception e) {
+            System.out.println("error" + e.getMessage());
+        }
+        return lista;
+    }
+    
+    public LinkedList <Cursa> listarCursasMatricula (Integer id_matricula){
+        LinkedList <Cursa> lista = new LinkedList<>();
+        try {
+            Statement stmt = new Conexion().getConnection().createStatement();
+            String query = "SELECT * FROM cursa where id_matricula = "+ id_matricula;
+            System.out.println(query);
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()) {
+                Cursa cc = new Cursa();
+                cc.setId(rs.getInt(1));
+                cc.setId_materia(rs.getInt(2));
+                cc.setParalelo(rs.getString(3));
+                cc.setId_docente(rs.getInt(4));
+                cc.setId_matricula(rs.getInt(5));
                 lista.add(cc);
             }
         } catch (Exception e) {

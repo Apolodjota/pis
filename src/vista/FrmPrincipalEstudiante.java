@@ -1,12 +1,32 @@
 package vista;
 
+import controlador.TDALista.LinkedList;
+import controlador.TDALista.exceptions.VacioException;
+import controladores.CursaController;
+import controladores.EstudianteControlador;
+import controladores.MateriaControllerListas;
+import controladores.MatriculaController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JLabel;
+import modelo.Cursa;
+import modelo.Estudiante;
+
 /**
  *
  * @author alexg
  */
 public class FrmPrincipalEstudiante extends javax.swing.JFrame {
+
     String nombres;
     Integer idEstudiante;
+    private Estudiante estudianteLogeado = new Estudiante();
+    private LinkedList<Cursa> cursasEstudiante = new LinkedList<>();
+    EstudianteControlador ec = new EstudianteControlador();
+    CursaController cc = new CursaController();
+    MateriaControllerListas mac = new MateriaControllerListas();
+    MatriculaController mtrc = new MatriculaController();
+
     /**
      * Creates new form FrmPrincipalEstudiante
      */
@@ -21,9 +41,42 @@ public class FrmPrincipalEstudiante extends javax.swing.JFrame {
     }
     
     public void setearEst(String nombres, Integer idEstudiante){
+        estudianteLogeado = ec.buscarEstudiante(id_estudiante);
+        cargarDatos();
+        lblid.setVisible(false);
+        lblid1.setVisible(false);
+        lblid2.setVisible(false);
+    }
+
+    private void cargarDatos() {
+        try {
+            lblnombres.setText(estudianteLogeado.toString());
+            cursasEstudiante = cc.listarCursasMatricula(mtrc.obtenerMatriculaActual(estudianteLogeado.getId()).getId());
+            System.out.println(cursasEstudiante.print());
+            int yinicial = 25;
+            for (int i = 0; i < cursasEstudiante.getSize(); i++) {
+                JLabel lbl = new javax.swing.JLabel();
+                panelCursas.add(lbl);
+                lbl.setLocation(50, yinicial);
+                lbl.setBackground(new java.awt.Color(204, 204, 255));
+                lbl.setFont(new java.awt.Font("Times New Roman", 1, 14));
+                lbl.setSize(300, 36);
+                lbl.setText(mac.buscarMateria(cursasEstudiante.get(i).getId_materia()).toString()+" "
+                        +cursasEstudiante.get(i).getParalelo());
+                lbl.setVisible(true);
+                yinicial += 25;
+            }
+        } catch (Exception e) {
+            System.out.println("Error cargando los cursas: " + e);
+        }
+
+    }
+
+    public void setearEst(String nombres, Integer idEstudiante) {
         this.nombres = nombres;
         this.idEstudiante = idEstudiante;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,6 +92,7 @@ public class FrmPrincipalEstudiante extends javax.swing.JFrame {
         lblid1 = new javax.swing.JLabel();
         lblid2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        panelCursas = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -66,6 +120,16 @@ public class FrmPrincipalEstudiante extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelCursas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mis cursos:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tw Cen MT", 1, 14))); // NOI18N
+
+        javax.swing.GroupLayout panelCursasLayout = new javax.swing.GroupLayout(panelCursas);
+        panelCursas.setLayout(panelCursasLayout);
+        panelCursasLayout.setHorizontalGroup(
+            panelCursasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 427, Short.MAX_VALUE)
+        );
+        panelCursasLayout.setVerticalGroup(
+            panelCursasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
@@ -84,6 +148,8 @@ public class FrmPrincipalEstudiante extends javax.swing.JFrame {
                             .addComponent(lblid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(49, 49, 49)
+                        .addComponent(panelCursas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelPrincipalLayout.setVerticalGroup(
@@ -101,6 +167,7 @@ public class FrmPrincipalEstudiante extends javax.swing.JFrame {
                 .addComponent(lblnombres)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelCursas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Administrar");
@@ -183,6 +250,7 @@ public class FrmPrincipalEstudiante extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FrmPrincipalEstudiante().setVisible(true);
+
             }
         });
     }
@@ -198,6 +266,7 @@ public class FrmPrincipalEstudiante extends javax.swing.JFrame {
     private javax.swing.JLabel lblid1;
     private javax.swing.JLabel lblid2;
     private javax.swing.JLabel lblnombres;
+    public javax.swing.JPanel panelCursas;
     private org.edisoncor.gui.panel.PanelImage panelPrincipal;
     // End of variables declaration//GEN-END:variables
 }

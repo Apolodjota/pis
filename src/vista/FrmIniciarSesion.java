@@ -187,18 +187,14 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
         jlabelContraseñas.setForeground(new java.awt.Color(255, 255, 255));
         jlabelContraseñas.setText("Cambiar Contraseña");
         jlabelContraseñas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
         jlabelContraseñas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jlabelContraseñasMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jlabelContraseñasMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jlabelContraseñasMouseExited(evt);
-            }
         });
-        panelImage1.add(jlabelContraseñas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 460, -1, -1));
+        panelImage1.add(jlabelContraseñas, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 450, -1, -1));
+
 
         jPanel1.add(panelImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 700));
 
@@ -232,6 +228,10 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
             if (idCuentaCorreo.equals(idCuentaClave) && idCuentaCorreo != -1) {
                 Integer idPersona = rc.getCuentas().get(idCuentaCorreo).getId_persona();
                 Integer idRol = pc.getLista().get(idPersona).getId_rol();
+                //Integer idPersona = rc.getCuentas().get(idCuentaCorreo).getId_persona();
+                Integer idPersona = rc.obtenerCuenta(idCuentaCorreo).getId_persona();
+                persona = perc.buscar(idPersona);
+                Integer idRol = persona.getId_rol(); 
                 if (idRol == 1) {
                     String nombres = pc.getLista().get(idCuentaCorreo).getNombres();
                     String apellidos = pc.getLista().get(idCuentaCorreo).getApellidos();
@@ -328,6 +328,10 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
     private void jlabelContraseñasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlabelContraseñasMouseExited
         jlabelContraseñas.setForeground(Color.white);
     }//GEN-LAST:event_jlabelContraseñasMouseExited
+
+        FrmCambiarClave cambio =  new FrmCambiarClave();
+        cambio.setVisible(true);
+    }//GEN-LAST:event_jlabelContraseñasMouseClicked
 
     /**
      * @param args the command line arguments

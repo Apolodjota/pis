@@ -186,6 +186,7 @@ public class FrmCursa extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestión de Matriculas");
+        setPreferredSize(new java.awt.Dimension(1140, 572));
 
         panelPrincipal.setBackground(new java.awt.Color(153, 153, 153));
         panelPrincipal.setMinimumSize(new java.awt.Dimension(622, 251));
@@ -196,7 +197,7 @@ public class FrmCursa extends javax.swing.JFrame {
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel31.setBackground(new java.awt.Color(204, 204, 255));
-        jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel31.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel31.setText("Paralelo:");
         jPanel6.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 94, -1));
 
@@ -217,10 +218,12 @@ public class FrmCursa extends javax.swing.JFrame {
         jPanel6.add(txtMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 125, -1));
 
         jLabel33.setBackground(new java.awt.Color(204, 204, 255));
-        jLabel33.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel33.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel33.setText("Materia:");
         jPanel6.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 89, -1));
 
+        btnGuardar.setBackground(new java.awt.Color(204, 204, 255));
+        btnGuardar.setFont(new java.awt.Font("SimSun-ExtB", 1, 18)); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -229,6 +232,8 @@ public class FrmCursa extends javax.swing.JFrame {
         });
         jPanel6.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 112, 31));
 
+        btnCancelar.setBackground(new java.awt.Color(204, 204, 255));
+        btnCancelar.setFont(new java.awt.Font("SimSun-ExtB", 1, 18)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -260,11 +265,12 @@ public class FrmCursa extends javax.swing.JFrame {
 
         jLabel36.setBackground(new java.awt.Color(204, 204, 255));
         jLabel36.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel36.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel36.setText("Docente:");
         jPanel6.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 89, -1));
 
         lblPeriodo.setBackground(new java.awt.Color(204, 204, 255));
-        lblPeriodo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblPeriodo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblPeriodo.setText("Matrícula:");
         jPanel6.add(lblPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
 
@@ -312,6 +318,8 @@ public class FrmCursa extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbltabla);
 
+        btncancelar1.setBackground(new java.awt.Color(204, 204, 255));
+        btncancelar1.setFont(new java.awt.Font("SimSun-ExtB", 1, 18)); // NOI18N
         btncancelar1.setText("Seleccionar");
         btncancelar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

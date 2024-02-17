@@ -128,10 +128,32 @@ public class FrmDocente extends javax.swing.JFrame {
     }
     
     private void registrarCuenta(Integer id){
+        String nombre = "", apellido = "";
+        if (dc.getDocente().getNombres().trim().contains(" ")){
+            Integer index = dc.getDocente().getNombres().indexOf(" ");
+            if (index > -1) {
+                nombre = dc.getDocente().getNombres().substring(0, index);
+            }
+        } else {
+            nombre = dc.getDocente().getNombres().trim();
+        } 
+        if (dc.getDocente().getApellidos().trim().contains(" ")){
+            Integer index = dc.getDocente().getApellidos().indexOf(" ");
+            if (index > -1) {
+                apellido = dc.getDocente().getApellidos().substring(0, index);
+            }
+        } else {
+            apellido = dc.getDocente().getApellidos().trim();
+        }
+        try {
+        cc.getCuenta().setCorreo(nombre.toLowerCase()+apellido.toLowerCase()+"@unl.com.ec");
         cc.getCuenta().setId_persona(id);
         cc.getCuenta().setEstado("T");
-        cc.getCuenta().setCorreo(""+dc.getDocente().getNombres().trim()+dc.getDocente().getApellidos().trim()+"@unl.com.ec");
-        cc.getCuenta().setClave(dc.getDocente().getCedula().trim());
+        cc.getCuenta().setClave(Util.cifrarMensaje(dc.getDocente().getCedula().trim()));
+        } catch (Exception e) {
+            System.out.println("ERROR " + e.getMessage());
+                    
+        }
     }
     
     private void obtenerPersona(){
