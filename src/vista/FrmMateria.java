@@ -6,9 +6,7 @@ import controlador.TDALista.LinkedList;
 import controladores.MallaControllerListas;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import modelo.Curso;
 import modelo.Malla;
-import modelo.Materia;
 import vista.listas.tablas.ModeloTablaMateriaListas;
 import vista.listas.util.UtilVista;
 
@@ -208,7 +206,7 @@ public class FrmMateria extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1140, 642));
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -379,6 +377,11 @@ public class FrmMateria extends javax.swing.JFrame {
                 cbxCriterioItemStateChanged(evt);
             }
         });
+        cbxCriterio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxCriterioActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -447,7 +450,7 @@ public class FrmMateria extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
         );
 
         pack();
@@ -502,6 +505,10 @@ public class FrmMateria extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_cbxMallaItemStateChanged
+
+    private void cbxCriterioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCriterioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxCriterioActionPerformed
 
     /**
      * @param args the command line arguments

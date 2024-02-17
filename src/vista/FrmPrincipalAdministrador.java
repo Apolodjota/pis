@@ -13,36 +13,39 @@ import javax.swing.JPanel;
 public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
     private CuentaControllerListas cc = new CuentaControllerListas();
-    private boolean isDocentesClicked = false;
-    private boolean isEstudiantesClicked = false;
-    private boolean isMateriasClicked = false;
-    private boolean isCursoClicked = false;
-    private boolean isMallaClicked = false;
-    private boolean isMatriculaClicked = false;
-    private boolean isPeriodoAcademicoClicked = false;
+    private Boolean isDocentesClicked = false;
+    private Boolean isEstudiantesClicked = false;
+    private Boolean isMateriasClicked = false;
+    private Boolean isCursoClicked = false;
+    private Boolean isMallaClicked = false;
+    private Boolean isMatriculaClicked = false;
+    private Boolean isPeriodoAcademicoClicked = false;
+    private Boolean isCursaClicked = false;
+    private Boolean isInicioClicked = false;
 
     /**
      * Creates new form FrmPrincipalAdministrador
      */
-    public FrmPrincipalAdministrador() {
+    public FrmPrincipalAdministrador(String nombre, String apellido) {
         initComponents();
         this.setLocationRelativeTo(null);
         cargarImagenes();
-//        jblNombre.setText(nombre);CAMBIAMOS EL PAQUETE
+        jplInicio.setVisible(false);
+        jblNombre.setText(nombre + " " + apellido);
     }
 
     private void cargarImagenes() {
         panelImage2.setIcon(new ImageIcon("src/icono/docentes.png"));
         panelImage4.setIcon(new ImageIcon("src/icono/estudiantes.png"));
         panelImage5.setIcon(new ImageIcon("src/icono/materias.png"));
-        panelImage6.setIcon(new ImageIcon("src/icono/curso.png"));
         panelImage7.setIcon(new ImageIcon("src/icono/malla.png"));
         panelImage8.setIcon(new ImageIcon("src/icono/matricula.png"));
         panelImage3.setIcon(new ImageIcon("src/icono/periodoAcademico.png"));
         panelImage9.setIcon(new ImageIcon("src/icono/usuario_prin.png"));
-        panelImage11.setIcon(new ImageIcon("src/icono/cerrar-sesion.png"));
+        panelImage11.setIcon(new ImageIcon("src/icono/salir.png"));
+        panelImage12.setIcon(new ImageIcon("src/icono/cursa.png"));
         panelImage1.setIcon(new ImageIcon("src/icono/logoEva_1.png"));
-//        panelImage10.setIcon(new ImageIcon("src/icono/fondo_blue.png"));
+        panelImage10.setIcon(new ImageIcon("src/icono/inicio.png"));
     }
 
     /**
@@ -60,9 +63,11 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         jplSalir = new javax.swing.JPanel();
         panelImage11 = new org.edisoncor.gui.panel.PanelImage();
         jLabel14 = new javax.swing.JLabel();
-        panelImage10 = new org.edisoncor.gui.panel.PanelImage();
-        jPanel3 = new javax.swing.JPanel();
         jblNombre = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jplCursa = new javax.swing.JPanel();
+        panelImage12 = new org.edisoncor.gui.panel.PanelImage();
+        jLabel15 = new javax.swing.JLabel();
         jplDocentes = new javax.swing.JPanel();
         panelImage2 = new org.edisoncor.gui.panel.PanelImage();
         jLabel2 = new javax.swing.JLabel();
@@ -75,9 +80,6 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         panelImage5 = new org.edisoncor.gui.panel.PanelImage();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jplCurso = new javax.swing.JPanel();
-        panelImage6 = new org.edisoncor.gui.panel.PanelImage();
-        jLabel11 = new javax.swing.JLabel();
         jplMalla = new javax.swing.JPanel();
         panelImage7 = new org.edisoncor.gui.panel.PanelImage();
         jLabel12 = new javax.swing.JLabel();
@@ -88,20 +90,23 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         panelImage3 = new org.edisoncor.gui.panel.PanelImage();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        panelImage9 = new org.edisoncor.gui.panel.PanelImage();
+        jplInicio = new javax.swing.JPanel();
+        panelImage10 = new org.edisoncor.gui.panel.PanelImage();
+        jLabel16 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         panelImage1 = new org.edisoncor.gui.panel.PanelImage();
+        panelImage9 = new org.edisoncor.gui.panel.PanelImage();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
 
-        jPanel2.setBackground(new java.awt.Color(0, 51, 153));
+        jPanel2.setBackground(new java.awt.Color(0, 204, 204));
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 204, 0));
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(255, 255, 255)));
 
-        jplSalir.setBackground(new java.awt.Color(255, 255, 204));
+        jplSalir.setBackground(new java.awt.Color(255, 204, 0));
         jplSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jplSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -134,56 +139,98 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jplSalir.add(jLabel14, gridBagConstraints);
 
-        javax.swing.GroupLayout panelImage10Layout = new javax.swing.GroupLayout(panelImage10);
-        panelImage10.setLayout(panelImage10Layout);
-        panelImage10Layout.setHorizontalGroup(
-            panelImage10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 774, Short.MAX_VALUE)
-        );
-        panelImage10Layout.setVerticalGroup(
-            panelImage10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 76, Short.MAX_VALUE)
-        );
+        jblNombre.setFont(new java.awt.Font("Harlow Solid Italic", 1, 18)); // NOI18N
+        jblNombre.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jblNombre.setText("Administrador");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(192, Short.MAX_VALUE)
-                .addComponent(panelImage10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jplSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(115, 115, 115)
+                .addComponent(jblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 542, Short.MAX_VALUE)
+                .addComponent(jplSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jplSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(panelImage10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jplSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jblNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(255, 255, 255)));
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
-        jblNombre.setFont(new java.awt.Font("Harlow Solid Italic", 1, 18)); // NOI18N
-        jblNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jblNombre.setText("Administrador");
+        jplCursa.setBackground(new java.awt.Color(255, 255, 255));
+        jplCursa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jplCursa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jplCursaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jplCursaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jplCursaMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelImage12Layout = new javax.swing.GroupLayout(panelImage12);
+        panelImage12.setLayout(panelImage12Layout);
+        panelImage12Layout.setHorizontalGroup(
+            panelImage12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+        panelImage12Layout.setVerticalGroup(
+            panelImage12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 35, Short.MAX_VALUE)
+        );
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel15.setText("Cursa");
+
+        javax.swing.GroupLayout jplCursaLayout = new javax.swing.GroupLayout(jplCursa);
+        jplCursa.setLayout(jplCursaLayout);
+        jplCursaLayout.setHorizontalGroup(
+            jplCursaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jplCursaLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(panelImage12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jplCursaLayout.setVerticalGroup(
+            jplCursaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jplCursaLayout.createSequentialGroup()
+                .addGroup(jplCursaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jplCursaLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel15))
+                    .addGroup(jplCursaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(panelImage12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(15, 15, 15))
+        );
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 11;
-        gridBagConstraints.insets = new java.awt.Insets(30, 30, 30, 30);
-        jPanel3.add(jblNombre, gridBagConstraints);
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.ipadx = 60;
+        gridBagConstraints.ipady = -6;
+        jPanel3.add(jplCursa, gridBagConstraints);
 
-        jplDocentes.setBackground(new java.awt.Color(0, 204, 204));
+        jplDocentes.setBackground(new java.awt.Color(255, 255, 255));
         jplDocentes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jplDocentes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -240,12 +287,12 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = 31;
         gridBagConstraints.ipady = 7;
         jPanel3.add(jplDocentes, gridBagConstraints);
 
-        jplEstudiantes.setBackground(new java.awt.Color(0, 204, 204));
+        jplEstudiantes.setBackground(new java.awt.Color(255, 255, 255));
         jplEstudiantes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jplEstudiantes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -302,12 +349,12 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.ipadx = 31;
         gridBagConstraints.ipady = 7;
         jPanel3.add(jplEstudiantes, gridBagConstraints);
 
-        jplMaterias.setBackground(new java.awt.Color(0, 204, 204));
+        jplMaterias.setBackground(new java.awt.Color(255, 255, 255));
         jplMaterias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jplMaterias.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -364,70 +411,12 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.ipadx = 31;
         gridBagConstraints.ipady = 7;
         jPanel3.add(jplMaterias, gridBagConstraints);
 
-        jplCurso.setBackground(new java.awt.Color(0, 204, 204));
-        jplCurso.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jplCurso.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jplCursoMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jplCursoMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jplCursoMouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelImage6Layout = new javax.swing.GroupLayout(panelImage6);
-        panelImage6.setLayout(panelImage6Layout);
-        panelImage6Layout.setHorizontalGroup(
-            panelImage6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-        );
-        panelImage6Layout.setVerticalGroup(
-            panelImage6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 35, Short.MAX_VALUE)
-        );
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel11.setText("Curso");
-        jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        javax.swing.GroupLayout jplCursoLayout = new javax.swing.GroupLayout(jplCurso);
-        jplCurso.setLayout(jplCursoLayout);
-        jplCursoLayout.setHorizontalGroup(
-            jplCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jplCursoLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(panelImage6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jLabel11)
-                .addContainerGap())
-        );
-        jplCursoLayout.setVerticalGroup(
-            jplCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jplCursoLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel11)
-                .addGap(15, 15, 15))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jplCursoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelImage6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.ipadx = 66;
-        jPanel3.add(jplCurso, gridBagConstraints);
-
-        jplMalla.setBackground(new java.awt.Color(0, 204, 204));
+        jplMalla.setBackground(new java.awt.Color(255, 255, 255));
         jplMalla.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jplMalla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -481,12 +470,12 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.ipadx = 60;
         gridBagConstraints.ipady = -6;
         jPanel3.add(jplMalla, gridBagConstraints);
 
-        jplMatricula.setBackground(new java.awt.Color(0, 204, 204));
+        jplMatricula.setBackground(new java.awt.Color(255, 255, 255));
         jplMatricula.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jplMatricula.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -539,11 +528,11 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.ipadx = 40;
         jPanel3.add(jplMatricula, gridBagConstraints);
 
-        jplPeriodoAcademico.setBackground(new java.awt.Color(0, 204, 204));
+        jplPeriodoAcademico.setBackground(new java.awt.Color(255, 255, 255));
         jplPeriodoAcademico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jplPeriodoAcademico.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -600,34 +589,72 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.ipadx = 34;
         gridBagConstraints.ipady = 7;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 100, 0);
         jPanel3.add(jplPeriodoAcademico, gridBagConstraints);
 
-        javax.swing.GroupLayout panelImage9Layout = new javax.swing.GroupLayout(panelImage9);
-        panelImage9.setLayout(panelImage9Layout);
-        panelImage9Layout.setHorizontalGroup(
-            panelImage9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
+        jplInicio.setBackground(new java.awt.Color(255, 255, 255));
+        jplInicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jplInicio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jplInicioMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jplInicioMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jplInicioMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelImage10Layout = new javax.swing.GroupLayout(panelImage10);
+        panelImage10.setLayout(panelImage10Layout);
+        panelImage10Layout.setHorizontalGroup(
+            panelImage10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
         );
-        panelImage9Layout.setVerticalGroup(
-            panelImage9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 29, Short.MAX_VALUE)
+        panelImage10Layout.setVerticalGroup(
+            panelImage10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 35, Short.MAX_VALUE)
+        );
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel16.setText("Inicio");
+
+        javax.swing.GroupLayout jplInicioLayout = new javax.swing.GroupLayout(jplInicio);
+        jplInicio.setLayout(jplInicioLayout);
+        jplInicioLayout.setHorizontalGroup(
+            jplInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jplInicioLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(panelImage10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jplInicioLayout.setVerticalGroup(
+            jplInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jplInicioLayout.createSequentialGroup()
+                .addGroup(jplInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jplInicioLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel16))
+                    .addGroup(jplInicioLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(panelImage10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(15, 15, 15))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
-        gridBagConstraints.ipadx = 30;
-        gridBagConstraints.ipady = 29;
-        gridBagConstraints.insets = new java.awt.Insets(30, 30, 30, 30);
-        jPanel3.add(panelImage9, gridBagConstraints);
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 60;
+        gridBagConstraints.ipady = -6;
+        jPanel3.add(jplInicio, gridBagConstraints);
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel5.setPreferredSize(new java.awt.Dimension(1140, 572));
+        jPanel5.setPreferredSize(new java.awt.Dimension(1140, 642));
         jPanel5.setRequestFocusEnabled(false);
         jPanel5.setLayout(new java.awt.GridBagLayout());
 
@@ -642,36 +669,60 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
             .addGap(0, 592, Short.MAX_VALUE)
         );
 
-        jPanel5.add(panelImage1, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 595;
+        gridBagConstraints.ipady = 592;
+        gridBagConstraints.insets = new java.awt.Insets(50, 50, 50, 50);
+        jPanel5.add(panelImage1, gridBagConstraints);
+
+        javax.swing.GroupLayout panelImage9Layout = new javax.swing.GroupLayout(panelImage9);
+        panelImage9.setLayout(panelImage9Layout);
+        panelImage9Layout.setHorizontalGroup(
+            panelImage9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 36, Short.MAX_VALUE)
+        );
+        panelImage9Layout.setVerticalGroup(
+            panelImage9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 36, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1372, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGap(10, 10, 10)))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 768, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(225, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(panelImage9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE))
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addContainerGap()))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addComponent(panelImage9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -694,20 +745,28 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
     private void jplDocentesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplDocentesMouseClicked
         isDocentesClicked = true;
+        jplInicio.setVisible(true);
 
-        JLabel[] labelsBlancos = {jLabel6, jLabel7, jLabel8, jLabel9, jLabel11, jLabel12, jLabel13, jLabel4, jLabel5};
+        jplInicio.setBackground(Color.white);
+        jplEstudiantes.setBackground(Color.white);
+        jplMaterias.setBackground(Color.white);
+        jplCursa.setBackground(Color.white);
+        jplMalla.setBackground(Color.white);
+        jplMatricula.setBackground(Color.white);
+        jplPeriodoAcademico.setBackground(Color.white);
+
+        JLabel[] labelsBlancos = {jLabel6, jLabel7, jLabel8, jLabel9, jLabel16, jLabel12, jLabel13, jLabel4, jLabel5, jLabel15};
         for (JLabel label : labelsBlancos) {
-            label.setForeground(Color.white);
+            label.setForeground(Color.black);
         }
 
-        JPanel[] panelsCianOscuro = {jplEstudiantes, jplMaterias, jplMalla, jplCurso, jplMatricula, jplPeriodoAcademico};
+        JPanel[] panelsCianOscuro = {jplInicio, jplEstudiantes, jplMaterias, jplMalla, jplMatricula, jplPeriodoAcademico, jplCursa};
         for (JPanel panel : panelsCianOscuro) {
-            panel.setBackground(new Color(0, 204, 204));
+            panel.setBackground(Color.WHITE);
         }
-
-        jplDocentes.setBackground(Color.WHITE);
-        jLabel2.setForeground(Color.blue);
-        jLabel3.setForeground(Color.blue);
+        jplDocentes.setBackground(new Color(255, 204, 0));
+        jLabel2.setForeground(Color.black);
+        jLabel3.setForeground(Color.black);
 
         FrmDocente frmDocente = new FrmDocente();
         JPanel panelDocente = frmDocente.getJPanel1();
@@ -719,20 +778,20 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
     private void jplEstudiantesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplEstudiantesMouseClicked
         isEstudiantesClicked = true;
+        jplInicio.setVisible(true);
 
-        JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel8, jLabel9, jLabel11, jLabel12, jLabel13, jLabel4, jLabel5};
+        JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel8, jLabel9, jLabel16, jLabel12, jLabel13, jLabel4, jLabel5, jLabel15};
         for (JLabel label : labelsBlancos) {
-            label.setForeground(Color.white);
+            label.setForeground(Color.black);
         }
 
-        JPanel[] panelsCianOscuro = {jplDocentes, jplMaterias, jplMalla, jplCurso, jplMatricula, jplPeriodoAcademico};
+        JPanel[] panelsCianOscuro = {jplInicio, jplDocentes, jplMaterias, jplMalla, jplMatricula, jplPeriodoAcademico, jplCursa};
         for (JPanel panel : panelsCianOscuro) {
-            panel.setBackground(new Color(0, 204, 204));
+            panel.setBackground(Color.WHITE);
         }
-
-        jplEstudiantes.setBackground(Color.WHITE);
-        jLabel6.setForeground(Color.blue);
-        jLabel7.setForeground(Color.blue);
+        jplEstudiantes.setBackground(new Color(255, 204, 0));
+        jLabel6.setForeground(Color.black);
+        jLabel7.setForeground(Color.black);
 
         FrmEstudiante frmEstudiante = new FrmEstudiante();
         JPanel panelDocente = frmEstudiante.getJPanel1();
@@ -744,20 +803,20 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
     private void jplMateriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMateriasMouseClicked
         isMateriasClicked = true;
+        jplInicio.setVisible(true);
 
-        JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7, jLabel11, jLabel12, jLabel13, jLabel4, jLabel5};
+        JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7, jLabel16, jLabel12, jLabel13, jLabel4, jLabel5, jLabel15};
         for (JLabel label : labelsBlancos) {
-            label.setForeground(Color.white);
+            label.setForeground(Color.black);
         }
 
-        JPanel[] panelsCianOscuro = {jplDocentes, jplEstudiantes, jplMalla, jplCurso, jplMatricula, jplPeriodoAcademico};
+        JPanel[] panelsCianOscuro = {jplDocentes, jplEstudiantes, jplMalla, jplInicio, jplMatricula, jplPeriodoAcademico, jplCursa};
         for (JPanel panel : panelsCianOscuro) {
-            panel.setBackground(new Color(0, 204, 204));
+            panel.setBackground(Color.WHITE);
         }
-
-        jplMaterias.setBackground(Color.WHITE);
-        jLabel8.setForeground(Color.blue);
-        jLabel9.setForeground(Color.blue);
+        jplMaterias.setBackground(new Color(255, 204, 0));
+        jLabel8.setForeground(Color.black);
+        jLabel9.setForeground(Color.black);
 
         FrmMateria frmMateria = new FrmMateria();
         JPanel panelMateria = frmMateria.getJPanel1();
@@ -767,45 +826,21 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         jPanel5.repaint();
     }//GEN-LAST:event_jplMateriasMouseClicked
 
-    private void jplCursoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplCursoMouseClicked
-        isCursoClicked = true;
-
-        JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7, jLabel8, jLabel9, jLabel12, jLabel13, jLabel4, jLabel5};
-        for (JLabel label : labelsBlancos) {
-            label.setForeground(Color.white);
-        }
-
-        JPanel[] panelsCianOscuro = {jplDocentes, jplEstudiantes, jplMaterias, jplMalla, jplMatricula, jplPeriodoAcademico};
-        for (JPanel panel : panelsCianOscuro) {
-            panel.setBackground(new Color(0, 204, 204));
-        }
-
-        jplCurso.setBackground(Color.WHITE);
-        jLabel11.setForeground(Color.blue);
-
-        FrmCurso frmCurso = new FrmCurso();
-        JPanel panelCurso = frmCurso.getJPanel1();
-        jPanel5.removeAll();
-        jPanel5.add(panelCurso);
-        jPanel5.revalidate();
-        jPanel5.repaint();
-    }//GEN-LAST:event_jplCursoMouseClicked
-
     private void jplMallaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMallaMouseClicked
         isMallaClicked = true;
+        jplInicio.setVisible(true);
 
-        JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7, jLabel8, jLabel9, jLabel11, jLabel13, jLabel4, jLabel5};
+        JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7, jLabel8, jLabel9, jLabel16, jLabel13, jLabel4, jLabel5, jLabel15};
         for (JLabel label : labelsBlancos) {
-            label.setForeground(Color.white);
+            label.setForeground(Color.black);
         }
 
-        JPanel[] panelsCianOscuro = {jplDocentes, jplEstudiantes, jplMaterias, jplCurso, jplMatricula, jplPeriodoAcademico};
+        JPanel[] panelsCianOscuro = {jplDocentes, jplEstudiantes, jplMaterias, jplInicio, jplMatricula, jplPeriodoAcademico, jplCursa};
         for (JPanel panel : panelsCianOscuro) {
-            panel.setBackground(new Color(0, 204, 204));
+            panel.setBackground(Color.WHITE);
         }
-
-        jplMalla.setBackground(Color.WHITE);
-        jLabel12.setForeground(Color.blue);
+        jplMalla.setBackground(new Color(255, 204, 0));
+        jLabel12.setForeground(Color.black);
 
         FrmMalla frmMalla = new FrmMalla();
         JPanel panelMalla = frmMalla.getJPanel1();
@@ -817,19 +852,19 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
     private void jplMatriculaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMatriculaMouseClicked
         isMatriculaClicked = true;
+        jplInicio.setVisible(true);
 
-        JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7, jLabel8, jLabel9, jLabel11, jLabel12, jLabel4, jLabel5};
+        JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7, jLabel8, jLabel9, jLabel16, jLabel12, jLabel4, jLabel5, jLabel15};
         for (JLabel label : labelsBlancos) {
-            label.setForeground(Color.white);
+            label.setForeground(Color.black);
         }
 
-        JPanel[] panelsCianOscuro = {jplDocentes, jplEstudiantes, jplMaterias, jplCurso, jplMalla, jplPeriodoAcademico};
+        JPanel[] panelsCianOscuro = {jplDocentes, jplEstudiantes, jplMaterias, jplInicio, jplMalla, jplPeriodoAcademico, jplCursa};
         for (JPanel panel : panelsCianOscuro) {
-            panel.setBackground(new Color(0, 204, 204));
+            panel.setBackground(Color.WHITE);
         }
-
-        jplMatricula.setBackground(Color.WHITE);
-        jLabel13.setForeground(Color.blue);
+        jplMatricula.setBackground(new Color(255, 204, 0));
+        jLabel13.setForeground(Color.black);
 
         FrmMatricula frmMatricula = new FrmMatricula();
         JPanel panelDocente = frmMatricula.getJPanel1();
@@ -841,20 +876,21 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
     private void jplPeriodoAcademicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplPeriodoAcademicoMouseClicked
         isPeriodoAcademicoClicked = true;
-
-        JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7, jLabel8, jLabel9, jLabel11, jLabel12, jLabel13};
+        jplInicio.setVisible(true);
+        
+        JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7, jLabel8, jLabel9, jLabel16, jLabel12, jLabel13, jLabel15};
         for (JLabel label : labelsBlancos) {
-            label.setForeground(Color.white);
+            label.setForeground(Color.black);
         }
 
-        JPanel[] panelsCianOscuro = {jplDocentes, jplEstudiantes, jplMaterias, jplCurso, jplMalla, jplMatricula};
+        JPanel[] panelsCianOscuro = {jplMatricula, jplMalla, jplCursa, jplMaterias, jplEstudiantes, jplDocentes, jplInicio};
         for (JPanel panel : panelsCianOscuro) {
-            panel.setBackground(new Color(0, 204, 204));
+            panel.setBackground(Color.WHITE);
         }
 
-        jplPeriodoAcademico.setBackground(Color.WHITE);
-        jLabel4.setForeground(Color.blue);
-        jLabel5.setForeground(Color.blue);
+        jplPeriodoAcademico.setBackground(new Color(255, 204, 0));
+        jLabel4.setForeground(Color.black);
+        jLabel5.setForeground(Color.black);        
 
         FrmPeriodoAcademico frmPeriodo = new FrmPeriodoAcademico(null, true);
         JPanel panelDocente = frmPeriodo.getJPanel1();
@@ -871,15 +907,15 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
     private void jplDocentesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplDocentesMouseEntered
         if (!isDocentesClicked) {
-            jplDocentes.setBackground(Color.WHITE);
-            jLabel2.setForeground(Color.blue);
-            jLabel3.setForeground(Color.blue);
+            jplDocentes.setBackground(new Color(255, 204, 0));
+            jLabel2.setForeground(Color.black);
+            jLabel3.setForeground(Color.black);
         }
     }//GEN-LAST:event_jplDocentesMouseEntered
 
     private void jplDocentesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplDocentesMouseExited
         if (!isDocentesClicked) {
-            jplDocentes.setBackground(new Color(0, 204, 204));
+            jplDocentes.setBackground(Color.WHITE);
             jLabel2.setForeground(Color.black);
             jLabel3.setForeground(Color.black);
         }
@@ -887,15 +923,15 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
     private void jplEstudiantesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplEstudiantesMouseEntered
         if (!isEstudiantesClicked) {
-            jplEstudiantes.setBackground(Color.WHITE);
-            jLabel6.setForeground(Color.blue);
-            jLabel7.setForeground(Color.blue);
+            jplEstudiantes.setBackground(new Color(255, 204, 0));
+            jLabel6.setForeground(Color.black);
+            jLabel7.setForeground(Color.black);
         }
     }//GEN-LAST:event_jplEstudiantesMouseEntered
 
     private void jplEstudiantesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplEstudiantesMouseExited
         if (!isEstudiantesClicked) {
-            jplEstudiantes.setBackground(new Color(0, 204, 204));
+            jplEstudiantes.setBackground(Color.WHITE);
             jLabel6.setForeground(Color.black);
             jLabel7.setForeground(Color.black);
         }
@@ -903,77 +939,140 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
 
     private void jplMateriasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMateriasMouseEntered
         if (!isMateriasClicked) {
-            jplMaterias.setBackground(Color.WHITE);
-            jLabel8.setForeground(Color.blue);
-            jLabel9.setForeground(Color.blue);
+            jplMaterias.setBackground(new Color(255, 204, 0));
+            jLabel8.setForeground(Color.black);
+            jLabel9.setForeground(Color.black);
         }
     }//GEN-LAST:event_jplMateriasMouseEntered
 
     private void jplMateriasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMateriasMouseExited
         if (!isMateriasClicked) {
-            jplMaterias.setBackground(new Color(0, 204, 204));
+            jplMaterias.setBackground(Color.WHITE);
             jLabel8.setForeground(Color.black);
             jLabel9.setForeground(Color.black);
         }
     }//GEN-LAST:event_jplMateriasMouseExited
 
-    private void jplCursoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplCursoMouseEntered
-        if (!isCursoClicked) {
-            jplCurso.setBackground(Color.WHITE);
-            jLabel11.setForeground(Color.blue);
-        }
-    }//GEN-LAST:event_jplCursoMouseEntered
-
-    private void jplCursoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplCursoMouseExited
-        if (!isCursoClicked) {
-            jplCurso.setBackground(new Color(0, 204, 204));
-            jLabel11.setForeground(Color.black);
-        }
-    }//GEN-LAST:event_jplCursoMouseExited
-
     private void jplMallaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMallaMouseEntered
         if (!isMallaClicked) {
-            jplMalla.setBackground(Color.WHITE);
-            jLabel12.setForeground(Color.blue);
+            jplMalla.setBackground(new Color(255, 204, 0));
+            jLabel12.setForeground(Color.black);
         }
     }//GEN-LAST:event_jplMallaMouseEntered
 
     private void jplMallaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMallaMouseExited
         if (!isMallaClicked) {
-            jplMalla.setBackground(new Color(0, 204, 204));
+            jplMalla.setBackground(Color.WHITE);
             jLabel12.setForeground(Color.black);
         }
     }//GEN-LAST:event_jplMallaMouseExited
 
     private void jplMatriculaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMatriculaMouseEntered
         if (!isMatriculaClicked) {
-            jplMatricula.setBackground(Color.WHITE);
-            jLabel13.setForeground(Color.blue);
+            jplMatricula.setBackground(new Color(255, 204, 0));
+            jLabel13.setForeground(Color.black);
         }
     }//GEN-LAST:event_jplMatriculaMouseEntered
 
     private void jplMatriculaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplMatriculaMouseExited
         if (!isMatriculaClicked) {
-            jplMatricula.setBackground(new Color(0, 204, 204));
+            jplMatricula.setBackground(Color.WHITE);
             jLabel13.setForeground(Color.black);
         }
     }//GEN-LAST:event_jplMatriculaMouseExited
 
     private void jplPeriodoAcademicoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplPeriodoAcademicoMouseEntered
         if (!isPeriodoAcademicoClicked) {
-            jplPeriodoAcademico.setBackground(Color.WHITE);
-            jLabel4.setForeground(Color.blue);
-            jLabel5.setForeground(Color.blue);
+            jplPeriodoAcademico.setBackground(new Color(255, 204, 0));
+            jLabel4.setForeground(Color.black);
+            jLabel5.setForeground(Color.black);
         }
     }//GEN-LAST:event_jplPeriodoAcademicoMouseEntered
 
     private void jplPeriodoAcademicoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplPeriodoAcademicoMouseExited
         if (!isPeriodoAcademicoClicked) {
-            jplPeriodoAcademico.setBackground(new Color(0, 204, 204));
+            jplPeriodoAcademico.setBackground(Color.WHITE);
             jLabel4.setForeground(Color.black);
             jLabel5.setForeground(Color.black);
         }
     }//GEN-LAST:event_jplPeriodoAcademicoMouseExited
+
+    private void jplInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplInicioMouseClicked
+        isInicioClicked = true;
+        jplInicio.setVisible(false);
+
+        JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7, jLabel8, jLabel9, jLabel12, jLabel13, jLabel4, jLabel5, jLabel15};
+        for (JLabel label : labelsBlancos) {
+            label.setForeground(Color.black);
+        }
+
+        JPanel[] panelsCianOscuro = {jplDocentes, jplEstudiantes, jplMaterias, jplCursa, jplMalla, jplMatricula, jplPeriodoAcademico};
+        for (JPanel panel : panelsCianOscuro) {
+            panel.setBackground(Color.WHITE);
+        }
+        jplInicio.setBackground(new Color(255, 204, 0));
+        jLabel16.setForeground(Color.black);
+
+        jPanel5.removeAll();
+        jPanel5.add(panelImage1);
+        jPanel5.revalidate();
+        jPanel5.repaint();
+    }//GEN-LAST:event_jplInicioMouseClicked
+
+    private void jplInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplInicioMouseEntered
+        if (!isInicioClicked) {
+            jplInicio.setBackground(new Color(255, 204, 0));
+            jLabel16.setForeground(Color.black);
+        } else {
+
+        }
+    }//GEN-LAST:event_jplInicioMouseEntered
+
+    private void jplInicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplInicioMouseExited
+        if (!isInicioClicked) {
+            jplInicio.setBackground(Color.WHITE);
+            jLabel16.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_jplInicioMouseExited
+
+    private void jplCursaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplCursaMouseClicked
+        isCursaClicked = true;
+        jplInicio.setVisible(true);
+        
+        JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7, jLabel8, jLabel9, jLabel12, jLabel13, jLabel4, jLabel5, jLabel16};
+        for (JLabel label : labelsBlancos) {
+            label.setForeground(Color.black);
+        }
+
+        JPanel[] panelsCianOscuro = {jplDocentes, jplEstudiantes, jplMaterias, jplMalla, jplMatricula, jplPeriodoAcademico, jplInicio};
+        for (JPanel panel : panelsCianOscuro) {
+            panel.setBackground(Color.WHITE);
+        }
+
+        jplCursa.setBackground(new Color(255, 204, 0));
+        jLabel15.setForeground(Color.black);        
+
+        FrmCursa frmCursa = new FrmCursa();
+        JPanel panelCursa = frmCursa.getJPanel1();
+        jPanel5.removeAll();
+        jPanel5.add(panelCursa);
+        jPanel5.revalidate();
+        jPanel5.repaint();
+    }//GEN-LAST:event_jplCursaMouseClicked
+
+    private void jplCursaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplCursaMouseEntered
+        if (!isCursaClicked) {
+            jplCursa.setBackground(new Color(255, 204, 0));
+            jLabel15.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_jplCursaMouseEntered
+
+    private void jplCursaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplCursaMouseExited
+        if (!isCursaClicked) {
+            jplCursa.setBackground(Color.WHITE);
+            jLabel15.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_jplCursaMouseExited
 
     /**
      * @param args the command line arguments
@@ -1003,22 +1102,32 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 String nombre = null;
                 String apellidos = null;
-                new FrmPrincipalAdministrador().setVisible(true);
+                new FrmPrincipalAdministrador(nombre, apellidos).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1032,9 +1141,10 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel jblNombre;
-    private javax.swing.JPanel jplCurso;
+    private javax.swing.JPanel jplCursa;
     private javax.swing.JPanel jplDocentes;
     private javax.swing.JPanel jplEstudiantes;
+    private javax.swing.JPanel jplInicio;
     private javax.swing.JPanel jplMalla;
     private javax.swing.JPanel jplMaterias;
     private javax.swing.JPanel jplMatricula;
@@ -1043,11 +1153,11 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
     private org.edisoncor.gui.panel.PanelImage panelImage1;
     private org.edisoncor.gui.panel.PanelImage panelImage10;
     private org.edisoncor.gui.panel.PanelImage panelImage11;
+    private org.edisoncor.gui.panel.PanelImage panelImage12;
     private org.edisoncor.gui.panel.PanelImage panelImage2;
     private org.edisoncor.gui.panel.PanelImage panelImage3;
     private org.edisoncor.gui.panel.PanelImage panelImage4;
     private org.edisoncor.gui.panel.PanelImage panelImage5;
-    private org.edisoncor.gui.panel.PanelImage panelImage6;
     private org.edisoncor.gui.panel.PanelImage panelImage7;
     private org.edisoncor.gui.panel.PanelImage panelImage8;
     private org.edisoncor.gui.panel.PanelImage panelImage9;

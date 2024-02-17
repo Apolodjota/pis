@@ -236,7 +236,7 @@ public class FrmPeriodoAcademico extends javax.swing.JDialog {
             }
         });
         jPanel3.add(btnGuardar);
-        btnGuardar.setBounds(190, 150, 72, 23);
+        btnGuardar.setBounds(170, 160, 72, 23);
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -245,7 +245,7 @@ public class FrmPeriodoAcademico extends javax.swing.JDialog {
             }
         });
         jPanel3.add(btnCancelar);
-        btnCancelar.setBounds(370, 150, 76, 23);
+        btnCancelar.setBounds(390, 160, 76, 23);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Recuerde que al generarse un nuevo periodo, el existente quedará en desuso.");
@@ -306,7 +306,7 @@ public class FrmPeriodoAcademico extends javax.swing.JDialog {
         jScrollPane2.setViewportView(tblTabla);
 
         jPanel5.add(jScrollPane2);
-        jScrollPane2.setBounds(10, 60, 950, 227);
+        jScrollPane2.setBounds(30, 120, 950, 227);
 
         btnSeleccionar.setText("Seleccionar");
         btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
@@ -315,19 +315,19 @@ public class FrmPeriodoAcademico extends javax.swing.JDialog {
             }
         });
         jPanel5.add(btnSeleccionar);
-        btnSeleccionar.setBounds(1000, 160, 91, 23);
+        btnSeleccionar.setBounds(1010, 210, 90, 23);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("Valor:");
         jPanel5.add(jLabel8);
-        jLabel8.setBounds(160, 30, 36, 16);
+        jLabel8.setBounds(70, 70, 36, 16);
         jPanel5.add(txtBusqueda);
-        txtBusqueda.setBounds(220, 30, 170, 22);
+        txtBusqueda.setBounds(130, 70, 170, 22);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText("Criterio:");
         jPanel5.add(jLabel9);
-        jLabel9.setBounds(510, 30, 60, 16);
+        jLabel9.setBounds(450, 70, 60, 16);
 
         cbxCriterio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "FechaDesde", "FechaHasta" }));
         cbxCriterio.addItemListener(new java.awt.event.ItemListener() {
@@ -336,7 +336,7 @@ public class FrmPeriodoAcademico extends javax.swing.JDialog {
             }
         });
         jPanel5.add(cbxCriterio);
-        cbxCriterio.setBounds(610, 30, 138, 22);
+        cbxCriterio.setBounds(530, 70, 138, 22);
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -345,13 +345,13 @@ public class FrmPeriodoAcademico extends javax.swing.JDialog {
             }
         });
         jPanel5.add(btnBuscar);
-        btnBuscar.setBounds(1000, 30, 90, 23);
+        btnBuscar.setBounds(1000, 70, 90, 23);
         jPanel5.add(dtcbusqueda);
-        dtcbusqueda.setBounds(220, 30, 170, 22);
+        dtcbusqueda.setBounds(130, 70, 170, 22);
 
         cbxorden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fecha Exacta", "Menores", "Mayores" }));
         jPanel5.add(cbxorden);
-        cbxorden.setBounds(820, 30, 130, 22);
+        cbxorden.setBounds(790, 70, 130, 22);
 
         jPanel1.add(jPanel5, java.awt.BorderLayout.CENTER);
 

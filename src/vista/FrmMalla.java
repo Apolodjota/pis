@@ -105,6 +105,7 @@ public class FrmMalla extends javax.swing.JFrame {
 
     private Boolean validar() {
         return !txtNombre.getText().trim().isEmpty()
+                && !txtCiclos.getText().trim().isEmpty()
                 && !(dtcCreacion == null);
     }
 
@@ -118,16 +119,16 @@ public class FrmMalla extends javax.swing.JFrame {
                 mcl.getMalla().setEstado("T");
 
                 if (mcl.getMalla().getId() == null) {
-                    Integer id = mcl.save();
                     System.out.println("Numero de ciclos; " + Integer.valueOf(txtCiclos.getText()));
                     try {
+                        Integer id = mcl.save();
                         for (int i = 1; i <= Integer.valueOf(txtCiclos.getText()); i++) {
-                            ccl.save();
                             ccl.getCurso().setId_malla(id);
                             ccl.getCurso().setCiclo(i);
+                            ccl.save();
                         }
-
                         System.out.println("ID: " + id);
+
                         limpiar();
                         JOptionPane.showMessageDialog(null,
                                 "Se ha guardado correctamente", "Ok",
@@ -187,7 +188,7 @@ public class FrmMalla extends javax.swing.JFrame {
                     checkBoxVigente.setEnabled(true);
                 } else {
                     checkBoxVigente.setSelected(false);
-                    checkBoxVigente.setEnabled(true);  
+                    checkBoxVigente.setEnabled(true);
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null,

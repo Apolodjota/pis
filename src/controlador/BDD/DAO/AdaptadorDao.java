@@ -111,7 +111,7 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
                 System.out.println("PRIMERO");
             }
         } catch (Exception e) {
-            System.out.println("SEGUNDO");
+            System.out.println(e.getMessage() + "SEGUNDO");
         }
 //        Statement st = conexion.getConnection().createStatement();
 //        st.executeUpdate(query);
@@ -318,7 +318,13 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
             Field[] fields = clazz.getDeclaredFields();
             for (Field f : fields) {
                 f.setAccessible(true);
-                query += f.getName() + " = " + "'" + f.get(obj) + "'" + ",";
+                if(f.get(obj).getClass().getSimpleName().equalsIgnoreCase("Date")){   
+                    SimpleDateFormat formato = new SimpleDateFormat("dd-MM-YY");
+                //query += '"' + formato.format(entry.getValue()) + '"' + ", ";
+                query += f.getName() + " = " +  "'" + formato.format(f.get(obj)) + "'" + ", ";
+                } else { 
+                    query += f.getName() + " = " + "'" + f.get(obj) + "'" + ",";
+                }
             }
             System.out.println("despues");
             query = query.substring(0, query.length() - 1);

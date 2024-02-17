@@ -1,7 +1,5 @@
 package vista;
 
-import controladores.AdministradorControlador;
-import controladores.RolControllerListas;
 import controladores.CuentaControllerListas;
 import controladores.PersonaController;
 import java.awt.Color;
@@ -19,11 +17,9 @@ import modelo.Persona;
 public class FrmIniciarSesion extends javax.swing.JFrame {
     private PersonaController perc = new PersonaController();
     private CuentaControllerListas rc = new CuentaControllerListas();
-    private AdministradorControlador ac = new AdministradorControlador();
-    private RolControllerListas rl = new RolControllerListas();
-    private Persona persona = new Persona();
-//    FondoPanel fondo = new FondoPanel();
-
+    private PersonaController pc = new PersonaController();
+    private Persona persona = null;
+    
     /**
      * Creates new form FrmPrincipal
      */
@@ -60,6 +56,7 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
         panelImage10 = new org.edisoncor.gui.panel.PanelImage();
         txtClave1 = new javax.swing.JTextField();
         panelImage11 = new org.edisoncor.gui.panel.PanelImage();
+        jlabelContraseñas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Iniciar Sesion");
@@ -125,7 +122,7 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
                 buttonColoredAction1ActionPerformed(evt);
             }
         });
-        panelImage1.add(buttonColoredAction1, new org.netbeans.lib.awtextra.AbsoluteConstraints(221, 481, 162, -1));
+        panelImage1.add(buttonColoredAction1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 500, 162, -1));
 
         javax.swing.GroupLayout panelImage9Layout = new javax.swing.GroupLayout(panelImage9);
         panelImage9.setLayout(panelImage9Layout);
@@ -185,6 +182,19 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
 
         panelImage1.add(panelImage11, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 409, -1, 28));
 
+        jlabelContraseñas.setFont(new java.awt.Font("Harlow Solid Italic", 1, 14)); // NOI18N
+        jlabelContraseñas.setForeground(new java.awt.Color(255, 255, 255));
+        jlabelContraseñas.setText("Cambiar Contraseña");
+        jlabelContraseñas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jlabelContraseñas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlabelContraseñasMouseClicked(evt);
+            }
+        });
+        panelImage1.add(jlabelContraseñas, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 450, -1, -1));
+
+
         jPanel1.add(panelImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 700));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -206,15 +216,17 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
         String clave = String.valueOf(txtClave.getPassword());
         try {
             Integer idCuentaCorreo = rc.obtenerIdPorCorreo(rc.getCuentas(), correo);
-            System.out.println("ID cuenta correo: "+idCuentaCorreo);
+            System.out.println("ID cuenta correo: " + idCuentaCorreo);
             Integer idCuentaClave = rc.obtenerIdPorClave(rc.getCuentas(), clave);
-            System.out.println("ID cuenta clave: "+idCuentaClave);
-            if (idCuentaCorreo == idCuentaClave && idCuentaCorreo != -1) {
+            System.out.println("ID cuenta clave: " + idCuentaClave);
+            if (idCuentaCorreo.equals(idCuentaClave) && idCuentaCorreo != -1) {
                 Integer idPersona = rc.getCuentas().get(idCuentaCorreo).getId_persona();
                 persona = perc.buscar(idPersona);
                 Integer idRol = persona.getId_rol(); 
                 if (idRol == 1) {
-                    new FrmPrincipalAdministrador().setVisible(true);
+                    String nombres = pc.getLista().get(idCuentaCorreo).getNombres();
+                    String apellidos = pc.getLista().get(idCuentaCorreo).getApellidos();
+                    new FrmPrincipalAdministrador(nombres, apellidos).setVisible(true);
                     this.setVisible(false);
                 } else if (idRol == 2) {
                     new FrmMainDocente().setVisible(true);
@@ -294,6 +306,12 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
         panelImage10.setVisible(true);
     }//GEN-LAST:event_panelImage11MouseClicked
 
+    private void jlabelContraseñasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlabelContraseñasMouseClicked
+
+        FrmCambiarClave cambio =  new FrmCambiarClave();
+        cambio.setVisible(true);
+    }//GEN-LAST:event_jlabelContraseñasMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -337,6 +355,7 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jlabelContraseñas;
     private org.edisoncor.gui.panel.PanelImage panelImage1;
     private org.edisoncor.gui.panel.PanelImage panelImage10;
     private org.edisoncor.gui.panel.PanelImage panelImage11;

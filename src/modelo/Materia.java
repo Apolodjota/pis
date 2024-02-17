@@ -46,6 +46,11 @@ public class Materia {
         }
     }       
 
+    @Override
+    public String toString() {
+        return "Materia: " + nombre + " " + "Ciclo: " +  id_curso;
+    }
+    
     public Integer getId() {
         return id;
     }

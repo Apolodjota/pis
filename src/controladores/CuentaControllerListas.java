@@ -213,24 +213,24 @@ public class CuentaControllerListas extends AdaptadorDao<Cuenta> {
     public static void main(String[] args) {
         CuentaControllerListas cc = new CuentaControllerListas();
 
-        cc.getCuenta().setId(1);
-        cc.getCuenta().setCorreo("apolo");
-        cc.getCuenta().setClave("123");
-        cc.getCuenta().setId_persona(1);
-//        cc.getCuenta().setId_rol(2);
-        cc.save();
+//        cc.getCuenta().setCorreo("apolo");
+//        cc.getCuenta().setClave("123");
+//        cc.getCuenta().setEstado("T");
+//        cc.getCuenta().setId_persona(1);
+////        cc.getCuenta().setId_rol(2);
+//        cc.save();
         
-        cc.getCuenta().setId(2);
-        cc.getCuenta().setCorreo("admin@gmail.com");
-        cc.getCuenta().setClave("2004");
-        cc.getCuenta().setId_persona(2);
-//        cc.getCuenta().setId_rol(1);
-        cc.save();        
-        
-        cc.getCuenta().setId(3);
+//        cc.getCuenta().setCorreo("admin@gmail.com");
+//        cc.getCuenta().setClave("2004");
+//        cc.getCuenta().setId_persona(2);
+//        cc.getCuenta().setEstado("T");
+////        cc.getCuenta().setId_rol(1);
+//        cc.save();        
+//        
         cc.getCuenta().setCorreo("ger");
         cc.getCuenta().setClave("456");
         cc.getCuenta().setId_persona(3);
+        cc.getCuenta().setEstado("T");
 //        cc.getCuenta().setId_rol(3);
         cc.save();         
     }
