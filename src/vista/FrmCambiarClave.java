@@ -66,17 +66,17 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         txtClave1 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtClave3 = new javax.swing.JTextField();
         panelImage12 = new org.edisoncor.gui.panel.PanelImage();
-        txtClave2 = new javax.swing.JPasswordField();
         panelImage13 = new org.edisoncor.gui.panel.PanelImage();
+        txtClave2 = new javax.swing.JPasswordField();
         panelImage10 = new org.edisoncor.gui.panel.PanelImage();
         panelImage11 = new org.edisoncor.gui.panel.PanelImage();
+        txtClave3 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        txtClave4 = new javax.swing.JTextField();
+        txtClave5 = new javax.swing.JPasswordField();
         panelImage15 = new org.edisoncor.gui.panel.PanelImage();
         panelImage14 = new org.edisoncor.gui.panel.PanelImage();
-        txtClave5 = new javax.swing.JPasswordField();
+        txtClave4 = new javax.swing.JTextField();
         jplSalir = new javax.swing.JPanel();
         panelImage16 = new org.edisoncor.gui.panel.PanelImage();
         jLabel14 = new javax.swing.JLabel();
@@ -97,7 +97,7 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.insets = new java.awt.Insets(110, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(50, 0, 0, 0);
         panelImage1.add(jLabel6, gridBagConstraints);
 
         jLabel4.setFont(new java.awt.Font("Harlow Solid Italic", 1, 18)); // NOI18N
@@ -175,7 +175,7 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         gridBagConstraints.gridy = 11;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 46;
-        gridBagConstraints.insets = new java.awt.Insets(50, 50, 50, 50);
+        gridBagConstraints.insets = new java.awt.Insets(50, 20, 20, 20);
         panelImage1.add(buttonColoredActionGuardar, gridBagConstraints);
 
         javax.swing.GroupLayout panelImage9Layout = new javax.swing.GroupLayout(panelImage9);
@@ -195,7 +195,7 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 82;
         gridBagConstraints.ipady = 82;
-        gridBagConstraints.insets = new java.awt.Insets(30, 30, 30, 30);
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         panelImage1.add(panelImage9, gridBagConstraints);
 
         txtClave1.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
@@ -216,11 +216,8 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         jLabel7.setText("de usuario");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(140, 230, 0, 0);
         panelImage1.add(jLabel7, gridBagConstraints);
 
         jLabel8.setFont(new java.awt.Font("Harlow Solid Italic", 1, 18)); // NOI18N
@@ -234,17 +231,6 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 12;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         panelImage1.add(jLabel8, gridBagConstraints);
-
-        txtClave3.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        txtClave3.setForeground(java.awt.Color.lightGray);
-        txtClave3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtClave3.setBorder(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.ipadx = 258;
-        gridBagConstraints.ipady = 12;
-        panelImage1.add(txtClave3, gridBagConstraints);
 
         panelImage12.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -272,22 +258,6 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(7, 6, 0, 140);
         panelImage1.add(panelImage12, gridBagConstraints);
 
-        txtClave2.setForeground(java.awt.Color.lightGray);
-        txtClave2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtClave2.setText("**********************");
-        txtClave2.setBorder(null);
-        txtClave2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtClave2MousePressed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.ipadx = 258;
-        gridBagConstraints.ipady = 12;
-        panelImage1.add(txtClave2, gridBagConstraints);
-
         panelImage13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelImage13MouseClicked(evt);
@@ -313,6 +283,22 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(7, 6, 0, 140);
         panelImage1.add(panelImage13, gridBagConstraints);
+
+        txtClave2.setForeground(java.awt.Color.lightGray);
+        txtClave2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtClave2.setText("**********************");
+        txtClave2.setBorder(null);
+        txtClave2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtClave2MousePressed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.ipadx = 258;
+        gridBagConstraints.ipady = 12;
+        panelImage1.add(txtClave2, gridBagConstraints);
 
         panelImage10.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -366,6 +352,17 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(7, 6, 0, 140);
         panelImage1.add(panelImage11, gridBagConstraints);
 
+        txtClave3.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        txtClave3.setForeground(java.awt.Color.lightGray);
+        txtClave3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtClave3.setBorder(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.ipadx = 258;
+        gridBagConstraints.ipady = 12;
+        panelImage1.add(txtClave3, gridBagConstraints);
+
         jLabel9.setFont(new java.awt.Font("Harlow Solid Italic", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -378,16 +375,21 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         panelImage1.add(jLabel9, gridBagConstraints);
 
-        txtClave4.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        txtClave4.setForeground(java.awt.Color.lightGray);
-        txtClave4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtClave4.setBorder(null);
+        txtClave5.setForeground(java.awt.Color.lightGray);
+        txtClave5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtClave5.setText("**********************");
+        txtClave5.setBorder(null);
+        txtClave5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtClave5MousePressed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 10;
         gridBagConstraints.ipadx = 258;
         gridBagConstraints.ipady = 12;
-        panelImage1.add(txtClave4, gridBagConstraints);
+        panelImage1.add(txtClave5, gridBagConstraints);
 
         panelImage15.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -441,21 +443,16 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(7, 6, 0, 140);
         panelImage1.add(panelImage14, gridBagConstraints);
 
-        txtClave5.setForeground(java.awt.Color.lightGray);
-        txtClave5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtClave5.setText("**********************");
-        txtClave5.setBorder(null);
-        txtClave5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtClave5MousePressed(evt);
-            }
-        });
+        txtClave4.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        txtClave4.setForeground(java.awt.Color.lightGray);
+        txtClave4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtClave4.setBorder(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 10;
         gridBagConstraints.ipadx = 258;
         gridBagConstraints.ipady = 12;
-        panelImage1.add(txtClave5, gridBagConstraints);
+        panelImage1.add(txtClave4, gridBagConstraints);
 
         jplSalir.setBackground(new java.awt.Color(255, 204, 0));
         jplSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -487,7 +484,7 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         jplSalir.add(panelImage16, gridBagConstraints);
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel14.setText("Cerrar Sesion");
+        jLabel14.setText("Regresar");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -497,8 +494,7 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_END;
         panelImage1.add(jplSalir, gridBagConstraints);
 
         jPanel1.add(panelImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 700));
@@ -531,6 +527,11 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         if (String.valueOf(txtClave2.getPassword()).isEmpty()) {
             txtClave2.setText("**********************");
             txtClave2.setForeground(Color.lightGray);
+        }
+        
+        if (String.valueOf(txtClave5.getPassword()).isEmpty()) {
+            txtClave5.setText("**********************");
+            txtClave5.setForeground(Color.lightGray);
         }
     }//GEN-LAST:event_txtCorreoMousePressed
 
@@ -573,7 +574,7 @@ public class FrmCambiarClave extends javax.swing.JFrame {
                 Integer idPersona = rc.getCuentas().get(idCuentaCorreo).getId_persona();
                 Integer idRol = persona.getId_rol();
                 if (idRol == 1) {
-                    new FrmPrincipalAdministrador().setVisible(true);
+//                    new FrmPrincipalAdministrador().setVisible(true);
                     this.setVisible(false);
                 } else if (idRol == 2) {
                     new FrmMainDocente().setVisible(true);
