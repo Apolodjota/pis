@@ -6,9 +6,7 @@ import controlador.TDALista.LinkedList;
 import controladores.MallaControllerListas;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import modelo.Curso;
 import modelo.Malla;
-import modelo.Materia;
 import vista.listas.tablas.ModeloTablaMateriaListas;
 import vista.listas.util.UtilVista;
 
@@ -379,6 +377,11 @@ public class FrmMateria extends javax.swing.JFrame {
                 cbxCriterioItemStateChanged(evt);
             }
         });
+        cbxCriterio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxCriterioActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -502,6 +505,10 @@ public class FrmMateria extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_cbxMallaItemStateChanged
+
+    private void cbxCriterioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCriterioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxCriterioActionPerformed
 
     /**
      * @param args the command line arguments
