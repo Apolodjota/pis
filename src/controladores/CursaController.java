@@ -8,12 +8,17 @@ import controlador.BDD.DAO.AdaptadorDao;
 import controlador.BDD.DAO.Conexion;
 import controlador.TDALista.LinkedList;
 import controlador.TDALista.exceptions.VacioException;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import modelo.Asignacion;
 import modelo.Cursa;
 import modelo.Docente;
 import modelo.Materia;
@@ -189,11 +194,11 @@ public class CursaController extends  AdaptadorDao<Cursa>{
         return result;
     }
     
-    public LinkedList <Cursa> listarCursosDocente (){
+    public LinkedList <Cursa> listarCursosDocente (Integer id){
         LinkedList <Cursa> lista = new LinkedList<>();
         try {
             Statement stmt = new Conexion().getConnection().createStatement();
-            String query = "SELECT DISTINCT id_materia, paralelo FROM Cursa";
+            String query = "SELECT DISTINCT id_materia, paralelo FROM Cursa  WHERE id_docente = " + id;
             ResultSet rs = stmt.executeQuery(query);
             while(rs.next()) {
                 Cursa cc = new Cursa();
@@ -227,6 +232,35 @@ public class CursaController extends  AdaptadorDao<Cursa>{
         } catch (Exception e) {
             System.out.println("error" + e.getMessage());
         }
+        return lista;
+    }
+    
+    //este metodo no va aqui:
+    public LinkedList<Asignacion> asignacionesdeCursa(Integer id_cursa){
+        LinkedList<Asignacion> lista = new LinkedList<>();
+        try {
+            Statement stmt = new Conexion().getConnection().createStatement();
+            String query = "SELECT * FROM asignacion WHERE id_cursa = "+id_cursa;
+            System.out.println(query);
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()) {
+                Asignacion a = new Asignacion();
+                a.setId(rs.getInt(1));
+                a.setId_cursa(rs.getInt(2));
+                a.setId_tarea(rs.getInt(3)); 
+                /*File f = new File("ruta");
+                OutputStream ou = new FileOutputStream(f, false);
+                rs.getBinaryStream(4).transferTo(ou);*/
+                a.setFechaEntrega(rs.getDate(5));
+                a.setCalificacion(rs.getDouble(6));
+                a.setComentario(rs.getString(7));
+                a.setEstado(rs.getString(8));
+                lista.add(a);
+            }
+        } catch (Exception e) {
+            System.out.println("error" + e.getMessage());
+        }
+        //System.out.println("Asignaciones en asignaciones de Cursa: \n"+lista.print());
         return lista;
     }
     

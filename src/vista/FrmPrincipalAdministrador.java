@@ -743,39 +743,6 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jplDocentesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplDocentesMouseClicked
-        isDocentesClicked = true;
-        jplInicio.setVisible(true);
-
-        jplInicio.setBackground(Color.white);
-        jplEstudiantes.setBackground(Color.white);
-        jplMaterias.setBackground(Color.white);
-        jplCursa.setBackground(Color.white);
-        jplMalla.setBackground(Color.white);
-        jplMatricula.setBackground(Color.white);
-        jplPeriodoAcademico.setBackground(Color.white);
-
-        JLabel[] labelsBlancos = {jLabel6, jLabel7, jLabel8, jLabel9, jLabel16, jLabel12, jLabel13, jLabel4, jLabel5, jLabel15};
-        for (JLabel label : labelsBlancos) {
-            label.setForeground(Color.black);
-        }
-
-        JPanel[] panelsCianOscuro = {jplInicio, jplEstudiantes, jplMaterias, jplMalla, jplMatricula, jplPeriodoAcademico, jplCursa};
-        for (JPanel panel : panelsCianOscuro) {
-            panel.setBackground(Color.WHITE);
-        }
-        jplDocentes.setBackground(new Color(255, 204, 0));
-        jLabel2.setForeground(Color.black);
-        jLabel3.setForeground(Color.black);
-
-        FrmDocente frmDocente = new FrmDocente();
-        JPanel panelDocente = frmDocente.getJPanel1();
-        jPanel5.removeAll();
-        jPanel5.add(panelDocente);
-        jPanel5.revalidate();
-        jPanel5.repaint();
-    }//GEN-LAST:event_jplDocentesMouseClicked
-
     private void jplEstudiantesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplEstudiantesMouseClicked
         isEstudiantesClicked = true;
         jplInicio.setVisible(true);
@@ -904,22 +871,6 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
         new FrmIniciarSesion().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jplSalirMouseClicked
-
-    private void jplDocentesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplDocentesMouseEntered
-        if (!isDocentesClicked) {
-            jplDocentes.setBackground(new Color(255, 204, 0));
-            jLabel2.setForeground(Color.black);
-            jLabel3.setForeground(Color.black);
-        }
-    }//GEN-LAST:event_jplDocentesMouseEntered
-
-    private void jplDocentesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplDocentesMouseExited
-        if (!isDocentesClicked) {
-            jplDocentes.setBackground(Color.WHITE);
-            jLabel2.setForeground(Color.black);
-            jLabel3.setForeground(Color.black);
-        }
-    }//GEN-LAST:event_jplDocentesMouseExited
 
     private void jplEstudiantesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplEstudiantesMouseEntered
         if (!isEstudiantesClicked) {
@@ -1073,6 +1024,55 @@ public class FrmPrincipalAdministrador extends javax.swing.JFrame {
             jLabel15.setForeground(Color.black);
         }
     }//GEN-LAST:event_jplCursaMouseExited
+
+    private void jplDocentesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplDocentesMouseExited
+        if (!isDocentesClicked) {
+            jplDocentes.setBackground(Color.WHITE);
+            jLabel2.setForeground(Color.black);
+            jLabel3.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_jplDocentesMouseExited
+
+    private void jplDocentesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplDocentesMouseEntered
+        if (!isDocentesClicked) {
+            jplDocentes.setBackground(new Color(255, 204, 0));
+            jLabel2.setForeground(Color.black);
+            jLabel3.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_jplDocentesMouseEntered
+
+    private void jplDocentesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplDocentesMouseClicked
+        isDocentesClicked = true;
+        jplInicio.setVisible(true);
+
+        jplInicio.setBackground(Color.white);
+        jplEstudiantes.setBackground(Color.white);
+        jplMaterias.setBackground(Color.white);
+        jplCursa.setBackground(Color.white);
+        jplMalla.setBackground(Color.white);
+        jplMatricula.setBackground(Color.white);
+        jplPeriodoAcademico.setBackground(Color.white);
+
+        JLabel[] labelsBlancos = {jLabel6, jLabel7, jLabel8, jLabel9, jLabel16, jLabel12, jLabel13, jLabel4, jLabel5, jLabel15};
+        for (JLabel label : labelsBlancos) {
+            label.setForeground(Color.black);
+        }
+
+        JPanel[] panelsCianOscuro = {jplInicio, jplEstudiantes, jplMaterias, jplMalla, jplMatricula, jplPeriodoAcademico, jplCursa};
+        for (JPanel panel : panelsCianOscuro) {
+            panel.setBackground(Color.WHITE);
+        }
+        jplDocentes.setBackground(new Color(255, 204, 0));
+        jLabel2.setForeground(Color.black);
+        jLabel3.setForeground(Color.black);
+
+        FrmDocente frmDocente = new FrmDocente();
+        JPanel panelDocente = frmDocente.getJPanel1();
+        jPanel5.removeAll();
+        jPanel5.add(panelDocente);
+        jPanel5.revalidate();
+        jPanel5.repaint();
+    }//GEN-LAST:event_jplDocentesMouseClicked
 
     /**
      * @param args the command line arguments

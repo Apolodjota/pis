@@ -4,6 +4,7 @@
  */
 package controladores;
 
+import controlador.BDD.DAO.AdaptadorDao;
 import controlador.TDALista.LinkedList;
 import controlador.TDALista.exceptions.VacioException;
 import controlador.listas.DAO.DataAccesObject;
@@ -13,7 +14,7 @@ import modelo.Tarea;
  *
  * @author apolo
  */
-public class TareaController extends DataAccesObject<Tarea>{
+public class TareaController extends AdaptadorDao<Tarea>{
     private Tarea tarea = new Tarea();
     private LinkedList<Tarea> tareas = new LinkedList<>();
     
@@ -21,14 +22,18 @@ public class TareaController extends DataAccesObject<Tarea>{
         super(Tarea.class);
     }
 
-    public Boolean guardar() {
-        getTarea().setId(generated_id());
-        return save(getTarea());
+    public Integer guardar() {
+        return guardar(tarea);
     }
 
-    public Boolean update(int fila) {
-        return update(getTarea(), fila);
+    public void update(Tarea t) throws Exception{
+        modificar(t);
     }
+    
+    public Tarea buscarTarea(Integer id){
+        return obtener(id);
+    }
+    
     public LinkedList<Tarea> quickSort(LinkedList<Tarea> lista, Integer type, String field) {
         Tarea[] m = lista.toArray();
         Integer fin = m.length - 1;

@@ -1,5 +1,4 @@
 package vista;
-
 import controlador.TDALista.LinkedList;
 import controlador.TDALista.exceptions.VacioException;
 import controladores.CuentaControllerListas;
@@ -18,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import modelo.Asignacion;
 import modelo.Cursa;
 import modelo.Estudiante;
 
@@ -44,7 +44,9 @@ public class FrmPrincipalEstudiante1 extends javax.swing.JFrame {
     CursaController cursac = new CursaController();
     MateriaControllerListas mac = new MateriaControllerListas();
     MatriculaController mtrc = new MatriculaController();
+    private LinkedList<Asignacion> asignacionesCursa = new LinkedList<>();
     private JPanel panelMAIN = new JPanel();
+    FrmInfoCursa infoCursa;
 
     /**
      * Creates new form FrmPrincipalAdministrador
@@ -65,7 +67,6 @@ public class FrmPrincipalEstudiante1 extends javax.swing.JFrame {
         jplUnidad1.setVisible(false);
         jplUnidad2.setVisible(false);
         jplUnidad3.setVisible(false);
-        //jPanel3.setSize(197, 642);
         estudianteLogeado = ec.buscarEstudiante(id_estudiante);
         cargarDatos();
     }
@@ -117,7 +118,9 @@ public class FrmPrincipalEstudiante1 extends javax.swing.JFrame {
                                 jplUnidad1.setVisible(true);
                                 jplUnidad2.setVisible(true);
                                 jplUnidad3.setVisible(true);
-                                FrmInfoCursa infoCursa = new FrmInfoCursa(frmactual, true, id_cursa);
+                                //FrmInfoCursa infoCursa = new FrmInfoCursa(frmactual, true, id_cursa);
+                                infoCursa = new FrmInfoCursa(frmactual, true, id_cursa);
+                                asignacionesCursa = cursac.asignacionesdeCursa(id_cursa);
                                 JPanel panelCursa = infoCursa.getJPanel1();
                                 panelPrincipal.removeAll();
                                 panelPrincipal.add(panelCursa);
@@ -223,6 +226,7 @@ public class FrmPrincipalEstudiante1 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setUndecorated(true);
 
         jPanel2.setBackground(new java.awt.Color(0, 204, 204));
@@ -883,7 +887,7 @@ public class FrmPrincipalEstudiante1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jplUnidad1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplUnidad1MouseClicked
-        isDocentesClicked = true;
+        /*isDocentesClicked = true;
         jplInicio.setVisible(true);
 
         jplInicio.setBackground(Color.white);
@@ -912,11 +916,13 @@ public class FrmPrincipalEstudiante1 extends javax.swing.JFrame {
         panelPrincipal.removeAll();
         panelPrincipal.add(panelDocente);
         panelPrincipal.revalidate();
-        panelPrincipal.repaint();
+        panelPrincipal.repaint();*/
+        infoCursa.getPanelAsignaciones().setVisible(true);
+        //infoCursa.cargarTabla();
     }//GEN-LAST:event_jplUnidad1MouseClicked
 
     private void jplUnidad2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplUnidad2MouseClicked
-        isEstudiantesClicked = true;
+        /*isEstudiantesClicked = true;
         jplInicio.setVisible(true);
 
         JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel8, jLabel9, jLabel16, jLabel12, jLabel13, jLabel4, jLabel5, jLabel15};
@@ -937,11 +943,12 @@ public class FrmPrincipalEstudiante1 extends javax.swing.JFrame {
         panelPrincipal.removeAll();
         panelPrincipal.add(panelDocente);
         panelPrincipal.revalidate();
-        panelPrincipal.repaint();
+        panelPrincipal.repaint();*/
+        infoCursa.getPanelAsignaciones().setVisible(true);
     }//GEN-LAST:event_jplUnidad2MouseClicked
 
     private void jplUnidad3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplUnidad3MouseClicked
-        isMateriasClicked = true;
+        /*isMateriasClicked = true;
         jplInicio.setVisible(true);
 
         JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7, jLabel16, jLabel12, jLabel13, jLabel4, jLabel5, jLabel15};
@@ -962,7 +969,8 @@ public class FrmPrincipalEstudiante1 extends javax.swing.JFrame {
         panelPrincipal.removeAll();
         panelPrincipal.add(panelMateria);
         panelPrincipal.revalidate();
-        panelPrincipal.repaint();
+        panelPrincipal.repaint();*/
+        infoCursa.getPanelAsignaciones().setVisible(true);
     }//GEN-LAST:event_jplUnidad3MouseClicked
 
     private void jplSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplSalirMouseClicked
