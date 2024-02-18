@@ -9,10 +9,10 @@ import controlador.BDD.DAO.Conexion;
 import controlador.TDALista.LinkedList;
 import controlador.TDALista.exceptions.VacioException;
 import controlador.listas.DAO.DataAccesObject;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import modelo.Docente;
-import modelo.Estudiante;
 
 /**
  *
@@ -21,6 +21,7 @@ import modelo.Estudiante;
 public class DocenteControlador extends AdaptadorDao<Docente>{
     private LinkedList <Docente> docentes = new LinkedList <Docente>();
     private Docente docente = new Docente();
+    private Conexion conexion =new Conexion();
     
     public DocenteControlador() {
         super(Docente.class);
@@ -82,7 +83,33 @@ public class DocenteControlador extends AdaptadorDao<Docente>{
         }
         return lista;
     }
-    
+    public Docente buscarDocente(Integer id) {
+        Docente docente = new Docente();
+        try {
+            Statement stmt = conexion.getConnection().createStatement();
+            String query = "SELECT * FROM docente JOIN persona on (docente.id = " + id + " and persona.id = " + id + ")";
+            System.out.println(query);
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                docente.setId(rs.getInt(1));
+                docente.setFecha_inicio_docencia(rs.getDate(2));
+                docente.setTitulo_tercerNivel(rs.getString(3));
+                docente.setTitulo_cuartoNivel(rs.getString(4));
+                docente.setId_rol(rs.getInt(5));
+                docente.setCedula(rs.getString(6));
+                docente.setNombres(rs.getString(7));
+                docente.setApellidos(rs.getString(8));
+                docente.setGenero(rs.getString(9));
+                docente.setFechaNacimiento(rs.getDate(10));
+                docente.setTelefonoCasa(rs.getString(11));
+                docente.setTelefonoCelular(rs.getString(12));
+                docente.setDireccionResidencia(rs.getString(13));
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        return docente;
+    }
     private void intercambio(Docente d[], int i, int j){
         Docente aux = d[j];
         d[j] = d[i];
