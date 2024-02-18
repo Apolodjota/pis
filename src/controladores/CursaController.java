@@ -189,11 +189,11 @@ public class CursaController extends  AdaptadorDao<Cursa>{
         return result;
     }
     
-    public LinkedList <Cursa> listarCursosDocente (){
+    public LinkedList <Cursa> listarCursosDocente (Integer id){
         LinkedList <Cursa> lista = new LinkedList<>();
         try {
             Statement stmt = new Conexion().getConnection().createStatement();
-            String query = "SELECT DISTINCT id_materia, paralelo FROM Cursa";
+            String query = "SELECT DISTINCT id_materia, paralelo FROM Cursa  WHERE id_docente = " + id;
             ResultSet rs = stmt.executeQuery(query);
             while(rs.next()) {
                 Cursa cc = new Cursa();
