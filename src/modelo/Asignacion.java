@@ -6,7 +6,7 @@ import java.util.Date;
  *
  * @author Apolo
  */
-public class Asignasion {
+public class Asignacion {
     private Integer id;
     private Integer id_cursa;
     private Integer id_tarea;
@@ -17,10 +17,10 @@ public class Asignasion {
     private String estado;
     
 
-    public Asignasion() {
+    public Asignacion() {
     }
 
-    public Asignasion(Integer id, Integer id_cursa, Integer id_tarea, File archivo, Date fechaEntrega, Double calificacion, String comentario, String estado) {
+    public Asignacion(Integer id, Integer id_cursa, Integer id_tarea, File archivo, Date fechaEntrega, Double calificacion, String comentario, String estado) {
         this.id = id;
         this.id_cursa = id_cursa;
         this.id_tarea = id_tarea;

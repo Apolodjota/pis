@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import modelo.Cursa;
 import modelo.PeriodoAcademico;
+import vista.listas.tablas.ModeloTablaAsignacion;
 import vista.listas.tablas.ModeloTablaPeriodo;
 
 /**
@@ -19,7 +20,7 @@ import vista.listas.tablas.ModeloTablaPeriodo;
  * @author alexg
  */
 public class FrmInfoCursa extends javax.swing.JDialog {
-
+    ModeloTablaAsignacion mta = new ModeloTablaAsignacion();
     LinkedList<PeriodoAcademico> p = new LinkedList<>();
     private PeriodoController pcl = new PeriodoController();
     private ModeloTablaPeriodo mtp = new ModeloTablaPeriodo();
@@ -40,6 +41,10 @@ public class FrmInfoCursa extends javax.swing.JDialog {
         return jPanel1;
     }
 
+    public JPanel getPanelAsignaciones() {
+        return panelAsignaciones;
+    }
+    
     public FrmInfoCursa(java.awt.Frame parent, boolean modal, Integer id_cursa) {
         super(parent, modal);
         initComponents();
@@ -47,6 +52,8 @@ public class FrmInfoCursa extends javax.swing.JDialog {
         cursaActual = curc.obtenerCursaPorID_Cursa(id_cursa);
         //limpiar();
         mostrarDatos();
+        panelAsignaciones.setVisible(false);
+        cargarTabla();
     }
 
     private void mostrarDatos() {
@@ -58,11 +65,11 @@ public class FrmInfoCursa extends javax.swing.JDialog {
         }
     }
 
-    /*private void cargarTabla() {
-        mtp.setPeriodos(pcl.getPeriodos());
-        tblTabla.setModel(mtp);
-        tblTabla.updateUI();
-    }*/
+    public void cargarTabla() {
+        mta.setAsignaciones(curc.asignacionesdeCursa(cursaActual.getId()));
+        tblAsignaciones.setModel(mta);
+        tblAsignaciones.updateUI();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -80,10 +87,12 @@ public class FrmInfoCursa extends javax.swing.JDialog {
         txtmiembros = new javax.swing.JTextField();
         txtdocente = new javax.swing.JTextField();
         txtcursa = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblTabla = new javax.swing.JTable();
         txtmatricula = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        panelAsignaciones = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblAsignaciones = new javax.swing.JTable();
+        btnabrirasignacion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestion de Materias");
@@ -112,7 +121,15 @@ public class FrmInfoCursa extends javax.swing.JDialog {
         txtcursa.setEditable(false);
         txtcursa.setText("Periodo Academico ");
 
-        tblTabla.setModel(new javax.swing.table.DefaultTableModel(
+        txtmatricula.setEditable(false);
+        txtmatricula.setText("Periodo Academico ");
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setText("Matrícula:");
+
+        panelAsignaciones.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Asignaciones de la Unidad:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+
+        tblAsignaciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -123,13 +140,36 @@ public class FrmInfoCursa extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(tblTabla);
+        jScrollPane2.setViewportView(tblAsignaciones);
 
-        txtmatricula.setEditable(false);
-        txtmatricula.setText("Periodo Academico ");
+        btnabrirasignacion.setText("Abrir asignacion");
+        btnabrirasignacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnabrirasignacionActionPerformed(evt);
+            }
+        });
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel8.setText("Matrícula:");
+        javax.swing.GroupLayout panelAsignacionesLayout = new javax.swing.GroupLayout(panelAsignaciones);
+        panelAsignaciones.setLayout(panelAsignacionesLayout);
+        panelAsignacionesLayout.setHorizontalGroup(
+            panelAsignacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAsignacionesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(panelAsignacionesLayout.createSequentialGroup()
+                .addGap(244, 244, 244)
+                .addComponent(btnabrirasignacion)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelAsignacionesLayout.setVerticalGroup(
+            panelAsignacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAsignacionesLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnabrirasignacion)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -137,19 +177,21 @@ public class FrmInfoCursa extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtmatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtcursa, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtmiembros, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtdocente, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(panelAsignaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtmatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtcursa, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtmiembros, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtdocente, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(537, 537, 537))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,9 +212,9 @@ public class FrmInfoCursa extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(txtmiembros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(267, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(panelAsignaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(148, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -199,6 +241,10 @@ public class FrmInfoCursa extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnabrirasignacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnabrirasignacionActionPerformed
+        int fila = tblAsignaciones.getSelectedRow();
+    }//GEN-LAST:event_btnabrirasignacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -274,6 +320,8 @@ public class FrmInfoCursa extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnabrirasignacion;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel7;
@@ -281,7 +329,8 @@ public class FrmInfoCursa extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tblTabla;
+    private javax.swing.JPanel panelAsignaciones;
+    private javax.swing.JTable tblAsignaciones;
     private javax.swing.JTextField txtcursa;
     private javax.swing.JTextField txtdocente;
     private javax.swing.JTextField txtmatricula;
