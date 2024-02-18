@@ -126,6 +126,7 @@ public class FrmInfoCursa extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestion de Materias");
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1140, 642));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -156,6 +157,7 @@ public class FrmInfoCursa extends javax.swing.JDialog {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("Matrícula:");
 
+        panelAsignaciones.setBackground(new java.awt.Color(255, 255, 255));
         panelAsignaciones.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Asignaciones de la Unidad:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
         tblAsignaciones.setModel(new javax.swing.table.DefaultTableModel(
@@ -272,7 +274,7 @@ public class FrmInfoCursa extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnabrirasignacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnabrirasignacionActionPerformed
-        try {
+        try { 
             int fila = tblAsignaciones.getSelectedRow();
             if (fila > -1) {
                 //new FrmSubirEstudiante().setVisible(true);
@@ -280,6 +282,7 @@ public class FrmInfoCursa extends javax.swing.JDialog {
                 Tarea tActual = tc.buscarTarea(asigActual.getId_tarea());
                 FrmSubirEstudiante asignacion = new FrmSubirEstudiante(asigActual, tActual);
                 JPanel panelAsignacion = asignacion.getPrincipalAsignacion();
+                
                 jPanel1.removeAll();
                 jPanel1.add(panelAsignacion);
                 jPanel1.revalidate();
@@ -288,7 +291,9 @@ public class FrmInfoCursa extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null, "!Seleccione alguna asignación", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Error al abrir FrmSubirEst: " + e);
+            
         }
     }//GEN-LAST:event_btnabrirasignacionActionPerformed
 
@@ -370,7 +375,6 @@ public class FrmInfoCursa extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnabrirasignacion;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
