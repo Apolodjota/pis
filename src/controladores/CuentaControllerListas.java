@@ -219,25 +219,25 @@ public class CuentaControllerListas extends AdaptadorDao<Cuenta> {
     public static void main(String[] args) {
         CuentaControllerListas cc = new CuentaControllerListas();
 
-//        cc.getCuenta().setCorreo("apolo");
-//        cc.getCuenta().setClave("123");
-//        cc.getCuenta().setEstado("T");
-//        cc.getCuenta().setId_persona(1);
-////        cc.getCuenta().setId_rol(2);
-//        cc.save();
+        cc.getCuenta().setCorreo("apolo");
+        cc.getCuenta().setClave("123");
+        cc.getCuenta().setEstado("T");
+        cc.getCuenta().setId_persona(8);
+//        cc.getCuenta().setId_rol(2);
+        cc.save();
         
-        cc.getCuenta().setCorreo("admin");
-        cc.getCuenta().setClave("2004");
-        cc.getCuenta().setId_persona(6);
-        cc.getCuenta().setEstado("T");
-//        cc.getCuenta().setId_rol(1);
-        cc.save();        
-//        
-        cc.getCuenta().setCorreo("ger");
-        cc.getCuenta().setClave("456");
-        cc.getCuenta().setId_persona(7);
-        cc.getCuenta().setEstado("T");
-//        cc.getCuenta().setId_rol(3);
-        cc.save();         
+//        cc.getCuenta().setCorreo("admin");
+//        cc.getCuenta().setClave("2004");
+//        cc.getCuenta().setId_persona(6);
+//        cc.getCuenta().setEstado("T");
+////        cc.getCuenta().setId_rol(1);
+//        cc.save();        
+////        
+//        cc.getCuenta().setCorreo("ger");
+//        cc.getCuenta().setClave("456");
+//        cc.getCuenta().setId_persona(7);
+//        cc.getCuenta().setEstado("T");
+////        cc.getCuenta().setId_rol(3);
+//        cc.save();         
     }
 }
