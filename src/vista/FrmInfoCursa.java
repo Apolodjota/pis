@@ -2,7 +2,10 @@ package vista;
 
 import controladores.PeriodoController;
 import controlador.TDALista.LinkedList;
+import controladores.AsignacionController;
 import controladores.CursaController;
+import controladores.PersonaController;
+import controladores.TareaController;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -10,8 +13,13 @@ import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import modelo.Asignacion;
 import modelo.Cursa;
+import modelo.Docente;
 import modelo.PeriodoAcademico;
+import modelo.Persona;
+import modelo.Tarea;
 import vista.listas.tablas.ModeloTablaAsignacion;
 import vista.listas.tablas.ModeloTablaPeriodo;
 
@@ -20,11 +28,15 @@ import vista.listas.tablas.ModeloTablaPeriodo;
  * @author alexg
  */
 public class FrmInfoCursa extends javax.swing.JDialog {
+
     ModeloTablaAsignacion mta = new ModeloTablaAsignacion();
     LinkedList<PeriodoAcademico> p = new LinkedList<>();
     private PeriodoController pcl = new PeriodoController();
+    private PersonaController perc = new PersonaController();
     private ModeloTablaPeriodo mtp = new ModeloTablaPeriodo();
     private CursaController curc = new CursaController();
+    private TareaController tc = new TareaController();
+    private AsignacionController asc = new AsignacionController();
     private Cursa cursaActual = new Cursa();
 
     /**
@@ -44,7 +56,19 @@ public class FrmInfoCursa extends javax.swing.JDialog {
     public JPanel getPanelAsignaciones() {
         return panelAsignaciones;
     }
-    
+
+    public Cursa getCursaActual() {
+        return cursaActual;
+    }
+
+    public JTextField getTxtcursa() {
+        return txtcursa;
+    }
+
+    public JTextField getTxtdocente() {
+        return txtdocente;
+    }
+
     public FrmInfoCursa(java.awt.Frame parent, boolean modal, Integer id_cursa) {
         super(parent, modal);
         initComponents();
@@ -52,24 +76,29 @@ public class FrmInfoCursa extends javax.swing.JDialog {
         cursaActual = curc.obtenerCursaPorID_Cursa(id_cursa);
         //limpiar();
         mostrarDatos();
-        panelAsignaciones.setVisible(false);
-        cargarTabla();
+        //panelAsignaciones.setVisible(false);
+        cargarTabla(asc.asignacionesdeCursa(cursaActual.getId()));
     }
 
     private void mostrarDatos() {
         if (cursaActual != null) {
+            //Persona doc = perc.buscar(cursaActual.getId_docente());
             txtmatricula.setText(cursaActual.getId_matricula().toString());
-            txtdocente.setText(cursaActual.getId_docente().toString());
-            txtcursa.setText(cursaActual.getId().toString());
+            //txtdocente.setText(doc.getNombres()+" "+doc.getApellidos());
+            //System.out.println("Encontro? el docente: "+doc.getDireccionResidencia());
+            //System.out.println("Encontro? el docente: "+doc.getTelefonoCasa());
+            //txtdocente.setText(cursaActual.getId_docente().toString());
+            //txtcursa.setText(cursaActual.getId().toString());
             //txtmatricula.setText(cursaActual.getId_matricula());
         }
     }
 
-    public void cargarTabla() {
-        mta.setAsignaciones(curc.asignacionesdeCursa(cursaActual.getId()));
+    public void cargarTabla(LinkedList<Asignacion> asignaciones) {
+        mta.setAsignaciones(asignaciones);
         tblAsignaciones.setModel(mta);
         tblAsignaciones.updateUI();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -243,8 +272,29 @@ public class FrmInfoCursa extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnabrirasignacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnabrirasignacionActionPerformed
-        int fila = tblAsignaciones.getSelectedRow();
+        try {
+            int fila = tblAsignaciones.getSelectedRow();
+            if (fila > -1) {
+                //new FrmSubirEstudiante().setVisible(true);
+                Asignacion asigActual = mta.getAsignaciones().get(fila);
+                Tarea tActual = tc.buscarTarea(asigActual.getId_tarea());
+                FrmSubirEstudiante asignacion = new FrmSubirEstudiante(asigActual, tActual);
+                JPanel panelAsignacion = asignacion.getPrincipalAsignacion();
+                jPanel1.removeAll();
+                jPanel1.add(panelAsignacion);
+                jPanel1.revalidate();
+                jPanel1.repaint();
+            } else {
+                JOptionPane.showMessageDialog(null, "!Seleccione alguna asignación", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al abrir FrmSubirEst: " + e);
+        }
     }//GEN-LAST:event_btnabrirasignacionActionPerformed
+
+    private void mostrarInfo() {
+
+    }
 
     /**
      * @param args the command line arguments
