@@ -224,6 +224,7 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
                 Integer idPersona = rc.obtenerCuenta(idCuentaCorreo).getId_persona();
                 persona = perc.buscar(idPersona);
                 Integer idRol = persona.getId_rol(); 
+                System.out.println(idRol.toString());
                 if (idRol == 1) {
                     String nombres = pc.getLista().get(idCuentaCorreo).getNombres();
                     String apellidos = pc.getLista().get(idCuentaCorreo).getApellidos();
@@ -233,7 +234,7 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
                     new FrmMainDocente().setVisible(true);
                     this.setVisible(false);
                 } else if (idRol == 3) {
-                    //new FrmPrincipalEstudiante(persona.getId()).setVisible(true);
+                    new FrmPrincipalEstudiante(persona.getId()).setVisible(true);
                     new FrmPrincipalEstudiante1(persona.getId()).setVisible(true);
                     this.setVisible(false);
                 }
