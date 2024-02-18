@@ -150,7 +150,7 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
         try {
             Statement stmt = conexion.getConnection().createStatement();
             String query = "select * from " + clazz.getSimpleName().toLowerCase() + " where id = " + id;
-            System.out.println("Sentencia: "+query);
+            System.out.println("Sentencia obtener: "+query);
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 data = llenarObjeto(rs);
