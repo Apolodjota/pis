@@ -5,6 +5,7 @@ import controlador.BDD.DAO.AdaptadorDao;
 import controlador.TDALista.LinkedList;
 import controlador.Utilidades.Utilidades;
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 import modelo.Rol;
 
 /**
@@ -131,7 +132,7 @@ public class RolControllerListas extends AdaptadorDao<Rol>{
     }
     
     public static void main(String[] args) {
-        RolControllerListas rc = new RolControllerListas();
+        /*RolControllerListas rc = new RolControllerListas();
         rc.getRol().setId(1);
         rc.getRol().setNombre("Admin");
         rc.save();
@@ -142,7 +143,20 @@ public class RolControllerListas extends AdaptadorDao<Rol>{
         
         rc.getRol().setId(3);
         rc.getRol().setNombre("Estudiante");
-        rc.save();        
+        rc.save();*/
+        
+        try {
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            java.util.Date now = df.parse("2024-02-20 23:00:00");
+            java.util.Date date = df.parse("2024-02-19 00:51:50");
+            long l = now.getTime() - date.getTime();
+            long day = l / (24 * 60 * 60 * 1000);
+            long hour = (l / (60 * 60 * 1000) - day * 24);
+            long min = ((l / (60 * 1000)) - day * 24 * 60 - hour * 60);
+            long s = (l / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
+            System.out.println("" + day + " días, " + hour + " horas, " + min + " minutos, " + s + " segundos");
+        } catch (Exception e) {
+        }
     }
     
 }

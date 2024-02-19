@@ -185,15 +185,13 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
         jlabelContraseñas.setFont(new java.awt.Font("Harlow Solid Italic", 1, 14)); // NOI18N
         jlabelContraseñas.setForeground(new java.awt.Color(255, 255, 255));
         jlabelContraseñas.setText("Cambiar Contraseña");
-        jlabelContraseñas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
+        jlabelContraseñas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jlabelContraseñas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jlabelContraseñasMouseClicked(evt);
             }
         });
-        panelImage1.add(jlabelContraseñas, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 450, -1, -1));
-
+        panelImage1.add(jlabelContraseñas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 460, -1, -1));
 
         jPanel1.add(panelImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 700));
 
@@ -226,9 +224,9 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
                 Integer idRol = persona.getId_rol(); 
                 System.out.println(idRol.toString());
                 if (idRol == 1) {
-                    String nombres = pc.getLista().get(idCuentaCorreo).getNombres();
-                    String apellidos = pc.getLista().get(idCuentaCorreo).getApellidos();
-                    new FrmPrincipalAdministrador(nombres, apellidos).setVisible(true);
+                    //String nombres = pc.getLista().get(idCuentaCorreo).getNombres();
+                    //String apellidos = pc.getLista().get(idCuentaCorreo).getApellidos();
+                    new FrmPrincipalAdministrador(persona.getNombres(), persona.getApellidos()).setVisible(true);
                     this.setVisible(false);
                 } else if (idRol == 2) {
                     new FrmPrincipalDocenteGrande(persona.getId()).setVisible(true);
@@ -310,7 +308,6 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_panelImage11MouseClicked
 
     private void jlabelContraseñasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlabelContraseñasMouseClicked
-
         FrmCambiarClave cambio =  new FrmCambiarClave();
         cambio.setVisible(true);
     }//GEN-LAST:event_jlabelContraseñasMouseClicked

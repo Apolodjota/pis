@@ -52,7 +52,8 @@ public class FrmPrincipalEstudiante1 extends javax.swing.JFrame {
     private LinkedList<Asignacion> asignacionesCursa = new LinkedList<>();
     private JPanel panelMAIN = new JPanel();
     private Cursa cursaActual = new Cursa();
-    FrmInfoCursa infoCursa;
+    private FrmInfoCursa frminfoCursa;
+    public static JPanel panelCursaSeleccionado;
 
     /**
      * Creates new form FrmPrincipalAdministrador
@@ -131,13 +132,15 @@ public class FrmPrincipalEstudiante1 extends javax.swing.JFrame {
                                 jplUnidad3.setVisible(true);
                                 //cursaActual = cursasEstudiante.get(0);
                                 //FrmInfoCursa infoCursa = new FrmInfoCursa(frmactual, true, id_cursa);
-                                infoCursa = new FrmInfoCursa(frmactual, true, id_cursa);
-                                infoCursa.getTxtcursa().setText(nombreCursa);
-                                infoCursa.getTxtdocente().setText(nombreDocente);
+                                frminfoCursa = new FrmInfoCursa(frmactual, true, id_cursa);
+                                frminfoCursa.getTxtcursa().setText(nombreCursa);
+                                frminfoCursa.getTxtdocente().setText(nombreDocente);
                                 //asignacionesCursa = cursac.asignacionesdeCursa(id_cursa);
-                                JPanel panelCursa = infoCursa.getJPanel1();
+                                //JPanel panelCursa = frminfoCursa.getJPanel1();
+                                panelCursaSeleccionado = frminfoCursa.getJPanel1();
+                                
                                 panelPrincipal.removeAll();
-                                panelPrincipal.add(panelCursa);
+                                panelPrincipal.add(panelCursaSeleccionado);
                                 panelPrincipal.revalidate();
                                 panelPrincipal.repaint();
                             } catch (Exception ex) {
@@ -170,12 +173,33 @@ public class FrmPrincipalEstudiante1 extends javax.swing.JFrame {
                     lbl.setVisible(true);
                     yinicial += 50;
                 }
+                panelMAIN = panelCursas;
             }
         } catch (Exception e) {
             System.out.println("Error cargando los cursas: " + e);
         }
     }
-
+    
+    
+    
+//    public static JPanel getPanelCursaSeleccionado() {
+//        return panelCursaSeleccionado;
+//    }
+//
+//    public static void setPanelCursaSeleccionado(JPanel panelCursaSeleccionado) {
+//        this.panelCursaSeleccionado = panelCursaSeleccionado;
+//    }
+//
+//    public static JPanel getPanelCursas() {
+//        return panelCursas;
+//    }
+//
+//    public static void setPanelCursas(JPanel panelCursas) {
+//        this.panelCursas = panelCursas;
+//    }
+    
+      
+    
 //    public void mouseClicked(MouseEvent evento) {
 //        try {
 //            for (int i = 0; i < labelsCursas.getSize(); i++) {
@@ -802,6 +826,8 @@ public class FrmPrincipalEstudiante1 extends javax.swing.JFrame {
 
         ejemplo.setText("XDDDD");
 
+        panelCursas.setBackground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout panelCursasLayout = new javax.swing.GroupLayout(panelCursas);
         panelCursas.setLayout(panelCursasLayout);
         panelCursasLayout.setHorizontalGroup(
@@ -926,13 +952,12 @@ public class FrmPrincipalEstudiante1 extends javax.swing.JFrame {
         jLabel3.setForeground(Color.black);
 
         FrmDocente frmDocente = new FrmDocente();
-        JPanel panelDocente = frmDocente.getJPanel1();
-        panelPrincipal.removeAll();
-        panelPrincipal.add(panelDocente);
-        panelPrincipal.revalidate();
-        panelPrincipal.repaint();*/
-        infoCursa.getPanelAsignaciones().setVisible(true);
-        infoCursa.cargarTabla(asc.asignacionesCursaUnidad(infoCursa.getCursaActual().getId(), 1));
+        JPanel panelDocente = frmDocente.getJPanel1();*/
+        frminfoCursa.cargarTabla(asc.asignacionesCursaUnidad(frminfoCursa.getCursaActual().getId(), 1));
+//        panelCursas.removeAll();
+//        panelCursas.add(panelCursaSeleccionado);
+//        panelCursas.revalidate();
+//        panelCursas.repaint();
     }//GEN-LAST:event_jplUnidad1MouseClicked
 
     private void jplUnidad2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplUnidad2MouseClicked
@@ -958,8 +983,11 @@ public class FrmPrincipalEstudiante1 extends javax.swing.JFrame {
         panelPrincipal.add(panelDocente);
         panelPrincipal.revalidate();
         panelPrincipal.repaint();*/
-        infoCursa.getPanelAsignaciones().setVisible(true);
-        infoCursa.cargarTabla(asc.asignacionesCursaUnidad(infoCursa.getCursaActual().getId(), 2));
+        frminfoCursa.cargarTabla(asc.asignacionesCursaUnidad(frminfoCursa.getCursaActual().getId(), 2));
+//        panelCursas.removeAll();
+//        panelCursas.add(panelCursaSeleccionado);
+//        panelCursas.revalidate();
+//        panelCursas.repaint();
     }//GEN-LAST:event_jplUnidad2MouseClicked
 
     private void jplUnidad3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplUnidad3MouseClicked
@@ -985,8 +1013,11 @@ public class FrmPrincipalEstudiante1 extends javax.swing.JFrame {
         panelPrincipal.add(panelMateria);
         panelPrincipal.revalidate();
         panelPrincipal.repaint();*/
-        infoCursa.getPanelAsignaciones().setVisible(true);
-        infoCursa.cargarTabla(asc.asignacionesCursaUnidad(infoCursa.getCursaActual().getId(), 3));
+        frminfoCursa.cargarTabla(asc.asignacionesCursaUnidad(frminfoCursa.getCursaActual().getId(), 3));
+//        panelCursas.removeAll();
+//        panelCursas.add(panelCursaSeleccionado);
+//        panelCursas.revalidate();
+//        panelCursas.repaint();
     }//GEN-LAST:event_jplUnidad3MouseClicked
 
     private void jplSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplSalirMouseClicked
@@ -1063,7 +1094,8 @@ public class FrmPrincipalEstudiante1 extends javax.swing.JFrame {
         jLabel16.setForeground(Color.black);
 
         panelPrincipal.removeAll();
-        panelPrincipal.add(panelCursas);
+        //panelPrincipal.add(panelCursas);
+        panelPrincipal.add(panelMAIN);
         panelPrincipal.revalidate();
         panelPrincipal.repaint();
     }//GEN-LAST:event_jplInicioMouseClicked
@@ -1321,15 +1353,15 @@ public class FrmPrincipalEstudiante1 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel jblNombre;
     private javax.swing.JPanel jplCursa;
-    private javax.swing.JPanel jplInicio;
+    public static javax.swing.JPanel jplInicio;
     private javax.swing.JPanel jplMalla;
     private javax.swing.JPanel jplMatricula;
     private javax.swing.JPanel jplPeriodoAcademico;
     private javax.swing.JPanel jplSalir;
-    private javax.swing.JPanel jplUnidad1;
-    private javax.swing.JPanel jplUnidad2;
-    private javax.swing.JPanel jplUnidad3;
-    private javax.swing.JPanel panelCursas;
+    public static javax.swing.JPanel jplUnidad1;
+    public static javax.swing.JPanel jplUnidad2;
+    public static javax.swing.JPanel jplUnidad3;
+    public static javax.swing.JPanel panelCursas;
     private org.edisoncor.gui.panel.PanelImage panelImage10;
     private org.edisoncor.gui.panel.PanelImage panelImage11;
     private org.edisoncor.gui.panel.PanelImage panelImage12;
