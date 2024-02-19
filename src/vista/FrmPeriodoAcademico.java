@@ -196,101 +196,139 @@ public class FrmPeriodoAcademico extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        btnGuardar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         dtcFin = new com.toedter.calendar.JDateChooser();
         txtnombre = new javax.swing.JTextField();
-        vernombre = new javax.swing.JButton();
         dtcInicio = new com.toedter.calendar.JDateChooser();
+        buttonGuardar = new org.edisoncor.gui.button.ButtonAero();
+        buttonCancelar = new org.edisoncor.gui.button.ButtonAero();
+        buttonCancelar1 = new org.edisoncor.gui.button.ButtonAero();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblTabla = new javax.swing.JTable();
-        btnSeleccionar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         txtBusqueda = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         cbxCriterio = new javax.swing.JComboBox<>();
-        btnBuscar = new javax.swing.JButton();
         dtcbusqueda = new com.toedter.calendar.JDateChooser();
         cbxorden = new javax.swing.JComboBox<>();
+        buttonSeleccionar = new org.edisoncor.gui.button.ButtonAero();
+        buttonBuscar = new org.edisoncor.gui.button.ButtonAero();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestion de Materias");
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1140, 642));
-        jPanel1.setLayout(new java.awt.BorderLayout());
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Informacion del periodo académico:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
         jPanel3.setPreferredSize(new java.awt.Dimension(200, 200));
-        jPanel3.setLayout(null);
-
-        btnGuardar.setText("Guardar");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btnGuardar);
-        btnGuardar.setBounds(170, 160, 72, 23);
-
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btnCancelar);
-        btnCancelar.setBounds(390, 160, 76, 23);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Recuerde que al generarse un nuevo periodo, el existente quedará en desuso.");
-        jPanel3.add(jLabel6);
-        jLabel6.setBounds(20, 130, 440, 16);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("Nombre del periodo:");
-        jPanel3.add(jLabel7);
-        jLabel7.setBounds(20, 30, 120, 16);
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setText("Fecha de Inicio:");
-        jPanel3.add(jLabel10);
-        jLabel10.setBounds(20, 70, 120, 16);
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel11.setText("Fecha de Fin:");
-        jPanel3.add(jLabel11);
-        jLabel11.setBounds(20, 100, 120, 16);
-        jPanel3.add(dtcFin);
-        dtcFin.setBounds(150, 100, 260, 22);
 
         txtnombre.setEditable(false);
         txtnombre.setText("Periodo Academico ");
-        jPanel3.add(txtnombre);
-        txtnombre.setBounds(150, 30, 320, 22);
 
-        vernombre.setText("Visualizar Nombre");
-        vernombre.addActionListener(new java.awt.event.ActionListener() {
+        buttonGuardar.setBackground(new java.awt.Color(0, 204, 204));
+        buttonGuardar.setText("Guardar");
+        buttonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                vernombreActionPerformed(evt);
+                buttonGuardarActionPerformed(evt);
             }
         });
-        jPanel3.add(vernombre);
-        vernombre.setBounds(480, 30, 130, 23);
-        jPanel3.add(dtcInicio);
-        dtcInicio.setBounds(150, 70, 260, 22);
 
-        jPanel1.add(jPanel3, java.awt.BorderLayout.PAGE_START);
+        buttonCancelar.setBackground(new java.awt.Color(0, 204, 204));
+        buttonCancelar.setText("Cancelar");
+        buttonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCancelarActionPerformed(evt);
+            }
+        });
+
+        buttonCancelar1.setBackground(new java.awt.Color(0, 204, 204));
+        buttonCancelar1.setText("Visualizar Nombre");
+        buttonCancelar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCancelar1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(dtcInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(dtcFin, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(145, 145, 145)
+                        .addComponent(buttonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(90, 90, 90)
+                        .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonCancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(506, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonCancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(13, 13, 13)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(dtcInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addComponent(dtcFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Periodos Registrados:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
         jPanel5.setPreferredSize(new java.awt.Dimension(200, 200));
-        jPanel5.setLayout(null);
 
         tblTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -305,29 +343,11 @@ public class FrmPeriodoAcademico extends javax.swing.JDialog {
         ));
         jScrollPane2.setViewportView(tblTabla);
 
-        jPanel5.add(jScrollPane2);
-        jScrollPane2.setBounds(30, 120, 950, 227);
-
-        btnSeleccionar.setText("Seleccionar");
-        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSeleccionarActionPerformed(evt);
-            }
-        });
-        jPanel5.add(btnSeleccionar);
-        btnSeleccionar.setBounds(1010, 210, 90, 23);
-
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("Valor:");
-        jPanel5.add(jLabel8);
-        jLabel8.setBounds(70, 70, 36, 16);
-        jPanel5.add(txtBusqueda);
-        txtBusqueda.setBounds(130, 70, 170, 22);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText("Criterio:");
-        jPanel5.add(jLabel9);
-        jLabel9.setBounds(450, 70, 60, 16);
 
         cbxCriterio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "FechaDesde", "FechaHasta" }));
         cbxCriterio.addItemListener(new java.awt.event.ItemListener() {
@@ -335,25 +355,87 @@ public class FrmPeriodoAcademico extends javax.swing.JDialog {
                 cbxCriterioItemStateChanged(evt);
             }
         });
-        jPanel5.add(cbxCriterio);
-        cbxCriterio.setBounds(530, 70, 138, 22);
-
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
-        jPanel5.add(btnBuscar);
-        btnBuscar.setBounds(1000, 70, 90, 23);
-        jPanel5.add(dtcbusqueda);
-        dtcbusqueda.setBounds(130, 70, 170, 22);
 
         cbxorden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fecha Exacta", "Menores", "Mayores" }));
-        jPanel5.add(cbxorden);
-        cbxorden.setBounds(790, 70, 130, 22);
 
-        jPanel1.add(jPanel5, java.awt.BorderLayout.CENTER);
+        buttonSeleccionar.setBackground(new java.awt.Color(0, 204, 204));
+        buttonSeleccionar.setText("Seleccionar");
+        buttonSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSeleccionarActionPerformed(evt);
+            }
+        });
+
+        buttonBuscar.setBackground(new java.awt.Color(0, 204, 204));
+        buttonBuscar.setText("Buscar");
+        buttonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonBuscarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dtcbusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(150, 150, 150)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(cbxCriterio, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(122, 122, 122)
+                .addComponent(cbxorden, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80)
+                .addComponent(buttonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 950, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(buttonSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(dtcbusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(cbxCriterio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbxorden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(90, 90, 90)
+                        .addComponent(buttonSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(63, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1140, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 1140, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -369,18 +451,6 @@ public class FrmPeriodoAcademico extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        guardar();
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        limpiar();
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
-        cargarVista();
-    }//GEN-LAST:event_btnSeleccionarActionPerformed
-
     private void cbxCriterioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCriterioItemStateChanged
         if(evt.getItem().toString().equalsIgnoreCase("Nombre")){
             txtBusqueda.setVisible(true);
@@ -393,18 +463,30 @@ public class FrmPeriodoAcademico extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_cbxCriterioItemStateChanged
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        buscar();
-    }//GEN-LAST:event_btnBuscarActionPerformed
+    private void buttonSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSeleccionarActionPerformed
+        cargarVista();
+    }//GEN-LAST:event_buttonSeleccionarActionPerformed
 
-    private void vernombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vernombreActionPerformed
+    private void buttonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarActionPerformed
+        buscar();
+    }//GEN-LAST:event_buttonBuscarActionPerformed
+
+    private void buttonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGuardarActionPerformed
+        guardar();
+    }//GEN-LAST:event_buttonGuardarActionPerformed
+
+    private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_buttonCancelarActionPerformed
+
+    private void buttonCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelar1ActionPerformed
         if(validar()){
             verNombre();
         }else
             JOptionPane.showMessageDialog(null, 
                         "Coloque las fechas para completar el nombre del periodo", 
                         "Error", JOptionPane.ERROR_MESSAGE);
-    }//GEN-LAST:event_vernombreActionPerformed
+    }//GEN-LAST:event_buttonCancelar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -464,10 +546,13 @@ public class FrmPeriodoAcademico extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnSeleccionar;
+    private org.edisoncor.gui.button.ButtonAero buttonBuscar;
+    private org.edisoncor.gui.button.ButtonAero buttonCancelar;
+    private org.edisoncor.gui.button.ButtonAero buttonCancelar1;
+    private org.edisoncor.gui.button.ButtonAero buttonGuardar;
+    private org.edisoncor.gui.button.ButtonAero buttonLimpiar;
+    private org.edisoncor.gui.button.ButtonAero buttonLimpiar1;
+    private org.edisoncor.gui.button.ButtonAero buttonSeleccionar;
     private javax.swing.JComboBox<String> cbxCriterio;
     private javax.swing.JComboBox<String> cbxorden;
     private com.toedter.calendar.JDateChooser dtcFin;
@@ -486,6 +571,5 @@ public class FrmPeriodoAcademico extends javax.swing.JDialog {
     private javax.swing.JTable tblTabla;
     private javax.swing.JTextField txtBusqueda;
     private javax.swing.JTextField txtnombre;
-    private javax.swing.JButton vernombre;
     // End of variables declaration//GEN-END:variables
 }
