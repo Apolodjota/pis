@@ -13,6 +13,7 @@ import controlador.TDALista.LinkedList;
 import controlador.Utilidades.Utilidades;
 import java.sql.SQLException;
 import modelo.Persona;
+import vista.Util.Util;
 
 /**
  * Clase adaptadora para los metodos de guardar, modificar, listar y buscar por id desde la Base de datos
@@ -133,7 +134,7 @@ public class AdaptadorDao<T> implements InterfazDao<T>{
                 lista.add(llenarObjeto(rs));
                 //lista.insertar(llenarObjeto(rs));
             }
-
+            
         } catch (Exception e) {
             System.out.println(e);
         }

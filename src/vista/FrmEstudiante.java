@@ -25,6 +25,7 @@ public class FrmEstudiante extends javax.swing.JFrame {
     private EstudianteModeloTabla et = new EstudianteModeloTabla(ec.getEstudiantes());
     private Integer fila = -1;
     private Boolean band = false; 
+    private Util u;
     
     /**
      * Creates new form FrmVendedor
@@ -45,17 +46,22 @@ public class FrmEstudiante extends javax.swing.JFrame {
     }
     
     private void limpiar(){
-        cargarTabla();
-        txtApellido.setText("");
-        txtDireccionResidencia.setText("");
-        txtCelular.setText("");
-        txtdni.setText("");
-        txtnombres.setText("");
-        txtTelefono.setText("");
-        cbxBusqueda.setVisible(false);
-        ec.setEstudiante(null);
-        ec.setEstudiantes(new LinkedList<Estudiante>());
-        table.clearSelection();
+        try {
+            u = new Util();
+            cargarTabla();
+            txtApellido.setText("");
+            txtDireccionResidencia.setText("");
+            txtCelular.setText("");
+            txtdni.setText("");
+            txtnombres.setText("");
+            txtTelefono.setText("");
+            cbxBusqueda.setVisible(false);
+            ec.setEstudiante(null);
+            ec.setEstudiantes(new LinkedList<Estudiante>());
+            table.clearSelection();
+        } catch (Exception e) {
+        }
+        
     }
     
     private void cargarTabla(){
@@ -127,10 +133,32 @@ public class FrmEstudiante extends javax.swing.JFrame {
     }
     
     private void registrarCuenta(Integer id){
-        cc.getCuenta().setId_persona(id);
-        cc.getCuenta().setEstado("T");
-        cc.getCuenta().setCorreo(""+ec.getEstudiante().getNombres().trim()+ec.getEstudiante().getApellidos().trim()+"@unl.com.ec");
-        cc.getCuenta().setClave(ec.getEstudiante().getCedula().trim());
+        String nombre = "", apellido = "";
+        if (ec.getEstudiante().getNombres().trim().contains(" ")){
+            Integer index = ec.getEstudiante().getNombres().indexOf(" ");
+            if (index > -1) {
+                nombre = ec.getEstudiante().getNombres().substring(0, index);
+            }
+        } else {
+            nombre = ec.getEstudiante().getNombres().trim();
+        } 
+        if (ec.getEstudiante().getApellidos().trim().contains(" ")){
+            Integer index = ec.getEstudiante().getApellidos().indexOf(" ");
+            if (index > -1) {
+                apellido = ec.getEstudiante().getApellidos().substring(0, index);
+            }
+        } else {
+            apellido = ec.getEstudiante().getApellidos().trim();
+        }
+        try {
+            cc.getCuenta().setId_persona(id);
+            cc.getCuenta().setEstado("T");
+            cc.getCuenta().setCorreo(nombre.toLowerCase()+apellido.toLowerCase()+"@unl.com.ec");
+            cc.getCuenta().setClave(u.cifrarMensaje(ec.getEstudiante().getCedula().trim()));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Exception "+ e.getMessage());
+        }
+       
     }
     
     private void obtenerPersona()throws Exception{

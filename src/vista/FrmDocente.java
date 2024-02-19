@@ -6,6 +6,8 @@ import controladores.DocenteControlador;
 import controladores.PersonaController;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import modelo.Docente;
@@ -25,10 +27,11 @@ public class FrmDocente extends javax.swing.JFrame {
     private DocenteModeloTabla dt = new DocenteModeloTabla(dc.getDocentes());
     private Integer fila = -1;
     private Boolean band = false; 
+    private Util u;
     /**
      * Creates new form FrmVendedor
      */
-    public FrmDocente() {
+    public FrmDocente(){
         initComponents();
         limpiar();
     }
@@ -69,18 +72,23 @@ public class FrmDocente extends javax.swing.JFrame {
     }
     
     private void limpiar(){
-        cargarTabla();
-        txtapellidos.setText("");
-        txtTituloTercer.setText("");
-        txtdni.setText("");
-        txtNombres.setText("");
-        txtCelular.setText("");
-        txtTituloCuarto.setText("");
-        txtTelefono.setText("");
-        txtDireccion.setText("");
-        dc.setDocente(null);
-        dc.setDocentes(new LinkedList<Docente>());
-        table.clearSelection();
+        try {
+            cargarTabla();
+            txtapellidos.setText("");
+            txtTituloTercer.setText("");
+            txtdni.setText("");
+            txtNombres.setText("");
+            txtCelular.setText("");
+            txtTituloCuarto.setText("");
+            txtTelefono.setText("");
+            txtDireccion.setText("");
+            dc.setDocente(null);
+            dc.setDocentes(new LinkedList<Docente>());
+            table.clearSelection();
+            u = new Util();
+        } catch (Exception e) {
+            System.out.println("Ex" + e.getMessage());
+        }
     }
     
     private void cargarTabla(){
@@ -149,7 +157,7 @@ public class FrmDocente extends javax.swing.JFrame {
         cc.getCuenta().setCorreo(nombre.toLowerCase()+apellido.toLowerCase()+"@unl.com.ec");
         cc.getCuenta().setId_persona(id);
         cc.getCuenta().setEstado("T");
-        cc.getCuenta().setClave(Util.cifrarMensaje(dc.getDocente().getCedula().trim()));
+        cc.getCuenta().setClave(u.cifrarMensaje(dc.getDocente().getCedula().trim()));
         } catch (Exception e) {
             System.out.println("ERROR " + e.getMessage());
                     

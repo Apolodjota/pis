@@ -20,6 +20,7 @@ import javax.crypto.spec.DESedeKeySpec;
 import modelo.Cuenta;
 import modelo.Persona;
 import vista.FrmIniciarSesion;
+import vista.Util.Util;
 
 /**
  *
@@ -31,6 +32,8 @@ public class PIS {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
+        Util u  = new Util();
+        System.out.println("clave unica ->" + u.getClave());
 //        CuentaControllerListas cc = new CuentaControllerListas();
 //        Cuenta cuenta = new Cuenta();
 //        Field[] fields = cuenta.getClass().getDeclaredFields();
@@ -81,7 +84,7 @@ public class PIS {
 //            System.out.println("-->" + ex.getMessage());
 //        }
 //        
-          new FrmIniciarSesion().setVisible(true);
+     //     new FrmIniciarSesion().setVisible(true);
     }
 
 }
