@@ -235,34 +235,6 @@ public class CursaController extends  AdaptadorDao<Cursa>{
         return lista;
     }
     
-    //este metodo no va aqui:
-    public LinkedList<Asignacion> asignacionesdeCursa(Integer id_cursa){
-        LinkedList<Asignacion> lista = new LinkedList<>();
-        try {
-            Statement stmt = new Conexion().getConnection().createStatement();
-            String query = "SELECT * FROM asignacion WHERE id_cursa = "+id_cursa;
-            System.out.println(query);
-            ResultSet rs = stmt.executeQuery(query);
-            while(rs.next()) {
-                Asignacion a = new Asignacion();
-                a.setId(rs.getInt(1));
-                a.setId_cursa(rs.getInt(2));
-                a.setId_tarea(rs.getInt(3)); 
-                /*File f = new File("ruta");
-                OutputStream ou = new FileOutputStream(f, false);
-                rs.getBinaryStream(4).transferTo(ou);*/
-                a.setFechaEntrega(rs.getDate(5));
-                a.setCalificacion(rs.getDouble(6));
-                a.setComentario(rs.getString(7));
-                a.setEstado(rs.getString(8));
-                lista.add(a);
-            }
-        } catch (Exception e) {
-            System.out.println("error" + e.getMessage());
-        }
-        //System.out.println("Asignaciones en asignaciones de Cursa: \n"+lista.print());
-        return lista;
-    }
     
     /**
      * @return the cursa

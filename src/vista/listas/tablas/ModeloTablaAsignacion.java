@@ -2,6 +2,7 @@ package vista.listas.tablas;
 
 import controlador.TDALista.LinkedList;
 import controladores.TareaController;
+import java.text.SimpleDateFormat;
 import javax.swing.table.AbstractTableModel;
 import modelo.Asignacion;
 import modelo.Cursa;
@@ -33,6 +34,9 @@ public class ModeloTablaAsignacion extends AbstractTableModel{
         try {
               Asignacion a = getAsignaciones().get(rowIndex);
               Tarea t = tc.buscarTarea(a.getId_tarea());
+              String estado = "Sin entregar";
+              if(a.getEstado().equalsIgnoreCase("E")) estado = "Entregado";
+              if(a.getEstado().equalsIgnoreCase("C")) estado = "Calificado";
 //            Cursa cursa = getCursas().get(rowIndex);
 //            Materia materia = mC.getMaterias().get(cursa.getId_materia() - 1);
 //            Docente docente = dC.getDocentes().get(cursa.getId_docente() - 1);
@@ -41,9 +45,10 @@ public class ModeloTablaAsignacion extends AbstractTableModel{
                 case 0:
                     return (a != null) ? t.getTitulo(): "";
                 case 1:
-                    return (a != null) ? t.getFechaEntrega(): "";   //cursa.getId_periodo(): "";   
+                    //return (a != null) ? new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(t.getFechaEntrega()): "";   //cursa.getId_periodo(): "";   
+                    return (a != null) ? t.getFechaEntrega(): "";
                 case 2:
-                    return (a != null) ? a.getEstado(): "";   
+                    return (a != null) ? estado: "";   
 //                case 3:
 //                    return (cursa != null) ? docente.getId()+". "+ docente.getCedula(): ""; 
 //                case 4:
@@ -54,7 +59,8 @@ public class ModeloTablaAsignacion extends AbstractTableModel{
                     return null;
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error en modelo tabla asignacion: "+e.getMessage());
+            //e.printStackTrace();
         }
         return null;
     }
@@ -65,7 +71,7 @@ public class ModeloTablaAsignacion extends AbstractTableModel{
             case 0:
                 return "Titulo";
             case 1:
-                return "Fecha";  
+                return "Fecha de entrega";  
             case 2:
                 return "Estado";
             default:

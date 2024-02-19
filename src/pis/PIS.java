@@ -19,6 +19,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESedeKeySpec;
 import modelo.Cuenta;
 import modelo.Persona;
+import vista.FrmIniciarSesion;
 
 /**
  *
@@ -80,6 +81,7 @@ public class PIS {
 //            System.out.println("-->" + ex.getMessage());
 //        }
 //        
+          new FrmIniciarSesion().setVisible(true);
     }
 
 }
