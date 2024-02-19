@@ -162,8 +162,6 @@ public class FrmCursa extends javax.swing.JFrame {
         jLabel31 = new javax.swing.JLabel();
         txtMatricula = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
-        btnGuardar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
         cbxMateria = new javax.swing.JComboBox<>();
         cbxDocente = new javax.swing.JComboBox<>();
         jLabel36 = new javax.swing.JLabel();
@@ -172,15 +170,17 @@ public class FrmCursa extends javax.swing.JFrame {
         jblTexto2 = new javax.swing.JLabel();
         cbxOrdenamiento = new javax.swing.JComboBox<>();
         descendente = new java.awt.Checkbox();
+        buttonGuardar1 = new org.edisoncor.gui.button.ButtonAero();
+        buttonCancelar = new org.edisoncor.gui.button.ButtonAero();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbltabla = new javax.swing.JTable();
-        btncancelar1 = new javax.swing.JButton();
         txtBusqueda = new javax.swing.JTextField();
         jblTexto = new javax.swing.JLabel();
-        btnBuscar = new javax.swing.JButton();
         cbxCriterio = new javax.swing.JComboBox<>();
         jblTexto1 = new javax.swing.JLabel();
+        buttonGuardar3 = new org.edisoncor.gui.button.ButtonAero();
+        buttonBuscar1 = new org.edisoncor.gui.button.ButtonAero();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -225,24 +225,6 @@ public class FrmCursa extends javax.swing.JFrame {
         jLabel33.setText("Materia:");
         jPanel6.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 89, -1));
 
-        btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnGuardar.setText("Guardar");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
-        jPanel6.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 112, 31));
-
-        btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-        jPanel6.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 120, 30));
-
         cbxMateria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbxMateria.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -254,7 +236,7 @@ public class FrmCursa extends javax.swing.JFrame {
                 cbxMateriaActionPerformed(evt);
             }
         });
-        jPanel6.add(cbxMateria, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 190, -1));
+        jPanel6.add(cbxMateria, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 250, -1));
 
         cbxDocente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbxDocente.addActionListener(new java.awt.event.ActionListener() {
@@ -302,6 +284,24 @@ public class FrmCursa extends javax.swing.JFrame {
         descendente.setLabel("Descendente");
         jPanel6.add(descendente, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, 102, -1));
 
+        buttonGuardar1.setBackground(new java.awt.Color(0, 204, 204));
+        buttonGuardar1.setText("Guardar");
+        buttonGuardar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonGuardar1ActionPerformed(evt);
+            }
+        });
+        jPanel6.add(buttonGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 120, 30));
+
+        buttonCancelar.setBackground(new java.awt.Color(0, 204, 204));
+        buttonCancelar.setText("Cancelar");
+        buttonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCancelarActionPerformed(evt);
+            }
+        });
+        jPanel6.add(buttonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 120, 30));
+
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Registros Existentes:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tw Cen MT", 1, 14))); // NOI18N
         jPanel7.setLayout(new java.awt.GridBagLayout());
@@ -331,29 +331,13 @@ public class FrmCursa extends javax.swing.JFrame {
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(24, 26, 0, 27);
         jPanel7.add(jScrollPane1, gridBagConstraints);
-
-        btncancelar1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btncancelar1.setText("Seleccionar");
-        btncancelar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncancelar1ActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 18;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 75, 23, 0);
-        jPanel7.add(btncancelar1, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 142;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 20, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel7.add(txtBusqueda, gridBagConstraints);
 
         jblTexto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -362,23 +346,8 @@ public class FrmCursa extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(9, 74, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel7.add(jblTexto, gridBagConstraints);
-
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 18;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 20, 0, 0);
-        jPanel7.add(btnBuscar, gridBagConstraints);
 
         cbxCriterio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NOMBRE", "CURSO" }));
         cbxCriterio.addItemListener(new java.awt.event.ItemListener() {
@@ -393,7 +362,7 @@ public class FrmCursa extends javax.swing.JFrame {
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 55;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 40, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel7.add(cbxCriterio, gridBagConstraints);
 
         jblTexto1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -402,8 +371,39 @@ public class FrmCursa extends javax.swing.JFrame {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(34, 87, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel7.add(jblTexto1, gridBagConstraints);
+
+        buttonGuardar3.setBackground(new java.awt.Color(0, 204, 204));
+        buttonGuardar3.setText("Seleccionar");
+        buttonGuardar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonGuardar3ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.ipadx = 14;
+        gridBagConstraints.ipady = 6;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 10);
+        jPanel7.add(buttonGuardar3, gridBagConstraints);
+
+        buttonBuscar1.setBackground(new java.awt.Color(0, 204, 204));
+        buttonBuscar1.setText("Buscar");
+        buttonBuscar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonBuscar1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 44;
+        gridBagConstraints.ipady = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel7.add(buttonBuscar1, gridBagConstraints);
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
@@ -434,18 +434,6 @@ public class FrmCursa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btncancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelar1ActionPerformed
-        cargarVista();
-    }//GEN-LAST:event_btncancelar1ActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        limpiar();
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        guardar();
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
     private void txtMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatriculaActionPerformed
         //LLLamadi a dialoj
     }//GEN-LAST:event_txtMatriculaActionPerformed
@@ -470,10 +458,6 @@ public class FrmCursa extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxMateriaActionPerformed
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        //buscar();
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
     private void cbxCriterioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCriterioItemStateChanged
         //ordenar();
     }//GEN-LAST:event_cbxCriterioItemStateChanged
@@ -485,6 +469,22 @@ public class FrmCursa extends javax.swing.JFrame {
     private void cbxOrdenamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxOrdenamientoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxOrdenamientoActionPerformed
+
+    private void buttonGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGuardar1ActionPerformed
+        guardar();
+    }//GEN-LAST:event_buttonGuardar1ActionPerformed
+
+    private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_buttonCancelarActionPerformed
+
+    private void buttonGuardar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGuardar3ActionPerformed
+        cargarVista();
+    }//GEN-LAST:event_buttonGuardar3ActionPerformed
+
+    private void buttonBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscar1ActionPerformed
+        //buscar();
+    }//GEN-LAST:event_buttonBuscar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -553,10 +553,10 @@ public class FrmCursa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btncancelar1;
+    private org.edisoncor.gui.button.ButtonAero buttonBuscar1;
+    private org.edisoncor.gui.button.ButtonAero buttonCancelar;
+    private org.edisoncor.gui.button.ButtonAero buttonGuardar1;
+    private org.edisoncor.gui.button.ButtonAero buttonGuardar3;
     private javax.swing.JComboBox<String> cbxCriterio;
     private javax.swing.JComboBox<String> cbxDocente;
     private javax.swing.JComboBox<String> cbxMateria;

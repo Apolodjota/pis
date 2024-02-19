@@ -181,6 +181,7 @@ public class FrmInfoCursa extends javax.swing.JDialog {
         ));
         jScrollPane2.setViewportView(tblAsignaciones);
 
+        btnabrirasignacion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnabrirasignacion.setText("Abrir asignacion");
         btnabrirasignacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -253,7 +254,7 @@ public class FrmInfoCursa extends javax.swing.JDialog {
                     .addComponent(txtmiembros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(panelAsignaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
