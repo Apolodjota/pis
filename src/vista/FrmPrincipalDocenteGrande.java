@@ -35,6 +35,9 @@ public class FrmPrincipalDocenteGrande extends javax.swing.JFrame {
         jblNombre.setText(docenteLogeado.getNombres() + " " + docenteLogeado.getApellidos());
     }
 
+    private String sacarClick(){
+        return "Hola";
+    }
     // Todo lo siguiente realiza un metodo para verificar el cambio de los atributos
     //public Boolean isInicioClicked = false;
     //public Boolean isCreacionClicked = false;
@@ -256,9 +259,11 @@ public class FrmPrincipalDocenteGrande extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 31;
         gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(1, 1, 0, 0);
         jPanel3.add(jplCreacion, gridBagConstraints);
 
         jplRevision.setBackground(new java.awt.Color(255, 255, 255));
@@ -318,9 +323,11 @@ public class FrmPrincipalDocenteGrande extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.ipadx = 31;
         gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 1, 0, 0);
         jPanel3.add(jplRevision, gridBagConstraints);
 
         jplListado.setBackground(new java.awt.Color(255, 255, 255));
@@ -359,9 +366,9 @@ public class FrmPrincipalDocenteGrande extends javax.swing.JFrame {
         jplListadoLayout.setHorizontalGroup(
             jplListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jplListadoLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(25, 25, 25)
                 .addComponent(ImagenListado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(28, 28, 28)
                 .addGroup(jplListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(jLabel9))
@@ -381,9 +388,13 @@ public class FrmPrincipalDocenteGrande extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.ipadx = 31;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 44;
         gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(49, 0, 222, 0);
         jPanel3.add(jplListado, gridBagConstraints);
 
         jplInicio.setBackground(new java.awt.Color(255, 255, 255));
@@ -440,9 +451,12 @@ public class FrmPrincipalDocenteGrande extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 60;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 70;
         gridBagConstraints.ipady = -6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(220, 0, 0, 0);
         jPanel3.add(jplInicio, gridBagConstraints);
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
@@ -537,10 +551,13 @@ public class FrmPrincipalDocenteGrande extends javax.swing.JFrame {
 
     private void jplRevisionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplRevisionMouseClicked
         setIsRevisionClicked(true);
-        //isRevisionClicked = true;
+        isCreacionClicked = false;
+        isInicioClicked = false;
+        isRevisionClicked = true;
+        isListadoClicked = false;
         jplInicio.setVisible(true);
 
-        JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel8, jLabel9, jLabel16};
+        JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7,jLabel8, jLabel9, jLabel16};
         for (JLabel label : labelsBlancos) {
             label.setForeground(Color.black);
         }
@@ -553,7 +570,7 @@ public class FrmPrincipalDocenteGrande extends javax.swing.JFrame {
         jLabel6.setForeground(Color.black);
         jLabel7.setForeground(Color.black);
 
-        FrmPrincipalDocente vistaPequania = new FrmPrincipalDocente(this, docenteLogeado.getId());
+        FrmPrincipalDocente vistaPequania = new FrmPrincipalDocente(this, docenteLogeado.getId(), sacarClick());
         JPanel panelDocente = vistaPequania.getjPanel1();
         jPanel5.removeAll();
         jPanel5.add(panelDocente);
@@ -562,16 +579,19 @@ public class FrmPrincipalDocenteGrande extends javax.swing.JFrame {
     }//GEN-LAST:event_jplRevisionMouseClicked
 
     private void jplListadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplListadoMouseClicked
-        //isListadoClicked = true;
         setIsListadoClicked(true);
+        isCreacionClicked = false;
+        isInicioClicked = false;
+        isRevisionClicked = false;
+        isListadoClicked = true;
         jplInicio.setVisible(true);
 
-        JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7, jLabel16};
+        JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7,jLabel8, jLabel9, jLabel16};
         for (JLabel label : labelsBlancos) {
             label.setForeground(Color.black);
         }
 
-        JPanel[] panelsCianOscuro = {jplCreacion, jplRevision, jplInicio};
+        JPanel[] panelsCianOscuro = {jplInicio, jplCreacion, jplRevision};
         for (JPanel panel : panelsCianOscuro) {
             panel.setBackground(Color.WHITE);
         }
@@ -579,7 +599,7 @@ public class FrmPrincipalDocenteGrande extends javax.swing.JFrame {
         jLabel8.setForeground(Color.black);
         jLabel9.setForeground(Color.black);
 
-        FrmPrincipalDocente vistaPequania = new FrmPrincipalDocente(this, docenteLogeado.getId());
+        FrmPrincipalDocente vistaPequania = new FrmPrincipalDocente(this, docenteLogeado.getId(), sacarClick());
         JPanel panelDocente = vistaPequania.getjPanel1();
         jPanel5.removeAll();
         jPanel5.add(panelDocente);
@@ -625,13 +645,15 @@ public class FrmPrincipalDocenteGrande extends javax.swing.JFrame {
     }//GEN-LAST:event_jplListadoMouseExited
 
     private void jplInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplInicioMouseClicked
-        
         setIsInicioClicked(true);
-        //isInicioClicked = true;
+        isInicioClicked = true;
+        isCreacionClicked = false;
+        isRevisionClicked = false;
+        isListadoClicked = false;
         
         jplInicio.setVisible(false);
 
-        JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7, jLabel8, jLabel9};
+        JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7,jLabel8, jLabel9, jLabel16};
         for (JLabel label : labelsBlancos) {
             label.setForeground(Color.black);
         }
@@ -683,14 +705,17 @@ public class FrmPrincipalDocenteGrande extends javax.swing.JFrame {
 
     private void jplCreacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplCreacionMouseClicked
         setIsCreacionClicked(true);
-        //isCreacionClicked = true;
+        isCreacionClicked = true;
+        isInicioClicked = false;
+        isRevisionClicked = false;
+        isListadoClicked = false;
         jplInicio.setVisible(true);
 
         jplInicio.setBackground(Color.white);
         jplRevision.setBackground(Color.white);
         jplListado.setBackground(Color.white);
 
-        JLabel[] labelsBlancos = {jLabel6, jLabel7, jLabel8, jLabel9, jLabel16};
+        JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7,jLabel8, jLabel9, jLabel16};
         for (JLabel label : labelsBlancos) {
             label.setForeground(Color.black);
         }
@@ -703,7 +728,7 @@ public class FrmPrincipalDocenteGrande extends javax.swing.JFrame {
         jLabel2.setForeground(Color.black);
         jLabel3.setForeground(Color.black);
 
-        FrmPrincipalDocente vistaPequania = new FrmPrincipalDocente(this, docenteLogeado.getId());
+        FrmPrincipalDocente vistaPequania = new FrmPrincipalDocente(this, docenteLogeado.getId(), sacarClick());
         JPanel panelDocente = vistaPequania.getjPanel1();
         jPanel5.removeAll();
         jPanel5.add(panelDocente);
