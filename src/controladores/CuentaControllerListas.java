@@ -8,6 +8,7 @@ import java.lang.reflect.Field;
 import modelo.Cuenta;
 import modelo.Estudiante;
 import modelo.Persona;
+import vista.Util.Util;
 
 /**
  *
@@ -26,9 +27,13 @@ public class CuentaControllerListas extends AdaptadorDao<Cuenta> {
     /**
      * @return the cuentas
      */
-    public LinkedList<Cuenta> getCuentas() {
+    public LinkedList<Cuenta> getCuentas() throws Exception{
         if (cuentas.isEmpty()) {
             cuentas = listar();
+//            for (int i = 0; i < cuentas.getSize(); i++) {   
+//                cuentas.get(i).setClave(Util.descifrarMensaje(cuentas.get(i).getClave()));
+//                System.out.println("clave Enc" + cuentas.get(i).getClave());
+//            }
         }
         return cuentas;
     }
@@ -176,7 +181,7 @@ public class CuentaControllerListas extends AdaptadorDao<Cuenta> {
         LinkedList<Cuenta> lo = this.quickSort(0, "clave", lista);
         Cuenta[] c = lo.toArray();
         for (int i = 0; i < lo.getSize(); i++) {
-            if (c[i].getClave().toString().equals(clave)) {
+            if (c[i].getClave().toString().equalsIgnoreCase(clave)) {
                 return c[i].getId();
             }
         }

@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import modelo.Persona;
+import vista.Util.Util;
 
 /**
  *
@@ -19,6 +20,7 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
     private CuentaControllerListas rc = new CuentaControllerListas();
     private PersonaController pc = new PersonaController();
     private Persona persona = null;
+    private Util u;
     
     /**
      * Creates new form FrmPrincipal
@@ -33,6 +35,15 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
         panelImage11.setIcon(new ImageIcon("src/icono/ojo.png"));
         txtClave1.setVisible(false);
         panelImage11.setVisible(false);
+        limpiar();
+    }
+    
+    private void limpiar(){
+        try {
+            u = new Util();
+        } catch (Exception e) {
+            System.out.println("Exception " + e.getMessage());
+        }        
     }
 
     /**
@@ -221,7 +232,8 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
         try {
             Integer idCuentaCorreo = rc.obtenerIdPorCorreo(rc.getCuentas(), correo);
             System.out.println("ID cuenta correo: " + idCuentaCorreo);
-            Integer idCuentaClave = rc.obtenerIdPorClave(rc.getCuentas(), clave);
+            System.out.println("cuenta cifrada" + u.cifrarMensaje(clave));
+            Integer idCuentaClave = rc.obtenerIdPorClave(rc.getCuentas(), u.cifrarMensaje(clave));
             System.out.println("ID cuenta clave: " + idCuentaClave);
             if (idCuentaCorreo.equals(idCuentaClave) && idCuentaCorreo != -1) {
                 //Integer idPersona = rc.getCuentas().get(idCuentaCorreo).getId_persona();
