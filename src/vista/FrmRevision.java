@@ -6,7 +6,6 @@ package vista;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Date;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -15,12 +14,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author apolo
  */
-public class FrmAsignacioneva extends javax.swing.JFrame {
+public class FrmRevision extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmRevision
      */
-    public FrmAsignacioneva() {
+    public FrmRevision() {
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -88,7 +87,7 @@ public class FrmAsignacioneva extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(txtarchivoTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(850, Short.MAX_VALUE))
+                .addContainerGap(853, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,26 +135,24 @@ public class FrmAsignacioneva extends javax.swing.JFrame {
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1108, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(principalAsignacionLayout.createSequentialGroup()
-                        .addGroup(principalAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(principalAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(principalAsignacionLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(36, 36, 36)
-                                .addComponent(txtfechaasignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(principalAsignacionLayout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(59, 59, 59)
-                                .addComponent(txttiemporestante, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(principalAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(principalAsignacionLayout.createSequentialGroup()
-                                .addGap(383, 383, 383)
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtestadoasignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(principalAsignacionLayout.createSequentialGroup()
-                                .addGap(428, 428, 428)
-                                .addComponent(jLabel4)
-                                .addGap(6, 6, 6)
-                                .addComponent(txtfechaentregatarea, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addGroup(principalAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(principalAsignacionLayout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addGap(36, 36, 36)
+                                    .addComponent(txtfechaasignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(principalAsignacionLayout.createSequentialGroup()
+                                    .addComponent(jLabel5)
+                                    .addGap(59, 59, 59)
+                                    .addComponent(txttiemporestante, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(428, 428, 428)
+                        .addComponent(jLabel4)
+                        .addGap(6, 6, 6)
+                        .addComponent(txtfechaentregatarea, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         principalAsignacionLayout.setVerticalGroup(
             principalAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,16 +182,19 @@ public class FrmAsignacioneva extends javax.swing.JFrame {
                     .addGroup(principalAsignacionLayout.createSequentialGroup()
                         .addGap(76, 76, 76)
                         .addComponent(txtfechaentregatarea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(62, 62, 62)
+                .addGap(25, 25, 25)
                 .addGroup(principalAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txttiemporestante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtestadoasignacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(principalAsignacionLayout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addGroup(principalAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3))))
-                .addContainerGap(120, Short.MAX_VALUE))
+                        .addComponent(jLabel3)))
+                .addGap(18, 18, 18)
+                .addGroup(principalAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txttiemporestante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(principalAsignacionLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel5)))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
 
         jPanel1.add(principalAsignacion, new java.awt.GridBagConstraints());
@@ -225,14 +225,18 @@ public class FrmAsignacioneva extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmAsignacioneva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmRevision.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmAsignacioneva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmRevision.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmAsignacioneva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmRevision.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmAsignacioneva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmRevision.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -241,7 +245,7 @@ public class FrmAsignacioneva extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmAsignacioneva().setVisible(true);
+                new FrmRevision().setVisible(true);
             }
         });
     }
