@@ -78,6 +78,26 @@ public class MatriculaController extends AdaptadorDao<Matricula>{
         return m;
     }
     
+    public LinkedList<Matricula> matriculasporPeriodo(Integer id_periodo) {
+        LinkedList<Matricula> list = new LinkedList<>();
+        try {
+            Statement stmt = conexion.getConnection().createStatement();
+            String query = "SELECT * FROM matricula WHERE id_periodoacademico = "+id_periodo;
+            System.out.println(query);
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Matricula m = new Matricula();
+                m.setId(rs.getInt(1));
+                m.setId_periodoAcademico(rs.getInt(2));
+                m.setId_estudiante(rs.getInt(3));
+                list.add(m);
+            }
+        } catch (Exception ex) {
+            System.out.println("No obtuvo la matricula del id: "+ex);
+        }
+        return list;
+    }
+    
     public void matricularVarios(LinkedList<Estudiante> estudiantes, Integer idPeriodoActual)throws Exception{
         Estudiante[] lista = estudiantes.toArray();
         //Integer idperiodoActual = new PeriodoController().getPeriodos().getLast().getId();

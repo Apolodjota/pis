@@ -824,15 +824,13 @@ public class FrmPrincipalEstudiante1 extends javax.swing.JFrame {
         panelPrincipal.setPreferredSize(new java.awt.Dimension(1140, 642));
         panelPrincipal.setRequestFocusEnabled(false);
 
-        ejemplo.setText("XDDDD");
-
         panelCursas.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout panelCursasLayout = new javax.swing.GroupLayout(panelCursas);
         panelCursas.setLayout(panelCursasLayout);
         panelCursasLayout.setHorizontalGroup(
             panelCursasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1124, Short.MAX_VALUE)
         );
         panelCursasLayout.setVerticalGroup(
             panelCursasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -844,10 +842,6 @@ public class FrmPrincipalEstudiante1 extends javax.swing.JFrame {
         panelPrincipalLayout.setHorizontalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(ejemplo, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(601, Short.MAX_VALUE))
-            .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addComponent(panelCursas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -855,9 +849,7 @@ public class FrmPrincipalEstudiante1 extends javax.swing.JFrame {
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
                 .addComponent(panelCursas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
-                .addComponent(ejemplo)
-                .addGap(17, 17, 17))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelImage9Layout = new javax.swing.GroupLayout(panelImage9);
@@ -1334,7 +1326,6 @@ public class FrmPrincipalEstudiante1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public final javax.swing.JLabel ejemplo = new javax.swing.JLabel();
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
