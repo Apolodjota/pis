@@ -38,7 +38,7 @@ public class FrmPrincipalDocente extends javax.swing.JFrame implements FrmPrinci
         cargarImagenes();
         jplInicio.setEnabled(false);
     }
-    public FrmPrincipalDocente(Frame frame, Integer id_docente) {
+    public FrmPrincipalDocente(Frame frame, Integer id_docente, String clicked) {
         initComponents();
         FrmPrincipalDocenteGrande.addEstadoChangeListener(this);
         this.setLocationRelativeTo(null);
