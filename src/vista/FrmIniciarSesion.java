@@ -224,9 +224,9 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
                 Integer idRol = persona.getId_rol(); 
                 System.out.println(idRol.toString());
                 if (idRol == 1) {
-                    String nombres = pc.getLista().get(idCuentaCorreo).getNombres();
-                    String apellidos = pc.getLista().get(idCuentaCorreo).getApellidos();
-                    new FrmPrincipalAdministrador(nombres, apellidos).setVisible(true);
+                    //String nombres = pc.getLista().get(idCuentaCorreo).getNombres();
+                    //String apellidos = pc.getLista().get(idCuentaCorreo).getApellidos();
+                    new FrmPrincipalAdministrador(persona.getNombres(), persona.getApellidos()).setVisible(true);
                     this.setVisible(false);
                 } else if (idRol == 2) {
                     new FrmPrincipalDocenteGrande(persona.getId()).setVisible(true);

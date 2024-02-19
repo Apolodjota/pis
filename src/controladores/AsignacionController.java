@@ -3,8 +3,15 @@ package controladores;
 import controlador.BDD.DAO.AdaptadorDao;
 import controlador.BDD.DAO.Conexion;
 import controlador.TDALista.LinkedList;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.sql.PreparedStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import modelo.Asignacion;
 import modelo.Cuenta;
 
@@ -15,20 +22,64 @@ import modelo.Cuenta;
 public class AsignacionController extends AdaptadorDao<Asignacion>{
     private Asignacion asignacion = new Asignacion();
     private LinkedList<Asignacion> asignaciones = new LinkedList<>();
+    private Conexion conexion;
     
     public AsignacionController() {
         super(Cuenta.class);
+        conexion = new Conexion();
     }
     
-    private Integer save(){
+    public Integer save(){
         return guardar(asignacion);
     }
     
-    private void actualizar(Asignacion asigna) throws Exception{
+    public void actualizar(Asignacion asigna) throws Exception{
         modificar(asigna);
     }
     
-    private Asignacion buscar(Integer id){
+    public void actualizarAsignacion(Asignacion asigna)throws Exception{
+        try {
+            String query = "UPDATE asignacion SET archivo = ?,fechaentrega = ?,comentario = ?,estado = ? where id ="+asigna.getId();
+            PreparedStatement stament = conexion.getConnection().prepareStatement(query);
+            stament.setBinaryStream(1, new FileInputStream(asigna.getArchivo()), (int)asigna.getArchivo().length());
+            /*String fecha = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(asigna.getFechaEntrega());
+            stament.setString(2, fecha);*/
+            java.sql.Date now = new java.sql.Date(asigna.getFechaEntrega().getTime());
+            stament.setDate(2, now);
+            stament.setString(3, asigna.getComentario());
+            stament.setString(4, asigna.getEstado());
+            stament.executeUpdate();
+            try {
+                Statement seqStament = conexion.getConnection().createStatement();
+                conexion.getConnection().close();
+                conexion.setConnection(null);
+            } catch (Exception e) {
+                System.out.println("Error actualizando asignacion: "+e);
+            }
+        } catch (Exception e) {
+            System.out.println("Error actualizando asignacion"+e);
+        }
+    }
+    
+    public void actualizarComentario(Asignacion a){
+        try {
+            String query = "UPDATE asignacion comentario = ? where id ="+a.getId();
+            PreparedStatement stament = conexion.getConnection().prepareStatement(query);
+            stament.setString(1, a.getComentario());
+            stament.executeUpdate();
+            try {
+                Statement seqStament = conexion.getConnection().createStatement();
+                conexion.getConnection().close();
+                conexion.setConnection(null);
+            } catch (Exception e) {
+                System.out.println("Error actualizando asignacion: "+e);
+            }
+        } catch (Exception e) {
+            System.out.println("Error actualizando asignacion"+e);
+        }
+    }
+    
+    public Asignacion buscar(Integer id){
         return obtener(id);
     }
     
@@ -47,6 +98,17 @@ public class AsignacionController extends AdaptadorDao<Asignacion>{
                 /*File f = new File("ruta");
                 OutputStream ou = new FileOutputStream(f, false);
                 rs.getBinaryStream(4).transferTo(ou);*/
+                InputStream recibido = rs.getBinaryStream(4);
+                if(recibido != null){
+                    File tempFile = File.createTempFile("Entrega", ".pdf");
+                    FileOutputStream outputStream = new FileOutputStream(tempFile);
+                    byte[] buffer = new byte[1024];
+                    int length;
+                    while ((length = recibido.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, length);
+                    }
+                    a.setArchivo(tempFile);
+                }
                 a.setFechaEntrega(rs.getDate(5));
                 a.setCalificacion(rs.getDouble(6));
                 a.setComentario(rs.getString(7));

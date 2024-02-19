@@ -5,9 +5,19 @@
 package controladores;
 
 import controlador.BDD.DAO.AdaptadorDao;
+import controlador.BDD.DAO.Conexion;
 import controlador.TDALista.LinkedList;
 import controlador.TDALista.exceptions.VacioException;
 import controlador.listas.DAO.DataAccesObject;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import modelo.Asignacion;
 import modelo.Tarea;
 
 /**
@@ -32,6 +42,43 @@ public class TareaController extends AdaptadorDao<Tarea>{
     
     public Tarea buscarTarea(Integer id){
         return obtener(id);
+    }
+    
+    public Tarea obtenerTcompleta(Integer id){
+        Tarea t = new Tarea();
+        try {
+            Statement stmt = new Conexion().getConnection().createStatement();
+            String query = "SELECT * FROM tarea WHERE id = "+id;
+            //System.out.println(query);
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()) {
+                t.setId(rs.getInt(1));
+                t.setUnidad(rs.getInt(2));
+                t.setTitulo(rs.getString(3));
+                InputStream recibido = rs.getBinaryStream(4);
+                if(recibido != null){
+                    File tempFile = File.createTempFile("tempfile", ".pdf");
+                    FileOutputStream outputStream = new FileOutputStream(tempFile);
+                    byte[] buffer = new byte[1024];
+                    int length;
+                    while ((length = recibido.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, length);
+                    }
+                    t.setArchivo(tempFile);
+                }
+                /*OutputStream ou = new FileOutputStream(f, false);
+                rs.getBinaryStream(4).transferTo(ou);*/
+                t.setFechaAsignacion(rs.getDate(5));
+                t.setFechaEntrega(rs.getDate(5));
+                t.setDescripcion(rs.getString(7));
+                //
+            }
+        } catch (Exception e) {
+            System.out.println("error obteniendo tarea: " + e.getMessage());
+            e.printStackTrace();
+        }
+        //System.out.println("Asignaciones en asignaciones de Cursa: \n"+lista.print());
+        return t;
     }
     
     public LinkedList<Tarea> quickSort(LinkedList<Tarea> lista, Integer type, String field) {
@@ -109,5 +156,10 @@ public class TareaController extends AdaptadorDao<Tarea>{
      */
     public void setTareas(LinkedList<Tarea> tareas) {
         this.tareas = tareas;
-    }     
+    }
+    
+    public static void main(String[] args) {
+        File ar = new File("envio xd");
+        System.out.println(ar.getName());
+    }
 }
