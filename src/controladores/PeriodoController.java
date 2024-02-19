@@ -168,6 +168,6 @@ public class PeriodoController extends AdaptadorDao<PeriodoAcademico>{
                 result.add(arrayOrdenado[i]);
         }
         return result;
-    }
+    }   
 
 }

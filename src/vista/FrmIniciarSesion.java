@@ -196,10 +196,16 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
         jlabelContraseñas.setFont(new java.awt.Font("Harlow Solid Italic", 1, 14)); // NOI18N
         jlabelContraseñas.setForeground(new java.awt.Color(255, 255, 255));
         jlabelContraseñas.setText("Cambiar Contraseña");
-        jlabelContraseñas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jlabelContraseñas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jlabelContraseñas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jlabelContraseñasMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jlabelContraseñasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jlabelContraseñasMouseExited(evt);
             }
         });
         panelImage1.add(jlabelContraseñas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 460, -1, -1));
@@ -322,7 +328,16 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
     private void jlabelContraseñasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlabelContraseñasMouseClicked
         FrmCambiarClave cambio =  new FrmCambiarClave();
         cambio.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jlabelContraseñasMouseClicked
+
+    private void jlabelContraseñasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlabelContraseñasMouseEntered
+        jlabelContraseñas.setForeground(Color.YELLOW);
+    }//GEN-LAST:event_jlabelContraseñasMouseEntered
+
+    private void jlabelContraseñasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlabelContraseñasMouseExited
+        jlabelContraseñas.setForeground(Color.white);
+    }//GEN-LAST:event_jlabelContraseñasMouseExited
 
     /**
      * @param args the command line arguments

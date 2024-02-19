@@ -19,7 +19,7 @@ import modelo.Docente;
  *
  * @author alexg
  */
-public class FrmPrincipalDocente extends javax.swing.JFrame implements FrmPrincipalDocenteGrande.ListenerVistas{
+public class FrmPrincipalDocente extends javax.swing.JFrame{
     Frame frameproveniente = null;
     DocenteControlador dc = new DocenteControlador();
     private Docente docenteLogeado = new Docente();
@@ -27,11 +27,9 @@ public class FrmPrincipalDocente extends javax.swing.JFrame implements FrmPrinci
     public LinkedList<Cursa> cursasDocente = new LinkedList<>();
     MateriaControllerListas mac = new MateriaControllerListas();
     Boolean isInicioClicked = null;
+    public String clickeado = "";
     
 
-    /**
-     * Creates new form FrmPrincipalEstudiante
-     */
     public FrmPrincipalDocente() {
         initComponents();
         setLocationRelativeTo(null);
@@ -40,13 +38,13 @@ public class FrmPrincipalDocente extends javax.swing.JFrame implements FrmPrinci
     }
     public FrmPrincipalDocente(Frame frame, Integer id_docente, String clicked) {
         initComponents();
-        FrmPrincipalDocenteGrande.addEstadoChangeListener(this);
         this.setLocationRelativeTo(null);
         cargarImagenes();
         cargarDatos();
         frameproveniente = frame;
         docenteLogeado = dc.buscarDocente(id_docente);
         jplInicio.setEnabled(false);
+        clickeado = clicked;
         cargarDatos();
     }
     
@@ -72,6 +70,8 @@ public class FrmPrincipalDocente extends javax.swing.JFrame implements FrmPrinci
                 Integer yinicial = 90;
                 for (int i = 0; i < cursasDocente.getSize(); i++) {
                     JLabel lbl = new javax.swing.JLabel();
+                    Integer id_cursa = cursasDocente.get(i).getId();
+                    lbl.setName(String.valueOf(id_cursa));
                     lbl.setLocation(50, yinicial);
                     lbl.setBackground(new java.awt.Color(60,63,65));
                     lbl.setForeground(new java.awt.Color(187, 187, 187));
@@ -80,12 +80,25 @@ public class FrmPrincipalDocente extends javax.swing.JFrame implements FrmPrinci
                     lbl.setSize(250, 20);
                     lbl.setText(mac.buscarMateria(cursasDocente.get(i).getId_materia()).toString() + " "
                             + cursasDocente.get(i).getParalelo());
-                    Integer id_cursa = cursasDocente.get(i).getId();
+                    
                     lbl.addMouseListener(new MouseListener() {
                         @Override
                         public void mouseClicked(MouseEvent e) {
                             try {
                                 jplInicio.setEnabled(true);
+                                switch (clickeado) {
+                                    case "Creacion":
+                                        new FrmAsignacioneva();
+                                        break;
+                                    case "Revision":
+                                        new FrmAsignacioneva();
+                                        break;
+                                    case "Listado":
+                                        new FrmAsignacioneva();
+                                        break;
+                                    default:
+                                        throw new AssertionError();
+                                }
                             } catch (Exception ex) {
                                 System.out.println("Error en el mouse event de: " + lbl.getText());
                             }
@@ -359,8 +372,4 @@ public class FrmPrincipalDocente extends javax.swing.JFrame implements FrmPrinci
     private javax.swing.JPanel jplInicio;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void clicksCambio() {
-        System.out.println("Funciona carajooooooo");
-    }
 }

@@ -22,6 +22,7 @@ public class FrmPrincipalDocenteGrande extends javax.swing.JFrame {
     public Boolean isCreacionClicked = false;
     public Boolean isRevisionClicked = false;
     public Boolean isListadoClicked = false;
+    public String clickeado= "";
 
     /**
      * Creates new form FrmPrincipalAdministrador
@@ -551,12 +552,10 @@ public class FrmPrincipalDocenteGrande extends javax.swing.JFrame {
 
     private void jplRevisionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplRevisionMouseClicked
         setIsRevisionClicked(true);
-        isCreacionClicked = false;
-        isInicioClicked = false;
         isRevisionClicked = true;
-        isListadoClicked = false;
+        clickeado = "Revision";
         jplInicio.setVisible(true);
-
+        
         JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7,jLabel8, jLabel9, jLabel16};
         for (JLabel label : labelsBlancos) {
             label.setForeground(Color.black);
@@ -570,7 +569,7 @@ public class FrmPrincipalDocenteGrande extends javax.swing.JFrame {
         jLabel6.setForeground(Color.black);
         jLabel7.setForeground(Color.black);
 
-        FrmPrincipalDocente vistaPequania = new FrmPrincipalDocente(this, docenteLogeado.getId(), sacarClick());
+        FrmPrincipalDocente vistaPequania = new FrmPrincipalDocente(this, docenteLogeado.getId(), clickeado);
         JPanel panelDocente = vistaPequania.getjPanel1();
         jPanel5.removeAll();
         jPanel5.add(panelDocente);
@@ -579,11 +578,8 @@ public class FrmPrincipalDocenteGrande extends javax.swing.JFrame {
     }//GEN-LAST:event_jplRevisionMouseClicked
 
     private void jplListadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplListadoMouseClicked
-        setIsListadoClicked(true);
-        isCreacionClicked = false;
-        isInicioClicked = false;
-        isRevisionClicked = false;
         isListadoClicked = true;
+        clickeado = "Listado";
         jplInicio.setVisible(true);
 
         JLabel[] labelsBlancos = {jLabel2, jLabel3, jLabel6, jLabel7,jLabel8, jLabel9, jLabel16};
@@ -645,11 +641,7 @@ public class FrmPrincipalDocenteGrande extends javax.swing.JFrame {
     }//GEN-LAST:event_jplListadoMouseExited
 
     private void jplInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplInicioMouseClicked
-        setIsInicioClicked(true);
         isInicioClicked = true;
-        isCreacionClicked = false;
-        isRevisionClicked = false;
-        isListadoClicked = false;
         
         jplInicio.setVisible(false);
 
@@ -704,11 +696,8 @@ public class FrmPrincipalDocenteGrande extends javax.swing.JFrame {
     }//GEN-LAST:event_jplCreacionMouseEntered
 
     private void jplCreacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jplCreacionMouseClicked
-        setIsCreacionClicked(true);
         isCreacionClicked = true;
-        isInicioClicked = false;
-        isRevisionClicked = false;
-        isListadoClicked = false;
+        clickeado = "Creacion";
         jplInicio.setVisible(true);
 
         jplInicio.setBackground(Color.white);
