@@ -1,23 +1,39 @@
 package vista;
 
+import controlador.Utilidades.Utilidades;
+import controladores.AsignacionController;
+import java.awt.Frame;
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import modelo.Asignacion;
 import modelo.Tarea;
+import vista.FrmPrincipalEstudiante1;
+import vista.FrmInfoCursa;
 
 /**
  *
  * @author apolo
  */
 public class FrmSubirEstudiante extends javax.swing.JFrame {
-
+    private AsignacionController ac = new AsignacionController();
     private File archivoDocente;
     private File archivoEstudiante;
     private Asignacion asignacion = new Asignacion();
     private Tarea tarea = new Tarea();
+    private java.awt.Frame padre;
 
     /**
      * Creates new form FrmRevision
@@ -27,11 +43,52 @@ public class FrmSubirEstudiante extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
+    public FrmSubirEstudiante(java.awt.Frame parent,Asignacion a, Tarea t) {
+        
+        initComponents();
+        setLocationRelativeTo(null);
+        padre = parent;
+        setearAsignacionTarea(a, t);
+        cargarDatos();
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(FrmSubirEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(FrmSubirEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(FrmSubirEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FrmSubirEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }
+    
     public FrmSubirEstudiante(Asignacion a, Tarea t) {
         initComponents();
         setLocationRelativeTo(null);
         setearAsignacionTarea(a, t);
         cargarDatos();
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(FrmSubirEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(FrmSubirEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(FrmSubirEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FrmSubirEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
     }
 
     private void setearAsignacionTarea(Asignacion a, Tarea t) {
@@ -43,16 +100,23 @@ public class FrmSubirEstudiante extends javax.swing.JFrame {
         txttitulo.setText(tarea.getTitulo());
         txtdescripcion.setText(tarea.getDescripcion());
         //archivoDocente = tarea.getArchivo();
-        txtfechaasignacion.setText(tarea.getFechaAsignacion().toString());
-        txtfechaentregatarea.setText(tarea.getFechaEntrega().toString());
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        txtfechaasignacion.setText(formato.format(tarea.getFechaAsignacion()));
+        txtfechaentregatarea.setText(formato.format(tarea.getFechaEntrega()));
         String estado = "Sin entregar";
-        if (asignacion.getEstado().equalsIgnoreCase("E")) {
-            estado = "Entregado";
-        }
-        if (asignacion.getEstado().equalsIgnoreCase("C")) {
-            estado = "Calificado";
-        }
+        if (asignacion.getEstado().equalsIgnoreCase("E")) {estado = "Entregado"; }
+        if (asignacion.getEstado().equalsIgnoreCase("C")) {estado = "Calificado";}
         txtestadoasignacion.setText(estado);
+        if(tarea.getFechaEntrega().before(new Date())){
+            if(asignacion.getEstado().equalsIgnoreCase("C")){txtcalificacion.setText(asignacion.getCalificacion().toString());}
+            btnSelecArchivo.setEnabled(false);
+            btnGuardar.setText("Enviar comentario");
+        }
+        String coment = (asignacion.getComentario() != null) ? asignacion.getComentario(): "";
+        txtcomentario.setText(coment);
+        txttiemporestante.setText(Utilidades.calcularDiferencia(tarea.getFechaEntrega(), new Date()));
+        if(tarea.getArchivo() != null){txtarchivoTarea.setText(tarea.getArchivo().getName());}
+        if(asignacion.getArchivo() != null){txtnomarchivo.setText(asignacion.getArchivo().getName());}
     }
 
     public File getArchivoDocente() {
@@ -91,6 +155,20 @@ public class FrmSubirEstudiante extends javax.swing.JFrame {
         return txttitulo;
     }
 
+    private void entregar(){
+        try {
+            asignacion.setArchivo(archivoEstudiante);
+            asignacion.setComentario(txtcomentario.getText());
+            asignacion.setFechaEntrega(new Date());
+            asignacion.setEstado("E");
+            System.out.println(new Date());
+            ac.actualizarAsignacion(asignacion);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al entregar tarea","Error",JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -107,11 +185,14 @@ public class FrmSubirEstudiante extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
+        txtarchivoTarea = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtdescripcion = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         panelArchivosEnviados = new javax.swing.JPanel();
+        btnSelecArchivo = new javax.swing.JButton();
+        txtnomarchivo = new javax.swing.JTextField();
         txttitulo = new javax.swing.JTextField();
         txtestadoasignacion = new javax.swing.JTextField();
         txtfechaentregatarea = new javax.swing.JTextField();
@@ -120,14 +201,14 @@ public class FrmSubirEstudiante extends javax.swing.JFrame {
         txtfechaasignacion = new javax.swing.JTextField();
         panelCalificacion = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        txtcomentario = new javax.swing.JTextPane();
         jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextPane3 = new javax.swing.JTextPane();
+        txtcalificacion = new javax.swing.JTextPane();
         jLabel9 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
-        btnGuardar1 = new javax.swing.JButton();
+        btncancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1008, 1118));
@@ -152,15 +233,25 @@ public class FrmSubirEstudiante extends javax.swing.JFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Archivo complementario:"));
 
+        txtarchivoTarea.setEditable(false);
+        txtarchivoTarea.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        txtarchivoTarea.setText("No se ha proporcionado un archivo");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtarchivoTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 51, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtarchivoTarea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         txtdescripcion.setEditable(false);
@@ -176,15 +267,38 @@ public class FrmSubirEstudiante extends javax.swing.JFrame {
 
         panelArchivosEnviados.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Subir archivo:"));
 
+        btnSelecArchivo.setText("Subir");
+        btnSelecArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelecArchivoActionPerformed(evt);
+            }
+        });
+
+        txtnomarchivo.setEditable(false);
+        txtnomarchivo.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        txtnomarchivo.setText("Ningun archivo seleccionado");
+        txtnomarchivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtnomarchivoMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelArchivosEnviadosLayout = new javax.swing.GroupLayout(panelArchivosEnviados);
         panelArchivosEnviados.setLayout(panelArchivosEnviadosLayout);
         panelArchivosEnviadosLayout.setHorizontalGroup(
             panelArchivosEnviadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panelArchivosEnviadosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtnomarchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSelecArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelArchivosEnviadosLayout.setVerticalGroup(
             panelArchivosEnviadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
+            .addGroup(panelArchivosEnviadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(btnSelecArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                .addComponent(txtnomarchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         txttitulo.setEditable(false);
@@ -201,15 +315,15 @@ public class FrmSubirEstudiante extends javax.swing.JFrame {
 
         panelCalificacion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jScrollPane1.setViewportView(jTextPane1);
+        jScrollPane1.setViewportView(txtcomentario);
 
         jLabel1.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         jLabel1.setText("Agregar comentrario:");
 
         jLabel8.setText("Calificacion");
 
-        jTextPane3.setEditable(false);
-        jScrollPane4.setViewportView(jTextPane3);
+        txtcalificacion.setEditable(false);
+        jScrollPane4.setViewportView(txtcalificacion);
 
         jLabel9.setFont(new java.awt.Font("Inter", 0, 15)); // NOI18N
         jLabel9.setText("/ 10");
@@ -254,22 +368,22 @@ public class FrmSubirEstudiante extends javax.swing.JFrame {
             }
         });
 
-        btnGuardar1.setText("Cancelar");
-        btnGuardar1.addActionListener(new java.awt.event.ActionListener() {
+        btncancelar.setText("Cancelar");
+        btncancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardar1ActionPerformed(evt);
+                btncancelarActionPerformed(evt);
             }
         });
 
         javax.swing.GroupLayout principalAsignacionLayout = new javax.swing.GroupLayout(principalAsignacion);
         principalAsignacion.setLayout(principalAsignacionLayout);
         principalAsignacionLayout.setHorizontalGroup(
-            principalAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            principalAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(principalAsignacionLayout.createSequentialGroup()
                 .addGap(247, 247, 247)
-                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
-                .addComponent(btnGuardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(principalAsignacionLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
@@ -343,7 +457,7 @@ public class FrmSubirEstudiante extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(principalAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnGuardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(principalAsignacionLayout.createSequentialGroup()
                         .addGroup(principalAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txttiemporestante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -363,23 +477,77 @@ public class FrmSubirEstudiante extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        int i = JOptionPane.showConfirmDialog(null, "¿Desea entregar la asignación?", "Confirmación", JOptionPane.OK_CANCEL_OPTION);
-        if (i == JOptionPane.OK_OPTION) {
+        if(archivoEstudiante != null){
+            int i = JOptionPane.showConfirmDialog(null, "¿Desea entregar la asignación?", "Confirmación", JOptionPane.OK_CANCEL_OPTION);
+            if (i == JOptionPane.OK_OPTION) {
             try {
-
+                if(new Date().before(tarea.getFechaEntrega())){
+                    entregar();//Si aún está dentro de la fecha, se aceptan entregas
+                    JOptionPane.showMessageDialog(null, "Entregado correctamente", "Operación exitorsa", JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Está fuera del límite de entrega, pero se guardará su comentario", 
+                            "Atención", JOptionPane.INFORMATION_MESSAGE);
+                    asignacion.setComentario(txtcomentario.getText());
+                    ac.actualizarComentario(asignacion);
+                }
+//                FrmInfoCursa.jPanel1.removeAll();
+//                FrmInfoCursa.jPanel1.add(FrmInfoCursa.copia);
+//                FrmInfoCursa.jPanel1.revalidate();
+//                FrmInfoCursa.jPanel1.repaint();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "No se pudo cargar el grafo", "Error", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "No se pudo guardar la tarea", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
+        }else
+            JOptionPane.showMessageDialog(null, "Seleccione un archivo primero", "Imposible", JOptionPane.WARNING_MESSAGE);
+        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btnGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar1ActionPerformed
-//        JPanel panelCursa = new FrmInfoCursa(this, true, WAIT_CURSOR).getJPanel1();
-//        jPanel3.removeAll();
-//        jPanel3.add(panelAsignacion);
-//        jPanel3.revalidate();
-//        jPanel3.repaint();
-    }//GEN-LAST:event_btnGuardar1ActionPerformed
+    private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
+        /*JPanel panelCursa = new FrmInfoCursa(this, true, WAIT_CURSOR).getJPanel1();
+        jPanel3.removeAll();
+        jPanel3.add(panelAsignacion);
+        jPanel3.revalidate();
+        jPanel3.repaint();
+        this.removeAll();
+        System.out.println("BORRANDO");
+        FrmPrincipalEstudiante1.panelCursas.removeAll();
+        FrmPrincipalEstudiante1.panelCursas.add(FrmPrincipalEstudiante1.panelCursaSeleccionado);
+        FrmPrincipalEstudiante1.panelCursas.revalidate();
+        FrmPrincipalEstudiante1.panelCursas.repaint();*/
+        FrmInfoCursa.jPanel1.removeAll();
+        FrmInfoCursa.jPanel1.add(new FrmInfoCursa(padre,true,asignacion.getId_cursa()).getJPanel1());
+        FrmInfoCursa.jPanel1.revalidate();
+        FrmInfoCursa.jPanel1.repaint();
+    }//GEN-LAST:event_btncancelarActionPerformed
+
+    private void btnSelecArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecArchivoActionPerformed
+        JFileChooser jf = new JFileChooser(archivoDocente);
+        jf.setMultiSelectionEnabled(false);
+        jf.setAcceptAllFileFilterUsed(false);
+        jf.setFileFilter(new FileNameExtensionFilter("Archivos PDF","pdf"));
+        if(jf.showOpenDialog(this) == JFileChooser.APPROVE_OPTION){
+            archivoEstudiante = jf.getSelectedFile();
+            txtnomarchivo.setText(archivoEstudiante.getName());      
+        }else
+            JOptionPane.showMessageDialog(null,"Ningún archivo seleccionado", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnSelecArchivoActionPerformed
+
+    private void txtnomarchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtnomarchivoMouseClicked
+        try {
+            String descargasDir = System.getProperty("user.home") + "/Downloads";
+        
+            // Creamos un objeto Path para la carpeta de descargas
+            Path descargasPath = Paths.get(descargasDir);
+        
+            // Copiamos el archivo temporal a la carpeta de descargas
+            Files.copy(asignacion.getArchivo().toPath(), descargasPath.resolve(asignacion.getArchivo().getName()), StandardCopyOption.REPLACE_EXISTING);
+            JOptionPane.showMessageDialog(null, "Guardado en Descargas", "Descargado", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_txtnomarchivoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -437,7 +605,8 @@ public class FrmSubirEstudiante extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnGuardar1;
+    private javax.swing.JButton btnSelecArchivo;
+    private javax.swing.JButton btncancelar;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -453,15 +622,17 @@ public class FrmSubirEstudiante extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JTextPane jTextPane3;
     private javax.swing.JPanel panelArchivosEnviados;
     private javax.swing.JPanel panelCalificacion;
     private javax.swing.JPanel principalAsignacion;
+    private javax.swing.JTextField txtarchivoTarea;
+    private javax.swing.JTextPane txtcalificacion;
+    private javax.swing.JTextPane txtcomentario;
     private javax.swing.JTextArea txtdescripcion;
     private javax.swing.JTextField txtestadoasignacion;
     private javax.swing.JTextField txtfechaasignacion;
     private javax.swing.JTextField txtfechaentregatarea;
+    private javax.swing.JTextField txtnomarchivo;
     private javax.swing.JTextField txttiemporestante;
     private javax.swing.JTextField txttitulo;
     // End of variables declaration//GEN-END:variables

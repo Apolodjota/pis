@@ -4,8 +4,10 @@ import controladores.PeriodoController;
 import controlador.TDALista.LinkedList;
 import controladores.AsignacionController;
 import controladores.CursaController;
+import controladores.MateriaControllerListas;
 import controladores.PersonaController;
 import controladores.TareaController;
+import java.awt.Frame;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -37,7 +39,9 @@ public class FrmInfoCursa extends javax.swing.JDialog {
     private CursaController curc = new CursaController();
     private TareaController tc = new TareaController();
     private AsignacionController asc = new AsignacionController();
+    private MateriaControllerListas mac = new MateriaControllerListas();
     private Cursa cursaActual = new Cursa();
+    public static JPanel copia;
 
     /**
      * Creates new form FrmAutos
@@ -80,11 +84,15 @@ public class FrmInfoCursa extends javax.swing.JDialog {
         cargarTabla(asc.asignacionesdeCursa(cursaActual.getId()));
     }
 
+    public FrmInfoCursa() {
+    }
+    
     private void mostrarDatos() {
         if (cursaActual != null) {
-            //Persona doc = perc.buscar(cursaActual.getId_docente());
+            Persona doc = perc.buscar(cursaActual.getId_docente());
             txtmatricula.setText(cursaActual.getId_matricula().toString());
-            //txtdocente.setText(doc.getNombres()+" "+doc.getApellidos());
+            txtdocente.setText(doc.getNombres()+" "+doc.getApellidos());
+            txtcursa.setText(mac.buscarMateria(cursaActual.getId_materia()).toString() + " "+cursaActual.getParalelo());
             //System.out.println("Encontro? el docente: "+doc.getDireccionResidencia());
             //System.out.println("Encontro? el docente: "+doc.getTelefonoCasa());
             //txtdocente.setText(cursaActual.getId_docente().toString());
@@ -280,9 +288,14 @@ public class FrmInfoCursa extends javax.swing.JDialog {
                 //new FrmSubirEstudiante().setVisible(true);
                 Asignacion asigActual = mta.getAsignaciones().get(fila);
                 Tarea tActual = tc.buscarTarea(asigActual.getId_tarea());
-                FrmSubirEstudiante asignacion = new FrmSubirEstudiante(asigActual, tActual);
+                //FrmSubirEstudiante asignacion = new FrmSubirEstudiante(asigActual, tActual);
+                FrmSubirEstudiante asignacion = new FrmSubirEstudiante((Frame)this.getParent(), asigActual, tActual);
                 JPanel panelAsignacion = asignacion.getPrincipalAsignacion();
-                
+                copia = jPanel1;
+                FrmPrincipalEstudiante1.jplInicio.setEnabled(false);
+                FrmPrincipalEstudiante1.jplUnidad1.setEnabled(false);
+                FrmPrincipalEstudiante1.jplUnidad2.setEnabled(false);
+                FrmPrincipalEstudiante1.jplUnidad3.setEnabled(false);
                 jPanel1.removeAll();
                 jPanel1.add(panelAsignacion);
                 jPanel1.revalidate();
@@ -380,7 +393,7 @@ public class FrmInfoCursa extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
+    public static javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel panelAsignaciones;
