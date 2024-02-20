@@ -297,7 +297,7 @@ public class FrmMateria extends javax.swing.JFrame {
                             .addComponent(jLabel12)
                             .addComponent(jLabel11))))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(buttonGuardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(23, Short.MAX_VALUE))
@@ -568,7 +568,6 @@ public class FrmMateria extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.edisoncor.gui.button.ButtonAero buttonBuscar;
     private org.edisoncor.gui.button.ButtonAero buttonCancelar;
-    private org.edisoncor.gui.button.ButtonAero buttonGuardar;
     private org.edisoncor.gui.button.ButtonAero buttonGuardar1;
     private org.edisoncor.gui.button.ButtonAero buttonGuardar3;
     private javax.swing.JComboBox<String> cbxAscDesc;
