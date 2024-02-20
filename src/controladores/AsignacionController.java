@@ -37,6 +37,45 @@ public class AsignacionController extends AdaptadorDao<Asignacion>{
         modificar(asigna);
     }
     
+    public LinkedList<Asignacion> asignacionesCursoUnidad(Integer id_materia,Integer id_docente,String paralelo, Integer unidad){
+        //SELECT * FROM asignacion join cursa on (id_cursa = cursa.id) join tarea on (tarea.id = asignacion.id_tarea) where id_materia = 2 and id_docente = 6 and paralelo = 'A' and unidad = 2;
+        LinkedList<Asignacion> lista = new LinkedList<Asignacion>();
+        try {
+            Statement stmt = conexion.getConnection().createStatement();
+            String query = "SELECT * FROM asignacion JOIN cursa ON (id_cursa = cursa.id) JOIN tarea ON (tarea.id = asignacion.id_tarea) where"
+                    + " id_materia = "+id_materia+" and id_docente = "+id_docente+" and paralelo = '"+paralelo+"' and unidad = "+unidad;
+            System.out.println(query);
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()) {
+                Asignacion a = new Asignacion();
+                a.setId(rs.getInt(1));
+                a.setId_cursa(rs.getInt(2));
+                a.setId_tarea(rs.getInt(3)); 
+                InputStream recibido = rs.getBinaryStream(4);
+                if(recibido != null){
+                    File tempFile = File.createTempFile("Entrega", ".pdf");
+                    FileOutputStream outputStream = new FileOutputStream(tempFile);
+                    byte[] buffer = new byte[1024];
+                    int length;
+                    while ((length = recibido.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, length);
+                    }
+                    a.setArchivo(tempFile);
+                }
+                a.setFechaEntrega(rs.getDate(5));
+                a.setCalificacion(rs.getDouble(6));
+                a.setComentario(rs.getString(7));
+                a.setEstado(rs.getString(8));
+                lista.add(a);
+            }
+        } catch (Exception e) {
+            System.out.println("error asignacionesdelaTarea: " + e.getMessage());
+            e.printStackTrace();
+        }
+        //System.out.println("Asignaciones en asignaciones de Cursa: \n"+lista.print());
+        return lista;
+    }
+    
     public void actualizarAsignacion(Asignacion asigna)throws Exception{
         try {
             String query = "UPDATE asignacion SET archivo = ?,fechaentrega = ?,comentario = ?,estado = ? where id ="+asigna.getId();
@@ -147,6 +186,43 @@ public class AsignacionController extends AdaptadorDao<Asignacion>{
             }
         } catch (Exception e) {
             System.out.println("error: " + e.getMessage());
+            e.printStackTrace();
+        }
+        //System.out.println("Asignaciones en asignaciones de Cursa: \n"+lista.print());
+        return lista;
+    }
+    
+    public LinkedList<Asignacion> asignacionesdelaTarea(Integer id_tarea,Integer unidad){
+        LinkedList<Asignacion> lista = new LinkedList<Asignacion>();
+        try {
+            Statement stmt = new Conexion().getConnection().createStatement();
+            String query = "SELECT * FROM asignacion WHERE id_tarea = "+id_tarea;
+            System.out.println(query);
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()) {
+                Asignacion a = new Asignacion();
+                a.setId(rs.getInt(1));
+                a.setId_cursa(rs.getInt(2));
+                a.setId_tarea(rs.getInt(3)); 
+                InputStream recibido = rs.getBinaryStream(4);
+                if(recibido != null){
+                    File tempFile = File.createTempFile("Entrega", ".pdf");
+                    FileOutputStream outputStream = new FileOutputStream(tempFile);
+                    byte[] buffer = new byte[1024];
+                    int length;
+                    while ((length = recibido.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, length);
+                    }
+                    a.setArchivo(tempFile);
+                }
+                a.setFechaEntrega(rs.getDate(5));
+                a.setCalificacion(rs.getDouble(6));
+                a.setComentario(rs.getString(7));
+                a.setEstado(rs.getString(8));
+                lista.add(a);
+            }
+        } catch (Exception e) {
+            System.out.println("error asignacionesdelaTarea: " + e.getMessage());
             e.printStackTrace();
         }
         //System.out.println("Asignaciones en asignaciones de Cursa: \n"+lista.print());

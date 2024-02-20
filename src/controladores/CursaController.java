@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import modelo.Asignacion;
 import modelo.Cursa;
 import modelo.Docente;
+import modelo.Estudiante;
 import modelo.Materia;
 import modelo.Matricula;
 
@@ -32,11 +33,15 @@ public class CursaController extends  AdaptadorDao<Cursa>{
     private Cursa cursa = new Cursa();
     private Integer index = - 1;
     private LinkedList<Cursa> cursas = new LinkedList<>();
-    private Conexion conexion = new Conexion();
-    private Connection con = conexion.getConnection();
+    private Conexion conexion;
+    //private Connection con = conexion.getConnection();
+    private PeriodoController pc = new PeriodoController();
+    private MatriculaController mc = new MatriculaController();
+    private EstudianteControlador ec = new EstudianteControlador();
     
     public CursaController() {
         super(Cursa.class);
+        conexion = new Conexion();
     }
     
     public Integer guardar() {
@@ -197,14 +202,14 @@ public class CursaController extends  AdaptadorDao<Cursa>{
     public LinkedList <Cursa> listarCursosDocente (Integer id){
         LinkedList <Cursa> lista = new LinkedList<>();
         try {
-            Statement stmt = new Conexion().getConnection().createStatement();
+            Statement stmt = conexion.getConnection().createStatement();
             String query = "SELECT DISTINCT id_materia, paralelo FROM Cursa  WHERE id_docente = " + id;
             ResultSet rs = stmt.executeQuery(query);
             while(rs.next()) {
                 Cursa cc = new Cursa();
-                cc.setId(rs.getInt(1));
-                cc.setId_materia(rs.getInt(2));
-                cc.setParalelo(rs.getString(3));
+                //cc.setId(rs.getInt(1));
+                cc.setId_materia(rs.getInt(1));
+                cc.setParalelo(rs.getString(2));
                 lista.add(cc);
             }
         } catch (Exception e) {
@@ -216,7 +221,7 @@ public class CursaController extends  AdaptadorDao<Cursa>{
     public LinkedList <Cursa> listarCursasMatricula (Integer id_matricula){
         LinkedList <Cursa> lista = new LinkedList<>();
         try {
-            Statement stmt = new Conexion().getConnection().createStatement();
+            Statement stmt = conexion.getConnection().createStatement();
             String query = "SELECT * FROM cursa where id_matricula = "+ id_matricula;
             System.out.println(query);
             ResultSet rs = stmt.executeQuery(query);
@@ -235,7 +240,26 @@ public class CursaController extends  AdaptadorDao<Cursa>{
         return lista;
     }
     
-    
+    public LinkedList <Estudiante> listarCursa_Participan (Integer id_docente,Integer id_materia, String paralelo){
+        LinkedList <Estudiante> lista = new LinkedList<>();
+        try {
+            Statement stmt = conexion.getConnection().createStatement();
+            String query = "SELECT cursa.id, id_estudiante FROM cursa JOIN matricula on(id_matricula = matricula.id) WHERE id_docente = "+ id_docente
+                    +" AND id_materia = "+id_materia+" AND paralelo = '"+paralelo+"'";
+            System.out.println(query);
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()) {
+                Matricula m = mc.obtenerMatriculaActual(rs.getInt(2));
+                if(m != null){
+                    lista.add(ec.buscarEstudiante(rs.getInt(2)));
+                }else
+                    System.out.println("La matricula encontrada pertenece a otro periodo");
+            }
+        } catch (Exception e) {
+            System.out.println("error listarCursa_Participan" + e.getMessage());
+        }
+        return lista;
+    }
     /**
      * @return the cursa
      */

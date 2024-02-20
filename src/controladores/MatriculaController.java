@@ -64,7 +64,7 @@ public class MatriculaController extends AdaptadorDao<Matricula>{
         try {
             Statement stmt = conexion.getConnection().createStatement();
             String query = "SELECT * FROM matricula WHERE id_estudiante = "+id_estudiante
-                    +" AND id_periodoacademico = "+pc.getPerioVigente().getId();
+                    +" AND id_periodoacademico = "+pc.getPerioVigente().getId();//Si el periodo de la matrícula no es el actual, quitalo
             System.out.println(query);
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {

@@ -380,7 +380,7 @@ public class FrmSubirEstudiante extends javax.swing.JFrame {
         principalAsignacionLayout.setHorizontalGroup(
             principalAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(principalAsignacionLayout.createSequentialGroup()
-                .addGap(247, 247, 247)
+                .addGap(250, 250, 250)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
