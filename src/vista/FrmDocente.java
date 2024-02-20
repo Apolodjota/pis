@@ -98,7 +98,10 @@ public class FrmDocente extends javax.swing.JFrame {
     }
     
     private Boolean validar (){
-        return !txtapellidos.getText().trim().isEmpty() &&
+        if (!validarInfo()){
+            return false;
+        } else {
+            return !txtapellidos.getText().trim().isEmpty() &&
                 !txtdni.getText().trim().isEmpty() &&
                 !txtNombres.getText().trim().isEmpty() &&
                 !txtTelefono.getText().trim().isEmpty() &&
@@ -106,6 +109,17 @@ public class FrmDocente extends javax.swing.JFrame {
                 !txtCelular.getText().trim().isEmpty() &&
                 !txtTituloCuarto.getText().trim().isEmpty() &&
                 !txtTituloTercer.getText().trim().isEmpty();
+        }
+    }
+    
+    private Boolean validarInfo(){
+        return !txtapellidos.getText().matches(".*\\d+.*") &&
+                !txtNombres.getText().matches(".*\\d+.*") &&
+                !txtTituloCuarto.getText().matches(".*\\d+.*") &&
+                !txtTituloTercer.getText().matches(".*\\d+.*") && 
+                !txtCelular.getText().matches(".*[a-zA-Z\\\\W]+.*") && 
+                !txtTelefono.getText().matches(".*[a-zA-Z\\W]+.*") &&
+                !txtdni.getText().matches(".*[a-zA-Z\\\\W]+.*");
     }
     
     private void cargarVista() {
@@ -127,7 +141,7 @@ public class FrmDocente extends javax.swing.JFrame {
                 txtTituloCuarto.setText(dc.getDocente().getTitulo_cuartoNivel());
                 txtTituloTercer.setText(dc.getDocente().getTitulo_tercerNivel());
                 txtTelefono.setText(dc.getDocente().getTelefonoCasa());
-                cbxGenero.setSelectedItem(dc.getDocente().getGenero());
+                cbxGenero.setSelectedItem((dc.getDocente().getGenero().equalsIgnoreCase("O")) ? "Otro" : (dc.getDocente().getGenero().equalsIgnoreCase("F")) ? "Femenino" : "Masculino");
             } catch (Exception e) {
                 System.out.println("EEORR" + e.getMessage());
             }
@@ -172,7 +186,7 @@ public class FrmDocente extends javax.swing.JFrame {
         pc.getPersona().setTelefonoCelular(txtCelular.getText().toString());
         pc.getPersona().setId_rol(2);
         pc.getPersona().setTelefonoCasa(txtTelefono.getText().toString());
-        pc.getPersona().setGenero(cbxGenero.getSelectedItem().toString());
+        pc.getPersona().setGenero((cbxGenero.getSelectedItem().toString().equalsIgnoreCase("Otro")) ? "O" : (cbxGenero.getSelectedItem().toString().equalsIgnoreCase("Femenino") ? "F" : "M"));
         pc.getPersona().setDireccionResidencia(txtDireccion.getText().toString());
     }
     
@@ -228,7 +242,7 @@ public class FrmDocente extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "error " + e.getMessage());
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Ingrese todos los campos Porfavor",
+            JOptionPane.showMessageDialog(null, "Ingrese correctamente todos los campos Porfavor",
                     "ERROR",
                     JOptionPane.ERROR_MESSAGE);
         } 
@@ -317,6 +331,18 @@ public class FrmDocente extends javax.swing.JFrame {
         jLabel36.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel36.setText("Teléfono:");
 
+        txtTituloTercer.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTituloTercerKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTituloTercerKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTituloTercerKeyTyped(evt);
+            }
+        });
+
         jLabel38.setBackground(new java.awt.Color(204, 204, 255));
         jLabel38.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel38.setText("Título Cuarto Nivel:");
@@ -341,7 +367,7 @@ public class FrmDocente extends javax.swing.JFrame {
         jLabel43.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel43.setText("Direccion Residencia:");
 
-        cbxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "M" }));
+        cbxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Femenino", "Masculino", "Otro" }));
 
         buttonGuardar1.setBackground(new java.awt.Color(0, 204, 204));
         buttonGuardar1.setText("Guardar");
@@ -714,6 +740,18 @@ public class FrmDocente extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_buttonBuscarActionPerformed
+
+    private void txtTituloTercerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTituloTercerKeyReleased
+        
+    }//GEN-LAST:event_txtTituloTercerKeyReleased
+
+    private void txtTituloTercerKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTituloTercerKeyPressed
+        
+    }//GEN-LAST:event_txtTituloTercerKeyPressed
+
+    private void txtTituloTercerKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTituloTercerKeyTyped
+
+    }//GEN-LAST:event_txtTituloTercerKeyTyped
 
     /**
      * @param args the command line arguments
