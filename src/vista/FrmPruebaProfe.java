@@ -76,6 +76,9 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
         jplUnidad1.setVisible(false);
         jplUnidad2.setVisible(false);
         jplUnidad3.setVisible(false);
+        jplUnidad1.setEnabled(false);
+        jplUnidad2.setEnabled(false);
+        jplUnidad3.setEnabled(false);
         cargarDatos();
     }
 
@@ -1502,9 +1505,10 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
     private void btnabrirasignacion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnabrirasignacion1ActionPerformed
         Integer fila = tblAsignacionesEstudiantes.getSelectedRow();
         if(fila < 0){
-            JOptionPane.showMessageDialog(null, "Seleccione una asignación", paralelo, 0);
+            JOptionPane.showMessageDialog(null, "Seleccione una asignación", "Error", JOptionPane.ERROR_MESSAGE);
         }else{
             pestañas.setSelectedIndex(3);
+            //Asignacion aselec = mtae.getAsignaciones().get(fila);
             panelAsigEstudiante.setVisible(true);
             String archivo = (asignacion.getArchivo() != null) ? "Archivo Entregado":"No se ha subido un archivo";
         }
