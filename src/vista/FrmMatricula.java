@@ -178,23 +178,23 @@ public class FrmMatricula extends javax.swing.JFrame {
         panelPrincipal = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
-        btnmattodos = new javax.swing.JButton();
-        btncancelar = new javax.swing.JButton();
         jLabel34 = new javax.swing.JLabel();
         txtperiodo = new javax.swing.JTextField();
         jLabel35 = new javax.swing.JLabel();
         checkGratuidad = new javax.swing.JCheckBox();
-        btnguardar = new javax.swing.JButton();
         txtestudiante = new javax.swing.JTextField();
+        buttonGuardar1 = new org.edisoncor.gui.button.ButtonAero();
+        buttonCancelar = new org.edisoncor.gui.button.ButtonAero();
+        buttonMatTodos = new org.edisoncor.gui.button.ButtonAero();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbldatos = new javax.swing.JTable();
-        btnbuscar = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         cbxcriterio = new javax.swing.JComboBox<>();
         txtvalor = new javax.swing.JTextField();
         cbxvalor = new javax.swing.JComboBox<>();
-        btnseleccionar = new javax.swing.JButton();
+        buttonBuscar = new org.edisoncor.gui.button.ButtonAero();
+        buttonSeleccionar = new org.edisoncor.gui.button.ButtonAero();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestión de Matriculas");
@@ -209,20 +209,6 @@ public class FrmMatricula extends javax.swing.JFrame {
         jLabel33.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel33.setText("Estudiante:");
 
-        btnmattodos.setText("Matricular todos");
-        btnmattodos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmattodosActionPerformed(evt);
-            }
-        });
-
-        btncancelar.setText("Cancelar");
-        btncancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncancelarActionPerformed(evt);
-            }
-        });
-
         jLabel34.setBackground(new java.awt.Color(204, 204, 255));
         jLabel34.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel34.setText("Periodo Vigente:");
@@ -236,13 +222,6 @@ public class FrmMatricula extends javax.swing.JFrame {
         checkGratuidad.setSelected(true);
         checkGratuidad.setText("Mantiene");
         checkGratuidad.setEnabled(false);
-
-        btnguardar.setText("Guardar");
-        btnguardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnguardarActionPerformed(evt);
-            }
-        });
 
         txtestudiante.setEditable(false);
         txtestudiante.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
@@ -259,14 +238,38 @@ public class FrmMatricula extends javax.swing.JFrame {
             }
         });
 
+        buttonGuardar1.setBackground(new java.awt.Color(0, 204, 204));
+        buttonGuardar1.setText("Guardar");
+        buttonGuardar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonGuardar1ActionPerformed(evt);
+            }
+        });
+
+        buttonCancelar.setBackground(new java.awt.Color(0, 204, 204));
+        buttonCancelar.setText("Cancelar");
+        buttonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCancelarActionPerformed(evt);
+            }
+        });
+
+        buttonMatTodos.setBackground(new java.awt.Color(0, 204, 204));
+        buttonMatTodos.setText("Matricular Todos");
+        buttonMatTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonMatTodosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(357, 357, 357)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(357, 357, 357)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel34)
                             .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -275,21 +278,21 @@ public class FrmMatricula extends javax.swing.JFrame {
                             .addComponent(txtperiodo)
                             .addComponent(txtestudiante, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(btnmattodos))
+                        .addComponent(buttonMatTodos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGap(357, 357, 357)
-                                .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(44, 44, 44))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36)))
+                            .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonGuardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(checkGratuidad, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(checkGratuidad, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(161, 161, 161))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(45, 45, 45)))))
+                .addContainerGap(236, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,20 +301,23 @@ public class FrmMatricula extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel34)
                     .addComponent(txtperiodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
+                .addGap(11, 11, 11)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33)
                     .addComponent(txtestudiante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnmattodos))
-                .addGap(19, 19, 19)
+                    .addComponent(buttonMatTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel35)
                     .addComponent(checkGratuidad))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(buttonGuardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
@@ -333,14 +339,6 @@ public class FrmMatricula extends javax.swing.JFrame {
 
         jPanel7.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 80, 720, 239));
 
-        btnbuscar.setText("Buscar");
-        btnbuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnbuscarActionPerformed(evt);
-            }
-        });
-        jPanel7.add(btnbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 30, 111, 36));
-
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText("Filtrar por:");
         jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
@@ -357,13 +355,23 @@ public class FrmMatricula extends javax.swing.JFrame {
         cbxvalor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel7.add(cbxvalor, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 40, 310, -1));
 
-        btnseleccionar.setText("Seleccionar");
-        btnseleccionar.addActionListener(new java.awt.event.ActionListener() {
+        buttonBuscar.setBackground(new java.awt.Color(0, 204, 204));
+        buttonBuscar.setText("Buscar");
+        buttonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnseleccionarActionPerformed(evt);
+                buttonBuscarActionPerformed(evt);
             }
         });
-        jPanel7.add(btnseleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 174, 111, 36));
+        jPanel7.add(buttonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 30, 120, 30));
+
+        buttonSeleccionar.setBackground(new java.awt.Color(0, 204, 204));
+        buttonSeleccionar.setText("Seleccionar");
+        buttonSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSeleccionarActionPerformed(evt);
+            }
+        });
+        jPanel7.add(buttonSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 170, 120, 30));
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
@@ -377,7 +385,7 @@ public class FrmMatricula extends javax.swing.JFrame {
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -398,7 +406,60 @@ public class FrmMatricula extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
+    private void txtestudianteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtestudianteMouseClicked
+        new DlgSelecEstudiante(this, true).setVisible(true);
+    }//GEN-LAST:event_txtestudianteMouseClicked
+
+    private void txtestudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtestudianteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtestudianteActionPerformed
+
+    private void cbxcriterioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxcriterioItemStateChanged
+        if(cbxcriterio.getSelectedIndex() == 2){
+            txtvalor.setVisible(false);
+            cbxvalor.setVisible(true);
+        }else{
+            txtvalor.setVisible(true);
+            cbxvalor.setVisible(false);
+        }
+    }//GEN-LAST:event_cbxcriterioItemStateChanged
+
+    private void buttonGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGuardar1ActionPerformed
+        guardar();
+    }//GEN-LAST:event_buttonGuardar1ActionPerformed
+
+    private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
+        //limpiar();
+        int yinicial = 25;
+        for (int i = 0; i < 5; i++) {
+            JLabel bot = new javax.swing.JLabel();
+            jPanel6.add(bot);
+            bot.setLocation(100, yinicial);
+            bot.setBackground(new java.awt.Color(204, 204, 255));
+            bot.setFont(new java.awt.Font("Times New Roman", 1, 14));
+            bot.setSize(111, 36);
+            bot.setText("XDDDD");
+            yinicial += 25;
+        }
+        
+    }//GEN-LAST:event_buttonCancelarActionPerformed
+
+    private void buttonMatTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMatTodosActionPerformed
+        try {
+            matriC.matricularVarios(ec.getEstudiantesNoMatriculados(), pActual.getId());
+            JOptionPane.showMessageDialog(null,
+                    "Estudiantes matriculados correctamente",
+                    "OK",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,
+                    "No se logró matrícular a varios estudiantes: " + e.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_buttonMatTodosActionPerformed
+
+    private void buttonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarActionPerformed
         LinkedList<Matricula> list = new LinkedList<>();
         if(txtvalor.getText().isEmpty())
             //JOptionPane.showMessageDialog(null, "Ingrese el valor de búsqueda", "Error", JOptionPane.WARNING_MESSAGE);
@@ -423,64 +484,11 @@ public class FrmMatricula extends javax.swing.JFrame {
             mtmatriC.setMatriculas(list);
             tbldatos.setModel(mtmatriC);
             tbldatos.updateUI();
-    }//GEN-LAST:event_btnbuscarActionPerformed
+    }//GEN-LAST:event_buttonBuscarActionPerformed
 
-    private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
-        //limpiar();
-        int yinicial = 25;
-        for (int i = 0; i < 5; i++) {
-            JLabel bot = new javax.swing.JLabel();
-            jPanel6.add(bot);
-            bot.setLocation(100, yinicial);
-            bot.setBackground(new java.awt.Color(204, 204, 255));
-            bot.setFont(new java.awt.Font("Times New Roman", 1, 14));
-            bot.setSize(111, 36);
-            bot.setText("XDDDD");
-            yinicial += 25;
-        }
-        
-    }//GEN-LAST:event_btncancelarActionPerformed
-
-    private void btnmattodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmattodosActionPerformed
-        try {
-            matriC.matricularVarios(ec.getEstudiantesNoMatriculados(), pActual.getId());
-            JOptionPane.showMessageDialog(null,
-                    "Estudiantes matriculados correctamente",
-                    "OK",
-                    JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,
-                    "No se logró matrícular a varios estudiantes: " + e.getMessage(),
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_btnmattodosActionPerformed
-
-    private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-        guardar();
-    }//GEN-LAST:event_btnguardarActionPerformed
-
-    private void txtestudianteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtestudianteMouseClicked
-        new DlgSelecEstudiante(this, true).setVisible(true);
-    }//GEN-LAST:event_txtestudianteMouseClicked
-
-    private void txtestudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtestudianteActionPerformed
+    private void buttonSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSeleccionarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtestudianteActionPerformed
-
-    private void btnseleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnseleccionarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnseleccionarActionPerformed
-
-    private void cbxcriterioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxcriterioItemStateChanged
-        if(cbxcriterio.getSelectedIndex() == 2){
-            txtvalor.setVisible(false);
-            cbxvalor.setVisible(true);
-        }else{
-            txtvalor.setVisible(true);
-            cbxvalor.setVisible(false);
-        }
-    }//GEN-LAST:event_cbxcriterioItemStateChanged
+    }//GEN-LAST:event_buttonSeleccionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -533,11 +541,11 @@ public class FrmMatricula extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnbuscar;
-    private javax.swing.JButton btncancelar;
-    private javax.swing.JButton btnguardar;
-    private javax.swing.JButton btnmattodos;
-    private javax.swing.JButton btnseleccionar;
+    private org.edisoncor.gui.button.ButtonAero buttonBuscar;
+    private org.edisoncor.gui.button.ButtonAero buttonCancelar;
+    private org.edisoncor.gui.button.ButtonAero buttonGuardar1;
+    private org.edisoncor.gui.button.ButtonAero buttonMatTodos;
+    private org.edisoncor.gui.button.ButtonAero buttonSeleccionar;
     private javax.swing.JComboBox<String> cbxcriterio;
     private javax.swing.JComboBox<String> cbxvalor;
     private javax.swing.JCheckBox checkGratuidad;
