@@ -582,7 +582,7 @@ public class FrmCambiarClave extends javax.swing.JFrame {
         jplSalir.add(panelImage16, gridBagConstraints);
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel14.setText("Cerrar Sesion");
+        jLabel14.setText("Regresar");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
