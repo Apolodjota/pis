@@ -84,7 +84,7 @@ public class PIS {
 //            System.out.println("-->" + ex.getMessage());
 //        }
 //        
-     //     new FrmIniciarSesion().setVisible(true);
+          new FrmIniciarSesion().setVisible(true);
     }
 
 }

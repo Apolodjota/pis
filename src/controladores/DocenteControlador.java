@@ -95,15 +95,15 @@ public class DocenteControlador extends AdaptadorDao<Docente>{
                 docente.setFecha_inicio_docencia(rs.getDate(2));
                 docente.setTitulo_tercerNivel(rs.getString(3));
                 docente.setTitulo_cuartoNivel(rs.getString(4));
-                docente.setId_rol(rs.getInt(5));
-                docente.setCedula(rs.getString(6));
-                docente.setNombres(rs.getString(7));
-                docente.setApellidos(rs.getString(8));
-                docente.setGenero(rs.getString(9));
-                docente.setFechaNacimiento(rs.getDate(10));
-                docente.setTelefonoCasa(rs.getString(11));
-                docente.setTelefonoCelular(rs.getString(12));
-                docente.setDireccionResidencia(rs.getString(13));
+                docente.setId_rol(rs.getInt(6));
+                docente.setCedula(rs.getString(7));
+                docente.setNombres(rs.getString(8));
+                docente.setApellidos(rs.getString(9));
+                docente.setGenero(rs.getString(10));
+                docente.setFechaNacimiento(rs.getDate(11));
+                docente.setTelefonoCasa(rs.getString(12));
+                docente.setTelefonoCelular(rs.getString(13));
+                docente.setDireccionResidencia(rs.getString(14));
             }
         } catch (Exception ex) {
             System.out.println(ex);

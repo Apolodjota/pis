@@ -247,7 +247,8 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
                     new FrmPrincipalAdministrador(persona.getNombres(), persona.getApellidos()).setVisible(true);
                     this.setVisible(false);
                 } else if (idRol == 2) {
-                    new FrmPrincipalDocenteGrande(persona.getId()).setVisible(true);
+                    //new FrmPrincipalDocenteGrande(persona.getId()).setVisible(true);
+                    new FrmPruebaProfe(persona.getId()).setVisible(true);
                     this.setVisible(false);
                 } else if (idRol == 3) {
                     //new FrmPrincipalEstudiante(persona.getId()).setVisible(true);

@@ -78,7 +78,7 @@ public class EstudianteControlador extends AdaptadorDao<Estudiante> {
         String query2 = "SELECT * FROM matricula WHERE id_estudiante = " + id_estudiante + " AND id_periodoacademico = " + id_periodo;//Ojo esto ultimo
         //System.out.println(query2);
         try {
-            return con.createStatement().executeQuery(query2);
+            return conexion.getConnection().createStatement().executeQuery(query2);
         } catch (SQLException ex) {
             System.out.println("Error al filtrar matríulas de estudiantes: "+ex);
         }
@@ -90,6 +90,7 @@ public class EstudianteControlador extends AdaptadorDao<Estudiante> {
         try {
             Statement stmt = conexion.getConnection().createStatement();//Poner conexion arriba
             String query = "SELECT * FROM estudiante JOIN persona using (id)";
+            System.out.println(query);
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 Boolean estaMatriculado = !segundaSentencia(rs.getInt(1), new PeriodoController().getPerioVigente().getId()).next();
@@ -116,6 +117,34 @@ public class EstudianteControlador extends AdaptadorDao<Estudiante> {
         return lista;
     }
 
+    public Estudiante obtenerEstudianteporIDcursa(Integer id_cursa){
+        Estudiante e = new Estudiante();
+        try {
+            Statement stmt = conexion.getConnection().createStatement();
+            String query = "SELECT * FROM persona JOIN matricula ON(persona.id = id_estudiante) join cursa on (matricula.id = id_matricula) where"
+                    + " cursa.id = "+id_cursa;
+            //System.out.println(query);
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                e.setId(rs.getInt(1));
+                e.setNombres(rs.getString(4));
+                e.setApellidos(rs.getString(5));
+                /*e.setTitulo_bachiller(rs.getString(2));
+                e.setTrabaja(rs.getString(3));
+                e.setId_rol(rs.getInt(5));
+                e.setCedula(rs.getString(6));
+                e.setGenero(rs.getString(9));
+                e.setFechaNacimiento(rs.getDate(10));
+                e.setTelefonoCasa(rs.getString(11));
+                e.setTelefonoCelular(rs.getString(12));
+                e.setDireccionResidencia(rs.getString(13));*/
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        return e;
+    }
+    
     public Estudiante buscarEstudiante(Integer id) {
         Estudiante e = new Estudiante();
         try {

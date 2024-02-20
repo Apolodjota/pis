@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controladores;
 
 import controlador.BDD.DAO.AdaptadorDao;
@@ -27,9 +23,11 @@ import modelo.Tarea;
 public class TareaController extends AdaptadorDao<Tarea>{
     private Tarea tarea = new Tarea();
     private LinkedList<Tarea> tareas = new LinkedList<>();
+    private Conexion conexion;
     
     public TareaController() {
         super(Tarea.class);
+        conexion = new Conexion();
     }
 
     public Integer guardar() {
@@ -69,7 +67,7 @@ public class TareaController extends AdaptadorDao<Tarea>{
                 /*OutputStream ou = new FileOutputStream(f, false);
                 rs.getBinaryStream(4).transferTo(ou);*/
                 t.setFechaAsignacion(rs.getDate(5));
-                t.setFechaEntrega(rs.getDate(5));
+                t.setFechaEntrega(rs.getDate(6));
                 t.setDescripcion(rs.getString(7));
                 //
             }
@@ -77,8 +75,28 @@ public class TareaController extends AdaptadorDao<Tarea>{
             System.out.println("error obteniendo tarea: " + e.getMessage());
             e.printStackTrace();
         }
-        //System.out.println("Asignaciones en asignaciones de Cursa: \n"+lista.print());
         return t;
+    } 
+        
+    public LinkedList<Tarea> tareasCursoParUnidad(Integer id_docente, Integer id_materia, String paralelo,Integer unidad){
+        LinkedList<Tarea> lista = new LinkedList<>();
+        try {
+                Statement stmt = conexion.getConnection().createStatement();
+                String query = "SELECT DISTINCT tarea.id FROM cursa join asignacion on (id_cursa = cursa.id) join tarea on (id_tarea = tarea.id) WHERE id_docente = "+
+                    id_docente+" AND id_materia = "+id_materia+" AND paralelo = '"+paralelo+"'";
+                System.out.println(query);
+                ResultSet rs = stmt.executeQuery(query);
+                while(rs.next()) {
+                    Tarea t = obtenerTcompleta(rs.getInt(1));
+                    if(t.getUnidad() == unidad){
+                        lista.add(t);
+                    }else if(unidad == 0)
+                        lista.add(t);
+                    }
+            }catch (Exception e) {
+                System.out.println("error tareasdelCursoParalelo: " + e.getMessage());
+            }
+        return lista;
     }
     
     public LinkedList<Tarea> quickSort(LinkedList<Tarea> lista, Integer type, String field) {
@@ -156,10 +174,5 @@ public class TareaController extends AdaptadorDao<Tarea>{
      */
     public void setTareas(LinkedList<Tarea> tareas) {
         this.tareas = tareas;
-    }
-    
-    public static void main(String[] args) {
-        File ar = new File("envio xd");
-        System.out.println(ar.getName());
     }
 }
