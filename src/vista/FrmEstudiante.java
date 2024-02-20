@@ -92,12 +92,24 @@ public class FrmEstudiante extends javax.swing.JFrame {
     }
 
     private Boolean validar (){
-        return !txtApellido.getText().trim().isEmpty() &&
+        if (!validarInfo()) {
+            return false;
+        } else {
+            return !txtApellido.getText().trim().isEmpty() &&
                 !txtDireccionResidencia.getText().trim().isEmpty() &&
                 !txtdni.getText().trim().isEmpty() &&
                 !txtnombres.getText().trim().isEmpty() &&
                 !txtCelular.getText().trim().isEmpty() &&
                 !txtTelefono.getText().trim().isEmpty();
+        }
+    }
+    
+        private Boolean validarInfo(){
+        return !txtapellidos.getText().matches(".*\\d+.*") &&
+                !txtnombres.getText().matches(".*\\d+.*") &&
+                !txtCelular.getText().matches(".*[a-zA-Z\\\\W]+.*") && 
+                !txtTelefono.getText().matches(".*[a-zA-Z\\W]+.*") &&
+                !txtdni.getText().matches(".*[a-zA-Z\\\\W]+.*");
     }
     
     private void cargarVista() {
@@ -117,8 +129,8 @@ public class FrmEstudiante extends javax.swing.JFrame {
                 txtdni.setText(ec.getEstudiante().getCedula());
                 txtTelefono.setText(ec.getEstudiante().getTelefonoCasa());
                 cbxNachiller.setSelectedItem(ec.getEstudiante().getTitulo_bachiller());
-                cbxGenero.setSelectedItem(ec.getEstudiante().getGenero());
-                cbxTrabaja.setSelectedItem(ec.getEstudiante().getTrabaja());
+                cbxGenero.setSelectedItem((ec.getEstudiante().getGenero().equalsIgnoreCase("O")) ? "Otro" : (ec.getEstudiante().getGenero().equalsIgnoreCase("F")) ? "Femenino" : "Masculino");
+                cbxTrabaja.setSelectedItem((ec.getEstudiante().getTrabaja().equalsIgnoreCase("T") ? "Si" : "No"));
                 txtDireccionResidencia.setText(ec.getEstudiante().getDireccionResidencia());
             } catch (Exception e) {
                 System.out.println("EEORR" + e.getMessage());
@@ -165,11 +177,11 @@ public class FrmEstudiante extends javax.swing.JFrame {
         pc.getPersona().setTelefonoCelular(txtCelular.getText().toString());
         pc.getPersona().setId_rol(3);
         pc.getPersona().setTelefonoCasa(txtTelefono.getText().toString());
-        pc.getPersona().setGenero(cbxGenero.getSelectedItem().toString());
+        pc.getPersona().setGenero((cbxGenero.getSelectedItem().toString().equalsIgnoreCase("Otro")) ? "O" : (cbxGenero.getSelectedItem().toString().equalsIgnoreCase("Femenino") ? "F" : "M"));
         pc.getPersona().setDireccionResidencia(txtDireccionResidencia.getText().toString());
     }
     
-    private void obtenerEstudiante() throws Exception{
+    private void obtenerEstudiante() throws Exception {
         ec.getEstudiante().setNombres(txtnombres.getText().toString());
         ec.getEstudiante().setApellidos(txtApellido.getText().toString());
         ec.getEstudiante().setCedula(txtdni.getText().toString());
@@ -179,11 +191,11 @@ public class FrmEstudiante extends javax.swing.JFrame {
         ec.getEstudiante().setTelefonoCasa(txtTelefono.getText().toString());
         ec.getEstudiante().setTitulo_bachiller(cbxNachiller.getSelectedItem().toString());
         ec.getEstudiante().setGenero(cbxGenero.getSelectedItem().toString());
-        ec.getEstudiante().setTrabaja(cbxTrabaja.getSelectedItem().toString());
+        ec.getEstudiante().setTrabaja(cbxTrabaja.getSelectedItem().toString().equalsIgnoreCase("Si") ? "T" : "F");
         ec.getEstudiante().setDireccionResidencia(txtDireccionResidencia.getText().toString());
     }
 
-    private void save(){
+    private void save() {
         if (validar()) {
             try {
                 obtenerPersona();
@@ -324,12 +336,12 @@ public class FrmEstudiante extends javax.swing.JFrame {
         jLabel39.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel39.setText("Teléfono Casa:");
 
-        cbxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "M" }));
+        cbxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Femenino", "Masculino", "Otro" }));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Titulo Bachiller:");
 
-        cbxTrabaja.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "T" }));
+        cbxTrabaja.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
 
         buttonGuardar1.setBackground(new java.awt.Color(0, 204, 204));
         buttonGuardar1.setText("Guardar");
@@ -577,7 +589,7 @@ public class FrmEstudiante extends javax.swing.JFrame {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(buttonGuardar3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
