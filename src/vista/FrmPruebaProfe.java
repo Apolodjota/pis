@@ -76,6 +76,9 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
         jplUnidad1.setVisible(false);
         jplUnidad2.setVisible(false);
         jplUnidad3.setVisible(false);
+        jplUnidad1.setEnabled(false);
+        jplUnidad2.setEnabled(false);
+        jplUnidad3.setEnabled(false);
         cargarDatos();
     }
 
@@ -1505,6 +1508,39 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
         jPanel5.revalidate();
         jPanel5.repaint();*/
     }//GEN-LAST:event_jplUnidad1MouseClicked
+    private void btnabrirasignacion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnabrirasignacion1ActionPerformed
+        Integer fila = tblAsignacionesEstudiantes.getSelectedRow();
+        if(fila < 0){
+            JOptionPane.showMessageDialog(null, "Seleccione una asignación", "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            pestañas.setSelectedIndex(3);
+            //Asignacion aselec = mtae.getAsignaciones().get(fila);
+            panelAsigEstudiante.setVisible(true);
+            String archivo = (asignacion.getArchivo() != null) ? "Archivo Entregado":"No se ha subido un archivo";
+        }
+        
+        
+        //asignacion = asc
+    }//GEN-LAST:event_btnabrirasignacion1ActionPerformed
+
+    private void btnverasignacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnverasignacionesActionPerformed
+        pestañas.setSelectedIndex(3);
+        try {
+            mtae.setAsignaciones(asc.asignacionesCursoUnidad(id_materia, docenteLogeado.getId(), paralelo, unidadActual));
+            tblAsignacionesEstudiantes.setModel(mtae);
+            tblAsignacionesEstudiantes.updateUI();
+        } catch (Exception e) {
+            System.out.println("Error ver asignaciones de estudiante");
+        }
+//        emt.setEstudiantes(cursac.listarCursa_Participan(docenteLogeado.getId(), id_materia, paralelo));
+//                                tblParticipantes.setModel(emt);
+//                                tblParticipantes.updateUI();
+    }//GEN-LAST:event_btnverasignacionesActionPerformed
+
+    private void btnNuevaTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaTareaActionPerformed
+        pestañas.setSelectedIndex(4);
+        panelAsigEstudiante.setVisible(false);
+    }//GEN-LAST:event_btnNuevaTareaActionPerformed
 
     private void limpiarpanelPrincipalAsignacion(){
         txttitulo.setText("");
