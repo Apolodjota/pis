@@ -12,6 +12,9 @@ import java.util.Map;
 import controlador.TDALista.LinkedList;
 import controlador.Utilidades.Utilidades;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Persona;
 import vista.Util.Util;
 

@@ -14,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -62,6 +63,7 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
     private Integer id_materia;
     private String paralelo;
     private Integer unidadActual;
+    private Boolean abrirParaCalificar;
     /**
      * Creates new form FrmPrincipalAdministrador
      */
@@ -79,6 +81,8 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
         jplUnidad1.setEnabled(false);
         jplUnidad2.setEnabled(false);
         jplUnidad3.setEnabled(false);
+        lblTiempoRest.setVisible(false);
+        txtTiempoRest.setVisible(false);
         cargarDatos();
     }
 
@@ -247,6 +251,8 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
         ImagenInicio = new org.edisoncor.gui.panel.PanelImage();
         jLabel16 = new javax.swing.JLabel();
         pestañas = new tabbed.MaterialTabbed();
+        pageIN = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         pageCursa = new javax.swing.JPanel();
         panelEstudiantes = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -267,7 +273,7 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
         panelAsignaciones1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblAsignacionesEstudiantes = new javax.swing.JTable();
-        buttonAbrirAsignacion = new org.edisoncor.gui.button.ButtonAero();
+        btnAbrirAsignacion = new org.edisoncor.gui.button.ButtonAero();
         jLabel20 = new javax.swing.JLabel();
         txtcursa1 = new javax.swing.JTextField();
         pageTres = new javax.swing.JPanel();
@@ -284,8 +290,8 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
         txttitulo = new javax.swing.JTextField();
         txtfechaasignacion = new javax.swing.JTextField();
         panelAsigEstudiante = new javax.swing.JPanel();
-        txttiemporestante = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
+        txtTiempoRest = new javax.swing.JTextField();
+        lblTiempoRest = new javax.swing.JLabel();
         txtestadoasignacion = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         panelArchivosEnviados = new javax.swing.JPanel();
@@ -304,8 +310,6 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
         spnminutos = new javax.swing.JSpinner();
         buttonGuardarySalir = new org.edisoncor.gui.button.ButtonAero();
         buttonCancelar = new org.edisoncor.gui.button.ButtonAero();
-        pageIN = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -657,6 +661,33 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
         pestañas.setMinimumSize(new java.awt.Dimension(1180, 550));
         pestañas.setPreferredSize(new java.awt.Dimension(1180, 550));
 
+        pageIN.setBackground(new java.awt.Color(255, 255, 255));
+        pageIN.setPreferredSize(new java.awt.Dimension(1140, 642));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Mis cursos:");
+
+        javax.swing.GroupLayout pageINLayout = new javax.swing.GroupLayout(pageIN);
+        pageIN.setLayout(pageINLayout);
+        pageINLayout.setHorizontalGroup(
+            pageINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pageINLayout.createSequentialGroup()
+                .addGap(109, 109, 109)
+                .addComponent(jLabel1)
+                .addContainerGap(922, Short.MAX_VALUE))
+        );
+        pageINLayout.setVerticalGroup(
+            pageINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pageINLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(662, Short.MAX_VALUE))
+        );
+
+        pestañas.addTab("", pageIN);
+
         pageCursa.setBackground(new java.awt.Color(255, 255, 255));
         pageCursa.setPreferredSize(new java.awt.Dimension(1140, 642));
 
@@ -724,7 +755,7 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
                     .addComponent(txtcursa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelEstudiantes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(322, Short.MAX_VALUE))
+                .addContainerGap(318, Short.MAX_VALUE))
         );
 
         pestañas.addTab("", pageCursa);
@@ -792,17 +823,12 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelAsignaciones2Layout.createSequentialGroup()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+                        .addGap(21, 21, 21)
                         .addGroup(panelAsignaciones2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAsignaciones2Layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(buttonVerAsignaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(buttonVerAsignaciones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelAsignaciones2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAsignaciones2Layout.createSequentialGroup()
-                                    .addGap(21, 21, 21)
-                                    .addComponent(buttonNuevaTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(panelAsignaciones2Layout.createSequentialGroup()
-                                    .addGap(21, 21, 21)
-                                    .addComponent(buttonEditarTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(buttonNuevaTarea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buttonEditarTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(11, Short.MAX_VALUE))))
         );
         panelAsignaciones2Layout.setVerticalGroup(
@@ -847,7 +873,7 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
                     .addComponent(txtcursa2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(panelAsignaciones2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(293, Short.MAX_VALUE))
+                .addContainerGap(289, Short.MAX_VALUE))
         );
 
         pestañas.addTab("", pageUno);
@@ -870,11 +896,11 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tblAsignacionesEstudiantes);
 
-        buttonAbrirAsignacion.setBackground(new java.awt.Color(0, 204, 204));
-        buttonAbrirAsignacion.setText("Abrir Asignacion");
-        buttonAbrirAsignacion.addActionListener(new java.awt.event.ActionListener() {
+        btnAbrirAsignacion.setBackground(new java.awt.Color(0, 204, 204));
+        btnAbrirAsignacion.setText("Abrir Asignacion");
+        btnAbrirAsignacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAbrirAsignacionActionPerformed(evt);
+                btnAbrirAsignacionActionPerformed(evt);
             }
         });
 
@@ -888,7 +914,7 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(panelAsignaciones1Layout.createSequentialGroup()
                 .addGap(220, 220, 220)
-                .addComponent(buttonAbrirAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAbrirAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelAsignaciones1Layout.setVerticalGroup(
@@ -897,7 +923,7 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(buttonAbrirAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAbrirAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
 
@@ -930,12 +956,12 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
                     .addComponent(txtcursa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelAsignaciones1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(323, Short.MAX_VALUE))
+                .addContainerGap(319, Short.MAX_VALUE))
         );
 
         pestañas.addTab("", pageDos);
 
-        pageTres.setBackground(new java.awt.Color(255, 255, 204));
+        pageTres.setBackground(new java.awt.Color(255, 255, 255));
 
         principalAsignacion.setBackground(new java.awt.Color(255, 255, 255));
         principalAsignacion.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Detalles de la tarea:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
@@ -950,6 +976,11 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
         txtarchivoTarea.setEditable(false);
         txtarchivoTarea.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         txtarchivoTarea.setText("No se ha proporcionado un archivo");
+        txtarchivoTarea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtarchivoTareaMouseClicked(evt);
+            }
+        });
 
         buttonSubir.setBackground(new java.awt.Color(0, 204, 204));
         buttonSubir.setText("Subir");
@@ -991,11 +1022,11 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
         txtfechaasignacion.setEditable(false);
 
         panelAsigEstudiante.setBackground(new java.awt.Color(255, 255, 255));
-        panelAsigEstudiante.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panelAsigEstudiante.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos de la Asignación:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
-        txttiemporestante.setEditable(false);
+        txtTiempoRest.setEditable(false);
 
-        jLabel10.setText("Tiempo restante:");
+        lblTiempoRest.setText("Tiempo restante:");
 
         txtestadoasignacion.setEditable(false);
 
@@ -1040,13 +1071,13 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
 
         panelCalificacion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        txtcomentario.setEditable(false);
         jScrollPane1.setViewportView(txtcomentario);
 
-        jLabel19.setText("Agregar comentario:");
+        jLabel19.setText("Comentario del estudiante:");
 
         jLabel21.setText("Calificacion");
 
-        txtcalificacion.setEditable(false);
         jScrollPane6.setViewportView(txtcalificacion);
 
         jLabel22.setFont(new java.awt.Font("Inter", 0, 15)); // NOI18N
@@ -1060,7 +1091,7 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(panelCalificacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
+                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCalificacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1097,9 +1128,9 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txtestadoasignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel10)
+                        .addComponent(lblTiempoRest)
                         .addGap(12, 12, 12)
-                        .addComponent(txttiemporestante, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTiempoRest, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(panelArchivosEnviados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelCalificacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1112,8 +1143,8 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
                 .addGroup(panelAsigEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtestadoasignacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18)
-                    .addComponent(jLabel10)
-                    .addComponent(txttiemporestante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblTiempoRest)
+                    .addComponent(txtTiempoRest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelArchivosEnviados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1203,13 +1234,13 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
                                 .addComponent(spnhora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(spnminutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(dtcFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelAsigEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelAsigEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
                 .addGroup(principalAsignacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonGuardarySalir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pageTresLayout = new javax.swing.GroupLayout(pageTres);
@@ -1223,39 +1254,13 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
         );
         pageTresLayout.setVerticalGroup(
             pageTresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pageTresLayout.createSequentialGroup()
-                .addGap(0, 68, Short.MAX_VALUE)
-                .addComponent(principalAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pageTresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(principalAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pestañas.addTab("", pageTres);
-
-        pageIN.setBackground(new java.awt.Color(255, 255, 255));
-        pageIN.setPreferredSize(new java.awt.Dimension(1140, 642));
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Mis cursos:");
-
-        javax.swing.GroupLayout pageINLayout = new javax.swing.GroupLayout(pageIN);
-        pageIN.setLayout(pageINLayout);
-        pageINLayout.setHorizontalGroup(
-            pageINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pageINLayout.createSequentialGroup()
-                .addGap(109, 109, 109)
-                .addComponent(jLabel1)
-                .addContainerGap(925, Short.MAX_VALUE))
-        );
-        pageINLayout.setVerticalGroup(
-            pageINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pageINLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(662, Short.MAX_VALUE))
-        );
-
-        pestañas.addTab("", pageIN);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -1548,6 +1553,17 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
         txtarchivoTarea.setText("No se ha proporcionado un archivo");
         txtfechaasignacion.setText("");
         txtcomentario.setText("");
+        dtcFin.setDate(null);
+    }
+    
+    private void setearAsignacion(Asignacion asigna){
+        txttitulo.setText(paralelo);
+        String estado = "Sin entregar";
+        if(asigna.getEstado().equalsIgnoreCase("E")) estado = "Entregado";
+        if(asigna.getEstado().equalsIgnoreCase("C")) estado = "Calificado";
+        txtestadoasignacion.setText(estado);
+        txtcomentario.setText(asigna.getComentario());
+        if(asignacion.getArchivo() != null){txtnomarchivo.setText(asignacion.getArchivo().getName());}
     }
     
     private void txtnomarchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtnomarchivoMouseClicked
@@ -1563,13 +1579,24 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
         try {
             Integer fila = tbltareas.getSelectedRow();
             if(fila > -1){
-                tareaSeleccionada = mtt.getTareas().get(fila);
-                txttitulo.setText(tareaSeleccionada.getTitulo());
+                //tareaSeleccionada = ;
+                tarc.setTarea(mtt.getTareas().get(fila));
+                /*txttitulo.setText(tareaSeleccionada.getTitulo());
                 txtdescripcion.setText(tareaSeleccionada.getDescripcion());
                 //if(tareaSeleccionada.getArchivo() != null)
                 txtfechaasignacion.setText(tareaSeleccionada.getFechaAsignacion().toString());
                 dtcFin.setDate(tareaSeleccionada.getFechaEntrega());
                 archivoDocente = tareaSeleccionada.getArchivo();
+                pestañas.setSelectedIndex(4);
+                panelAsigEstudiante.setVisible(false);*/
+                txttitulo.setText(tarc.getTarea().getTitulo());
+                txtdescripcion.setText(tarc.getTarea().getDescripcion());
+                //if(tareaSeleccionada.getArchivo() != null)
+                txtfechaasignacion.setText(tarc.getTarea().getFechaAsignacion().toString());
+                dtcFin.setDate(tarc.getTarea().getFechaEntrega());
+                archivoDocente = tarc.getTarea().getArchivo();
+                if(archivoDocente != null)
+                    txtarchivoTarea.setText(archivoDocente.getName());
                 pestañas.setSelectedIndex(4);
                 panelAsigEstudiante.setVisible(false);
             }else
@@ -1592,19 +1619,28 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
 //                                tblParticipantes.updateUI();
     }//GEN-LAST:event_buttonVerAsignacionesActionPerformed
 
-    private void buttonAbrirAsignacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAbrirAsignacionActionPerformed
+    private void btnAbrirAsignacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirAsignacionActionPerformed
         Integer fila = tblAsignacionesEstudiantes.getSelectedRow();
         if(fila < 0){
             JOptionPane.showMessageDialog(null, "Seleccione una asignación", paralelo, 0);
         }else{
-            pestañas.setSelectedIndex(3);
-            panelAsigEstudiante.setVisible(true);
-            String archivo = (asignacion.getArchivo() != null) ? "Archivo Entregado":"No se ha subido un archivo";
+            try {
+                abrirParaCalificar = true;
+                pestañas.setSelectedIndex(4);
+                panelAsigEstudiante.setVisible(true);
+                asignacion = mtae.getAsignaciones().get(fila);
+                String archivo = (asignacion.getArchivo() != null) ? "Archivo Entregado":"No se ha subido un archivo";
+                setearAsignacion(asignacion);
+                //Hay q actualizar asignacion
+            } catch (Exception e) {
+                System.out.println("Error seleccionando asignacion: "+e);
+            }
+            
         }
         
         
         //asignacion = asc
-    }//GEN-LAST:event_buttonAbrirAsignacionActionPerformed
+    }//GEN-LAST:event_btnAbrirAsignacionActionPerformed
 
     private void buttonSubirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSubirActionPerformed
         JFileChooser jf = new JFileChooser(archivoDocente);
@@ -1634,32 +1670,64 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonDescargarActionPerformed
 
     private void buttonGuardarySalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGuardarySalirActionPerformed
-        if(txttitulo.getText().isEmpty() == (dtcFin.getDate() == null || dtcFin.getDate().after(new Date()))){
-            JOptionPane.showMessageDialog(null,"Revise los campos: Título o Fecha de Entrega", "Validación Errónea", JOptionPane.ERROR_MESSAGE);
+        if(abrirParaCalificar){
+                        //Asignacion calificada = new Asignacion();
+                        asignacion.setCalificacion(Double.valueOf(txtcalificacion.getText()));
+                        asignacion.setEstado("C");
+                        asc.actualizarNota(asignacion);
+                        JOptionPane.showMessageDialog(null, "Calificado correctamente", "OK", 0);
+                        asignacion = null;
         }else{
-            try {
-                if(tarc.getTarea().getId() != null){
+            if (txttitulo.getText().isEmpty() == (dtcFin.getDate() == null || dtcFin.getDate().after(new Date()))) {
+                JOptionPane.showMessageDialog(null, "Revise los campos: Título o Fecha de Entrega", "Validación Errónea", JOptionPane.ERROR_MESSAGE);
+            } else {
+                try {
+
                     tarc.getTarea().setUnidad(unidadActual);
                     tarc.getTarea().setTitulo(txttitulo.getText());
                     tarc.getTarea().setDescripcion(txtdescripcion.getText());
                     tarc.getTarea().setArchivo(archivoDocente);
                     tarc.getTarea().setFechaAsignacion(new Date());
-                    tarc.getTarea().setFechaEntrega(dtcFin.getDate());
-                }else{
-                    
+                    SimpleDateFormat formato = new SimpleDateFormat("dd-MM-YY HH:mm");
+                    String f = new SimpleDateFormat("dd-MM-YY").format(dtcFin.getDate()) + " " + spnhora.getValue().toString() + ": " + spnminutos.getValue().toString();
+                    System.out.println("F: " + f);
+                    Date fecha = new SimpleDateFormat("dd-MM-YY HH:mm").parse(f);
+                    tarc.getTarea().setFechaEntrega(fecha);
+                    if (tarc.getTarea().getId() == null) {//guardar
+                        Integer idTarea = tarc.guardarTarea();
+                        LinkedList<Cursa> listadoCursas = cursac.listarCursas_Asignaciones(docenteLogeado.getId(), id_materia, paralelo);
+                        for (int i = 0; i < listadoCursas.getSize(); i++) {//Moverle aqui:
+                            Asignacion asignacionCreada = new Asignacion();
+                            asignacionCreada.setId_cursa(listadoCursas.get(i).getId());
+                            asignacionCreada.setId_tarea(idTarea);
+                            asc.inicializarAsinacion(asignacionCreada);
+                            //insert into asignacion 
+                        }
+                        JOptionPane.showMessageDialog(null, "Guardada Correctamente", "Satisfactorio", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        //actualizar
+                        tarc.actualizar();
+                        JOptionPane.showMessageDialog(null, "Actualizado Correctamente", "Satisfactorio", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "No se ha podido guardar la información de la tarea", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "No se ha podido guardar la información de la tarea","Error",JOptionPane.ERROR_MESSAGE);
+
             }
-            
-            
         }
         tarc.setTarea(null);
+        limpiarpanelPrincipalAsignacion();
     }//GEN-LAST:event_buttonGuardarySalirActionPerformed
 
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
         pestañas.setSelectedIndex(2);
+        limpiarpanelPrincipalAsignacion();
     }//GEN-LAST:event_buttonCancelarActionPerformed
+
+    private void txtarchivoTareaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtarchivoTareaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtarchivoTareaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1707,19 +1775,16 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
     private org.edisoncor.gui.panel.PanelImage ImagenNombre;
     private org.edisoncor.gui.panel.PanelImage ImagenRevision;
     private org.edisoncor.gui.panel.PanelImage ImagenSalir;
-    private org.edisoncor.gui.button.ButtonAero buttonAbrirAsignacion;
+    private org.edisoncor.gui.button.ButtonAero btnAbrirAsignacion;
     private org.edisoncor.gui.button.ButtonAero buttonCancelar;
     private org.edisoncor.gui.button.ButtonAero buttonDescargar;
     private org.edisoncor.gui.button.ButtonAero buttonEditarTarea;
-    private org.edisoncor.gui.button.ButtonAero buttonGuardar1;
-    private org.edisoncor.gui.button.ButtonAero buttonGuardar2;
     private org.edisoncor.gui.button.ButtonAero buttonGuardarySalir;
     private org.edisoncor.gui.button.ButtonAero buttonNuevaTarea;
     private org.edisoncor.gui.button.ButtonAero buttonSubir;
     private org.edisoncor.gui.button.ButtonAero buttonVerAsignaciones;
     private com.toedter.calendar.JDateChooser dtcFin;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -1755,6 +1820,7 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
     private javax.swing.JPanel jplUnidad1;
     private javax.swing.JPanel jplUnidad2;
     private javax.swing.JPanel jplUnidad3;
+    private javax.swing.JLabel lblTiempoRest;
     private javax.swing.JLabel lblnombreUnidad;
     private javax.swing.JPanel pageCursa;
     private javax.swing.JPanel pageDos;
@@ -1774,6 +1840,7 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
     private javax.swing.JTable tblAsignacionesEstudiantes;
     private javax.swing.JTable tblParticipantes;
     private javax.swing.JTable tbltareas;
+    private javax.swing.JTextField txtTiempoRest;
     private javax.swing.JTextField txtarchivoTarea;
     private javax.swing.JTextPane txtcalificacion;
     private javax.swing.JTextPane txtcomentario;
@@ -1784,7 +1851,6 @@ public class FrmPruebaProfe extends javax.swing.JFrame {
     private javax.swing.JTextField txtestadoasignacion;
     private javax.swing.JTextField txtfechaasignacion;
     private javax.swing.JTextField txtnomarchivo;
-    private javax.swing.JTextField txttiemporestante;
     private javax.swing.JTextField txttitulo;
     // End of variables declaration//GEN-END:variables
 }

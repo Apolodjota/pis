@@ -6,13 +6,19 @@ import controlador.TDALista.LinkedList;
 import controlador.TDALista.exceptions.VacioException;
 import controlador.listas.DAO.DataAccesObject;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Asignacion;
 import modelo.Tarea;
 
@@ -34,6 +40,72 @@ public class TareaController extends AdaptadorDao<Tarea>{
         return guardar(tarea);
     }
 
+    public Integer guardarTarea(){
+        String query = "INSERT INTO tarea(UNIDAD,TITULO,ARCHIVO,FECHAASIGNACION,FECHAENTREGA,DESCRIPCION) VALUES (?,?,?,?,?,?)";
+        System.out.println("Sentencia: "+query);
+        Integer idG = -1;
+        try {
+            PreparedStatement stament = conexion.getConnection().prepareStatement(query);
+            stament.setInt(1, tarea.getUnidad());
+            stament.setString(2, tarea.getTitulo());
+            if(tarea.getArchivo() != null)
+                stament.setBinaryStream(3, new FileInputStream(tarea.getArchivo()), (int)tarea.getArchivo().length());
+            else
+                stament.setBinaryStream(3, null);
+            java.sql.Date asignacion = new java.sql.Date(tarea.getFechaAsignacion().getTime());
+            java.sql.Date entrega = new java.sql.Date(tarea.getFechaEntrega().getTime());
+            stament.setDate(4, asignacion);
+            stament.setDate(5, entrega);
+            stament.setString(6, tarea.getDescripcion());
+            stament.executeUpdate();
+            try {
+                Statement seqStament = conexion.getConnection().createStatement();
+                ResultSet result = stament.executeQuery("SELECT TAREA_SEQ.CURRVAL FROM dual");
+                if (result.next()){
+                    idG = result.getInt(1);
+                }
+                conexion.getConnection().close();
+                conexion.setConnection(null);
+            } catch (SQLException ex){
+                System.out.println("ERROR GUARDARP" + ex.getMessage());
+            }
+        } catch (SQLException e){
+            System.out.println("ERROO GUARDAR P2" + e.getMessage().toString());
+        } catch (FileNotFoundException ex) {
+            System.out.println("Error en archivo: "+ex);;
+        }
+        return idG;
+    }
+    
+    
+    public void actualizar(){
+            try {
+                String query = "UPDATE tarea SET UNIDAD = ?,TITULO = ?,ARCHIVO = ?,FECHAENTREGA = ?,DESCRIPCION = ? WHERE id = "+tarea.getId();
+                PreparedStatement stament = conexion.getConnection().prepareStatement(query);
+                stament.setInt(1, tarea.getUnidad());
+                stament.setString(2, tarea.getTitulo());
+                if(tarea.getArchivo() != null)
+                    stament.setBinaryStream(3, new FileInputStream(tarea.getArchivo()), (int)tarea.getArchivo().length());
+                else
+                    stament.setBinaryStream(3, null);
+                java.sql.Date now = new java.sql.Date(tarea.getFechaEntrega().getTime());
+                stament.setDate(4, now);
+                stament.setString(5, tarea.getDescripcion());
+                stament.executeUpdate();
+                try {
+                    Statement seqStament = conexion.getConnection().createStatement();
+                    conexion.getConnection().close();
+                    conexion.setConnection(null);
+                } catch (Exception e) {
+                    System.out.println("Error actualizando tarea: "+e);
+                }
+            } catch (SQLException ex) {
+                System.out.println("Error actualizando asignacion: "+ex);
+            } catch (FileNotFoundException ex) {
+            System.out.println("Error actualizando asignacion: "+ex);
+        }
+    }
+    
     public void update(Tarea t) throws Exception{
         modificar(t);
     }

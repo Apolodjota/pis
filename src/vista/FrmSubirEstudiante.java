@@ -107,8 +107,7 @@ public class FrmSubirEstudiante extends javax.swing.JFrame {
         if (asignacion.getEstado().equalsIgnoreCase("E")) {estado = "Entregado"; }
         if (asignacion.getEstado().equalsIgnoreCase("C")) {estado = "Calificado";}
         txtestadoasignacion.setText(estado);
-        if(tarea.getFechaEntrega().before(new Date())){
-            if(asignacion.getEstado().equalsIgnoreCase("C")){txtcalificacion.setText(asignacion.getCalificacion().toString());}
+        if(tarea.getFechaEntrega().before(new Date()) || asignacion.getEstado().equalsIgnoreCase("C")){
             btnSelecArchivo.setEnabled(false);
             btnGuardar.setText("Enviar comentario");
         }
@@ -117,6 +116,7 @@ public class FrmSubirEstudiante extends javax.swing.JFrame {
         txttiemporestante.setText(Utilidades.calcularDiferencia(tarea.getFechaEntrega(), new Date()));
         if(tarea.getArchivo() != null){txtarchivoTarea.setText(tarea.getArchivo().getName());}
         if(asignacion.getArchivo() != null){txtnomarchivo.setText(asignacion.getArchivo().getName());}
+        if(asignacion.getEstado().equalsIgnoreCase("C")){txtcalificacion.setText(asignacion.getCalificacion().toString());}
     }
 
     public File getArchivoDocente() {
@@ -236,6 +236,11 @@ public class FrmSubirEstudiante extends javax.swing.JFrame {
         txtarchivoTarea.setEditable(false);
         txtarchivoTarea.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         txtarchivoTarea.setText("No se ha proporcionado un archivo");
+        txtarchivoTarea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtarchivoTareaMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -548,6 +553,22 @@ public class FrmSubirEstudiante extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_txtnomarchivoMouseClicked
+
+    private void txtarchivoTareaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtarchivoTareaMouseClicked
+        //descargar del profe:
+        try {
+            String descargasDir = System.getProperty("user.home") + "/Downloads";
+        
+            // Creamos un objeto Path para la carpeta de descargas
+            Path descargasPath = Paths.get(descargasDir);
+            
+            // Copiamos el archivo temporal a la carpeta de descargas
+            Files.copy(tarea.getArchivo().toPath(), descargasPath.resolve(tarea.getArchivo().getName()), StandardCopyOption.REPLACE_EXISTING);
+            JOptionPane.showMessageDialog(null, "Guardado en Descargas", "Descargado", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_txtarchivoTareaMouseClicked
 
     /**
      * @param args the command line arguments

@@ -51,7 +51,7 @@ public class ModeloTablaAsignacion extends AbstractTableModel{
                 case 2:
                     return (a != null) ? estado: "";   
                 case 3:
-                    return (a != null && t.getFechaEntrega().before(new Date())) ? a.getCalificacion() : ""; 
+                    return (a != null && a.getEstado().equalsIgnoreCase("C")) ? a.getCalificacion() : ""; 
 //                case 4:
 //                    return (cursa != null) ? curso.toString(): ""; 
 //                case 5:
