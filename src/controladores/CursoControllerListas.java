@@ -144,6 +144,16 @@ public class CursoControllerListas extends AdaptadorDao<Curso>{
         }
         return result;
     }
+    
+    public Curso buscarCurso(LinkedList <Curso> lista, String text, Integer id)throws Exception{
+        lista = this.quickSort(0, text, lista);
+        for (int i = 0; i < lista.getSize(); i++) {
+            if (lista.get(i).getId().intValue() == id.intValue()){
+                return lista.get(i);
+            }
+        }
+        return null;
+    }
 
 //    public LinkedList<Curso> buscarParalelo(LinkedList<Curso> lista, String text, String paralelo) throws Exception {
 //        LinkedList<Curso> lo = this.quickSort(0, text, lista);
