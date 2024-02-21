@@ -1,5 +1,6 @@
 package vista.listas.tablas;
 import controlador.TDALista.LinkedList;
+import controladores.CursaController;
 import controladores.CursoControllerListas;
 import controladores.DocenteControlador;
 import controladores.MateriaControllerListas;
@@ -18,6 +19,8 @@ public class ModeloTablaCursa extends AbstractTableModel{
     MateriaControllerListas mC = new MateriaControllerListas();
     DocenteControlador dC = new DocenteControlador();
     CursoControllerListas cC = new CursoControllerListas();
+    CursaController cursac = new CursaController();
+    
     @Override
     public int getRowCount() {
         return getCursas().getSize();
@@ -32,22 +35,22 @@ public class ModeloTablaCursa extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         try {
             Cursa cursa = getCursas().get(rowIndex);
-            Materia materia = mC.getMaterias().get(cursa.getId_materia() - 1);
-            Docente docente = dC.getDocentes().get(cursa.getId_docente() - 1);
-            Curso curso = cC.getCursos().get(materia.getId_curso() - 1 );
+//            Materia materia = mC.getMaterias().get(cursa.getId_materia() - 1);
+//            Docente docente = dC.getDocentes().get(cursa.getId_docente() - 1);
+//            Curso curso = cC.getCursos().get(materia.getId_curso() - 1 );
             switch (columnIndex) {
                 case 0:
-                    return (cursa != null) ? cursa.getId(): "";
+                    return (cursa != null) ? cursac.getPeriodo(cursa).getFechaDesde() : " ";
                 case 1:
-                    return (cursa != null) ? "Repe": "";   //cursa.getId_periodo(): "";   
+                    return (cursa != null) ? cursac.getPeriodo(cursa).getNombre() : " ";   //cursa.getId_periodo(): "";   
                 case 2:
-                    return (cursa != null) ? materia.getId() + materia.getNombre(): "";   
+                    return (cursa != null) ? cursac.getMateria(cursa).getNombre() : " ";   
                 case 3:
-                    return (cursa != null) ? docente.getId()+". "+ docente.getCedula(): ""; 
+                    return (cursa != null) ? cursac.getDocente(cursa).getNombres(): " "; 
                 case 4:
-                    return (cursa != null) ? curso.toString(): ""; 
+                    return (cursa != null) ? cursac.getCurso(cursac.getMateria(cursa)).getCiclo() : " "; 
                 case 5:
-                    return (cursa != null) ? cursa.getParalelo(): ""; 
+                    return (cursa != null) ? cursa.getParalelo(): " "; 
                 default:
                     return null;
             }

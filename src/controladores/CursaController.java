@@ -20,10 +20,12 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.Asignacion;
 import modelo.Cursa;
+import modelo.Curso;
 import modelo.Docente;
 import modelo.Estudiante;
 import modelo.Materia;
 import modelo.Matricula;
+import modelo.PeriodoAcademico;
 
 /**
  *
@@ -54,6 +56,46 @@ public class CursaController extends  AdaptadorDao<Cursa>{
                     JOptionPane.ERROR_MESSAGE);
             return null;
         }
+        
+    }
+    
+    public PeriodoAcademico getPeriodo(Cursa c) throws Exception{
+        MatriculaController mc = new MatriculaController();
+        PeriodoController pc = new PeriodoController();
+        PeriodoAcademico p = new PeriodoAcademico();
+        for (int i = 0; i < mc.getMatriculas().getSize(); i++) {
+            if (c.getId_matricula() == mc.getMatriculas().get(i).getId()){
+                mc.setMatricula(mc.getMatriculas().get(i));
+            }
+        }
+        for (int i = 0; i < pc.getPeriodos().getSize(); i++) {
+            if (mc.getMatricula().getId_periodoAcademico() == pc.getPeriodos().get(i).getId()) {
+                p = pc.getPeriodos().get(i);
+            }
+        }
+        return p;
+    }
+    
+    public Materia getMateria(Cursa c)throws Exception{
+        MateriaControllerListas mc = new MateriaControllerListas();
+        for (int i = 0; i < mc.getMaterias().getSize(); i++) {
+            if (c.getId_materia() == mc.getMaterias().get(i).getId()){
+                return mc.getMaterias().get(i);
+            } else {
+                return null;
+            }
+        }
+        return null;
+    }
+    
+        public Docente getDocente(Cursa c)throws Exception{
+        DocenteControlador dc = new DocenteControlador();
+        return dc.BusquedaID(dc.getDocentes(), c.getId_docente(), "id");
+    }
+        
+        public Curso getCurso(Materia m) throws Exception{
+        CursoControllerListas cc = new CursoControllerListas();
+        return cc.buscarCurso(cc.getCursos(), "ciclo", m.getId_curso());
         
     }
 

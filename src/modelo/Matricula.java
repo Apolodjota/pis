@@ -89,9 +89,10 @@ public class Matricula {
         EstudianteControlador ec = new EstudianteControlador();
         Estudiante m;
         try {
-            m = ec.getEstudiantes().get(id_estudiante);
+            m = ec.BusquedaID(ec.getEstudiantes(), id_estudiante, "id");
+            //m = ec.buscarEstudiante(id_estudiante);  //53
             return id +" "+ m.getCedula();
-        } catch (VacioException ex) {
+        } catch (Exception ex) {
             return id+" "+id_estudiante;
         }
     }

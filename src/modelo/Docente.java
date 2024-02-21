@@ -98,4 +98,11 @@ public class Docente extends Persona{
         }
     }
 
+    @Override
+    public String toString() {
+        return "" + getNombres() + " " + getApellidos();
+    }
+    
+    
+
 }
