@@ -5,22 +5,24 @@
 package vista;
 
 import controlador.TDALista.exceptions.VacioException;
+import controladores.DocenteControlador;
 import controladores.MatriculaController;
+import modelo.Docente;
 import modelo.Matricula;
 import vista.listas.tablas.ModeloTablaMatricula;
+import vista.tablas.DocenteModeloTabla;
 
 /**
  *
  * @author Asus
  */
-public class DialogSelecMatricula extends javax.swing.JDialog {
-
-    MatriculaController mc = new MatriculaController();
-    ModeloTablaMatricula modelo = new ModeloTablaMatricula();
+public class DialogSelecDocente extends javax.swing.JDialog {
+    DocenteControlador dc = new DocenteControlador();
+    DocenteModeloTabla mt = new DocenteModeloTabla(dc.getDocentes());
     /**
      * Creates new form DlgSelecEstudiante
      */
-    public DialogSelecMatricula(java.awt.Frame parent, boolean modal) {
+    public DialogSelecDocente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -28,17 +30,16 @@ public class DialogSelecMatricula extends javax.swing.JDialog {
     }
 
     private void cargarTabla(){
-        modelo.setMatriculas(mc.getMatriculas());
-        tblDatos.setModel(modelo);
+        tblDatos.setModel(mt);
         tblDatos.updateUI();
     }
-    public void cargarMatriculas(){
+    public void cargarDocente(){
         try {
             int fila = tblDatos.getSelectedRow();
-            Matricula mat= modelo.getMatriculas().get(fila);
-            FrmCursa.setearMatricula(mat);
+            Docente doc = mt.getDocentes().get(fila);
+            FrmCursa.setearDocente(doc);
         } catch (VacioException e) {
-            System.out.println("Error so: "+ e.getMessage());
+            System.out.println("Error: "+ e.getMessage());;
         }
         this.dispose();
     }
@@ -62,7 +63,7 @@ public class DialogSelecMatricula extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Matriculados registrados:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tw Cen MT", 1, 14))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Docentes registrados:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tw Cen MT", 1, 14))); // NOI18N
 
         jLabel1.setText("Buscar:");
 
@@ -136,7 +137,7 @@ public class DialogSelecMatricula extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        cargarMatriculas();
+        cargarDocente();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -156,21 +157,23 @@ public class DialogSelecMatricula extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DialogSelecMatricula.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogSelecDocente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DialogSelecMatricula.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogSelecDocente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DialogSelecMatricula.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogSelecDocente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DialogSelecMatricula.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogSelecDocente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DialogSelecMatricula dialog = new DialogSelecMatricula(new javax.swing.JFrame(), true);
+                DialogSelecDocente dialog = new DialogSelecDocente(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

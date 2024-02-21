@@ -7,6 +7,7 @@ import controladores.CursoControllerListas;
 import controladores.RevisionController;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import modelo.Docente;
 import modelo.Matricula;
 import modelo.Persona;
 import vista.listas.tablas.ModeloTablaCursa;
@@ -17,7 +18,7 @@ import vista.listas.util.UtilVista;
  * @author Asus
  */
 public class FrmCursa extends javax.swing.JFrame {
-
+    
     /**
      * @return the panelPrincipal
      */
@@ -26,6 +27,7 @@ public class FrmCursa extends javax.swing.JFrame {
     //RevisionController revC = new RevisionController();
     ModeloTablaCursa mtcc = new ModeloTablaCursa();
     public static Matricula m;
+    public static Docente d;
 
     /**
      * Creates new form FrmVendedor
@@ -46,7 +48,7 @@ public class FrmCursa extends javax.swing.JFrame {
     private void limpiar() {
         try {
             UtilVista.cargarMateria(cbxMateria);
-            UtilVista.cargarDocente(cbxDocente);
+            //UtilVista.cargarDocente(cbxDocente);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,
                     "Problemas con los combos de seleccion: " + e.getMessage(),
@@ -54,6 +56,7 @@ public class FrmCursa extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
         }
         txtMatricula.setEnabled(false);
+        txtDocente.setEditable(false);
         txtParalelo.setEnabled(true);
         tbltabla.clearSelection();
         cC.setCursa(null);
@@ -62,7 +65,7 @@ public class FrmCursa extends javax.swing.JFrame {
     }
 
     private void cargarTabla() {
-        mtcc.setCursas(mtcc.getCursas());
+        mtcc.setCursas(cC.getCursas());
         tbltabla.setModel(mtcc);
         tbltabla.updateUI();
     }
@@ -78,7 +81,7 @@ public class FrmCursa extends javax.swing.JFrame {
             try {
                 cC.setCursa(mtcc.getCursas().get(cC.getIndex()));
                 txtMatricula.setText(cC.getCursa().getId_matricula().toString());
-                cbxDocente.setSelectedIndex(cC.getCursa().getId_docente() - 1);
+                txtDocente.setText(cC.getCursa().getId_docente().toString());
                 cbxMateria.setSelectedIndex(cC.getCursa().getId_materia() - 1);
                 //cbxPeriodo.setSelectedIndex(cC.getCursa().getId_periodo()- 1);
             } catch (Exception e) {
@@ -106,7 +109,7 @@ public class FrmCursa extends javax.swing.JFrame {
             if (validar()) {
                 try {
                     cC.getCursa().setId_matricula(m.getId());
-                    cC.getCursa().setId_docente(UtilVista.getComboDocentes(cbxDocente).getId());
+                    cC.getCursa().setId_docente(d.getId());
                     cC.getCursa().setId_materia(UtilVista.getComboMateria(cbxMateria).getId());
                     cC.getCursa().setParalelo(txtParalelo.getText());
                     cC.guardar();
@@ -129,6 +132,12 @@ public class FrmCursa extends javax.swing.JFrame {
         m = mat;
         txtMatricula.setText(m.toString());
     }
+    
+    public static void setearDocente(Docente docente){
+        d = docente;
+        txtDocente.setText(d.toString());
+    }
+    
     private void ordenar(){
         Integer ascdesc = descendente.getState() ? 1 : 0;
         String criterio = "";
@@ -163,7 +172,6 @@ public class FrmCursa extends javax.swing.JFrame {
         txtMatricula = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
         cbxMateria = new javax.swing.JComboBox<>();
-        cbxDocente = new javax.swing.JComboBox<>();
         jLabel36 = new javax.swing.JLabel();
         lblPeriodo = new javax.swing.JLabel();
         txtParalelo = new javax.swing.JTextField();
@@ -172,6 +180,7 @@ public class FrmCursa extends javax.swing.JFrame {
         descendente = new java.awt.Checkbox();
         buttonGuardar1 = new org.edisoncor.gui.button.ButtonAero();
         buttonCancelar = new org.edisoncor.gui.button.ButtonAero();
+        txtDocente = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbltabla = new javax.swing.JTable();
@@ -205,6 +214,7 @@ public class FrmCursa extends javax.swing.JFrame {
         jPanel6.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 94, -1));
 
         txtMatricula.setEditable(false);
+        txtMatricula.setBackground(new java.awt.Color(204, 204, 255));
         txtMatricula.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         txtMatricula.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtMatricula.setText("Seleccione");
@@ -218,7 +228,7 @@ public class FrmCursa extends javax.swing.JFrame {
                 txtMatriculaActionPerformed(evt);
             }
         });
-        jPanel6.add(txtMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 125, -1));
+        jPanel6.add(txtMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, 125, -1));
 
         jLabel33.setBackground(new java.awt.Color(204, 204, 255));
         jLabel33.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -238,14 +248,6 @@ public class FrmCursa extends javax.swing.JFrame {
         });
         jPanel6.add(cbxMateria, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 250, -1));
 
-        cbxDocente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbxDocente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxDocenteActionPerformed(evt);
-            }
-        });
-        jPanel6.add(cbxDocente, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 125, -1));
-
         jLabel36.setBackground(new java.awt.Color(204, 204, 255));
         jLabel36.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel36.setText("Docente:");
@@ -256,7 +258,6 @@ public class FrmCursa extends javax.swing.JFrame {
         lblPeriodo.setText("Estudiante matriculado:");
         jPanel6.add(lblPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
 
-        txtParalelo.setEditable(false);
         txtParalelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtParaleloActionPerformed(evt);
@@ -301,6 +302,23 @@ public class FrmCursa extends javax.swing.JFrame {
             }
         });
         jPanel6.add(buttonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 120, 30));
+
+        txtDocente.setEditable(false);
+        txtDocente.setBackground(new java.awt.Color(204, 204, 255));
+        txtDocente.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        txtDocente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtDocente.setText("Seleccione");
+        txtDocente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtDocenteMouseClicked(evt);
+            }
+        });
+        txtDocente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDocenteActionPerformed(evt);
+            }
+        });
+        jPanel6.add(txtDocente, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 125, -1));
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), "Registros Existentes:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tw Cen MT", 1, 14))); // NOI18N
@@ -438,10 +456,6 @@ public class FrmCursa extends javax.swing.JFrame {
         //LLLamadi a dialoj
     }//GEN-LAST:event_txtMatriculaActionPerformed
 
-    private void cbxDocenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxDocenteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxDocenteActionPerformed
-
     private void cbxMateriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxMateriaItemStateChanged
         //nadita de nada
     }//GEN-LAST:event_cbxMateriaItemStateChanged
@@ -485,6 +499,14 @@ public class FrmCursa extends javax.swing.JFrame {
     private void buttonBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscar1ActionPerformed
         //buscar();
     }//GEN-LAST:event_buttonBuscar1ActionPerformed
+
+    private void txtDocenteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDocenteMouseClicked
+        new DialogSelecDocente(this, true).setVisible(true);
+    }//GEN-LAST:event_txtDocenteMouseClicked
+
+    private void txtDocenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDocenteActionPerformed
+        
+    }//GEN-LAST:event_txtDocenteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -558,7 +580,6 @@ public class FrmCursa extends javax.swing.JFrame {
     private org.edisoncor.gui.button.ButtonAero buttonGuardar1;
     private org.edisoncor.gui.button.ButtonAero buttonGuardar3;
     private javax.swing.JComboBox<String> cbxCriterio;
-    private javax.swing.JComboBox<String> cbxDocente;
     private javax.swing.JComboBox<String> cbxMateria;
     private javax.swing.JComboBox<String> cbxOrdenamiento;
     private java.awt.Checkbox descendente;
@@ -578,6 +599,7 @@ public class FrmCursa extends javax.swing.JFrame {
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JTable tbltabla;
     private javax.swing.JTextField txtBusqueda;
+    private static javax.swing.JTextField txtDocente;
     private static javax.swing.JTextField txtMatricula;
     private javax.swing.JTextField txtParalelo;
     // End of variables declaration//GEN-END:variables
