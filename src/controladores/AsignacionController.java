@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import modelo.Asignacion;
@@ -31,6 +32,19 @@ public class AsignacionController extends AdaptadorDao<Asignacion>{
     
     public Integer save(){
         return guardar(asignacion);
+    }
+    
+    public void inicializarAsinacion(Asignacion a){
+        String query = "INSERT INTO asignacion(ID_CURSA,ID_TAREA) VALUES (?,?)";
+        System.out.println("Sentencia: "+query);
+        try {
+            PreparedStatement stament = conexion.getConnection().prepareStatement(query);
+            stament.setInt(1, a.getId_cursa());
+            stament.setInt(2, a.getId_tarea());
+            stament.executeUpdate();
+        } catch (SQLException e){
+            System.out.println("ERROR GUARDAR Asignacion" + e.getMessage().toString());
+        }
     }
     
     public void actualizar(Asignacion asigna) throws Exception{
@@ -102,9 +116,30 @@ public class AsignacionController extends AdaptadorDao<Asignacion>{
     
     public void actualizarComentario(Asignacion a){
         try {
-            String query = "UPDATE asignacion comentario = ? where id ="+a.getId();
+            String query = "UPDATE asignacion SET comentario = ? where id ="+a.getId();
             PreparedStatement stament = conexion.getConnection().prepareStatement(query);
             stament.setString(1, a.getComentario());
+            stament.executeUpdate();
+            try {
+                Statement seqStament = conexion.getConnection().createStatement();
+                conexion.getConnection().close();
+                conexion.setConnection(null);
+            } catch (Exception e) {
+                System.out.println("Error actualizando asignacion: "+e);
+            }
+        } catch (Exception e) {
+            System.out.println("Error actualizando asignacion"+e);
+        }
+    }
+    
+    public void actualizarNota(Asignacion a){
+        try {
+            String query = "UPDATE asignacion SET calificacion = ?, estado = ? where id = "+a.getId();
+            
+            PreparedStatement stament = conexion.getConnection().prepareStatement(query);
+            stament.setDouble(1, a.getCalificacion());
+            stament.setString(2, a.getEstado());
+            System.out.println(query);
             stament.executeUpdate();
             try {
                 Statement seqStament = conexion.getConnection().createStatement();

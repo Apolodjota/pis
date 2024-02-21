@@ -302,6 +302,24 @@ public class CursaController extends  AdaptadorDao<Cursa>{
         }
         return lista;
     }
+    
+    public LinkedList <Cursa> listarCursas_Asignaciones(Integer id_docente,Integer id_materia, String paralelo){
+        LinkedList <Cursa> lista = new LinkedList<>();
+        try {
+            Statement stmt = conexion.getConnection().createStatement();
+            String query = "SELECT id FROM cursa where id_docente = "+id_docente+" AND id_materia = "+id_materia+" AND paralelo = '"+paralelo+"'";
+            System.out.println(query);
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()) {
+                Cursa c = new Cursa();
+                c.setId(rs.getInt(1));
+                lista.add(c);
+            }
+        } catch (Exception e) {
+            System.out.println("error listarCursa_Asig" + e.getMessage());
+        }
+        return lista;
+    }
     /**
      * @return the cursa
      */
